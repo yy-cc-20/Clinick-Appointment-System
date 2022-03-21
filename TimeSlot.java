@@ -6,6 +6,7 @@ enum TimeSlot {
 
 	// if there is a need to calculate the end time, can try to use LocalTime instead of String
 	
+	// 1 slot = 30 mins
 	SLOT_1("0800AM"),
 	SLOT_2("0830AM"),
 	SLOT_3("0900AM"),
