@@ -4,6 +4,8 @@ enum TimeSlot {
 	// "SLOT_1"   | "0800AM"
 	// toString() | getTime()
 
+	// if there is a need to calculate the end time, can try to use LocalTime instead of String
+	
 	SLOT_1("0800AM"),
 	SLOT_2("0830AM"),
 	SLOT_3("0900AM"),
