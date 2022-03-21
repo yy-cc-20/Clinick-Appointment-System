@@ -4,13 +4,13 @@ enum TimeSlot {
 	// "S1"       | "08:00AM"
 	// toString() | getTime()
 
-	S1("0800AM"),
-	S2("0830AM"),
-	S3("0900AM"),
-	S4("
-	S5
+	SLOT_1("0800AM"),
+	SLOT_2("0830AM"),
+	SLOT_3("0900AM"),
+	SLOT_4("
+	SLOT_5
 	// to be continue
-	S24("07:30PM");
+	SLOT_24("07:30PM");
 
 	private final String time;
 
