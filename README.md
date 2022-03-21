@@ -1,1 +1,1 @@
-# Clinick-Booking-App
+# Clinic-Booking-App
