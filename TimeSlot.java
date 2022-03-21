@@ -13,7 +13,7 @@ enum TimeSlot {
 	SLOT_4("
 	SLOT_5
 	// to be continue
-	SLOT_24("0730PM");
+	SLOT_13("0430PM");
 
 	private final String time;
 
