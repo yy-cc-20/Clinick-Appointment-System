@@ -1,7 +1,7 @@
 enum TimeSlot {
 
 	// in file    | display as
-	// "S1"       | "08:00AM - 08:30AM"
+	// "S1"       | "08:00AM"
 	// toString() | getTime()
 
 	S1("0800AM"),
