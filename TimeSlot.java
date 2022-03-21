@@ -1,7 +1,7 @@
 enum TimeSlot {
 
 	// in file    | display as
-	// "SLOT_1"   | "08:00AM"
+	// "SLOT_1"   | "0800AM"
 	// toString() | getTime()
 
 	SLOT_1("0800AM"),
@@ -10,7 +10,7 @@ enum TimeSlot {
 	SLOT_4("
 	SLOT_5
 	// to be continue
-	SLOT_24("07:30PM");
+	SLOT_24("0730PM");
 
 	private final String time;
 
