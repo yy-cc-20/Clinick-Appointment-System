@@ -1,0 +1,11 @@
+ApptDate;ApptTime;Service;PatID;DoctorID;Attendance
+04/05/2022;09:00AM;Oral Health Screening;159;History & Clinical Examination, Oral Cancer Screening, Gum Health Profile, Decay Risk Profile;1;P0002;D0005;-
+18/05/2022;08:00AM;Wellness Screeening;1060;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ultrasound of Abdomen & Pelvis, Diet Counselling;2;P0008;D0011;-
+09/05/2022;10:00AM;Lung Cancer Screening;690;Low Dose CT Scan without Contrast;1;P0004;D0003;-
+05/06/2022;02:00PM;Eye Screening;History & Clinical Examination, Visual Acuity, Auto-Refraction, Slit Lamp Examination, Intraocular Pressure, Eye Dilation;2;P0011;D0004;-
+12/06/2021;03:00PM;Post-Covid Screening;399;History & Clinical Examination, Anthropometry, Visual Acuity, Blood Test, Urine Test, Chest X-Ray, Lung Function Test;2;P0017;D0015;-
+12/06/2022;09:00AM;Oral Health Screening;159;History & Clinical Examination, Oral Cancer Screening, Gum Health Profile, Decay Risk Profile;1;P0020;D0005;-
+02/07/2022;10:00AM;Blood Screening;250;Full Blood Count, Urea, Creatinine, Uric Acid, Glucose Fasting, Hepatitis B Screening, Liver Function Profile, Lipid Profile, Urine FEME;1;P0022；D0007;-
+11/07/2021;08:00AM;Colonoscopy;2099;History & Clinical Examination, Blood Test, Ultrasound of Abdomen, Fibroscan, CT Abdomen, Bowel Cleansing, Stress Test;3;P0006;D0008;-
+20/07/2021;10:00AM;Oral Health Screening;159;History & Clinical Examination, Oral Cancer Screening, Gum Health Profile, Decay Risk Profile;1;P0013；D0005;-
+06/08/2021;02:00PM;Men's Health Screening;1588;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Uroflowmetry and Residual Urine Volume, Chest X-Ray, Ultrasound of Abdomen & Pelvis, Diet Counselling;3;P0014;D0012;-
