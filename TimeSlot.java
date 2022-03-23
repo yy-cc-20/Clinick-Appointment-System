@@ -3,8 +3,6 @@ enum TimeSlot {
 	// in file    | display as
 	// "SLOT_1"   | "0800AM"
 	// toString() | getTime()
-
-	// if there is a need to calculate the end time, can try to use LocalTime instead of String
 	
 	// 1 slot = 30 mins
 	SLOT_1("0800AM"),
