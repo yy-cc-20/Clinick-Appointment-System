@@ -2,6 +2,6 @@
 
 package controller;
 
-public class ManageProfileController {
+public class ManageAccountController {
 
 }
