@@ -18,7 +18,6 @@
  * 7. Close connection
  */
 
-package entity;
 
 import java.sql.*;
 

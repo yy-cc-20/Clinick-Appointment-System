@@ -1,71 +1,69 @@
-package boundary;
-
-import entity.*;
-
 public class ManageAccountView {
-	private static final String passwordCriteria = "Passwords must have at least 8 characters and contain at least one lowercase letter, one uppercase letter and one digit.%n%n";
+    private static final String passwordCriteria = "Passwords must have at least 8 characters and contain at least one lowercase letter, one uppercase letter and one digit.%n%n";
 
-	public void modifyAccount (User user) {
-		System.out.println("[1]Change Username");
-		System.out.println("[2]Change Password");		
-		int action = ConsoleUI.askEventNo(1, 2);
-		
-		switch(action) {
-			case 1: String inputUsername;
-			
-					while(true) {
-						System.out.print("> Username ");
-						inputUsername = KeyboardInput.scanner.nextLine();
-						if(KeyboardInput.hasDelimiter(inputUsername)) {
-							System.out.printf(KeyboardInput.getStringError());
-						} else {
-							username = inputUsername;
-							break;
-						}
-					} 
-					System.out.println("The username has changed to " + username);
-				break;
-			case 2: String inputPassword;
-					System.out.print("> Enter current password ");
-					inputPassword = Singleton.keyboard.nextLine();
-					if(inputPassword.equals(password)) {
-						askPassword();
-						System.out.println("The password has changed.");
-					} else {
-						System.out.println("Wrong password.");
-					}
-		}
-		// TODO update the arraylist / database
-	}
-	
-	
-	// assume the user has login 
-	// post: has to update password file
-	void changePassword() {
-		
-	}
-	
-	// will not stop until get the valid username
-	// verify the username
-	private void changeUsername() {
-		
-	}
+    public void modifyAccount(User user) {
+        System.out.println("[1] Change Username");
+        System.out.println("[2] Change Password");
+        int action = ConsoleUI.askEventNo(1, 2);
 
-	// verify the password
-	// will not stop until get the valid password
-	private void askPassword() {
-		String inputPassword;
-		boolean isValidPassword = false;
-		
-		while(!isValidPassword) {
-			System.out.print("> Password ");
-			inputPassword = KeyboardInput.scanner.nextLine();//String.valueOf(System.console().readPassword());
-			isValidPassword = User.isValidPassword(inputPassword);
-			if(isValidPassword) {
-				password = inputPassword;
-			} else {
-				System.out.printf(passwordCriteria);
-			}
-		}
-	}
+        switch (action) {
+            case 1:
+                String inputUsername;
+
+                while (true) {
+                    System.out.print("> Username ");
+                    inputUsername = SingletonScanner.scanner.nextLine();
+                    if (KeyboardInput.hasDelimiter(inputUsername)) {
+                        System.out.printf(KeyboardInput.getStringError());
+                    } else {
+                        username = inputUsername;
+                        break;
+                    }
+                }
+                System.out.println("The username has changed to " + username);
+                break;
+            case 2:
+                String inputPassword;
+                System.out.print("> Enter current password ");
+                inputPassword = Singleton.keyboard.nextLine();
+                if (inputPassword.equals(password)) {
+                    askPassword();
+                    System.out.println("The password has changed.");
+                } else {
+                    System.out.println("Wrong password.");
+                }
+        }
+        // TODO update the arraylist / database
+    }
+
+
+    // assume the user has login
+    // post: has to update password file
+    void changePassword() {
+
+    }
+
+    // will not stop until get the valid username
+    // verify the username
+    private void changeUsername() {
+
+    }
+
+    // verify the password
+    // will not stop until get the valid password
+    private void askPassword() {
+        String inputPassword;
+        boolean isValidPassword = false;
+
+        while (!isValidPassword) {
+            System.out.print("> Password ");
+            inputPassword = KeyboardInput.scanner.nextLine();//String.valueOf(System.console().readPassword());
+            isValidPassword = User.isValidPassword(inputPassword);
+            if (isValidPassword) {
+                password = inputPassword;
+            } else {
+                System.out.printf(passwordCriteria);
+            }
+        }
+    }
 }

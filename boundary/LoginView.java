@@ -1,10 +1,9 @@
-package boundary;
+
 
 import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import entity.*;
-import controller.LoginController;
+
 
 public class LoginView {
 	private LoginController loginController = new LoginController();

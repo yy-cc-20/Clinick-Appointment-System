@@ -1,5 +1,3 @@
-package entity;
-
 import boundary.KeyboardInput;
 
 public class User {

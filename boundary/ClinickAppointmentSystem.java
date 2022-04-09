@@ -1,7 +1,4 @@
-
-package boundary;
-
-import entity.*;
+// the main class
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) {
@@ -34,22 +31,22 @@ public class ClinickAppointmentSystem {
 			ConsoleUI.displaySystemName("System Name");
 			//ConsoleUI.displayMenu(); // need to change the menu
 			eventNo = ConsoleUI.askEventNo(beginEventNo, endEventNo);
-			
+
 			switch (eventNo) {
 			case 1:
 				// Just to test the method, you may change the sequence of the code
 				ConsoleUI.displayFunctionName("Account Setting");
 				new ManageAccountView().modifyAccount(systemUser);
-				
+
 				break;
-				
+
 			case 2: // Modify Account Info
 				ConsoleUI.displayFunctionName(" Modify Account Details ");
 				break;
-				
+
 			case 3: // logout and exit the program
 				ConsoleUI.displayFunctionName(" Program Stopped ");
-				KeyboardInput.scanner.close();
+				SingletonScanner.scanner.close();
 				System.exit(0);
 			}
 			ConsoleUI.clearScreen();

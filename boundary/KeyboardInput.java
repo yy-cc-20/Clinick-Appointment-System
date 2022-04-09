@@ -1,13 +1,8 @@
-package boundary;
-
-import java.util.Scanner;
-
 // scanner with error handling and conditions
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface
+
 public class KeyboardInput {
-	public static final Scanner scanner = new Scanner(System.in); // Singleton
-	
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
 
@@ -19,7 +14,7 @@ public class KeyboardInput {
         while (true) {
             System.out.printf("%nEnter %s: ", info);
             try {
-                input = Integer.parseInt(scanner.nextLine());
+                input = Integer.parseInt(SingletonScanner.scanner.nextLine());
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
@@ -41,7 +36,7 @@ public class KeyboardInput {
         while (true) {
             System.out.printf("%nEnter %s: ", info);
             try {
-                input = Double.parseDouble(scanner.nextLine());
+                input = Double.parseDouble(SingletonScanner.scanner.nextLine());
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
