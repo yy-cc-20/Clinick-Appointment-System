@@ -1,10 +1,13 @@
 
-enum TimeSlot {
+package entity;
 
-	// in file    | display as
-	// "SLOT_1"   | "0800AM"
+
+public enum TimeSlot {
+
+	// in file | display as
+	// "SLOT_1" | "0800AM"
 	// toString() | getTime()
-	
+
 	// 1 slot = 30 mins
 	SLOT_1("0800AM"),
 	SLOT_2("0830AM"),
@@ -20,7 +23,6 @@ enum TimeSlot {
 	SLOT_12("0330PM"),
 	SLOT_13("0400PM"),
 	SLOT_14("0430PM");
-	
 
 	private final String time;
 
@@ -31,4 +33,5 @@ enum TimeSlot {
 	public String getTime() {
 		return time;
 	}
+	
 }

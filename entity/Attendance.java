@@ -1,3 +1,5 @@
+package entity;
+
 public enum Attendance {
   	ATTENDED("Attended"),
 	ABSENT("Absent"),
