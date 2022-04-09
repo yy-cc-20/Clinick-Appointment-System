@@ -66,6 +66,18 @@ public class KeyboardInput {
             }
         }
     }
+    
+    // @return null if user enters ENTER key 
+    public static String askStringV2(String info) {
+        String input;
+
+        while (true) {
+            System.out.printf("%nEnter %s: ", info);
+            input = SingletonScanner.scanner.nextLine();
+            if (input.equals("\n"))
+                return null;
+        }
+    }
 
     // used to ask the name cannot be null
     public static String askName(String info, int length) {
