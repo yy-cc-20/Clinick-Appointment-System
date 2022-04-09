@@ -1,7 +1,15 @@
-package entity;
+public enum Attendance {
+  	ATTENDED("Attended"),
+	ABSENT("Absent"),
+	NAN("NAN");
 
-enum Attendance {
-  	ATTENDED,
-	ABSENT,
-	NAN;
+	private final String attendance;
+
+	Attendance(String attendance) {
+		this.attendance = attendance;
+	}
+
+	public String getAttendance() {
+		return attendance;
+	}
 }
