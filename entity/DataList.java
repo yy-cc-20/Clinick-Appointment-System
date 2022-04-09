@@ -8,7 +8,7 @@ public class DataList implements IDataStore {
 	private ArrayList<Patient> patientList;
 	private ArrayList<Receptionist> receptionistList;
 	
-	private DataList() {
+	public DataList() {
 		importDoctorList();
 		importPatientList();
 		importReceptionistList();
