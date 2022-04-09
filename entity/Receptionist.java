@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 package entity;
 
-public class Receptionist {
+public class Receptionist extends User {
 
 }
 =======

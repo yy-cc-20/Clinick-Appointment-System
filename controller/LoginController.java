@@ -50,8 +50,7 @@ public class LoginController {
 	private boolean loginSuccessfully() {
 		User user;
 		for (int i = 0; i < DataList.getDoctorList().size(); ++i) {
-			user = DataList.getDoctorList().get(i);
-			if (currentUser.equals(user)) {
+			if (currentUser.equals(DataList.getDoctorList().get(i))) {
 				currentUserIndex = i;
 				return true;
 			}
