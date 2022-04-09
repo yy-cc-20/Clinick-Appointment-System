@@ -30,9 +30,7 @@ public class LoginView {
 			System.out.print("> Password ");
 			password = KeyboardInput.scanner.nextLine();
 			
-			currentUser.askUsername();
-			currentUser.askPassword();
-			if (loginSuccessfully()) {
+			if (loginSuccessfully(username, password)) {
 				System.out.printf("%nHello " + currentUser.getUsername() + "!%n");
 				return currentUser;
 			} else {

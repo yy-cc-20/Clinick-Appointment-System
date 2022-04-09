@@ -5,18 +5,21 @@ import boundary.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) {
+		// Retrieve data from database
+		IDataStore dataList = DataList.getInstance(); 
+		dataList.importDoctorList(null);
+		dataList.importPatientList(null);
+		dataList.importReceptionistList(null);
+		// ...
+				
+		ConsoleUI.displaySystemName("System Name");
 		User systemUser = new LoginView().login();
-		
+		ConsoleUI.clearScreen();
+							
 		int eventNo; // the action that user wants to perform
 		final int beginEventNo = 1; 
 		final int endEventNo = 3;
-		
-		ConsoleUI.displaySystemName("System Name");
-		
-		// Retrieve data from database
-		DataList.importDoctorList(null);
-		// ...
-
+			
 		while (true) {
 			ConsoleUI.displaySystemName("System Name");
 			ConsoleUI.displayMenu(); // need to change the menu
