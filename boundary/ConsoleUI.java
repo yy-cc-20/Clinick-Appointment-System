@@ -162,9 +162,4 @@ public class ConsoleUI { // UI: user interface
 		} while(!isChar || !isInRange);
 		return eventNo;
 	}
-
-	// scanner with error handling and conditions
-	// to ask for attribute of a specific data type
-	// @param is the text that will be shown in the user interface
-
 }
