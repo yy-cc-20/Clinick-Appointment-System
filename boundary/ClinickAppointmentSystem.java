@@ -14,7 +14,9 @@ public class ClinickAppointmentSystem {
 		// password: password
 		
 		ConsoleUI.displaySystemName("Clinic Booking System");
-		User systemUser = new LoginView().login(); // From the returned object you can know the username, id, password, user type
+		User systemUser = new LoginView().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
+		// From systemUser, you can know the username, id, password, user type
+		
 		ConsoleUI.clearScreen();
 							
 		int eventNo; // the action that user wants to perform

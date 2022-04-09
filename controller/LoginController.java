@@ -71,23 +71,12 @@ public class LoginController {
 			 return true;
 	}
 	
-	public void lock() {
-		Toolkit.getDefaultToolkit().beep(); // emit a beep sound
+	public void setLockTimeEnded() {
 		lockTimeEnded = LocalDateTime.now().plusSeconds(LOCK_TIME_LENGTH);
-		
-		try {
-			Thread.sleep(LOCK_TIME_LENGTH * 1000 * 60);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			 //Thread.currentThread().interrupt();
-		}
-		
-		// unlock, if the user restart the program, the following statement will not be executed
-		unlock();
-		// reset failedLoginAttempt if login successfully or lock time expired
 	}
-	
-	public void continueLock() {
+
+	// if the user restart the program, the lockTimeEnded is loss, the account will not be locked
+	public void lock() {
 		try {
 			Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) * 1000); 
 		} catch (InterruptedException e) {
@@ -97,9 +86,9 @@ public class LoginController {
 		unlock(); // Lock time expired
 	}
 	
+	// use this if login successfully or lock time expired
 	private void unlock() {
 		failedLoginAttempt = 0;
 		lockTimeEnded = null;
 	}
-
 }

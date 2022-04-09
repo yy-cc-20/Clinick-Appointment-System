@@ -17,7 +17,7 @@ public class LoginView {
 		
 		if (loginController.isLocked()) {
 			displayLockMessage();
-			loginController.continueLock();
+			loginController.lock();
 		} 
 		
 		while (true) {
@@ -47,6 +47,7 @@ public class LoginView {
 				if (LoginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) {
 					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", LoginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
 				} else {
+					loginController.setLockTimeEnded();
 					displayLockMessage();
 					loginController.lock();
 				}
@@ -55,7 +56,13 @@ public class LoginView {
 	}
 	
 	private void displayLockMessage() {
-		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) + " second(s).\r");
-		// cannot act as a String data member, as the time interval is changing
+		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) + " second(s)."); // cannot act as a String data member, as the time interval is changing
+		
+		while (loginController.isLocked() && KeyboardInput.scanner.hasNextLine()) {
+			KeyboardInput.scanner.nextLine();
+			System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) + " second(s).");
+		}
+		System.out.println();
+		System.out.println();
 	}
 }
