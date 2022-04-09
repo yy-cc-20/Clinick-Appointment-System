@@ -1,5 +1,3 @@
-import boundary.KeyboardInput;
-
 public class User {
 	String id;
 	String username; // unique
