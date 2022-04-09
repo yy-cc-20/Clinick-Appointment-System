@@ -2,8 +2,6 @@
 
 package controller;
 
-import entity.*;
-
 public class ManageAccountController {
-	IDataStore dataList = DataList.getInstance();
+
 }
