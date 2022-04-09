@@ -1,11 +1,11 @@
-package boundary;
+package src.boundary;
 
-import controller.ManagePatientController;
-import entity.Patient;
+import src.controller.ManagePatientController;
+import src.entity.Patient;
 
 public class ManagePatientUI {
 
-    private ManagePatientController controller = new ManagePatientController();
+    private static ManagePatientController controller = new ManagePatientController();
 
     public static Patient searchPatient() {
         String patientIc = KeyboardInput.askString("patient IC");

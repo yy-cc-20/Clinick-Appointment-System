@@ -1,12 +1,14 @@
-package boundary;
+package src.boundary;
 
 import java.util.List;
 
-import controller.MakeAppointmentController;
-import entity.Appointment;
-import entity.User;
-import boundary.ManagePatientUI;
-import entity.TimeSlot;
+import src.entity.Service;
+import src.entity.Patient;
+import src.controller.MakeAppointmentController;
+import src.entity.Appointment;
+import src.entity.User;
+import src.boundary.ManagePatientUI;
+import src.entity.TimeSlot;
 
 public class MakeAppointmentUI {
 
@@ -59,7 +61,7 @@ public class MakeAppointmentUI {
     }
 
     public void makeAppointment() {
-        ManagePatientUI.searchPatient();
+        Patient selectedPatient = ManagePatientUI.searchPatient();
         viewSlots();
         boolean slotAvailable = false;
         int startSlot;
