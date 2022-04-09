@@ -13,16 +13,16 @@ public class LoginView {
 	public User login() {
 		if (loginController.isLocked()) {
 			displayLockMessage();
-			try {
-				Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) * 1000); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				 //Thread.currentThread().interrupt();
-			}
-			loginController.unlock();
+			loginController.continueLock();
 		} 
 		
 		while (true) {
+			System.out.println("Login as");
+			System.out.println("[1]Receptionist");
+			System.out.println("[2]Doctor");
+			System.out.println("[3]Patient");
+			int role = ConsoleUI.askEventNo(1, 3);
+			
 			System.out.print("> Username ");
 			String username = KeyboardInput.scanner.nextLine();
 			
