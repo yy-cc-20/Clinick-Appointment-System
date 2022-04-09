@@ -1,44 +1,10 @@
 package entity;
 
 public class User {
-	String id;
-	String username; // unique
-	String password;
-	
-	public User() {}
-	
-	public User(String theId, String theUsername, String thePassword) {
-		id = theId;
-		username = theUsername;
-		password = thePassword;
-	}
-	
-	public User(String theUsername, String thePassword) {
-		username = theUsername;
-		password = thePassword;
-	}
-	/*
-	public String getId() {
-		return id;
-	}
-	
-	
-	public void logout() {
-		username = "";
-		password = "";
-	}
-	*/
-	public String getUsername() {
-		return username;
-	}
-	
-	// For login
-	public boolean equals(User aUser) {
-		return username.equals(aUser.id) && password.equals(aUser.password);
-	}
-	
+    String userId;
+    String username; // unique
+    String password;
 
-	// only for sign up, not for login
 	// password cannot contain comma
 	// @return true if have at least 8 characters and contain at least
 	// one lowercase letter, one uppercase letter, one digit and no comma
@@ -83,5 +49,39 @@ public class User {
 		} 
 		return false;
 	}
+
+    public User() {
+    }
+
+    public User(String theId, String theUsername, String thePassword) {
+        userId = theId;
+        username = theUsername;
+        password = thePassword;
+    }
+
+    public User(String theUsername, String thePassword) {
+        username = theUsername;
+        password = thePassword;
+    }
+
+    /*
+    public String getId() {
+        return id;
+    }
+
+
+    public void logout() {
+        username = "";
+        password = "";
+    }
+    */
+    public String getUsername() {
+        return username;
+    }
+
+    // For login
+    public boolean equals(User aUser) {
+        return username.equals(aUser.userId) && password.equals(aUser.password);
+    }
 }
  
