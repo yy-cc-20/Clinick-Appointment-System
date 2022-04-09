@@ -7,11 +7,8 @@ enum TimeSlot {
 	// 1 slot = 30 mins
 	SLOT_1("0800AM"),
 	SLOT_2("0830AM"),
-	SLOT_3("0900AM"),
-	SLOT_4("
-	SLOT_5
-	// to be continue
-	SLOT_13("0430PM");
+	SLOT_3("0900AM");
+
 
 	private final String time;
 
