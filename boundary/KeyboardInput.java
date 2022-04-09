@@ -1,10 +1,8 @@
-import database.IOFile;
-
 // scanner with error handling and conditions
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface
 public class KeyboardInput {
-    private static final String stringError = "Sorry, cannot contain \"" + IOFile.getDELIMITER() + "\".";
+    private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
 
     // @return 0 or positive int
@@ -126,6 +124,6 @@ public class KeyboardInput {
     // apply to String attribute
     // check if the String input contains delimiter used in the database
     public static boolean hasDelimiter(String text) {
-        return text.contains(IOFile.getDELIMITER());
+        return text.contains(";");
     }
 }

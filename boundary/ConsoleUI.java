@@ -1,6 +1,6 @@
 // display message on the screen
 
-public class UI {// UI: user interface
+public class ConsoleUI {// UI: user interface
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
     private static final int screenHeight = 30; // the number of lines
