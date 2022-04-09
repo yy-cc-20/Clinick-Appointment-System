@@ -68,7 +68,7 @@ public class User {
                     thisCharacterHasType = true;
                 }
             }
-			
+
             if (!thisCharacterHasType) {
                 if (Character.isDigit(password.charAt(i))) {
                     hasDigit = true;
