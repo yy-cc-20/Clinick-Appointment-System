@@ -6,13 +6,14 @@ import boundary.*;
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) {
 		// Retrieve data from database
-		IDataStore dataList = DataList.getInstance(); 
-		dataList.importDoctorList();
-		dataList.importPatientList();
-		dataList.importReceptionistList();
-		// ...
-				
-		ConsoleUI.displaySystemName("System Name");
+		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
+		
+		// the test data is created in DataList
+		// role: doctor
+		// username: username
+		// password: password
+		
+		ConsoleUI.displaySystemName("Clinic Booking System");
 		User systemUser = new LoginView().login(); // From the returned object you can know the username, id, password, user type
 		ConsoleUI.clearScreen();
 							
@@ -22,7 +23,7 @@ public class ClinickAppointmentSystem {
 			
 		while (true) {
 			ConsoleUI.displaySystemName("System Name");
-			ConsoleUI.displayMenu(); // need to change the menu
+			//ConsoleUI.displayMenu(); // need to change the menu
 			eventNo = ConsoleUI.askEventNo(beginEventNo, endEventNo);
 			
 			switch (eventNo) {

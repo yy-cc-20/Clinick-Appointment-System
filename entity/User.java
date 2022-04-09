@@ -12,6 +12,16 @@ public class User {
 		username = theUsername;
 		password = thePassword;
 	}
+	
+	public User(String theUsername, String thePassword) {
+		username = theUsername;
+		password = thePassword;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
 	/*
 	public void logout() {
 		username = "";

@@ -8,7 +8,11 @@ public class DataList implements IDataStore {
 	private ArrayList<Patient> patientList;
 	private ArrayList<Receptionist> receptionistList;
 	
-	private DataList() {} // Private constructor for singleton
+	private DataList() {
+		importDoctorList();
+		importPatientList();
+		importReceptionistList();
+	} // Private constructor for singleton
 	
 	public static IDataStore getInstance() {
 		if (instance == null) {
@@ -18,14 +22,9 @@ public class DataList implements IDataStore {
 	}
 	
 	public void importDoctorList() {
+		// Test data for login
 		doctorList = new ArrayList<>();
-	}
-	
-	public ArrayList<Doctor> getDoctorList() {
-		if (doctorList == null)
-			return new ArrayList<Doctor>();
-		else 
-			return doctorList;
+		doctorList.add(new Doctor("1", "username", "password"));
 	}
 	
 	public void importPatientList() {
@@ -34,6 +33,13 @@ public class DataList implements IDataStore {
 	
 	public void importReceptionistList() {
 		
+	}
+	
+	public ArrayList<Doctor> getDoctorList() {
+		if (doctorList == null)
+			return new ArrayList<Doctor>();
+		else 
+			return doctorList;
 	}
 	
 	public ArrayList<Patient> getPatientList() {
