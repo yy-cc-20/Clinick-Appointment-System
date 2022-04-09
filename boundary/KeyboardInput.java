@@ -56,7 +56,7 @@ public class KeyboardInput {
 
         while (true) {
             System.out.printf("%nEnter %s: ", info);
-            input = scanner.nextLine();
+            input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else {
@@ -70,7 +70,7 @@ public class KeyboardInput {
         String input;
         while (true) {
             System.out.printf("%nEnter %s: ", info);
-            input = scanner.nextLine();
+            input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else if (input.equals("")) {
@@ -89,7 +89,7 @@ public class KeyboardInput {
         String input;
         while (true) {
             System.out.printf("%nEnter %s: ", info);
-            input = scanner.nextLine();
+            input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else if (input.equals("")) {
@@ -108,8 +108,8 @@ public class KeyboardInput {
     public static boolean askBoolean(String info) {
         String ans;
         while (true) {
-            System.out.printf(Color.ANSI_CYAN_BRIGHT + "%n%n%s%s", info, " (y/n)? " + Color.ANSI_RESET);
-            ans = scanner.nextLine().toLowerCase();
+            System.out.printf("%n%n%s%s", info, " (y/n)? ");
+            ans = SingletonScanner.scanner.nextLine().toLowerCase();
 
             if (ans.equalsIgnoreCase("y") || ans.equalsIgnoreCase("yes")) {
                 return true;
