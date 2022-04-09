@@ -1,7 +1,6 @@
 package boundary;
 
 import entity.*;
-import boundary.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) {
@@ -10,6 +9,7 @@ public class ClinickAppointmentSystem {
 		
 		// the test data is created in DataList
 		// role: doctor
+		// userid: 1
 		// username: username
 		// password: password
 		
@@ -30,7 +30,10 @@ public class ClinickAppointmentSystem {
 			
 			switch (eventNo) {
 			case 1:
-				ConsoleUI.displayFunctionName(" Add XX ");
+				// Just to test the method, you may change the sequence of the code
+				ConsoleUI.displayFunctionName("Account Setting");
+				new ManageAccountView().modifyAccount(systemUser);
+				
 				break;
 				
 			case 2: // Modify Account Info
