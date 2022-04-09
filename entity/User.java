@@ -1,5 +1,5 @@
 public class User {
-    String id;
+    String userId;
     String username; // unique
     String password;
 
@@ -7,7 +7,7 @@ public class User {
     }
 
     public User(String theId, String theUsername, String thePassword) {
-        id = theId;
+        userId = theId;
         username = theUsername;
         password = thePassword;
     }
@@ -34,7 +34,7 @@ public class User {
 
     // For login
     public boolean equals(User aUser) {
-        return username.equals(aUser.id) && password.equals(aUser.password);
+        return username.equals(aUser.userId) && password.equals(aUser.password);
     }
 
 
