@@ -56,26 +56,8 @@ public class LoginController {
 		return failedLoginAttempt;
 	}
 	
-	public boolean isLocked() {
-		 return lockTimeEnded.isBefore(LocalDateTime.now());
-	}
-	
-	
-	/**
-	 * TODO a bug: if the user restart the program, the lockTimeEnded is loss, the account will not be locked
-	 
-	public void lock() {
-		try {
-			Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) * 1000); 
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			 //Thread.currentThread().interrupt();
-		}
-		resetFailedLoginAttempts(); // Lock time expired
-	}*/
-	
 	// use this if login successfully or lock time expired
-	private void resetFailedLoginAttempts() {
+	public void resetFailedLoginAttempts() {
 		failedLoginAttempt = 0;
 	}
 }

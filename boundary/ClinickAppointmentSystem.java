@@ -1,10 +1,12 @@
 
 package boundary;
 
+import java.sql.SQLException;
+
 import entity.*;
 
 public class ClinickAppointmentSystem {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		// Retrieve data from database
 		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
 		
@@ -50,6 +52,7 @@ public class ClinickAppointmentSystem {
 			case 3: // logout and exit the program
 				ConsoleUI.displayFunctionName(" Program Stopped ");
 				KeyboardInput.scanner.close();
+				DatabaseConnection.closeConnection();
 				System.exit(0);
 			}
 			ConsoleUI.clearScreen();

@@ -45,11 +45,13 @@ public class LoginView {
 					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", LoginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
 				} else { // Failed too many times
 					lockAccount();
+					loginController.resetFailedLoginAttempts();
 				}
 			}
 		} // end while
 	}
 	
+	// TODO a bug: if the user restart the program, the lockTimeEnded is loss, the account will not be locked
 	private void lockAccount() {
 		LocalDateTime lockTimeEnded = LocalDateTime.now().plusSeconds(LoginController.LOCK_TIME_LENGTH); // Untill when the account will be unlocked
 		
