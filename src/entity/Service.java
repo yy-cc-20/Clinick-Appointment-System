@@ -1,3 +1,5 @@
+package entity;
+
 public class Service {
     private String serviceId;
     private String serviceName;
