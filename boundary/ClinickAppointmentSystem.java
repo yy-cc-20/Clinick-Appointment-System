@@ -9,11 +9,11 @@ public class ClinickAppointmentSystem {
 		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
 		
 		// instantiating the user interfaces
-/*		MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
+		MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
 		ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
 		ManageAccountUI manageAccountInterface = new ManageAccountUI();
 		ManagePatientUI managePatientInterface = new ManagePatientUI();
-	*/	
+		
 		// the test data is created in DataList
 		// role: doctor
 		// userid: 1
