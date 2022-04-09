@@ -57,11 +57,43 @@ public class ConsoleUI { // UI: user interface
 		System.out.printf("%n%n");
 	}
 	
-	// display the functions provided in this program
-	public static void displayMenu() {
-		System.out.println("[1]Add XX");
-		System.out.println("[2]Modify Account Info");
-		System.out.println("[3]Exit");
+	// display the menus for each unique user in this program
+	public static void displayMenuForReceptionist() {
+		System.out.println("         Menu             ");
+		System.out.println(" 1. View Appointment      ");
+		System.out.println(" 2. Search Appointment    ");
+		System.out.println(" 3. Make Appointment      ");
+
+		System.out.println(" 4. Update Appointment    ");
+		System.out.println(" 5. Cancel Appointment    ");
+		System.out.println(" 6. Record Attendance     ");
+
+		System.out.println(" 7. Create Patient Profile");
+		System.out.println(" 8. Manage Patient Profile");
+		System.out.println(" 9. Search Patient        ");
+
+		System.out.println("10. Manage Account        ");
+		System.out.println("11. View Slots            ");
+
+		System.out.println(" 0. Exit Application      ");
+	}
+
+	public static void displayMenuForDoctor() {
+		System.out.println("         Menu             ");
+		System.out.println(" 1. View Appointment      ");
+		System.out.println(" 2. Search Appointment    ");
+		System.out.println(" 3. Search Patient        ");
+		System.out.println(" 4. Manage Account        ");
+		System.out.println(" 0. Exit Application      ");
+	}
+
+	public static void displayMenuForPatient() {
+		System.out.println("         Menu             ");
+		System.out.println(" 1. View Appointment      ");
+		System.out.println(" 2. Search Appointment    ");
+		System.out.println(" 3. Manage Account        ");
+		System.out.println(" 4. View Slots            ");
+		System.out.println(" 0. Exit Application      ");
 	}
 	
 	// let user chose which eventNo he/she wants to perform
