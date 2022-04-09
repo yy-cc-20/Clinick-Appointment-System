@@ -1,3 +1,5 @@
+package boundary;
+
 
 // display message on the screen
 

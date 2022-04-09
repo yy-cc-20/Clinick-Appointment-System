@@ -1,9 +1,11 @@
-
+package boundary;
 
 import java.awt.Toolkit;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import controller.LoginController;
+import entity.*;
 
 public class LoginView {
 	private LoginController loginController = new LoginController();
@@ -58,7 +60,7 @@ public class LoginView {
 		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s)."); // cannot act as a String data member, as the time interval is changing
 		
 		// If user keep pressing the keyboard while being suspended from login
-		while (!lockTimeEnded.isBefore(LocalDateTime.now()) && KeyboardInput.scanner.hasNextLine()) {
+		while (!lockTimeEnded.isBefore(LocalDateTime.now()) && SingletonScanner.scanner.hasNextLine()) {
 			SingletonScanner.scanner.nextLine(); // Allow the user press the keyboard and response to it
 			if (!lockTimeEnded.isBefore(LocalDateTime.now())) // Check again, to avoid display negative time interval when the suspended period is over
 				System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s).");

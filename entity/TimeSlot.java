@@ -1,3 +1,5 @@
+package entity;
+
 enum TimeSlot {
 
 	// in file    | display as

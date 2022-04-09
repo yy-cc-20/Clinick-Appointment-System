@@ -1,3 +1,5 @@
+package boundary;
+
 // scanner with error handling and conditions
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface

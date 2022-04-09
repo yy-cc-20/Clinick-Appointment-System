@@ -1,3 +1,5 @@
+package entity;
+
 public class User {
 	String id;
 	String username; // unique
@@ -48,7 +50,7 @@ public class User {
 		boolean hasDigit = false;
 		boolean thisCharacterHasType = false; // skip the rest of the checking
 		
-		if(!isLong || KeyboardInput.hasDelimiter(password)) {
+		if(!isLong) {
 			return false;
 		}
 		
