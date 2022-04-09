@@ -1,7 +1,11 @@
+import java.util.Scanner;
+
 // scanner with error handling and conditions
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface
 public class KeyboardInput {
+	public static final Scanner scanner = new Scanner(System.in);
+	
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
 
@@ -13,7 +17,7 @@ public class KeyboardInput {
         while (true) {
             System.out.printf("%nEnter %s: ", info);
             try {
-                input = Integer.parseInt(SingleObject.scanner.nextLine());
+                input = Integer.parseInt(scanner.nextLine());
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
@@ -35,7 +39,7 @@ public class KeyboardInput {
         while (true) {
             System.out.printf("%nEnter %s: ", info);
             try {
-                input = Double.parseDouble(SingleObject.scanner.nextLine());
+                input = Double.parseDouble(scanner.nextLine());
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
@@ -55,7 +59,7 @@ public class KeyboardInput {
 
         while (true) {
             System.out.printf("%nEnter %s: ", info);
-            input = SingleObject.scanner.nextLine();
+            input = scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else {
@@ -69,7 +73,7 @@ public class KeyboardInput {
         String input;
         while (true) {
             System.out.printf("%nEnter %s: ", info);
-            input = SingleObject.scanner.nextLine();
+            input = scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else if (input.equals("")) {
@@ -88,7 +92,7 @@ public class KeyboardInput {
         String input;
         while (true) {
             System.out.printf("%nEnter %s: ", info);
-            input = SingleObject.scanner.nextLine();
+            input = scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else if (input.equals("")) {
@@ -108,7 +112,7 @@ public class KeyboardInput {
         String ans;
         while (true) {
             System.out.printf(Color.ANSI_CYAN_BRIGHT + "%n%n%s%s", info, " (y/n)? " + Color.ANSI_RESET);
-            ans = SingleObject.scanner.nextLine().toLowerCase();
+            ans = scanner.nextLine().toLowerCase();
 
             if (ans.equalsIgnoreCase("y") || ans.equalsIgnoreCase("yes")) {
                 return true;
