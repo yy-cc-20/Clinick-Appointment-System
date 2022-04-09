@@ -1,32 +1,30 @@
-// general.UI.java
-
-package boundary;
 
 // display message on the screen
 
 public class ConsoleUI { // UI: user interface
 	// only static variable can be used in static method
-	private static int headingWidth = 50; // the number of characters
-	private static int screenHeight = 22; // the number of lines
-	
+	private static final int headingWidth = 50; // the number of characters
+
 	// clear screen
-	public static void clearScreen() { 
+	public static void clearScreen() {
 		System.out.printf("%n[Enter] to continue...");
-		 KeyboardInput.scanner.nextLine(); // pause, wait for user to continue
-		 for (int i = 0; i < screenHeight; ++i) {
+		 SingletonScanner.scanner.nextLine(); // pause, wait for user to continue
+		// the number of lines
+		int screenHeight = 22;
+		for (int i = 0; i < screenHeight; ++i) {
 			 System.out.println();
 		 }
 	}
-	
+
 	// display the program name and menu name
 	public static void displaySystemName(String heading) {
 		int field = headingWidth - heading.length();
-		
+
 		for(int i = 0; i < headingWidth; ++i) {
 			System.out.print('#');
 		}
 		System.out.printf("%n%n");
-		
+
 		for(int i = 0; i < field / 2; ++i) { // display the heading in the center
 			System.out.print(' ');
 		}
@@ -35,18 +33,18 @@ public class ConsoleUI { // UI: user interface
 			System.out.print(' ');
 		}
 		System.out.printf("%n%n");
-		
+
 		for(int i = 0; i < headingWidth; ++i) {
 			System.out.print('#');
 		}
 		System.out.printf("%n%n");
 	}
-	
+
 	public static void displayFunctionName(String heading) {
 		int field = headingWidth - heading.length();
-		
+
 		System.out.printf("%n");
-		
+
 		for(int i = 0; i < field / 2; ++i) { // display the heading in the center
 			System.out.print('-');
 		}
@@ -56,7 +54,7 @@ public class ConsoleUI { // UI: user interface
 		}
 		System.out.printf("%n%n");
 	}
-	
+
 	// display the menus for each unique user in this program
 	public static void displayMenuForReceptionist() {
 		System.out.println("         Menu             ");
@@ -95,35 +93,35 @@ public class ConsoleUI { // UI: user interface
 		System.out.println(" 4. View Slots            ");
 		System.out.println(" 0. Exit Application      ");
 	}
-	
+
 	// let user chose which eventNo he/she wants to perform
 	// assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
-	public static int askEventNo(int beginEventNo, int endEventNo) throws IllegalArgumentException { 
+	public static int askEventNo(int beginEventNo, int endEventNo) throws IllegalArgumentException {
 		if (beginEventNo > endEventNo) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		int eventNo;
 		final String errorMessage = "Sorry, input failed. Please enter the number of choice you want.%n";
-				
+
 		while (true) {
 			try {
 				System.out.printf("%n> ");
-				eventNo = Integer.parseInt(KeyboardInput.scanner.nextLine());
-				
+				eventNo = Integer.parseInt(SingletonScanner.scanner.nextLine());
+
 				if(eventNo >= beginEventNo && eventNo <= endEventNo) {
 					break;
 				} else {
-					System.out.printf(errorMessage);
+					System.out.print(errorMessage);
 				}
 			}
 			catch(NumberFormatException e) {
-				System.out.printf(errorMessage);
+				System.out.print(errorMessage);
 				// 1. Apologise, the application should accept the responsibility for the problem
 				// 2. What happened (what went wrong / the problem, why / the cause)
 				// 3. How to fix it (where to find the bug / the solution)
 			}
-		} 
+		}
 		return eventNo;
 	}
 
@@ -132,21 +130,21 @@ public class ConsoleUI { // UI: user interface
 	// assumption: the menu will be listed in sentence
 	// 				index is alphabet
 	// 				each alphabet between the range has an eventNo
-	public static char askEventNo2(char beginEventNo, char endEventNo) throws IllegalArgumentException{ 
+	public static char askEventNo2(char beginEventNo, char endEventNo) throws IllegalArgumentException{
 		char eventNo = '?';
 		String input = "";
 		boolean isChar = false;
 		boolean isInRange = eventNo >= beginEventNo && eventNo <= endEventNo; // to form readable code
-		
+
 		if (beginEventNo > endEventNo) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		do {
 			try {
 				isChar = false;
 				System.out.printf("%n> ");
-				input = KeyboardInput.scanner.nextLine();
+				input = SingletonScanner.scanner.nextLine();
 				if(input.length() == 1 && Character.isLetter(input.charAt(0))) {
 					eventNo = input.charAt(0);
 					isChar = true;

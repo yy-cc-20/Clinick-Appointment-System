@@ -1,4 +1,3 @@
-package entity;
 
 import java.util.ArrayList;
 import java.util.List;
