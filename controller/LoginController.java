@@ -11,13 +11,19 @@ public class LoginController {
 	private int currentUserIndex;
 		
 	// security: lock the system after a few failed logins
-	int failedLoginAttempt;
+	int failedLoginAttempt = 0;
 	LocalDateTime lockTimeEnded;
 	
 	private static final int MAX_FAILED_LOGIN_ATTEMPT = 3;
 	private static final int LOCK_TIME_LENGTH = 10; // in seconds
 	
-	public 
+	public int failedLoginAttempt() {
+		return failedLoginAttempt;
+	}
+	
+	public LocalDateTime getLockTimeEnded() {
+		return lockTimeEnded;
+	}
 	
 	private boolean isLocked() {
 		 if (lockTimeEnded == null)
@@ -40,22 +46,22 @@ public class LoginController {
 		}
 		
 		// unlock, if the user restart the program, the following statement will not be executed
+		unLock();
+		// reset failedLoginAttempt if login successfully or lock time expired
+	}
+	
+	private void unLock() {
 		failedLoginAttempt = 0;
-		/* reset failedLoginAttempt if
-		 * login successfully or
-		 * lock time expired
-		 */
 	}
 	
 	private boolean loginSuccessfully() {
-		User user;
 		for (int i = 0; i < DataList.getDoctorList().size(); ++i) {
 			if (currentUser.equals(DataList.getDoctorList().get(i))) {
 				currentUserIndex = i;
+				unLock();
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

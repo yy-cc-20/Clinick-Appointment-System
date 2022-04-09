@@ -11,50 +11,45 @@ public class LoginView {
 	private
 	
 	// lock account and exit program if fail too many times
-	private User login() {
-		if (isLocked()) {
+	public User login() {
+		if (loginController.isLocked()) {
 			displayLockMessage();
 			try {
-				Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) * 1000); 
+				Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.lockTimeEnded) * 1000); 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				 //Thread.currentThread().interrupt();
 			}
-			failedLoginAttempt = 0;
+			loginController.failedLoginAttempt = 0;
 		} 
 		
 		while (true) {
+			System.out.print("> Username ");
+			username = KeyboardInput.scanner.nextLine();
+			
+			System.out.print("> Password ");
+			password = KeyboardInput.scanner.nextLine();
+			
 			currentUser.askUsername();
 			currentUser.askPassword();
 			if (loginSuccessfully()) {
 				System.out.printf("%nHello " + currentUser.getUsername() + "!%n");
-				failedLoginAttempt = 0;
 				return currentUser;
 			} else {
-				++failedLoginAttempt;
+				++loginController.failedLoginAttempt;
 				
-				if (MAX_FAILED_LOGIN_ATTEMPT > failedLoginAttempt) {
-					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", MAX_FAILED_LOGIN_ATTEMPT - failedLoginAttempt);
+				if (loginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.failedLoginAttempt) {
+					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", loginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.failedLoginAttempt);
 				} else {
 					displayLockMessage();
-					lock();
+					loginController.lock();
 				}
 			}
 		}
 	}
 	
 	private void displayLockMessage() {
-		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s).\r");
+		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) + " second(s).\r");
 		// cannot act as a String data member, as the time interval is changing
-	}
-	
-	void askUsername() {
-		System.out.print("> Username ");
-		username = Singleton.keyboard.nextLine();
-	}
-	
-	void askPassword() {
-		System.out.print("> Password ");
-		password = Singleton.keyboard.nextLine();
 	}
 }
