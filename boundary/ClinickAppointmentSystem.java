@@ -54,9 +54,9 @@ public class ClinickAppointmentSystem {
 	public static void main(String[] args) {
 		// Retrieve data from database
 		IDataStore dataList = DataList.getInstance(); 
-		dataList.importDoctorList(null);
-		dataList.importPatientList(null);
-		dataList.importReceptionistList(null);
+		dataList.importDoctorList();
+		dataList.importPatientList();
+		dataList.importReceptionistList();
 		// ...
 				
 		ConsoleUI.displaySystemName("System Name");

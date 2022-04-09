@@ -17,8 +17,8 @@ public class DataList implements IDataStore {
 		return instance;
 	}
 	
-	public void importDoctorList(ArrayList<Doctor> d) {
-		doctorList = new ArrayList<>(d);
+	public void importDoctorList() {
+		doctorList = new ArrayList<>();
 	}
 	
 	public ArrayList<Doctor> getDoctorList() {
@@ -28,11 +28,11 @@ public class DataList implements IDataStore {
 			return doctorList;
 	}
 	
-	public void importPatientList(ArrayList<Patient> d) {
+	public void importPatientList() {
 		
 	}
 	
-	public void importReceptionistList(ArrayList<Receptionist> d) {
+	public void importReceptionistList() {
 		
 	}
 	

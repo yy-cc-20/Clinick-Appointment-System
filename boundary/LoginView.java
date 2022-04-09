@@ -8,36 +8,35 @@ import entity.User;
 
 public class LoginView {
 	private LoginController loginController = new LoginController();
-	private
-	
+		
 	// lock account and exit program if fail too many times
 	public User login() {
 		if (loginController.isLocked()) {
 			displayLockMessage();
 			try {
-				Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.lockTimeEnded) * 1000); 
+				Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) * 1000); 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				 //Thread.currentThread().interrupt();
 			}
-			loginController.failedLoginAttempt = 0;
+			loginController.unlock();
 		} 
 		
 		while (true) {
 			System.out.print("> Username ");
-			username = KeyboardInput.scanner.nextLine();
+			String username = KeyboardInput.scanner.nextLine();
 			
 			System.out.print("> Password ");
-			password = KeyboardInput.scanner.nextLine();
+			String password = KeyboardInput.scanner.nextLine();
 			
-			if (loginSuccessfully(username, password)) {
-				System.out.printf("%nHello " + currentUser.getUsername() + "!%n");
+			if (loginController.loginSuccessfully(username, password)) {
+				System.out.printf("%nHello " + username + "!%n");
 				return currentUser;
 			} else {
 				++loginController.failedLoginAttempt;
 				
-				if (loginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.failedLoginAttempt) {
-					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", loginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.failedLoginAttempt);
+				if (loginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) {
+					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", loginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
 				} else {
 					displayLockMessage();
 					loginController.lock();

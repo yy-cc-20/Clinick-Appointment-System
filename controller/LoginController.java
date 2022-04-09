@@ -9,15 +9,17 @@ import java.time.temporal.ChronoUnit;
 public class LoginController {
 	private User currentUser;
 	private int currentUserIndex;
+	private Class role;
+	private IDataStore dataList = DataList.getInstance();
 		
 	// security: lock the system after a few failed logins
 	int failedLoginAttempt = 0;
 	LocalDateTime lockTimeEnded;
 	
-	private static final int MAX_FAILED_LOGIN_ATTEMPT = 3;
+	public static final int MAX_FAILED_LOGIN_ATTEMPT = 3;
 	private static final int LOCK_TIME_LENGTH = 10; // in seconds
 	
-	public int failedLoginAttempt() {
+	public int getFailedLoginAttempt() {
 		return failedLoginAttempt;
 	}
 	
@@ -25,7 +27,7 @@ public class LoginController {
 		return lockTimeEnded;
 	}
 	
-	private boolean isLocked() {
+	public boolean isLocked() {
 		 if (lockTimeEnded == null)
 			 return false;
 		 else if (lockTimeEnded.isBefore(LocalDateTime.now()))
@@ -34,7 +36,7 @@ public class LoginController {
 			 return true;
 	}
 	
-	private void lock() {
+	public void lock() {
 		Toolkit.getDefaultToolkit().beep(); // emit a beep sound
 		lockTimeEnded = LocalDateTime.now().plusSeconds(LOCK_TIME_LENGTH);
 		
@@ -46,19 +48,30 @@ public class LoginController {
 		}
 		
 		// unlock, if the user restart the program, the following statement will not be executed
-		unLock();
+		unlock();
 		// reset failedLoginAttempt if login successfully or lock time expired
 	}
 	
-	private void unLock() {
+	public void continueLock() {
+		try {
+			Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) * 1000); 
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			 //Thread.currentThread().interrupt();
+		}
+		unlock(); // Lock time expired
+	}
+	
+	public void unlock() {
 		failedLoginAttempt = 0;
 	}
 	
 	private boolean loginSuccessfully() {
-		for (int i = 0; i < DataList.getDoctorList().size(); ++i) {
-			if (currentUser.equals(DataList.getDoctorList().get(i))) {
+		for (int i = 0; i < dataList.getDoctorList().size(); ++i) {
+			if (currentUser.equals(dataList.getDoctorList().get(i))) {
 				currentUserIndex = i;
-				unLock();
+				role = Doctor.class;
+				unlock();
 				return true;
 			}
 		}

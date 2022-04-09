@@ -72,7 +72,7 @@ public class ConsoleUI { // UI: user interface
 		}
 		
 		int eventNo;
-		final String errorMessage = "Sorry, input failed. Please enter the number of option you want to perform.%n";
+		final String errorMessage = "Sorry, input failed. Please enter the number of choice you want.%n";
 				
 		while (true) {
 			try {
