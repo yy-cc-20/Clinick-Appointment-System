@@ -2,17 +2,21 @@ package entity;
 
 import java.util.ArrayList;
 
+/* 
+ * IDataStore dataList = DataList.getInstance(); // Already retrieved the data
+ */
+
 public class DataList implements IDataStore {
 	private static IDataStore instance;
 	private ArrayList<Doctor> doctorList;
 	private ArrayList<Patient> patientList;
 	private ArrayList<Receptionist> receptionistList;
 	
-	public DataList() {
+	private DataList() {
 		importDoctorList();
 		importPatientList();
 		importReceptionistList();
-	} // Private constructor for singleton
+	} // Private constructor for singleton !!!
 	
 	public static IDataStore getInstance() {
 		if (instance == null) {
