@@ -1,3 +1,5 @@
+package boundary;
+
 import java.util.Scanner;
 
 // scanner with error handling and conditions
