@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DataList implements IDataStore {
 	private static IDataStore instance;
-	private List<Doctor> doctorList; // Use List interface instead of ArrayList, more flexible, reduce denpendency
+	private List<Doctor> doctorList; // Use List interface instead of ArrayList, more flexible, reduce the dependency
 	private List<Patient> patientList;
 	private List<Receptionist> receptionistList;
 	

@@ -6,7 +6,7 @@ import java.util.Scanner;
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface
 public class KeyboardInput {
-	public static final Scanner scanner = new Scanner(System.in);
+	public static final Scanner scanner = new Scanner(System.in); // Singleton
 	
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";

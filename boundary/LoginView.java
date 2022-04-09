@@ -58,8 +58,8 @@ public class LoginView {
 		
 		// If user keep pressing the keyboard while being suspended from login
 		while (!lockTimeEnded.isBefore(LocalDateTime.now()) && KeyboardInput.scanner.hasNextLine()) {
-			KeyboardInput.scanner.nextLine();
-			if (!lockTimeEnded.isBefore(LocalDateTime.now())) // Check again
+			KeyboardInput.scanner.nextLine(); // Allow the user press the keyboard and response to it
+			if (!lockTimeEnded.isBefore(LocalDateTime.now())) // Check again, to avoid display negative time interval when the suspended period is over
 				System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s).");
 		}
 		System.out.println();
