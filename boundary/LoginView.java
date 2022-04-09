@@ -2,15 +2,19 @@ package boundary;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-
+import entity.*;
 import controller.LoginController;
-import entity.User;
 
 public class LoginView {
 	private LoginController loginController = new LoginController();
 		
 	// lock account and exit program if fail too many times
 	public User login() {
+		int role;
+		String username;
+		String password;
+		String userid;
+		
 		if (loginController.isLocked()) {
 			displayLockMessage();
 			loginController.continueLock();
@@ -21,28 +25,33 @@ public class LoginView {
 			System.out.println("[1]Receptionist");
 			System.out.println("[2]Doctor");
 			System.out.println("[3]Patient");
-			int role = ConsoleUI.askEventNo(1, 3);
+			role = ConsoleUI.askEventNo(1, 3);
 			
 			System.out.print("> Username ");
-			String username = KeyboardInput.scanner.nextLine();
+			username = KeyboardInput.scanner.nextLine();
 			
 			System.out.print("> Password ");
-			String password = KeyboardInput.scanner.nextLine();
+			password = KeyboardInput.scanner.nextLine();
 			
-			if (loginController.loginSuccessfully(username, password)) {
+			userid = loginController.login(role, username, password);
+			if (!userid.isBlank()) {
 				System.out.printf("%nHello " + username + "!%n");
-				return currentUser;
-			} else {
-				++loginController.failedLoginAttempt;
+				switch (role) {
+					case 1: return new Receptionist(userid, username, password);
+					case 2: return new Doctor(userid, username, password);
+					default: // case 3
+						return new Patient(userid, username, password);
+				}
 				
-				if (loginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) {
-					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", loginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
+			} else {				
+				if (LoginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) {
+					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", LoginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
 				} else {
 					displayLockMessage();
 					loginController.lock();
 				}
 			}
-		}
+		} // end while
 	}
 	
 	private void displayLockMessage() {

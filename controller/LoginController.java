@@ -7,13 +7,9 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class LoginController {
-	private User currentUser;
-	private int currentUserIndex;
-	private Class role;
 	private IDataStore dataList = DataList.getInstance();
 		
-	// security: lock the system after a few failed logins
-	int failedLoginAttempt = 0;
+	int failedLoginAttempt = 0; // security: lock the system after a few failed logins
 	LocalDateTime lockTimeEnded;
 	
 	public static final int MAX_FAILED_LOGIN_ATTEMPT = 3;
@@ -54,7 +50,7 @@ public class LoginController {
 	
 	public void continueLock() {
 		try {
-			Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) * 1000); 
+			Thread.sleep(ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) * 1000); 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			 //Thread.currentThread().interrupt();
@@ -62,19 +58,23 @@ public class LoginController {
 		unlock(); // Lock time expired
 	}
 	
-	public void unlock() {
+	private void unlock() {
 		failedLoginAttempt = 0;
+		lockTimeEnded = null;
 	}
 	
-	private boolean loginSuccessfully() {
+	/**
+	 * @return userid, return empty string is not found
+	 */
+	public String login(int role, String username, String password) {
+		User user;
 		for (int i = 0; i < dataList.getDoctorList().size(); ++i) {
-			if (currentUser.equals(dataList.getDoctorList().get(i))) {
-				currentUserIndex = i;
-				role = Doctor.class;
+			if (user.equals(dataList.getDoctorList().get(i))) {
 				unlock();
 				return true;
 			}
 		}
+		failedLoginAttempt++;
 		return false;
 	}
 }

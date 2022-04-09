@@ -1,28 +1,29 @@
 package entity;
 
 public class User {
-	int id;
+	String id;
 	String username; // unique
 	String password;
 	
-	User() {}
+	public User() {}
 	
-	User(int theId, String theUsername, String thePassword) {
+	public User(String theId, String theUsername, String thePassword) {
 		id = theId;
 		username = theUsername;
 		password = thePassword;
 	}
-	
+	/*
 	public void logout() {
 		username = "";
 		password = "";
 	}
 	
-	String getUsername() {
+	public String getUsername() {
 		return username;
-	}
+	}*/
 	
-	boolean equals(User aUser) {
+	// For login
+	public boolean equals(User aUser) {
 		return username.equals(aUser.username) && password.equals(aUser.password);
 	}
 }
