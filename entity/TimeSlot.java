@@ -19,7 +19,7 @@ enum TimeSlot {
 	SLOT_12("0330PM"),
 	SLOT_13("0400PM"),
 	SLOT_14("0430PM");
-	
+
 
 	private final String time;
 
