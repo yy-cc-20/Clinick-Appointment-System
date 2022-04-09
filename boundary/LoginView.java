@@ -58,6 +58,7 @@ public class LoginView {
 	private void displayLockMessage() {
 		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) + " second(s)."); // cannot act as a String data member, as the time interval is changing
 		
+		// Handle keyboard input for user being suspended from login and keep pressing the keyboard
 		while (loginController.isLocked() && KeyboardInput.scanner.hasNextLine()) {
 			KeyboardInput.scanner.nextLine();
 			System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), loginController.getLockTimeEnded()) + " second(s).");
