@@ -1,4 +1,3 @@
-package entity;
 
 enum TimeSlot {
 
