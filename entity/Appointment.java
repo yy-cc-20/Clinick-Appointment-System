@@ -4,5 +4,5 @@ public class Appointment {
     private String appointmentId;
     private LocalDate appointmentDate;
     private Attendance attendance;
-    private TimeSlot timeSlot;
+    private TimeSlot[] timeSlot;
 }
