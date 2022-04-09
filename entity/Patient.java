@@ -7,4 +7,20 @@ public class Patient extends User {
 	public Patient(String userid, String username, String password) {
 		super(userid, username, password);
 	}
+
+	public String getIc() {
+		return ic;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public Appointment[] getAppointments() {
+		return appointments;
+	}
 }
