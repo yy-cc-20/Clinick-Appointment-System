@@ -1,5 +1,7 @@
 package entity;
 
+import entity.Appointment;
+
 public class Patient extends User {
     private String ic;
     private String phoneNo;

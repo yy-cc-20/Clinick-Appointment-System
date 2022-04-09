@@ -1,3 +1,5 @@
+package entity;
+
 public class Branch{
     private String branchId;
     private String branchName;

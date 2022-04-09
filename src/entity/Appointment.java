@@ -14,7 +14,7 @@ public class Appointment {
     public Appointment(String appointmentId, String appointmentDate, String attendance, String[] timeSlot) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, formatter);
-        this.attendance = attendance;
-        this.timeSlot = timeSlot;
+//        this.attendance = attendance;
+//        this.timeSlot = timeSlot;
     }
 }

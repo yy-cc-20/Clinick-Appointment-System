@@ -4,7 +4,7 @@ package boundary;
 
 import java.sql.SQLException;
 
-import entity.*;
+import entity.IDataStore;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
