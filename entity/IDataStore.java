@@ -1,12 +1,12 @@
 package entity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IDataStore {
 	void importDoctorList();
 	void importPatientList();
 	void importReceptionistList();
-	ArrayList<Doctor> getDoctorList();
-	ArrayList<Patient> getPatientList();
-	ArrayList<Receptionist> getReceptionistList();
+	List<Doctor> getDoctorList();
+	List<Patient> getPatientList();
+	List<Receptionist> getReceptionistList();
 }

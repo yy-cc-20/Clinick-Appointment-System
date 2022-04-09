@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /* 
  * IDataStore dataList = DataList.getInstance(); // Already retrieved the data
@@ -8,9 +9,9 @@ import java.util.ArrayList;
 
 public class DataList implements IDataStore {
 	private static IDataStore instance;
-	private ArrayList<Doctor> doctorList;
-	private ArrayList<Patient> patientList;
-	private ArrayList<Receptionist> receptionistList;
+	private List<Doctor> doctorList; // Use List interface instead of ArrayList, more flexible, reduce denpendency
+	private List<Patient> patientList;
+	private List<Receptionist> receptionistList;
 	
 	private DataList() {
 		importDoctorList();
@@ -39,21 +40,21 @@ public class DataList implements IDataStore {
 		
 	}
 	
-	public ArrayList<Doctor> getDoctorList() {
+	public List<Doctor> getDoctorList() {
 		if (doctorList == null)
 			return new ArrayList<Doctor>();
 		else 
 			return doctorList;
 	}
 	
-	public ArrayList<Patient> getPatientList() {
+	public List<Patient> getPatientList() {
 		if (patientList == null)
 			return new ArrayList<Patient>();
 		else 
 			return patientList;
 	}
 	
-	public ArrayList<Receptionist> getReceptionistList() {
+	public List<Receptionist> getReceptionistList() {
 		if (receptionistList == null)
 			return new ArrayList<Receptionist>();
 		else 
