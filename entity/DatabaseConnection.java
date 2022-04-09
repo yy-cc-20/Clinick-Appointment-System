@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 /* Notes on using JDBC
  * 
  * 0. Exception throws: SQLException, ClassNotFoundException
@@ -92,8 +92,8 @@ public class DatabaseConnection {
 	public static void closeConnection() throws SQLException{
 		conn.close();
 	}
-=======
-public class DatabaseConnection{
-
->>>>>>> Stashed changes
+	
+	private void setUpDatabaseIfNotExist() {
+		
+	}
 }
