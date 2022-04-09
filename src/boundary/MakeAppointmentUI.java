@@ -13,13 +13,12 @@ import src.entity.TimeSlot;
 public class MakeAppointmentUI {
 
     private MakeAppointmentController controller = new MakeAppointmentController();
-    List<Appointment> theAppointments = controller.getAllAppointments();
 
     public void viewAppointment() {
-        displayAppointment(theAppointments);
+        displayAppointment(controller.getAllAppointments());
     }
 
-    public void displayAppointment(List<Appointment> theAppointments) {
+    public static void displayAppointment(List<Appointment> theAppointments) {
         if (theAppointments.size() == 0) {
             System.out.println("No appointment to display.");
         } else {
@@ -87,7 +86,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public void viewSlots() {
+    public static void viewSlots() {
         displayServices();
         int choice = KeyboardInput.askPositiveInt("a service (1-15)");
         String date = KeyboardInput.askString("a date (DD/MM/YYYY)");
@@ -102,7 +101,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public void displayServices() {
+    public static void displayServices() {
         List<Service> theServices = controller.getAllServices();
         Service aService;
 
