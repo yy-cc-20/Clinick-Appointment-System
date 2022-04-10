@@ -7,7 +7,8 @@ import entity.User;
 public class ConsoleUI { // UI: user interface
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
-
+    private static int screenHeight = 22; // the number of lines
+    
     // instantiating the user interfaces
     MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
     ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
@@ -52,8 +53,6 @@ public class ConsoleUI { // UI: user interface
     public static void clearScreen() {
         System.out.printf("%n[Enter] to continue...");
         SingletonScanner.scanner.nextLine(); // pause, wait for user to continue
-        // the number of lines
-        int screenHeight = 22;
         for (int i = 0; i < screenHeight; ++i) {
             System.out.println();
         }
@@ -137,5 +136,4 @@ public class ConsoleUI { // UI: user interface
         System.out.println(" 4. View Slots            ");
         System.out.println(" 0. Exit Application      ");
     }
-
 }
