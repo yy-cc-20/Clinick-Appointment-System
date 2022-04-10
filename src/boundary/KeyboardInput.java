@@ -81,10 +81,6 @@ public class KeyboardInput {
         }
     }
 
-    public static Attendance askAttendance(){
-
-    }
-
     // used to ask the name cannot be null
     public static String askName(String info, int length) {
         String input;
