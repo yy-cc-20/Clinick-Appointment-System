@@ -6,11 +6,11 @@ public class Patient extends User {
     private String address;
     private Appointment[] appointments;
 
-    public Patient(String userid, String username, String password) {
+    public Patient(int userid, String username, String password) {
         super(userid, username, password);
     }
 
-    public Patient(String userid, String username, String password, String ic, String phoneNo, String address,
+    public Patient(int userid, String username, String password, String ic, String phoneNo, String address,
                    Appointment[] appointments) {
         super(userid, username, password);
         this.ic = ic;

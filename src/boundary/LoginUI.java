@@ -8,13 +8,13 @@ import controller.LoginController;
 import entity.*;
 
 public class LoginUI {
-	private final LoginController loginController = new LoginController(); // final object: can never refer to another object, but the object it refers to may change state
+	private final LoginController loginController = new LoginController();
 	
 	// Use this method for login
-	// Lock account and exit program if fail too many times
+	// lock account and exit program if fail too many times
 	public User login() {
 		int role;
-		String userid;
+		int userid;
 		String password;
 		String username;
 		
@@ -56,7 +56,7 @@ public class LoginUI {
 	private void lockAccount() {
 		LocalDateTime lockTimeEnded = LocalDateTime.now().plusSeconds(LoginController.LOCK_TIME_LENGTH); // Untill when the account will be unlocked
 		
-		Toolkit.getDefaultToolkit().beep(); // Emit a beep sound
+		Toolkit.getDefaultToolkit().beep(); // emit a beep sound
 		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s)."); // cannot act as a String data member, as the time interval is changing
 		
 		// If user keep pressing the keyboard while being suspended from login

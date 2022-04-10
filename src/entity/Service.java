@@ -1,13 +1,13 @@
 package entity;
 
 public class Service {
-    private String serviceId;
+    private int serviceId;
     private String serviceName;
     private double price;
     private String description;
     private int timeSlotRequired;
 
-    public Service(String serviceId, String serviceName, double price, String description, int timeSlotRequired) {
+    public Service(int serviceId, String serviceName, double price, String description, int timeSlotRequired) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.price = price;
@@ -17,11 +17,11 @@ public class Service {
 
     public Service(){}
 
-    public String getServiceId() {
+    public int getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(String serviceId) {
+    public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
     }
 

@@ -1,16 +1,20 @@
 package entity;
 
 public class Allocation {
-    private String linkId;
+    private int linkId;
     private Branch branch;
     private Service service;
     private Doctor doctor;
 
-    public Allocation(String linkId, String branchId, String serviceId, String doctorId) {
+    public Allocation(int linkId, String branchId, String serviceId, String doctorId) {
         this.linkId = linkId;
         this.branch = findBranch(branchId);
         this.service = findService(serviceId);
         this.doctor = findDoctor(doctorId);
+    }
+
+    public Allocation(){
+
     }
 
     private Branch findBranch(String branchId){
@@ -28,11 +32,11 @@ public class Allocation {
         return doctor;
     }
 
-    public String getLinkId() {
+    public int getLinkId() {
         return linkId;
     }
 
-    public void setLinkId(String linkId) {
+    public void setLinkId(int linkId) {
         this.linkId = linkId;
     }
 

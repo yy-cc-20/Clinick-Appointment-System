@@ -1,5 +1,7 @@
 package entity;
 
+import boundary.ConsoleUI;
+
 public enum Attendance {
   	ATTENDED("Attended"),
 	ABSENT("Absent"),
@@ -14,5 +16,23 @@ public enum Attendance {
 	// get the attendance in String
 	public String toString() {
 		return attendance;
+	}
+
+	static void displayAttendanceChoice(){
+		System.out.printf("%nSelect attendance.%n%n");
+		System.out.println("1. Attended");
+		System.out.println("2. Absent");
+		System.out.println("3. NAN");
+	}
+
+	public static Attendance askAttendance(){
+		displayAttendanceChoice();
+		int choice = ConsoleUI.askEventNo(1, 3);
+
+		return switch (choice) {
+			case 1 -> ATTENDED;
+			case 2 -> ABSENT;
+			default -> NAN; // case 3
+		};
 	}
 }

@@ -6,12 +6,16 @@ import entity.Service;
 import entity.Patient;
 import controller.MakeAppointmentController;
 import entity.Appointment;
-import entity.User;
 import entity.TimeSlot;
+
+// view appointment
+// search appointment
+// make appointment
+// view slots
 
 public class MakeAppointmentUI {
 
-    private MakeAppointmentController controller = new MakeAppointmentController();
+    private final MakeAppointmentController controller = new MakeAppointmentController();
 
     public void viewAppointment() {
         displayAppointment(controller.getAllAppointments());
@@ -26,13 +30,13 @@ public class MakeAppointmentUI {
                     "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t| Patient \t| Doctor ID \t| Doctor \t| Attendance");
             for (int i = 0; i < theAppointments.size(); i++) {
                 anAppointment = theAppointments.get(i);
-                System.out.println(anAppointment.getId() + " \t| " + anAppointment.getDate() + " \t| "
+                System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
                         + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
-                        + anAppointment.getAllocation().getService().getName() + " \t| "
-                        + anAppointment.getAllocation().getBranch().getName() + " \t| "
-                        + anAppointment.getPatient().getId() + " \t| " + anAppointment.getPatient().getName() + " \t| "
-                        + anAppointment.getAllocation().getDoctor().getId() + " \t| "
-                        + anAppointment.getAllocation().getDoctor().getName() + " \t| "
+                        + anAppointment.getAllocation().getService().getServiceName() + " \t| "
+                        + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
+                        + anAppointment.getPatient().getUserId() + " \t| " + anAppointment.getPatient().getUsername() + " \t| "
+                        + anAppointment.getAllocation().getDoctor().getUserId() + " \t| "
+                        + anAppointment.getAllocation().getDoctor().getUsername() + " \t| "
                         + anAppointment.getAttendance());
             }
         }
@@ -60,19 +64,21 @@ public class MakeAppointmentUI {
 
     public void makeAppointment() {
         Patient selectedPatient = ManagePatientUI.searchPatient();
+//        Service service = new Service();
         viewSlots();
         boolean slotAvailable = false;
         int startSlot;
 
         while (!slotAvailable) {
-            startSlot = KeyboardInput.askPositiveInt("starting time slot");
+            TimeSlot.displayTimeSlot();
+            startSlot = ConsoleUI.askEventNo(1, 14);
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {
                 System.out.println("Slot " + startSlot + "-" + (startSlot + timeSlotRequired) + " selected.");
                 displayAppointment(appointmentToBooked);
                 if (KeyboardInput.askBoolean("Book appointment")) {
-                    controller.addAppointment(date, time, service, patientId, doctorId);
+                    controller.addAppointment(date, timeslots, patientId, allocationId);
                     System.out.println("Appointment booked. Booking ID is " + appointmentId);
                     System.out.println();
                 }
@@ -85,7 +91,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void viewSlots() {
+    public void viewSlots() {
         displayServices();
         int choice = KeyboardInput.askPositiveInt("a service (1-15)");
         String date = KeyboardInput.askString("a date (DD/MM/YYYY)");
@@ -100,7 +106,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void displayServices() {
+    public void displayServices() {
         List<Service> theServices = controller.getAllServices();
         Service aService;
 
@@ -110,7 +116,7 @@ public class MakeAppointmentUI {
                 "No \t| Service \t| Service ID \t| Branch Address \t| Telephone No \t| Description \t| Price \t| Required Time Slot");
         for (int i = 0; i < theServices.size(); i++) {
             aService = theServices.get(i);
-            System.out.println(i + " \t| " + aService.getName() + " \t| " + aService.getId() + " \t| "
+            System.out.println(i + " \t| " + aService.getServiceName() + " \t| " + aService.getServiceId() + " \t| "
                     + aService.getAllocation().getBranch().getAddress() + " \t| "
                     + aService.getAllocation().getBranch().getTelNo() + " \t| "
                     + aService.getDescription() + aService.getPrice() + aService.getTimeSlotRequired());

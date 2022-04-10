@@ -1,13 +1,13 @@
 package entity;
 
 public class Branch{
-    private String branchId;
+    private int branchId;
     private String branchName;
     private String branchAddress;
     private Receptionist receptionist;
     private String telNo;
 
-    public Branch(String branchId, String branchName, String branchAddress, String receptionistId, String telNo) {
+    public Branch(int branchId, String branchName, String branchAddress, String receptionistId, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
         this.branchAddress = branchAddress;
@@ -22,11 +22,11 @@ public class Branch{
         return receptionist;
     }
 
-    public String getBranchId() {
+    public int getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(String branchId) {
+    public void setBranchId(int branchId) {
         this.branchId = branchId;
     }
 

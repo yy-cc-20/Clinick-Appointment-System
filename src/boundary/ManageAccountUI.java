@@ -13,9 +13,8 @@ public class ManageAccountUI {
         String password = "adsf";
 
         switch (action) {
-            case 1:
+            case 1 -> {
                 String inputUsername;
-
                 while (true) {
                     System.out.print("> Username ");
                     inputUsername = SingletonScanner.scanner.nextLine();
@@ -27,8 +26,8 @@ public class ManageAccountUI {
                     }
                 }
                 System.out.println("The username has changed to " + username);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 String inputPassword;
                 System.out.print("> Enter current password ");
                 inputPassword = SingletonScanner.scanner.nextLine();
@@ -38,6 +37,7 @@ public class ManageAccountUI {
                 } else {
                     System.out.println("Wrong password.");
                 }
+            }
         }
         // TODO update the arraylist / database
     }
