@@ -1,7 +1,5 @@
 package boundary;
 
-import entity.User;
-
 // display message on the screen
 
 public class ConsoleUI { // UI: user interface
