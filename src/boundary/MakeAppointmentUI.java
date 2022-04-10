@@ -55,8 +55,8 @@ public class MakeAppointmentUI {
         System.out.println(" 7. Attendance Record");
         System.out.println();
 
-        int choice = KeyboardInput.askPositiveInt("your selection");
-        String searchKeyword = KeyboardInput.askString("search keyword");
+        int choice = ConsoleInput.askPositiveInt("your selection");
+        String searchKeyword = ConsoleInput.askString("search keyword");
         List<Appointment> selectedAppointments = controller.searchAppointment(choice, searchKeyword);
 
         System.out.println("Search Results: ");
@@ -75,7 +75,7 @@ public class MakeAppointmentUI {
 
         while (!slotAvailable) {
             TimeSlot.displayTimeSlot();
-            startSlot = KeyboardInput.askChoice(1, 14);
+            startSlot = ConsoleInput.askChoice(1, 14);
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {
@@ -83,14 +83,14 @@ public class MakeAppointmentUI {
                 appointmentToBook = new Appointment(appointmentId, appointmentDate, patientId, allocationId,
                         attendance, timeSlot);
                 displayAppointment(appointmentToBook);
-                if (KeyboardInput.askBoolean("Book appointment")) {
+                if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
                     System.out.println("Appointment booked. Booking ID is " + appointmentToBook.getAppointmentId());
                     System.out.println();
                 }
             } else {
                 System.out.println("Slot unavailable. Required time slot is " + service.getTimeSlotRequired());
-                if (KeyboardInput.askBoolean("Go back to menu")) {
+                if (ConsoleInput.askBoolean("Go back to menu")) {
                     return;
                 }
             }
@@ -99,8 +99,8 @@ public class MakeAppointmentUI {
 
     public void viewSlots(Service service) {
         displayServices();
-        int choice = KeyboardInput.askPositiveInt("a service (1-15)");
-        LocalDate date = KeyboardInput.askDate("a date (DD/MM/YYYY)");
+        int choice = ConsoleInput.askPositiveInt("a service (1-15)");
+        LocalDate date = ConsoleInput.askDate("a date (DD/MM/YYYY)");
         controller.getAvailableTimeSlots(choice, date);
 
         System.out.println("Available time slots for service " + service.getServiceName());

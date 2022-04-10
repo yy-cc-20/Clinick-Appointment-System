@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 
 import controller.LoginController;
 import entity.*;
-import boundary.KeyboardInput;
+import boundary.ConsoleInput;
 
 /*
  * How to use this class:
@@ -34,8 +34,8 @@ public class LoginUI {
 			System.out.println("[2]Doctor");
 			System.out.println("[3]Patient");
 			
-			role = KeyboardInput.askChoice(1, 3, "Login as");
-			userid = KeyboardInput.askInt("User ID");
+			role = ConsoleInput.askChoice(1, 3, "Login as");
+			userid = ConsoleInput.askInt("User ID");
 			System.out.print("> Password ");
 			password = SingletonScanner.scanner.nextLine();
 			

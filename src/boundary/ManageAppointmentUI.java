@@ -12,7 +12,7 @@ public class ManageAppointmentUI {
     private static Appointment selectedAppointment;
 
     public void searchAppointmentToModify() {
-        String appointmentId = KeyboardInput.askString("appointment ID");
+        String appointmentId = ConsoleInput.askString("appointment ID");
         List<Appointment> selectedAppointments = controller.searchAppointment(1, appointmentId);
 
         if (selectedAppointments.size() == 0) {
@@ -26,14 +26,14 @@ public class ManageAppointmentUI {
     public void updateAppointment() {
         searchAppointmentToModify();
 
-        if (KeyboardInput.askBoolean("Update appointment")) {
+        if (ConsoleInput.askBoolean("Update appointment")) {
             System.out.println("Appointment updated.");
         }
     }
 
     public void cancelAppointment() {
         searchAppointmentToModify();
-        if (KeyboardInput.askBoolean("Cancel appointment")) {
+        if (ConsoleInput.askBoolean("Cancel appointment")) {
             controller.cancelAppointment(selectedAppointment);
             System.out.println("Appointment cancelled.");
         }

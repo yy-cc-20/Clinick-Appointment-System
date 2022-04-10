@@ -30,7 +30,7 @@ public class ConsoleUI { // UI: user interface
         while (true) {
             displaySystemName("System Name");
             // ConsoleUI.displayMenu(); // need to change the menu
-            choiceNo = KeyboardInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
+            choiceNo = ConsoleInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
 
             switch (choiceNo) {
                 case 1 -> {

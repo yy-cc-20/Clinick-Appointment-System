@@ -8,12 +8,12 @@ public class ManagePatientUI {
     private static ManagePatientController controller = new ManagePatientController();
 
     public static Patient searchPatient() {
-        String patientIc = KeyboardInput.askString("patient IC");
+        String patientIc = ConsoleInput.askString("patient IC");
         Patient selectedPatient = controller.searchPatient(patientIc);
 
         if (selectedPatient == null) {
             System.out.println("No patient with IC " + patientIc + " found.");
-            if (KeyboardInput.askBoolean("Continue to create new patient profile"))
+            if (ConsoleInput.askBoolean("Continue to create new patient profile"))
                 createPatientProfile(patientIc);
         } else {
             System.out.println("Search Results:");
@@ -30,7 +30,7 @@ public class ManagePatientUI {
     }
 
     public static void createPatientProfile(String patientIc) {
-        String name = KeyboardInput.askString("new patient name");
+        String name = ConsoleInput.askString("new patient name");
 
         controller.addPatient(name, patientIc);
         System.out.println("New patient ID generated.   ");
@@ -42,10 +42,10 @@ public class ManagePatientUI {
 
     public void managePatientProfile() {
         Patient selectedPatient = searchPatient();
-        String phoneNo = KeyboardInput.askStringV2("new patient phone number (PRESS ENTER TO SKIP)");
-        String address = KeyboardInput.askStringV2("new patient address (PRESS ENTER TO SKIP)");
+        String phoneNo = ConsoleInput.askStringV2("new patient phone number (PRESS ENTER TO SKIP)");
+        String address = ConsoleInput.askStringV2("new patient address (PRESS ENTER TO SKIP)");
 
-        if (KeyboardInput.askBoolean("Confirm changes")) {
+        if (ConsoleInput.askBoolean("Confirm changes")) {
             if (phoneNo == null && address == null) {
                 System.out.println("No changes has been made.");
             } else if (phoneNo != null && address == null) {

@@ -21,7 +21,7 @@ public class ManageAccountUI {
     
     // Exit this method if the user do not want to change the password
     public void changePassword() {
-    	if (!KeyboardInput.askBoolean("Change password"))
+    	if (!ConsoleInput.askBoolean("Change password"))
     		return; // Don't want to change password
 
         String inputPassword;
