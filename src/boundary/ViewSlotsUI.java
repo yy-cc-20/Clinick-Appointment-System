@@ -3,9 +3,17 @@ package boundary;
 import entity.TimeSlot;
 
 public class ViewSlotsUI {
+	
+	select service ([X] to go back to the previous page) 
+	select branch ([X] to go back to the previous page) 
+	show available time slot
+	
+	return timeslot
+	
+	
 	public static TimeSlot askTimeSlot(){
 		displayTimeSlot();
-		int choice = KeyboardInput.askChoice(1, 13, "Select time slot");
+		int choice = ConsoleInput.askChoice(1, 13, "Select time slot");
 
 		return switch (choice) {
 			case 1 -> SLOT_1;

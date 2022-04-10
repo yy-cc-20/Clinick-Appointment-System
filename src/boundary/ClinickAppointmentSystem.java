@@ -26,12 +26,21 @@ import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
-		// the login test data is created in DataList
+		// the test data is created in DataList
 		// role: doctor
 		// userid: 1
 		// username: username
 		// password: password
 		
+		ConsoleUI.displaySystemName("Clinic Booking System");
+		User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
+		// From systemUser can know the username, id, password, user type
+
+		// instantiating the user interfaces
+   		MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
+		ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
+		ManagePatientUI managePatientInterface = new ManagePatientUI();
+
 		ConsoleUI.displaySystemName("Clinic Booking System");
 		User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 		// From systemUser can know the username, id, password, user type
@@ -45,7 +54,7 @@ public class ClinickAppointmentSystem {
 		while (true) {
 			ConsoleUI.displaySystemName("System Name");
 			//ConsoleUI.displayMenu(); // need to change the menu
-			choiceNo = KeyboardInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
+			choiceNo = ConsoleInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
 
 			switch (choiceNo) {
 				case 1 -> {

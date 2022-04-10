@@ -19,16 +19,11 @@ public class User {
         password = thePassword;
     }
 
-    /*
-    public String getId() {
-        return id;
-    }    
-    
     public int getUserId(){
     	return userId;
 	}
 
-    */
+    
     public void setPassword(String pw) {
     	password = pw;
     }

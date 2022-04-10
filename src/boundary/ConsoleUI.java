@@ -11,7 +11,6 @@ public class ConsoleUI { // UI: user interface
     public static void clearScreen() {
         System.out.printf("%n[Enter] to continue...");
         SingletonScanner.scanner.nextLine(); // pause, wait for user to continue
- 
         for (int i = 0; i < screenHeight; ++i) {
             System.out.println();
         }
@@ -95,5 +94,4 @@ public class ConsoleUI { // UI: user interface
         System.out.println(" 4. View Slots            ");
         System.out.println(" 0. Exit Application      ");
     }
-
 }

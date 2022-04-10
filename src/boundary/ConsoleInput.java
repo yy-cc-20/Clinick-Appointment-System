@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class KeyboardInput {
+public class ConsoleInput {
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
 
