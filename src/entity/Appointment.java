@@ -24,6 +24,8 @@ public class Appointment {
         this.timeSlot = retrieveTimeSlot(timeSlot);
     }
 
+    public Appointment(){}
+
     private Patient findPatient(String patientId){
         Patient patient = new Patient();
         return patient;

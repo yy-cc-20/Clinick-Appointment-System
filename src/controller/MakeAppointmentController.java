@@ -1,5 +1,6 @@
 package controller;
 
+import entity.Allocation;
 import entity.Appointment;
 import entity.Service;
 
@@ -15,12 +16,12 @@ public class MakeAppointmentController {
     public boolean checkSlotAvailability(int startSlot) {
     }
 
-    public List<Service> getAllServices() {
-    }
-
     public void getAvailableTimeSlots(int choice, String date) {
     }
 
     public void addAppointment(Appointment appointmentToBook) {
+    }
+
+    public List<Allocation> getAllAllocations() {
     }
 }
