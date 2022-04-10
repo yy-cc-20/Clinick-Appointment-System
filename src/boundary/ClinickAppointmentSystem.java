@@ -26,12 +26,17 @@ import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
-		// the login test data is created in DataList
+		// Retrieve data from database
+		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
+
+		// the test data is created in DataList
 		// role: doctor
 		// userid: 1
 		// username: username
 		// password: password
 
-		new ConsoleUI().start();
+		ConsoleUI consoleUI = new ConsoleUI();
+		consoleUI.start();
 	}
+
 }
