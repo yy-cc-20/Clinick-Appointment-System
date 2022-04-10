@@ -1,0 +1,6 @@
+BraId;Name;Address;ServiceList;TelNo
+B0001;Klang Health Screening Centre;No.29, Jalan Bayu Tinggi 1A/KS6, Taman Bayu Tinggi, 41200 Klang, Selangor;Stroke Screening, Eye Screening, Blood Screening;03-55699996
+B0002;Cheras Health Screening Centre;No 37, 39, 41&43, Jalan 4/96A, Taman Cheras Makmur, Cheras 56100 Kuala Lumpur;Heart Screening, Lung Cancer Screening, Post-Covid Screening ;03-91309163
+B0003;Seri Kembangan Health Screening Centre;No.1 & 3, Ground Floor, Jalan Besar Susur 1, 43300 Seri Kembangan, Selangor; Bone Screening, Colonoscopy, Allergy Test;03-89599924
+B0004;Kajang Health Screening Centre;No.40 & 41, Jalan Tukang, 43000 Kajang, Selangor;Oral Health Screening, Wellness Screening, Pre-Marital Screening;03-87337433
+B0005;Skudai Health Screening Centre;Tower 1, No.68, Jalan Pertama 1, Danga Utama Commercial Center, 81300 Skudai Johor Bahru;Men's Health Screening, Women's Health Screening, Gastroscopy;07-5500323

@@ -1,0 +1,16 @@
+SerId;Name;Price;Description;DocId;BraId;Time Slots Required;
+S0001;Heart Screening;1799;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Echocardiogram, Stress Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis;D0001;B0002;3;
+S0002;Stroke Screening;2699;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, MRA Brain, Diet Counselling;D0002;B0001;3;
+S0003;Lung Cancer Screening;690;Low Dose CT Scan without Contrast;D0003;B0002;1;
+S0004;Eye Screening;History & Clinical Examination, Visual Acuity, Auto-Refraction, Slit Lamp Examination, Intraocular Pressure, Eye Dilation;D0004;B0001;2;
+S0005;Oral Health Screening;159;History & Clinical Examination, Oral Cancer Screening, Gum Health Profile, Decay Risk Profile;D0005;B0004;1;
+S0006;Bone Screening;800;History & Clinical Examination, DEXA Scan, Laboratory Test, Nutritional & Body Fat Assessment;D0006;B0003;2;
+S0007;Blood Screening;250;Full Blood Count, Urea, Creatinine, Uric Acid, Glucose Fasting, Hepatitis B Screening, Liver Function Profile, Lipid Profile, Urine FEME;D0007;B0001;1;
+S0008;Colonoscopy;2099;History & Clinical Examination, Blood Test, Ultrasound of Abdomen, Fibroscan, CT Abdomen, Bowel Cleansing, Stress Test;D0008;B0003;3;
+S0009;Gastroscopy;1500;History & Clinical Examination, Blood Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis, CT Abdomen, Bowel Cleansing, Stress Test, H-Pylori Test;D0009;B0005;3;
+S0010;Allergy Test;999;Complete Hemogram, IgE Total Antibody;D0010;B0003;1;
+S0011;Wellness Screeening;1060;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ultrasound of Abdomen & Pelvis, Diet Counselling;D0011;B0004;2;
+S0012;Men's Health Screening;1588;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Uroflowmetry and Residual Urine Volume, Chest X-Ray, Ultrasound of Abdomen & Pelvis, Diet Counselling;D0012;B0005;3;
+S0013;Women's Health Screening;1999;History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Thin Prep, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Chest X-Ray, 3D Mammogram, Ultrasound of Breast, Abdomen & Pelvis, Bone Mineral Density Scan, Diet Counselling;D0013;B0005;4;
+S0014;Pre-Marital Screening;299;Blood Test including Full Blood Count, Peripheral Blood Film, Blood Grouping, Hepatitis B Screening, and HIV;D0014;B0004;2;
+S0015;Post-Covid Screening;399;History & Clinical Examination, Anthropometry, Visual Acuity, Blood Test, Urine Test, Chest X-Ray, Lung Function Test;D0015;B0002;2;
