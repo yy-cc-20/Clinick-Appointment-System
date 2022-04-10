@@ -8,6 +8,11 @@ import controller.MakeAppointmentController;
 import entity.Appointment;
 import entity.TimeSlot;
 
+// view appointment
+// search appointment
+// make appointment
+// view slots
+
 public class MakeAppointmentUI {
 
     private final MakeAppointmentController controller = new MakeAppointmentController();
@@ -73,7 +78,7 @@ public class MakeAppointmentUI {
                 System.out.println("Slot " + startSlot + "-" + (startSlot + timeSlotRequired) + " selected.");
                 displayAppointment(appointmentToBooked);
                 if (KeyboardInput.askBoolean("Book appointment")) {
-                    controller.addAppointment(date, time, service, patientId, doctorId);
+                    controller.addAppointment(date, timeslots, patientId, allocationId);
                     System.out.println("Appointment booked. Booking ID is " + appointmentId);
                     System.out.println();
                 }

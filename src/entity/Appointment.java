@@ -34,7 +34,7 @@ public class Appointment {
         return allocation;
     }
 
-    public Attendance retrieveAttendance(String attendance) {
+    private Attendance retrieveAttendance(String attendance) {
         if(attendance.equals("Attended")){
             return Attendance.ATTENDED;
         } else if(attendance.equals("Absent")){
@@ -44,7 +44,7 @@ public class Appointment {
         }
     }
 
-    public ArrayList<TimeSlot> retrieveTimeSlot(String[] timeSlot) {
+    private ArrayList<TimeSlot> retrieveTimeSlot(String[] timeSlot) {
         ArrayList<TimeSlot> timeSlots = new ArrayList<>();
 
         for (String s : timeSlot) {
@@ -54,7 +54,7 @@ public class Appointment {
         return timeSlots;
     }
 
-    public TimeSlot getTimeSlot(String timeSlot){
+    private TimeSlot getTimeSlot(String timeSlot){
         return switch (timeSlot) {
             case "SLOT_1" -> TimeSlot.SLOT_1;
             case "SLOT_2" -> TimeSlot.SLOT_2;
@@ -91,6 +91,11 @@ public class Appointment {
 
     public ArrayList<TimeSlot> getTimeSlot() {
         return timeSlot;
+    }
+
+    public String getTime(){
+
+        return
     }
 
     public Allocation getAllocation() {
