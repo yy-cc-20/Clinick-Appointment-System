@@ -13,7 +13,7 @@ public class LoginController {
 	public static final int LOCK_TIME_LENGTH = 10; // in seconds
 	
 	/**
-	 * search for the list to find the same username and password
+	 * Search for the list to find the same username and password
 	 * TODO replace with sql
 	 * @param role 1 for receptionist, 2 for doctor, 3 for patient
 	 * @return userid, return empty string if login fail
@@ -55,7 +55,7 @@ public class LoginController {
 		return failedLoginAttempt;
 	}
 	
-	// use this if login successfully or lock time expired
+	// Use this if login successfully or lock time expired
 	public void resetFailedLoginAttempts() {
 		failedLoginAttempt = 0;
 	}

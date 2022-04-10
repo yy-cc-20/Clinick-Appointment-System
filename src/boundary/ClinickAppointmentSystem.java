@@ -1,17 +1,17 @@
 /**
- * @subject UECS2344 SOFTWARE DESIGN 
- * @trimester January 2022
+ * @subject 	UECS2344 SOFTWARE DESIGN 
+ * @trimester 	January 2022
  * 
- * @system Clinik Appointment System
- * @date 15.04.2022
+ * @system 		Clinik Appointment System
+ * @date 		15/04/2022
  * 
- * @author Ling Sun Shuai 2004562 P2 
- * @author Kong Suet Hua 2005756 P5
- * @author Olivia Ong Yee Ming 2004564 P5
- * @author Tan Jia Qi 1904022 P2
- * @author Yang Chu Yan 2005912 P2
+ * @author 		Ling Sun Shuai 2004562 P2 
+ * @author 		Kong Suet Hua 2005756 P5
+ * @author 		Olivia Ong Yee Ming 2004564 P5
+ * @author 		Tan Jia Qi 1904022 P2
+ * @author 		Yang Chu Yan 2005912 P2
  * 
- * @database JDBC MySQL, driver class version: 8.0.28
+ * @database 	JDBC MySQL, driver class version: 8.0.28
  * 
  * @description A console program aims to digitize the process of making an appointment.
  * 
