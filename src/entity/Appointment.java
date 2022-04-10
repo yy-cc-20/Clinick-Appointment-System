@@ -94,8 +94,19 @@ public class Appointment {
     }
 
     public String getTime(){
-
+        String time = String.format();
         return
+    }
+
+    public String getDuration(){
+        int required = allocation.getService().getTimeSlotRequired();
+        return switch (required) {
+            case 1 -> "30 mins";
+            case 2 -> "1 hour";
+            case 3 -> "1 hour 30 mins";
+            case 4 -> "2 hours";
+            default -> throw new IllegalStateException("Unexpected value: " + required);
+        };
     }
 
     public Allocation getAllocation() {
