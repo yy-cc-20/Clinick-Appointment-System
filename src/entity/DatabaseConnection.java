@@ -1,7 +1,6 @@
 /** What this class does:
  * - connects to the database 
- * - automatically creates tables if not exist (Just use this class, then no need to write extra code to create tables)
- * - automatically insert the data into the tables.
+ * - call SetUpDatabase to create tables if tables not exists
  * 
  * This class is using MySQL database.
  * @setup have mysql connector downlowded

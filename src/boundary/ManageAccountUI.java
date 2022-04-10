@@ -33,10 +33,10 @@ public class ManageAccountUI {
             if (inputPassword.equalsIgnoreCase("x"))
             	return;
             
-            if (User.isValidPassword(inputPassword)) {
+            if (ManageAccountController.isValidPassword(inputPassword)) {
                 break;
             } else {
-                System.out.printf(User.PASSWORD_CRITERIA);
+                System.out.printf(ManageAccountController.PASSWORD_CRITERIA);
                 System.out.println("Enter 'x' to cancel.");
             }
         }

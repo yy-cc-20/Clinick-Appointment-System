@@ -29,14 +29,12 @@ public class ClinickAppointmentSystem {
 		// Retrieve data from database
 		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
 
-		// the test data is created in DataList
+		// the login test data is created in DataList
 		// role: doctor
 		// userid: 1
 		// username: username
 		// password: password
 
-		ConsoleUI consoleUI = new ConsoleUI();
-		consoleUI.start();
+		new ConsoleUI().start();
 	}
-
 }

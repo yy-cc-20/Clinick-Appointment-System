@@ -12,7 +12,6 @@ public class ConsoleUI { // UI: user interface
     MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
     ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
     ManagePatientUI managePatientInterface = new ManagePatientUI();
-    ManageAccountUI manageAccountInterface;
 
     // start the user interface
     public void start() {
@@ -34,10 +33,8 @@ public class ConsoleUI { // UI: user interface
 
             switch (choiceNo) {
                 case 1 -> {
-                    // Just to test the method, you may change the position of the code
                     displayFunctionName("Account Setting");
-                    manageAccountInterface = new ManageAccountUI(systemUser);
-                    manageAccountInterface.changePassword();
+                    new ManageAccountUI(systemUser).changePassword();
                 }
                 case 2 -> // Modify Account Info
                     displayFunctionName(" Modify Account Details ");

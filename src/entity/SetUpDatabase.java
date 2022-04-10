@@ -2,6 +2,11 @@ package entity;
 
 import java.sql.*;
 
+/*
+ * creates tables if not exist
+ * insert the data into the tables
+ */
+
 public class SetUpDatabase {
 	private static Statement st;
 	

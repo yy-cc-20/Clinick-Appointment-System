@@ -46,7 +46,8 @@ public class LoginUI {
 				return switch (role) {
 					case 1 -> new Receptionist(userid, username, password);
 					case 2 -> new Doctor(userid, username, password);
-					default -> new Patient(userid, username, password); // case 3
+					case 3 -> new Patient(userid, username, password);
+					default -> throw new IllegalArgumentException();
 				};
 			} else { // Login failed	
 				if (LoginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) { // Still have chance to login
