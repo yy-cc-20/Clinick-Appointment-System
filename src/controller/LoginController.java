@@ -19,7 +19,7 @@ public class LoginController {
 	 * @return userid, return empty string if login fail
 	 */
 	public String loginSuccessfully(int role, int userid, String password) {
-		User user = new User(userid, password);
+		User user = new User(userid, "", password);
 		
 		switch (role) {
 			case 1: 

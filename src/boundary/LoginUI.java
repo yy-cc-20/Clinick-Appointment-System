@@ -27,7 +27,7 @@ public class LoginUI {
 			role = ConsoleUI.askEventNo(1, 3);
 			
 			System.out.print("> User ID ");
-			userid = SingletonScanner.scanner.nextLine();
+			userid = KeyboardInput.askPositiveInt("user id");
 			
 			System.out.print("> Password ");
 			password = SingletonScanner.scanner.nextLine();

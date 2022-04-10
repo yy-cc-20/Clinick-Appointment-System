@@ -8,7 +8,7 @@
  * @setup add external JARs file (mysql-connector-java-8.0.28.jar) to the build path.
  * 
  * This class is using the singleton design pattern. 
- * There is only one object created for Connection and Statement class in the system.
+ * There is only one object created for Connection class in the system.
  * 
  * How to use this class:
  * 1. Connection conn = DatabaseConnection.getConnection();
@@ -26,29 +26,29 @@ public class DatabaseConnection {
 	private static Connection conn; // Singleton
 	private static Statement st;
 
-	private DatabaseConnection() throws ClassNotFoundException, SQLException { // private constructor for singleton !!!
-		// Load and register the driver
-		Class.forName("com.mysql.jdbc.Driver");
+	private DatabaseConnection() throws SQLException { // private constructor for singleton !!!
 		
 		// Create Connection
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/Clinick-Appointment-System", "root", "root"); // Database name: Clinick-Appointment-System
-		if (conn == null) {
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/clinick-appointment-system", "root", "root"); // Database name: Clinick-Appointment-System
+			st = conn.createStatement();
+		} catch (SQLException e) {
 			System.out.println("Error connecting to database.");
 			System.out.println("Exiting...");
+			e.printStackTrace();
 			System.exit(1);
 		}
-		st = conn.createStatement();
 		
 		setUpDatabaseIfNotExist();
 	} 
 
-	public static Connection getConnection() throws ClassNotFoundException, SQLException {
+	public static Connection getConnection() throws SQLException {
 		if (conn == null)
 			new DatabaseConnection();
 		return conn; // Already connect to database
 	}
 	
-	public static void closeConnection() throws SQLException{
+	public static void closeConnection() throws SQLException {
 		conn.close();
 	}
 	
@@ -58,15 +58,14 @@ public class DatabaseConnection {
 		// TODO 1. Drop other table here
 		
 		// Create table
-		st.executeUpdate("CREATE TABLE IF NOT EXISTS doctor (userid int(5) NOT NULL AUTO_INCREMENT, username varchar(30) NOT NULL, password varchar(30) NOT NULL, PRIMARY KEY (userid);");
+		st.executeUpdate("CREATE TABLE `clinick-appointment-system`.`doctor` (`userid` INT NOT NULL AUTO_INCREMENT, `username` VARCHAR(45) NOT NULL, `password` VARCHAR(45) NOT NULL, PRIMARY KEY (`userid`));");
 		// TODO 2. Continue create other table
 		
 		// Insert data into the table
 		insertDoctorTable();
 		// TODO 3. Continue insert other table here
 		
-		conn.commit();
-		conn.setAutoCommit(true);
+		//conn.commit(); // Cannot call commit when autocommit is true
 	}
 	
 	private void insertDoctorTable() throws SQLException {
@@ -80,7 +79,7 @@ public class DatabaseConnection {
 	}
 	
 	// DatabaseConnectionTest
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	public static void main(String[] args) throws SQLException {
 		Statement st = DatabaseConnection.getConnection().createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM doctor;");
 		if (rs != null) {
@@ -97,19 +96,20 @@ public class DatabaseConnection {
  * 1. import java.sql.*;
  * 2. Load and register the driver
  * 		2.0 Download MySQL
- 		- https://dev.mysql.com/downloads/file/?id=510038
+ * 		youtube tutorial: https://www.youtube.com/watch?v=BOUMR85B-V0
+ 		- download: https://dev.mysql.com/downloads/file/?id=510038
  		- open mysql workbench
  		- create a schema (database) call Clinick-Appointment-System
  * 
  * 		2.1 Download the driver class
- * 		Database | Driver class			 | Download 
- * 		MySQL    | com.mysql.jdbc.Driver | mysql-connector-java-8.0.28.jar (https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28)
+ * 		Database | Download 
+ * 		MySQL    | mysql-connector-java-8.0.28.jar (https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28)
  * 
  * 		-> build path -> external JAR file -> add mysql-connector-java-6.0.6.jar to class path
  * 
- * 		2.2 Load and register the driver
- * 		String mysqlDriver = "com.mysql.jdbc.Driver";
- * 		Class.forName(mysqlDriver);
+ * 		2.2 Load and register the driver [no need, the driver class will be added automatically in the newer version]
+ * 		//String mysqlDriver = "com.mysql.jdbc.Driver";
+ * 		//Class.forName(mysqlDriver);
  * 
  * 3. Create connection
  * 		String databaseURL = "jdbc:mysql://localhost/Clinick-Appointment-System";
