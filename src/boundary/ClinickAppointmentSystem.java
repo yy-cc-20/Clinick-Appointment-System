@@ -13,7 +13,8 @@
  * 
  * @database 	JDBC MySQL, driver class version: 8.0.28
  * 
- * @description A console program aims to digitize the process of making an appointment.
+ * @description A console program aims to digitize the process of making an appointment. 
+ * 				Applying object-oriented programming concept, using entity-boundary-controller design pattern.
  * 
  */
 
@@ -21,10 +22,7 @@ package boundary;
 
 import java.sql.SQLException;
 
-import entity.DataList;
-import entity.DatabaseConnection;
-import entity.IDataStore;
-import entity.User;
+import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
