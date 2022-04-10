@@ -1,3 +1,5 @@
+package entity;
+
 /** What this class does:
  * - connects to the database 
  * - call SetUpDatabase to create tables if tables not exist
