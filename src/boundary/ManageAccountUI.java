@@ -37,7 +37,7 @@ public class ManageAccountUI {
                 break;
             } else {
                 System.out.printf(ManageAccountController.PASSWORD_CRITERIA);
-                System.out.println("[X] to back to the previous page.");
+                System.out.println(ConsoleUI.CANCEL_OPERATION);
             }
         }
         
