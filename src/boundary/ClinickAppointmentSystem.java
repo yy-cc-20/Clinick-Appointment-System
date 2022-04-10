@@ -12,6 +12,7 @@
  * @author 		Yang Chu Yan 2005912 P2
  * 
  * @database 	JDBC MySQL, driver class version: 8.0.28
+ * @see 		entity.DatabaseConnection (You might need to change the username and password to access to mysql database in your pc)
  * 
  * @description A console program aims to digitize the process of making an appointment. 
  * 				Applying object-oriented programming concept, using entity-boundary-controller design pattern.

@@ -31,7 +31,7 @@ public class DatabaseConnection {
 		Class.forName("com.mysql.jdbc.Driver");
 		
 		// Create Connection
-		conn = DriverManager.getConnection("jdbc:mysql://localhost/Clinick-Appointment-System"); // Database name: Clinick-Appointment-System
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/Clinick-Appointment-System", "root", "root"); // Database name: Clinick-Appointment-System
 		if (conn == null) {
 			System.out.println("Error connecting to database.");
 			System.out.println("Exiting...");
@@ -97,13 +97,13 @@ public class DatabaseConnection {
  * 1. import java.sql.*;
  * 2. Load and register the driver
  * 		2.0 Download MySQL
- 		https://dev.mysql.com/downloads/file/?id=510038
+ 		- https://dev.mysql.com/downloads/file/?id=510038
+ 		- open mysql workbench
+ 		- create a schema (database) call Clinick-Appointment-System
  * 
  * 		2.1 Download the driver class
  * 		Database | Driver class			 | Download 
  * 		MySQL    | com.mysql.jdbc.Driver | mysql-connector-java-8.0.28.jar (https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28)
- * 		Access: not supported by JDK1.8 and latter
- * 		Oracle: need username and password to access to
  * 
  * 		-> build path -> external JAR file -> add mysql-connector-java-6.0.6.jar to class path
  * 
