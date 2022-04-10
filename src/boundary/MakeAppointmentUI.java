@@ -82,8 +82,8 @@ public class MakeAppointmentUI {
             if (slotAvailable) {
                 System.out.println("Slot " + startSlot + "-" + (startSlot + service.getTimeSlotRequired()) + " selected.");
                 LocalDate today = LocalDate.now();
-                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
-                        Attendance.NAN, startSlot);
+//                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
+//                        Attendance.NAN, startSlot);
                 displayAppointment(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
@@ -109,10 +109,10 @@ public class MakeAppointmentUI {
         System.out.println();
         // todo: check the timeslot status
         System.out.println("Slot No \t| Start Time \t| Status");
-        for (TimeSlot slot : TimeSlot.values()) {
-            int i = slot.ordinal() + 1;
-            System.out.println(i + " \t| " + slot + " \t| " + status);
-        }
+//        for (TimeSlot slot : TimeSlot.values()) {
+//            int i = slot.ordinal() + 1;
+//            System.out.println(i + " \t| " + slot + " \t| " + status);
+//        }
     }
 
     public void displayServices() {
