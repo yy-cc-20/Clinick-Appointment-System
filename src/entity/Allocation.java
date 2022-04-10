@@ -1,7 +1,5 @@
 package entity;
 
-import java.util.List;
-
 public class Allocation {
     private int linkId;
     private Branch branch;
@@ -14,6 +12,7 @@ public class Allocation {
         this.branch = findBranch(branchId);
         this.service = findService(serviceId);
         this.doctor = findDoctor(doctorId);
+        this.timeSlotList =
     }
 
     public Allocation(){

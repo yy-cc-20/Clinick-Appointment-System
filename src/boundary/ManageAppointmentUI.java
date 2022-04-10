@@ -18,7 +18,8 @@ public class ManageAppointmentUI {
         if (selectedAppointment.size() == 0) {
             System.out.println("No such appointment found.");
         } else {
-            MakeAppointmentUI.displayAppointment(selectedAppointment);
+            for (Appointment theAppointment : selectedAppointment) {
+                MakeAppointmentUI.displayAppointment(theAppointment);
         }
     }
 
