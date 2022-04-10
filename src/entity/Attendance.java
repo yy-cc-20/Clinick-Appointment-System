@@ -27,7 +27,7 @@ public enum Attendance {
 
 	public static Attendance askAttendance(){
 		displayAttendanceChoice();
-		int choice = ConsoleUI.askEventNo(1, 3);
+		int choice = ConsoleUI.askChoice(1, 3);
 
 		return switch (choice) {
 			case 1 -> ATTENDED;

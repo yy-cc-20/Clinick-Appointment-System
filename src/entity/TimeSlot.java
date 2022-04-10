@@ -39,7 +39,7 @@ public enum TimeSlot {
 
 	public static TimeSlot askTimeSlot(){
 		displayTimeSlot();
-		int choice = ConsoleUI.askEventNo(1, 13);
+		int choice = ConsoleUI.askChoice(1, 13);
 
 		return switch (choice) {
 			case 1 -> SLOT_1;

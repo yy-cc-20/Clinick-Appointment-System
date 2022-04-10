@@ -1,9 +1,10 @@
 package entity;
 
 public class User {
-    int userId;
-    String username; // unique
-    String password;
+    public static final String PASSWORD_CRITERIA = "Passwords must have at least 8 characters and contain at least one lowercase letter, one uppercase letter and one digit.%n%n";
+    private int userId;
+    private String username; // unique
+    private String password;
 
 	// password cannot contain comma
 	// @return true if have at least 8 characters and contain at least
@@ -11,12 +12,13 @@ public class User {
 	public static boolean isValidPassword(String password) {
 		boolean isStrong = false;
 		boolean isLong = password.length() >= 8;
+		boolean tooLong = password.length() > 45;
 		boolean hasLowerCase = false;
 		boolean hasUpperCase = false;
 		boolean hasDigit = false;
 		boolean thisCharacterHasType = false; // skip the rest of the checking
 		
-		if(!isLong) {
+		if(!isLong || tooLong) {
 			return false;
 		}
 		
@@ -75,6 +77,10 @@ public class User {
         password = "";
     }
     */
+    public void setPassword(String pw) {
+    	password = pw;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -85,7 +91,7 @@ public class User {
 
     // For login
     public boolean equals(User aUser) {
-        return username.equals(aUser.username) && password.equals(aUser.password);
+        return userId == aUser.userId && password.equals(aUser.password);
     }
 }
  

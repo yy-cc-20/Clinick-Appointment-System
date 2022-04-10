@@ -29,7 +29,7 @@ public class DataList implements IDataStore {
 	public void importDoctorList() {
 		// Test data for login
 		doctorList = new ArrayList<>();
-		doctorList.add(new Doctor("1", "username", "password"));
+		doctorList.add(new Doctor(1, "username", "password"));
 	}
 	
 	public void importPatientList() {

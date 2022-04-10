@@ -48,20 +48,20 @@ public class ClinickAppointmentSystem {
 		
 		ConsoleUI.clearScreen();
 							
-		int eventNo; // the action that user wants to perform
-		final int beginEventNo = 1; 
-		final int endEventNo = 3;
+		int choiceNo; // the action that user wants to perform
+		final int beginChoiceNo = 1; 
+		final int endChoiceNo = 3;
 			
 		while (true) {
 			ConsoleUI.displaySystemName("System Name");
 			//ConsoleUI.displayMenu(); // need to change the menu
-			eventNo = ConsoleUI.askEventNo(beginEventNo, endEventNo);
+			choiceNo = ConsoleUI.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
 
-			switch (eventNo) {
+			switch (choiceNo) {
 			case 1:
 				// Just to test the method, you may change the sequence of the code
 				ConsoleUI.displayFunctionName("Account Setting");
-				new ManageAccountUI().modifyAccount(systemUser);
+				new ManageAccountUI(systemUser).changePassword();
 
 				break;
 

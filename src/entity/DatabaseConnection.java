@@ -9,7 +9,7 @@
  * @setup add external JARs file (mysql-connector-java-8.0.28.jar) to the build path.
  * 
  * This class is using the singleton design pattern. 
- * There is only one object created for Connection class in the system.
+ * There is only one object created for the Connection class in the system.
  * 
  * How to use this class:
  * 1. Connection conn = DatabaseConnection.getConnection();

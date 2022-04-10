@@ -98,8 +98,8 @@ public class ConsoleUI { // UI: user interface
 
     // let user chose which eventNo he/she wants to perform
     // assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
-    public static int askEventNo(int beginEventNo, int endEventNo) throws IllegalArgumentException {
-        if (beginEventNo > endEventNo) {
+    public static int askChoice(int beginChoiceNo, int endChoiceNo, String info) throws IllegalArgumentException {
+        if (beginChoiceNo > endChoiceNo) {
             throw new IllegalArgumentException();
         }
 
@@ -108,10 +108,10 @@ public class ConsoleUI { // UI: user interface
 
         while (true) {
             try {
-                System.out.printf("%n> ");
+                System.out.printf("%n> %s ", info);
                 eventNo = Integer.parseInt(SingletonScanner.scanner.nextLine());
 
-                if (eventNo >= beginEventNo && eventNo <= endEventNo) {
+                if (eventNo >= beginChoiceNo && eventNo <= endChoiceNo) {
                     break;
                 } else {
                     System.out.print(errorMessage);
@@ -131,7 +131,7 @@ public class ConsoleUI { // UI: user interface
     // assumption: the menu will be listed in sentence
     // 				index is alphabet
     // 				each alphabet between the range has an eventNo
-    public static char askEventNo2(char beginEventNo, char endEventNo) throws IllegalArgumentException {
+    public static char askChoice2(char beginEventNo, char endEventNo) throws IllegalArgumentException {
         char eventNo = '?';
         String input = "";
         boolean isChar = false;

@@ -77,7 +77,7 @@ public class MakeAppointmentUI {
 
         while (!slotAvailable) {
             TimeSlot.displayTimeSlot();
-            startSlot = ConsoleUI.askEventNo(1, 14);
+            startSlot = ConsoleUI.askChoice(1, 14);
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {

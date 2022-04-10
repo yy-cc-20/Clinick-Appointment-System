@@ -20,15 +20,12 @@ public class LoginUI {
 		
 		while (true) {
 			// Get input from user
-			System.out.println("Login as");
 			System.out.println("[1]Receptionist");
 			System.out.println("[2]Doctor");
 			System.out.println("[3]Patient");
-			role = ConsoleUI.askEventNo(1, 3);
 			
-			System.out.print("> User ID ");
-			userid = KeyboardInput.askPositiveInt("user id");
-			
+			role = ConsoleUI.askChoice(1, 3, "Login as");
+			userid = KeyboardInput.askInt("User ID");
 			System.out.print("> Password ");
 			password = SingletonScanner.scanner.nextLine();
 			

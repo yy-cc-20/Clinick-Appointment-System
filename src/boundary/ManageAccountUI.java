@@ -1,11 +1,52 @@
 package boundary;
 
 import entity.User;
+import boundary.*;
+import controller.ManageAccountController;
 
 public class ManageAccountUI {
-    private static final String passwordCriteria = "Passwords must have at least 8 characters and contain at least one lowercase letter, one uppercase letter and one digit.%n%n";
+    private ManageAccountController controller;
+    private User currentUser;
+    
+    public ManageAccountUI(User uc) {
+    	this.currentUser = uc;
+    	controller = new ManageAccountController(currentUser);
+    }
+    
+    // Exit this method if the user do not want to change the password
+    public void changePassword() {
+    	if (!KeyboardInput.askBoolean("Change password"))
+    		return; // Don't want to change password
 
-    public void modifyAccount(User user) {
+        String inputPassword;
+        String confirmedPassword;
+        
+        while (true) {
+            System.out.print("> New password  ");
+            inputPassword = SingletonScanner.scanner.nextLine();
+            if (inputPassword.equalsIgnoreCase("x"))
+            	return;
+            
+            if (User.isValidPassword(inputPassword)) {
+                break;
+            } else {
+                System.out.printf(User.PASSWORD_CRITERIA);
+                System.out.println("Enter 'x' to cancel.");
+            }
+        }
+        
+        System.out.print("> Confirm new password ");
+        confirmedPassword = SingletonScanner.scanner.nextLine();
+        
+        if (inputPassword.equals(confirmedPassword)) {
+        	controller.updatePassword(confirmedPassword);
+        	System.out.println("Password changed.");
+        } else
+        	System.out.println("Password did not match.");
+    }
+    
+    /*
+    public void modifyAccount(User currentUser) {
         System.out.println("[1] Change Username");
         System.out.println("[2] Change Password");
         int action = ConsoleUI.askEventNo(1, 2);
@@ -40,37 +81,5 @@ public class ManageAccountUI {
             }
         }
         // TODO update the arraylist / database
-    }
-
-
-    // assume the user has login
-    // post: has to update password file
-    void changePassword() {
-
-    }
-
-    // will not stop until get the valid username
-    // verify the username
-    private void changeUsername() {
-
-    }
-
-    // verify the password
-    // will not stop until get the valid password
-    private void askPassword() {
-        String inputPassword;
-        String password;
-        boolean isValidPassword = false;
-
-        while (!isValidPassword) {
-            System.out.print("> Password ");
-            inputPassword = SingletonScanner.scanner.nextLine();//String.valueOf(System.console().readPassword());
-            isValidPassword = User.isValidPassword(inputPassword);
-            if (isValidPassword) {
-                password = inputPassword;
-            } else {
-                System.out.printf(passwordCriteria);
-            }
-        }
-    }
+    }*/
 }

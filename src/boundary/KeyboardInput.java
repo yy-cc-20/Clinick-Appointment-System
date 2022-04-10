@@ -4,8 +4,6 @@ package boundary;
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface
 
-import entity.Attendance;
-
 public class KeyboardInput {
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
@@ -16,7 +14,7 @@ public class KeyboardInput {
         String errorMessage = "Please enter a positive integer.";
 
         while (true) {
-            System.out.printf("%nEnter %s: ", info);
+            System.out.printf("%n> %s ", info);
             try {
                 input = Integer.parseInt(SingletonScanner.scanner.nextLine());
                 if (input < 0) {
@@ -31,6 +29,22 @@ public class KeyboardInput {
             }
         }
     }
+    
+    /** @return int */
+    public static int askInt(String info) {
+        int input;
+        String errorMessage = "Please enter a number.";
+
+        while (true) {
+            System.out.printf("> %s ", info);
+            try {
+                input = Integer.parseInt(SingletonScanner.scanner.nextLine());
+                return input;
+            } catch (NumberFormatException e) {
+                System.out.println(errorMessage);
+            }
+        }
+    }
 
     // @return 0 or positive double
     public static double askPositiveDouble(String info) {
@@ -38,7 +52,7 @@ public class KeyboardInput {
         String errorMessage = "Please enter a positive number.";
 
         while (true) {
-            System.out.printf("%nEnter %s: ", info);
+            System.out.printf("%n> %s ", info);
             try {
                 input = Double.parseDouble(SingletonScanner.scanner.nextLine());
                 if (input < 0) {
@@ -59,7 +73,7 @@ public class KeyboardInput {
         String input;
 
         while (true) {
-            System.out.printf("%nEnter %s: ", info);
+            System.out.printf("%n> %s ", info);
             input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
@@ -74,7 +88,7 @@ public class KeyboardInput {
         String input;
 
         while (true) {
-            System.out.printf("%nEnter %s: ", info);
+            System.out.printf("%n> %s ", info);
             input = SingletonScanner.scanner.nextLine();
             if (input.equals("\n"))
                 return null;
@@ -82,36 +96,17 @@ public class KeyboardInput {
     }
 
     // used to ask the name cannot be null
-    public static String askName(String info, int length) {
+    public static String askShortString(String info, int length) {
         String input;
         while (true) {
-            System.out.printf("%nEnter %s: ", info);
+            System.out.printf("%n> %s ", info);
             input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
             } else if (input.equals("")) {
-                System.out.println("PLease enter a name.");
+                System.out.println("PLease enter again.");
             } else if (input.length() > length) {
-                System.out.printf("Sorry, cannot contain more than %d characters for name.%n", length);
-            } else {
-                break;
-            }
-        }
-        return input;
-    }
-
-    // used to ask the password
-    public static String askPassword(String info, int length) {
-        String input;
-        while (true) {
-            System.out.printf("%nEnter %s: ", info);
-            input = SingletonScanner.scanner.nextLine();
-            if (hasDelimiter(input)) {
-                System.out.printf("%s%n", stringError);
-            } else if (input.equals("")) {
-                System.out.println("PLease enter a password.");
-            } else if (input.length() > length) {
-                System.out.printf("Sorry, cannot contain more than %d characters for password.%n", length);
+                System.out.printf("Sorry, cannot contain more than %d characters.%n", length);
             } else {
                 break;
             }
@@ -124,7 +119,7 @@ public class KeyboardInput {
     public static boolean askBoolean(String info) {
         String ans;
         while (true) {
-            System.out.printf("%n%n%s%s", info, " (y/n)? ");
+            System.out.printf("%n%n> %s%s", info, " [y/n]? ");
             ans = SingletonScanner.scanner.nextLine().toLowerCase();
 
             if (ans.equalsIgnoreCase("y") || ans.equalsIgnoreCase("yes")) {
