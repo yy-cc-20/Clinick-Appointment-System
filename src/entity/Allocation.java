@@ -1,13 +1,19 @@
 package entity;
 
-import java.time.LocalDate;
-
 public class Allocation {
     private int linkId;
     private Branch branch;
     private Service service;
     private Doctor doctor;
     private TimeSlot timeSlotList;
+
+    public TimeSlot getTimeSlotList() {
+        return timeSlotList;
+    }
+
+    public void setTimeSlotList(TimeSlot timeSlotList) {
+        this.timeSlotList = timeSlotList;
+    }
 
     public Allocation(int linkId, String branchId, String serviceId, String doctorId, String date) {
         this.linkId = linkId;

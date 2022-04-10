@@ -32,4 +32,23 @@ public enum Slot {
     public String toString() {
         return time;
     }
+
+    public static void displaySlots(){
+        System.out.printf("%nSelect time slot.%n%n");
+        System.out.println("1. 0800AM");
+        System.out.println("2. 0830AM");
+        System.out.println("3. 0900AM");
+        System.out.println("4. 0930AM");
+        System.out.println("5. 1000AM");
+        System.out.println("6. 1030AM");
+        System.out.println("7. 1100AM");
+        System.out.println("8. 1130AM");
+        System.out.println("9. 0200PM");
+        System.out.println("10. 0230PM");
+        System.out.println("11. 0300PM");
+        System.out.println("12. 0330PM");
+        System.out.println("13. 0400PM");
+        System.out.println("14. 0430PM");
+
+    }
 }

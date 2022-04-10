@@ -1,6 +1,7 @@
 package boundary;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import entity.*;
@@ -74,14 +75,15 @@ public class MakeAppointmentUI {
         int startSlot;
 
         while (!slotAvailable) {
-            TimeSlot.displayTimeSlot();
-            startSlot = ConsoleInput.askChoice(1, 14);
+            Slot.displaySlots();
+            startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {
                 System.out.println("Slot " + startSlot + "-" + (startSlot + service.getTimeSlotRequired()) + " selected.");
-                appointmentToBook = new Appointment(appointmentId, appointmentDate, patientId, allocationId,
-                        attendance, timeSlot);
+                LocalDate today = LocalDate.now();
+                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
+                        Attendance.NAN, startSlot);
                 displayAppointment(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
