@@ -18,17 +18,31 @@
  * 
  */
 
-package entity;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 public class DatabaseConnection {
-	private static Connection conn; // Singleton
-	
-	// Create Connection
-	private DatabaseConnection() throws SQLException { // private constructor for singleton !!!
+
+	private static Connection conn;
+	private static Statement st;
+	private static String url = "jdbc:mysql://localhost:3308/clinick-appointment-system";
+	private static String username = "root";
+	private static String password = "root";
+
+	public DatabaseConnection() throws ClassNotFoundException, SQLException {
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/clinick-appointment-system", "root", "root");
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Driver not found.");
+			e.printStackTrace();
+		}
+
+		try {
+			conn = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
 			System.out.println("Error connecting to database.");
 			System.out.println("Exiting...");
@@ -36,7 +50,41 @@ public class DatabaseConnection {
 			System.exit(1);
 		}
 		SetUpDatabase.setUpDatabaseIfNotExist();
-	} 
+	}
+
+	public void setUpDatabase() throws SQLException {
+		try {
+			st = conn.createStatement();
+			st.executeUpdate("CREATE TABLE Service (serviceId VARCHAR(25), serviceName VARCHAR(25), price double, description VARCHAR(250), timeSlotRequired int, PRIMARY KEY (serviceId))");
+			//st.executeUpdate("CREATE TABLE Branch (branchId VARCHAR(25), branchName VARCHAR(25), branchAddress VARCHAR(250), receptionistId VARCHAR(25), telNo VARCHAR(25), PRIMARY KEY (branchId), FOREIGN KEY (receptionistId) REFERENCES Receptionist(id))");
+
+			st.executeUpdate("INSERT INTO Service VALUES ('S0001', 'Heart Screening', 1799, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Echocardiogram, Stress Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis', 3");
+			//st.executeUpdate("INSERT INTO Branch VALUES ()");
+			//st.executeUpdate("INSERT INTO Branch VALUES ()");
+			st.executeUpdate("UPDATE Appointment SET attendance = 'Attended' WHERE id = 1111");
+			st.executeUpdate("DELETE FROM Appointment WHERE id = 1111");
+			PreparedStatement pst = conn.prepareStatement("INSERT INTO Appointment (id, date, service) VALUES (?, ?, ?)");
+			pst.setInt(1, 50);
+			pst.setString(2, "date");
+			pst.setString(2, "service");
+			pst.executeUpdate(); // no args
+
+			
+			
+			ResultSet serviceResult = st.executeQuery("SELECT * FROM Service");
+			ResultSet branchResult = st.executeQuery("SELECT * FROM Branch");
+			
+			while(serviceResult.next()) {
+				String data = "";
+				for(int i = 1; i < 6; i++) {
+					data += serviceResult.getString(i) + " ";
+				}
+				System.out.println(data);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static Connection getConnection() throws SQLException {
 		if (conn == null)

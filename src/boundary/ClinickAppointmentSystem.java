@@ -26,6 +26,10 @@ import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
+
+		DatabaseConnection dc = new DatabaseConnection();
+		dc.setUpDatabase();
+		
 		// the test data is created in DataList
 		// role: doctor
 		// userid: 1
