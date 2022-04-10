@@ -13,6 +13,10 @@ public class Allocation {
         this.doctor = findDoctor(doctorId);
     }
 
+    public Allocation(){
+
+    }
+
     private Branch findBranch(String branchId){
         Branch branch = new Branch();
         return branch;

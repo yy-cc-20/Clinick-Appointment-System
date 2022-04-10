@@ -79,6 +79,10 @@ public class User {
         return username;
     }
 
+    public String getUserId(){
+    	return userId;
+	}
+
     // For login
     public boolean equals(User aUser) {
         return username.equals(aUser.userId) && password.equals(aUser.password);

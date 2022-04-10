@@ -6,7 +6,6 @@ import entity.Service;
 import entity.Patient;
 import controller.MakeAppointmentController;
 import entity.Appointment;
-import entity.User;
 import entity.TimeSlot;
 
 public class MakeAppointmentUI {
@@ -26,13 +25,13 @@ public class MakeAppointmentUI {
                     "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t| Patient \t| Doctor ID \t| Doctor \t| Attendance");
             for (int i = 0; i < theAppointments.size(); i++) {
                 anAppointment = theAppointments.get(i);
-                System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getDate() + " \t| "
+                System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
                         + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
-                        + anAppointment.getAllocation().getService().getName() + " \t| "
-                        + anAppointment.getAllocation().getBranch().getName() + " \t| "
-                        + anAppointment.getPatient().getId() + " \t| " + anAppointment.getPatient().getName() + " \t| "
-                        + anAppointment.getAllocation().getDoctor().getId() + " \t| "
-                        + anAppointment.getAllocation().getDoctor().getName() + " \t| "
+                        + anAppointment.getAllocation().getService().getServiceName() + " \t| "
+                        + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
+                        + anAppointment.getPatient().getUserId() + " \t| " + anAppointment.getPatient().getUsername() + " \t| "
+                        + anAppointment.getAllocation().getDoctor().getUserId() + " \t| "
+                        + anAppointment.getAllocation().getDoctor().getUsername() + " \t| "
                         + anAppointment.getAttendance());
             }
         }
@@ -110,7 +109,7 @@ public class MakeAppointmentUI {
                 "No \t| Service \t| Service ID \t| Branch Address \t| Telephone No \t| Description \t| Price \t| Required Time Slot");
         for (int i = 0; i < theServices.size(); i++) {
             aService = theServices.get(i);
-            System.out.println(i + " \t| " + aService.getName() + " \t| " + aService.getId() + " \t| "
+            System.out.println(i + " \t| " + aService.getServiceName() + " \t| " + aService.getServiceId() + " \t| "
                     + aService.getAllocation().getBranch().getAddress() + " \t| "
                     + aService.getAllocation().getBranch().getTelNo() + " \t| "
                     + aService.getDescription() + aService.getPrice() + aService.getTimeSlotRequired());

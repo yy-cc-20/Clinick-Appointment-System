@@ -9,14 +9,29 @@ public class Appointment {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
     private String appointmentId;
     private LocalDate appointmentDate;
+    private Patient patient;
+    private Allocation allocation;
     private Attendance attendance;
     private ArrayList<TimeSlot> timeSlot;
 
-    public Appointment(String appointmentId, String appointmentDate, String attendance, String[] timeSlot) {
+    public Appointment(String appointmentId, String appointmentDate, String patientId, String allocationId,
+                       String attendance, String[] timeSlot) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, formatter);
+        this.patient = findPatient(patientId);
+        this.allocation = findAllocation(allocationId);
         this.attendance = retrieveAttendance(attendance);
         this.timeSlot = retrieveTimeSlot(timeSlot);
+    }
+
+    private Patient findPatient(String patientId){
+        Patient patient = new Patient();
+        return patient;
+    }
+
+    private Allocation findAllocation(String appointmentId){
+        Allocation allocation = new Allocation();
+        return allocation;
     }
 
     public Attendance retrieveAttendance(String attendance) {
@@ -62,8 +77,12 @@ public class Appointment {
         return appointmentId;
     }
 
-    public LocalDate getAppointmentDate() {
-        return appointmentDate;
+    public String getAppointmentDate() {
+        return appointmentDate.format(formatter);
+    }
+
+    public Patient getPatient() {
+        return patient;
     }
 
     public Attendance getAttendance() {
@@ -72,6 +91,10 @@ public class Appointment {
 
     public ArrayList<TimeSlot> getTimeSlot() {
         return timeSlot;
+    }
+
+    public Allocation getAllocation() {
+        return allocation;
     }
 
     public void setAppointmentId(String appointmentId) {
@@ -88,5 +111,9 @@ public class Appointment {
 
     public void setTimeSlot(ArrayList<TimeSlot> timeSlot) {
         this.timeSlot = timeSlot;
+    }
+
+    public void setAllocation(Allocation allocation) {
+        this.allocation = allocation;
     }
 }
