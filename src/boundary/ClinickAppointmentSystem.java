@@ -26,9 +26,6 @@ import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
-		// Retrieve data from database
-		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
-
 		// the login test data is created in DataList
 		// role: doctor
 		// userid: 1
