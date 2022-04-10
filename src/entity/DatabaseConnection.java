@@ -30,7 +30,8 @@ public class DatabaseConnection {
 		
 		// Create Connection
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/clinick-appointment-system", "root", "root"); // Database name: Clinick-Appointment-System
+			// Database name: Clinick-Appointment-System
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/clinick-appointment-system", "root", "root");
 			st = conn.createStatement();
 		} catch (SQLException e) {
 			System.out.println("Error connecting to database.");
@@ -58,7 +59,8 @@ public class DatabaseConnection {
 		// TODO 1. Drop other table here
 		
 		// Create table
-		st.executeUpdate("CREATE TABLE `clinick-appointment-system`.`doctor` (`userid` INT NOT NULL AUTO_INCREMENT, `username` VARCHAR(45) NOT NULL, `password` VARCHAR(45) NOT NULL, PRIMARY KEY (`userid`));");
+		st.executeUpdate("CREATE TABLE `clinick-appointment-system`.`doctor` (`userid` INT NOT NULL AUTO_INCREMENT, " +
+				"`username` VARCHAR(45) NOT NULL, `password` VARCHAR(45) NOT NULL, PRIMARY KEY (`userid`));");
 		// TODO 2. Continue create other table
 		
 		// Insert data into the table
@@ -73,7 +75,9 @@ public class DatabaseConnection {
 		conn.setAutoCommit(false); // So that multiple SQL statements can all run inside the same transaction
 		st.addBatch("INSERT INTO doctor (username, password) VALUES ('username', 'password');");
 		st.addBatch("INSERT INTO doctor (username, password) VALUES ('testing', 'password');");
-		st.executeBatch(); // Should anything go wrong with any of the insert statements, the whole transaction would be rolled back, so will not have inconsistent data in the database
+		st.executeBatch();
+		// Should anything go wrong with any of the insert statements, the whole transaction
+		// would be rolled back, so will not have inconsistent data in the database
 		conn.commit();           
 		conn.setAutoCommit(true); // Set back to default, so other part of the code will not be affected
 	}
