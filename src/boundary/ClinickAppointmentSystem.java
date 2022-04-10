@@ -1,10 +1,8 @@
-
-
 package boundary;
 
 import java.sql.SQLException;
 
-import entity.IDataStore;
+import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
