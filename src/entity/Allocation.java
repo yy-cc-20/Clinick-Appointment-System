@@ -1,10 +1,13 @@
 package entity;
 
+import java.util.List;
+
 public class Allocation {
     private int linkId;
     private Branch branch;
     private Service service;
     private Doctor doctor;
+    private TimeSlot timeSlotList;
 
     public Allocation(int linkId, String branchId, String serviceId, String doctorId) {
         this.linkId = linkId;

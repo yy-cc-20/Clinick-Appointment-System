@@ -17,8 +17,11 @@ public class DataList implements IDataStore {
 		importDoctorList();
 		importPatientList();
 		importReceptionistList();
+		importTimeSlotList();
+		importAppointmentList();
+		importAllocationList();
 	} // Private constructor for singleton !!!
-	
+
 	public static IDataStore getInstance() {
 		if (instance == null) {
 			instance = new DataList();
@@ -38,6 +41,15 @@ public class DataList implements IDataStore {
 	
 	public void importReceptionistList() {
 		
+	}
+
+	public void importAllocationList() {
+	}
+
+	public void importAppointmentList() {
+	}
+
+	public void importTimeSlotList() {
 	}
 	
 	public List<Doctor> getDoctorList() {

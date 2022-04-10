@@ -12,16 +12,14 @@ public class Appointment {
     private Patient patient;
     private Allocation allocation;
     private Attendance attendance;
-    private ArrayList<TimeSlot> timeSlot;
 
     public Appointment(String appointmentId, String appointmentDate, String patientId, String allocationId,
-                       String attendance, String[] timeSlot) {
+                       String attendance) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, formatter);
         this.patient = findPatient(patientId);
         this.allocation = findAllocation(allocationId);
         this.attendance = retrieveAttendance(attendance);
-        this.timeSlot = retrieveTimeSlot(timeSlot);
     }
 
     public Appointment(){}

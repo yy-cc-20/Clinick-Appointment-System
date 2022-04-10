@@ -28,6 +28,7 @@ public class ManageAppointmentUI {
         // MakeAppointmentUI.viewSlots();
 
         if(KeyboardInput.askBoolean("Update appointment")){
+            // todo
             System.out.println("Appointment updated.");
         }
     }
