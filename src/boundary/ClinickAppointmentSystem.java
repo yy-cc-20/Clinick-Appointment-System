@@ -16,7 +16,7 @@
  * 
  * @description A console program that aims to digitize the process of making an appointment. 
  * 				Applying object-oriented programming concept, using entity-boundary-controller design pattern.
- **/
+ */
 
 package boundary;
 
@@ -70,5 +70,4 @@ public class ClinickAppointmentSystem {
 			ConsoleUI.clearScreen();
 		}
 	}
-
 }

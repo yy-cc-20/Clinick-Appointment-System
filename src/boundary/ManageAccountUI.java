@@ -28,7 +28,7 @@ public class ManageAccountUI {
         String confirmedPassword;
         
         while (true) {
-            System.out.print("> New password  ");
+            System.out.print("New password > ");
             inputPassword = SingletonScanner.scanner.nextLine();
             if (inputPassword.equalsIgnoreCase("x"))
             	return;
@@ -41,7 +41,7 @@ public class ManageAccountUI {
             }
         }
         
-        System.out.print("> Confirm new password ");
+        System.out.print("Confirm new password > ");
         confirmedPassword = SingletonScanner.scanner.nextLine();
         
         if (inputPassword.equals(confirmedPassword)) {
@@ -50,42 +50,4 @@ public class ManageAccountUI {
         } else
         	System.out.println("Password did not match.");
     }
-    
-    /*
-    public void modifyAccount(User currentUser) {
-        System.out.println("[1] Change Username");
-        System.out.println("[2] Change Password");
-        int action = ConsoleUI.askEventNo(1, 2);
-        String username = "adf";
-        String password = "adsf";
-
-        switch (action) {
-            case 1 -> {
-                String inputUsername;
-                while (true) {
-                    System.out.print("> Username ");
-                    inputUsername = SingletonScanner.scanner.nextLine();
-                    if (KeyboardInput.hasDelimiter(inputUsername)) {
-                        System.out.println();
-                    } else {
-                        username = inputUsername;
-                        break;
-                    }
-                }
-                System.out.println("The username has changed to " + username);
-            }
-            case 2 -> {
-                String inputPassword;
-                System.out.print("> Enter current password ");
-                inputPassword = SingletonScanner.scanner.nextLine();
-                if (inputPassword.equals(password)) {
-                    askPassword();
-                    System.out.println("The password has changed.");
-                } else {
-                    System.out.println("Wrong password.");
-                }
-            }
-        }
-        // TODO update the arraylist / database
-    }*/
 }

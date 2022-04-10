@@ -4,8 +4,23 @@ import entity.TimeSlot;
 
 public class ViewSlotsUI {
 	
-	select service ([X] to go back to the previous page) 
-	select branch ([X] to go back to the previous page) 
+	public static int selectService() {
+		select service ([X] to go back to the previous page)
+		+----+---------+--------+---------+-------+-------------+
+		| No | Service | Branch | Tel. No | Price | Description |
+		+----+---------+--------+---------+-------+-------------+
+	}
+
+	public static int selectBranchBasedOnService(int serviceID) {
+		select branch ([X] to go back to the previous page) 
+		> service name <
+		+----+---------+---------+---------+-------------+
+		| No | Branch  | Tel. No | Address | Description |
+		+----+---------+---------+---------+-------------+
+	}
+	
+
+	
 	show available time slot
 	
 	return timeslot

@@ -36,7 +36,7 @@ public class LoginUI {
 			
 			role = ConsoleInput.askChoice(1, 3, "Login as");
 			userid = ConsoleInput.askInt("User ID");
-			System.out.print("> Password ");
+			System.out.print("Password> ");
 			password = SingletonScanner.scanner.nextLine();
 			
 			// Interact with the controller

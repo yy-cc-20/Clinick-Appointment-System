@@ -24,7 +24,7 @@ public class ConsoleInput {
 
         while (true) {
             try {
-                System.out.printf("%n> %s ", info);
+                System.out.printf("%n%s> ", info);
                 eventNo = Integer.parseInt(SingletonScanner.scanner.nextLine());
 
                 if (eventNo >= beginChoiceNo && eventNo <= endChoiceNo) {
@@ -47,7 +47,7 @@ public class ConsoleInput {
     // assumption: the menu will be listed in sentence
     // 				index is alphabet
     // 				each alphabet between the range has an eventNo
-    public static char askChoice2(char beginEventNo, char endEventNo) throws IllegalArgumentException {
+    public static char askChoice2(char beginEventNo, char endEventNo, String info) throws IllegalArgumentException {
         char eventNo = '?';
         String input = "";
         boolean isChar = false;
@@ -60,7 +60,7 @@ public class ConsoleInput {
         do {
             try {
                 isChar = false;
-                System.out.printf("%n> ");
+                System.out.printf("%n%s> ", info);
                 input = SingletonScanner.scanner.nextLine();
                 if (input.length() == 1 && Character.isLetter(input.charAt(0))) {
                     eventNo = input.charAt(0);
@@ -86,7 +86,7 @@ public class ConsoleInput {
         String errorMessage = "Please enter a positive integer.";
 
         while (true) {
-            System.out.printf("%n> %s ", info);
+            System.out.printf("%n%s> ", info);
             try {
                 input = Integer.parseInt(SingletonScanner.scanner.nextLine());
                 if (input < 0) {
@@ -108,7 +108,7 @@ public class ConsoleInput {
         String errorMessage = "Please enter a number.";
 
         while (true) {
-            System.out.printf("> %s ", info);
+            System.out.printf("%s> ", info);
             try {
                 input = Integer.parseInt(SingletonScanner.scanner.nextLine());
                 return input;
@@ -124,7 +124,7 @@ public class ConsoleInput {
         String errorMessage = "Please enter a positive number.";
 
         while (true) {
-            System.out.printf("%n> %s ", info);
+            System.out.printf("%n%s> ", info);
             try {
                 input = Double.parseDouble(SingletonScanner.scanner.nextLine());
                 if (input < 0) {
@@ -145,7 +145,7 @@ public class ConsoleInput {
         String input;
 
         while (true) {
-            System.out.printf("%n> %s ", info);
+            System.out.printf("%n%s> ", info);
             input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
@@ -160,7 +160,7 @@ public class ConsoleInput {
         String input;
 
         while (true) {
-            System.out.printf("%n> %s ", info);
+            System.out.printf("%n%s> ", info);
             input = SingletonScanner.scanner.nextLine();
             if (input.equals("\n"))
                 return null;
@@ -171,7 +171,7 @@ public class ConsoleInput {
     public static String askShortString(String info, int length) {
         String input;
         while (true) {
-            System.out.printf("%n> %s ", info);
+            System.out.printf("%n%s> ", info);
             input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", stringError);
@@ -191,7 +191,7 @@ public class ConsoleInput {
     public static LocalDate askDate(String dateName) {
         String stringDate;
         while (true) {
-            System.out.print("\nEnter " + dateName + " in \"dd/mm/yyyy\" format: ");
+            System.out.print("%n" + dateName + " (dd/mm/yyyy) > ");
             // the "%n" in dateName will not take effect if you use %s
             try {
                 stringDate = SingletonScanner.scanner.nextLine();
@@ -207,7 +207,7 @@ public class ConsoleInput {
     public static boolean askBoolean(String info) {
         String ans;
         while (true) {
-            System.out.printf("%n%n> %s%s", info, " [y/n]? ");
+            System.out.printf("%n%n%s%s> ", info, " [y/n]? ");
             ans = SingletonScanner.scanner.nextLine().toLowerCase();
 
             if (ans.equalsIgnoreCase("y") || ans.equalsIgnoreCase("yes")) {
