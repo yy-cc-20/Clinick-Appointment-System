@@ -30,7 +30,7 @@ public class ManageAccountUI {
         while (true) {
             System.out.print("New password > ");
             inputPassword = SingletonScanner.scanner.nextLine();
-            if (inputPassword.equalsIgnoreCase("x"))
+            if (inputPassword.equalsIgnoreCase(ConsoleUI.CANCEL_KEY))
             	return;
             
             if (ManageAccountController.isValidPassword(inputPassword)) {

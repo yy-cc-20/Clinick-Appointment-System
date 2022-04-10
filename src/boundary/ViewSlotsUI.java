@@ -3,6 +3,7 @@ package boundary;
 import java.time.LocalDate;
 import java.util.List;
 
+import controller.ViewSlotsController;
 import entity.*;
 
 /*
@@ -13,6 +14,7 @@ import entity.*;
 
 public class ViewSlotsUI {
 	// TODO calculate the column width according to the length of the info in order to display the table more neatly
+	private final ViewSlotsController controller = new ViewSlotsController();	
 	
 	// All information
 	List<Service> services;
@@ -38,15 +40,19 @@ public class ViewSlotsUI {
 			select branch
 			select date
 		 */
-		viewService();
 		System.out.println(ConsoleUI.CANCEL_OPERATION);
+		
+		viewService();
 		serviceId = ConsoleInput.askChoice(1, services.size(), "Select service");
 		
 		System.out.printf("%n>" + services.get(serviceId).getName() + "<%n");
 		viewBranchFilteredByService();
-		System.out.println(ConsoleUI.CANCEL_OPERATION);
 		branchId = ConsoleInput.askChoice(1, services.size(), "Select branch");
 		
+		date = ConsoleInput.askDate("Date");
+		
+		System.out.println(">" + services.get(serviceId).getName() + " AT " + branches.get(branchId).getBranchName() + " ON " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
+		viewTimeSlotFilteredByServiceBranchDate();
 	}
 	
 	public int getSelectedServiceId() {
@@ -57,8 +63,15 @@ public class ViewSlotsUI {
 		return branchId;
 	}
 	
+	public LocalDate getSelectedDate() {
+		return date;
+	}
+	
+	public int[] getAvailableTimeSlots() {
+		// calculation here
+		return availableTimeSlots;
+	}
     
-
 	public static void viewService() {
 		ArrayList<Service> services
 		+----+---------+-------+-------------+
@@ -80,11 +93,12 @@ public class ViewSlotsUI {
                     + allocation.getBranch().getTelNo() + " \t| "
                     + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
         }
-
 	}
 
 	public static void viewBranchFilteredByService(int serviceId, ArrayList<Branch> branches, ArrayList<Allocation> allocations) {
-
+		List<Branch> branchResult = controller.getBranchFilteredByService(serviceId);
+		ArrayList
+		
 		> service name <
 		+----+--------+---------+---------+-------------+
 		| No | Branch | Tel. No | Address | Description |
@@ -92,7 +106,7 @@ public class ViewSlotsUI {
 	}
 	
 	public static void viewTimeSlotFilteredByServiceBranchDate(int serviceId, int branchId, LocalDate date, ArrayList<Appointment> appointments) {
-		availableTimeSlots = new int[14];
+		availableTimeSlots = controller.getAvailableTimeSlot(serviceId, branchId, date);
 		
 		 displayServices();
 	        int choice = ConsoleInput.askPositiveInt("a service (1-15)");
