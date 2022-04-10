@@ -25,7 +25,7 @@ public class ManagePatientUI {
     public static void displayPatient(Patient selectedPatient) {
         System.out.println("Patient ID \t| Patient \t| Phone No \t| Patient IC \t| Address");
         System.out.println(
-                selectedPatient.getId() + " \t| " + selectedPatient.getName() + " \t| " + selectedPatient.getPhoneNo()
+                selectedPatient.getUserId() + " \t| " + selectedPatient.getUsername() + " \t| " + selectedPatient.getPhoneNo()
                         + " \t| " + selectedPatient.getIc() + " \t| " + selectedPatient.getAddress());
     }
 

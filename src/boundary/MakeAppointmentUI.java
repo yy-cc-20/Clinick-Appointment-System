@@ -31,6 +31,7 @@ public class MakeAppointmentUI {
             for (int i = 0; i < theAppointments.size(); i++) {
                 anAppointment = theAppointments.get(i);
                 System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
+                        // todo: get the time
                         + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                         + anAppointment.getAllocation().getService().getServiceName() + " \t| "
                         + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
@@ -64,8 +65,8 @@ public class MakeAppointmentUI {
 
     public void makeAppointment() {
         Patient selectedPatient = ManagePatientUI.searchPatient();
-//        Service service = new Service();
-        viewSlots();
+        Service service = new Service();
+        viewSlots(service);
         boolean slotAvailable = false;
         int startSlot;
 
@@ -91,14 +92,15 @@ public class MakeAppointmentUI {
         }
     }
 
-    public void viewSlots() {
+    public void viewSlots(Service service) {
         displayServices();
         int choice = KeyboardInput.askPositiveInt("a service (1-15)");
         String date = KeyboardInput.askString("a date (DD/MM/YYYY)");
         controller.getAvailableTimeSlots(choice, date);
 
-        System.out.println("Available time slots for service " + service);
+        System.out.println("Available time slots for service " + service.getServiceName());
         System.out.println();
+        // todo: check the timeslot status
         System.out.println("Slot No \t| Start Time \t| Status");
         for (TimeSlot slot : TimeSlot.values()) {
             int i = slot.ordinal() + 1;
