@@ -25,23 +25,18 @@ import java.sql.*;
 
 public class DatabaseConnection {
 	private static Connection conn; // Singleton
-	private static Statement st;
-
+	
+	// Create Connection
 	private DatabaseConnection() throws SQLException { // private constructor for singleton !!!
-		
-		// Create Connection
 		try {
-			// Database name: Clinick-Appointment-System
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/clinick-appointment-system", "root", "root");
-			st = conn.createStatement();
 		} catch (SQLException e) {
 			System.out.println("Error connecting to database.");
 			System.out.println("Exiting...");
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
-		setUpDatabaseIfNotExist();
+		SetUpDatabase.setUpDatabaseIfNotExist();
 	} 
 
 	public static Connection getConnection() throws SQLException {
@@ -52,35 +47,6 @@ public class DatabaseConnection {
 	
 	public static void closeConnection() throws SQLException {
 		conn.close();
-	}
-	
-	private void setUpDatabaseIfNotExist() throws SQLException {
-		// Recreate the table in the database in case the table structure has changed 
-		st.executeUpdate("DROP TABLE IF EXISTS `doctor`;"); 
-		// TODO 1. Drop other table here
-		
-		// Create table
-		st.executeUpdate("CREATE TABLE IF NOT EXISTS `clinick-appointment-system`.`doctor` (`userid` INT NOT NULL AUTO_INCREMENT, " +
-				"`username` VARCHAR(45) NOT NULL, `password` VARCHAR(45) NOT NULL, PRIMARY KEY (`userid`));");
-		// TODO 2. Continue create other table
-		
-		// Insert data into the table
-		insertDoctorTable();
-		// TODO 3. Continue insert other table here
-		
-		//conn.commit(); // Cannot call commit when autocommit is true
-	}
-	
-	private void insertDoctorTable() throws SQLException {
-		// Good practice for autocommit statement
-		conn.setAutoCommit(false); // So that multiple SQL statements can all run inside the same transaction
-		st.addBatch("INSERT INTO doctor (username, password) VALUES ('username', 'password');");
-		st.addBatch("INSERT INTO doctor (username, password) VALUES ('testing', 'password');");
-		st.executeBatch();
-		// Should anything go wrong with any of the insert statements, the whole transaction
-		// would be rolled back, so will not have inconsistent data in the database
-		conn.commit();           
-		conn.setAutoCommit(true); // Set back to default, so other part of the code will not be affected
 	}
 	
 	// DatabaseConnectionTest
