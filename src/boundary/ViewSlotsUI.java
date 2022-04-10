@@ -8,37 +8,44 @@ import entity.TimeSlot;
  */
 
 public class ViewSlotsUI {
-	
+
 	public static void viewService() {
+<<<<<<< HEAD
 		
 		+----+---------+-------+-------------+
 		| No | Service | Price | Description |
 		+----+---------+-------+-------------+
+=======
+
+		+----+---------+--------+---------+-------+-------------+
+		| No | Service | Branch | Tel. No | Price | Description |
+		+----+---------+--------+---------+-------+-------------+
+>>>>>>> 447d29ed249dae10152884653a5b8f1075bc28fd
 	}
 
 	public static void viewBranchFilteredByService(int serviceId) {
-		
+
 		> service name <
 		+----+---------+---------+---------+-------------+
 		| No | Branch  | Tel. No | Address | Description |
 		+----+---------+---------+---------+-------------+
 	}
-	
+
 	public static void viewAvailableTimeSlot(int serviceId, int branchId) {
-		
+
 	}
 	([X] to back to the previous page)
-	select service 
-	select branch 
-	
+	select service
+	select branch
+
 	public static int viewAvailableTimeSlot(int serviceId)
 
-	
+
 	show available time slot
-	
+
 	return timeslot
-	
-	
+
+
 	public static TimeSlot askTimeSlot(){
 		displayTimeSlot();
 		int choice = ConsoleInput.askChoice(1, 13, "Select time slot");
@@ -59,8 +66,8 @@ public class ViewSlotsUI {
 			case 13 -> SLOT_13;
 			default -> SLOT_14; // case 14
 		};
-	}	
-	
+	}
+
 	public static void displayTimeSlot(){
 		System.out.println(" 1. 0800 AM");
 		System.out.println(" 2. 0830 AM");
