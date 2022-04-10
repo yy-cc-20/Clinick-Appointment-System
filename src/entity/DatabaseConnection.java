@@ -33,7 +33,7 @@ public class DatabaseConnection {
 	private static String username = "root";
 	private static String password = "root";
 
-	public DatabaseConnection() throws ClassNotFoundException, SQLException {
+	public DatabaseConnection() throws SQLException {
 		try {
 			conn = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
