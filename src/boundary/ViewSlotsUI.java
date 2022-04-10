@@ -2,23 +2,36 @@ package boundary;
 
 import entity.TimeSlot;
 
+/*
+ * Display available time slot filtered by service and branch
+ * Did not let the user select the desired time slot
+ */
+
 public class ViewSlotsUI {
 	
-	public static int selectService() {
-		select service ([X] to go back to the previous page)
+	public static void viewService() {
+		
 		+----+---------+--------+---------+-------+-------------+
 		| No | Service | Branch | Tel. No | Price | Description |
 		+----+---------+--------+---------+-------+-------------+
 	}
 
-	public static int selectBranchBasedOnService(int serviceID) {
-		select branch ([X] to go back to the previous page) 
+	public static void viewBranchFilteredByService(int serviceId) {
+		
 		> service name <
 		+----+---------+---------+---------+-------------+
 		| No | Branch  | Tel. No | Address | Description |
 		+----+---------+---------+---------+-------------+
 	}
 	
+	public static void viewAvailableTimeSlot(int serviceId, int branchId) {
+		
+	}
+	([X] to back to the previous page)
+	select service 
+	select branch 
+	
+	public static int viewAvailableTimeSlot(int serviceId)
 
 	
 	show available time slot
