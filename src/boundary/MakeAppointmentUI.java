@@ -1,5 +1,6 @@
 package boundary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entity.Service;
@@ -18,29 +19,31 @@ public class MakeAppointmentUI {
     private final MakeAppointmentController controller = new MakeAppointmentController();
 
     public void viewAppointment() {
-        displayAppointment(controller.getAllAppointments());
-    }
-
-    public static void displayAppointment(List<Appointment> theAppointments) {
+        List<Appointment> theAppointments = controller.getAllAppointments();
         if (theAppointments.size() == 0) {
             System.out.println("No appointment to display.");
-        } else {
-            Appointment anAppointment;
-            System.out.println(
-                    "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t| Patient \t| Doctor ID \t| Doctor \t| Attendance");
-            for (int i = 0; i < theAppointments.size(); i++) {
-                anAppointment = theAppointments.get(i);
-                System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
-                        // todo: get the time
-                        + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
-                        + anAppointment.getAllocation().getService().getServiceName() + " \t| "
-                        + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
-                        + anAppointment.getPatient().getUserId() + " \t| " + anAppointment.getPatient().getUsername() + " \t| "
-                        + anAppointment.getAllocation().getDoctor().getUserId() + " \t| "
-                        + anAppointment.getAllocation().getDoctor().getUsername() + " \t| "
-                        + anAppointment.getAttendance());
-            }
         }
+        else {
+            System.out.println(
+                    "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t" +
+                            "| Patient \t| Doctor ID \t| Doctor \t| Attendance");
+            for (Appointment theAppointment : theAppointments) {
+                displayAppointment(theAppointment);
+            }
+
+        }
+    }
+
+    public static void displayAppointment(Appointment anAppointment) {
+        System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
+                // todo: get the time
+                + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
+                + anAppointment.getAllocation().getService().getServiceName() + " \t| "
+                + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
+                + anAppointment.getPatient().getUserId() + " \t| " + anAppointment.getPatient().getUsername() + " \t| "
+                + anAppointment.getAllocation().getDoctor().getUserId() + " \t| "
+                + anAppointment.getAllocation().getDoctor().getUsername() + " \t| "
+                + anAppointment.getAttendance());
     }
 
     public void searchAppointment() {
@@ -60,7 +63,9 @@ public class MakeAppointmentUI {
 
         System.out.println("Search Results: ");
         System.out.println();
-        displayAppointment(selectedAppointments);
+        for (Appointment theAppointment : selectedAppointments) {
+            displayAppointment(theAppointment);
+        }
     }
 
     public void makeAppointment() {
@@ -76,15 +81,17 @@ public class MakeAppointmentUI {
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {
-                System.out.println("Slot " + startSlot + "-" + (startSlot + timeSlotRequired) + " selected.");
-                displayAppointment(appointmentToBooked);
+                System.out.println("Slot " + startSlot + "-" + (startSlot + service.getTimeSlotRequired()) + " selected.");
+                Appointment appointmentToBook = new Appointment(appointmentId, appointmentDate, patientId, allocationId,
+                        attendance, timeSlot);
+                displayAppointment(appointmentToBook);
                 if (KeyboardInput.askBoolean("Book appointment")) {
-                    controller.addAppointment(date, timeslots, patientId, allocationId);
-                    System.out.println("Appointment booked. Booking ID is " + appointmentId);
+                    controller.addAppointment(appointmentToBook);
+                    System.out.println("Appointment booked. Booking ID is " + appointmentToBook.getAppointmentId());
                     System.out.println();
                 }
             } else {
-                System.out.println("Slot unavailable. Required time slot is " + timeSlotRequired);
+                System.out.println("Slot unavailable. Required time slot is " + service.getTimeSlotRequired());
                 if (KeyboardInput.askBoolean("Go back to menu")) {
                     return;
                 }

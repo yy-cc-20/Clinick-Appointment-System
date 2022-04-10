@@ -20,4 +20,7 @@ public class MakeAppointmentController {
 
     public void getAvailableTimeSlots(int choice, String date) {
     }
+
+    public void addAppointment(Appointment appointmentToBook) {
+    }
 }
