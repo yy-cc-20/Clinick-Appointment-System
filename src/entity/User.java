@@ -5,6 +5,40 @@ public class User {
     String username; // unique
     String password;
 
+    public User() {
+    }
+
+    public User(String theId, String theUsername, String thePassword) {
+        userId = theId;
+        username = theUsername;
+        password = thePassword;
+    }
+
+    public User(String theUsername, String thePassword) {
+        username = theUsername;
+        password = thePassword;
+    }
+
+    /*
+    public String getId() {
+        return id;
+    }
+
+
+    public void logout() {
+        username = "";
+        password = "";
+    }
+    */
+    public String getUsername() {
+        return username;
+    }
+
+    // For login
+    public boolean equals(User aUser) {
+        return username.equals(aUser.userId) && password.equals(aUser.password);
+    }
+    
 	// password cannot contain comma
 	// @return true if have at least 8 characters and contain at least
 	// one lowercase letter, one uppercase letter, one digit and no comma
@@ -49,39 +83,5 @@ public class User {
 		} 
 		return false;
 	}
-
-    public User() {
-    }
-
-    public User(String theId, String theUsername, String thePassword) {
-        userId = theId;
-        username = theUsername;
-        password = thePassword;
-    }
-
-    public User(String theUsername, String thePassword) {
-        username = theUsername;
-        password = thePassword;
-    }
-
-    /*
-    public String getId() {
-        return id;
-    }
-
-
-    public void logout() {
-        username = "";
-        password = "";
-    }
-    */
-    public String getUsername() {
-        return username;
-    }
-
-    // For login
-    public boolean equals(User aUser) {
-        return username.equals(aUser.userId) && password.equals(aUser.password);
-    }
 }
  

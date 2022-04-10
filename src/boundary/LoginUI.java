@@ -8,7 +8,7 @@ import controller.LoginController;
 import entity.*;
 
 public class LoginUI {
-	private final LoginController loginController = new LoginController();
+	private final LoginController loginController = new LoginController(); // final object: can never refer to another object, but the object it refers to may change state
 	
 	// Use this method for login
 	// lock account and exit program if fail too many times
