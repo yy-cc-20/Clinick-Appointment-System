@@ -14,7 +14,7 @@ public class Allocation {
         this.branch = findBranch(branchId);
         this.service = findService(serviceId);
         this.doctor = findDoctor(doctorId);
-        this.timeSlotList =
+//        this.timeSlotList =
     }
 
     public Allocation(){
