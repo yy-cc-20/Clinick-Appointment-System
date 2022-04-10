@@ -5,6 +5,7 @@
  * 
  * This class is using MySQL database.
  * @setup have mysql connector downlowded
+ * @setup open mysql workbench, create a schema (database) call Clinick-Appointment-System
  * @setup add external JARs file (mysql-connector-java-8.0.28.jar) to the build path.
  * 
  * This class is using the singleton design pattern. 
@@ -98,8 +99,7 @@ public class DatabaseConnection {
  * 		2.0 Download MySQL
  * 		youtube tutorial: https://www.youtube.com/watch?v=BOUMR85B-V0
  		- download: https://dev.mysql.com/downloads/file/?id=510038
- 		- open mysql workbench
- 		- create a schema (database) call Clinick-Appointment-System
+ 		- open mysql workbench, create a schema (database) call Clinick-Appointment-System
  * 
  * 		2.1 Download the driver class
  * 		Database | Download 
