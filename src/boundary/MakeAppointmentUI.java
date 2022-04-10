@@ -99,7 +99,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void displayServices() {
+    public void displayServices() {
         List<Service> theServices = controller.getAllServices();
         Service aService;
 
