@@ -37,7 +37,7 @@ public class ManageAccountUI {
                 break;
             } else {
                 System.out.printf(ManageAccountController.PASSWORD_CRITERIA);
-                System.out.println("Enter 'x' to cancel.");
+                System.out.println("[X] to go back to the previous page.");
             }
         }
         
