@@ -13,12 +13,12 @@ public class LoginController {
 	public static final int LOCK_TIME_LENGTH = 10; // in seconds
 	
 	/**
-	 * Search for the list to find the same username and password
+	 * search for the list to find the same username and password
 	 * TODO replace with sql
 	 * @param role 1 for receptionist, 2 for doctor, 3 for patient
 	 * @return userid, return empty string if login fail
 	 */
-	public String loginSuccessfully(int role, String userid, String password) {
+	public String loginSuccessfully(int role, int userid, String password) {
 		User user = new User(userid, password);
 		
 		switch (role) {
@@ -55,7 +55,7 @@ public class LoginController {
 		return failedLoginAttempt;
 	}
 	
-	// Use this if login successfully or lock time expired
+	// use this if login successfully or lock time expired
 	public void resetFailedLoginAttempts() {
 		failedLoginAttempt = 0;
 	}

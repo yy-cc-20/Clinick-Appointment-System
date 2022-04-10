@@ -1,7 +1,7 @@
 package entity;
 
 public class User {
-    String userId;
+    int userId;
     String username; // unique
     String password;
 
@@ -53,7 +53,7 @@ public class User {
     public User() {
     }
 
-    public User(String theId, String theUsername, String thePassword) {
+    public User(int theId, String theUsername, String thePassword) {
         userId = theId;
         username = theUsername;
         password = thePassword;
@@ -79,13 +79,13 @@ public class User {
         return username;
     }
 
-    public String getUserId(){
+    public int getUserId(){
     	return userId;
 	}
 
     // For login
     public boolean equals(User aUser) {
-        return username.equals(aUser.userId) && password.equals(aUser.password);
+        return username.equals(aUser.username) && password.equals(aUser.password);
     }
 }
  
