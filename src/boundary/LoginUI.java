@@ -8,7 +8,7 @@ import controller.LoginController;
 import entity.*;
 
 public class LoginUI {
-	private LoginController loginController = new LoginController();
+	private final LoginController loginController = new LoginController();
 	
 	// Use this method for login
 	// lock account and exit program if fail too many times
@@ -36,11 +36,11 @@ public class LoginUI {
 			username = loginController.loginSuccessfully(role, userid, password);
 			if (!username.isBlank()) { // Successfully login
 				System.out.printf("%nHello " + username + "!%n");
-				switch (role) {
-					case 1: return new Receptionist(userid, username, password);
-					case 2: return new Doctor(userid, username, password);
-					default: return new Patient(userid, username, password); // case 3
-				}
+				return switch (role) {
+					case 1 -> new Receptionist(userid, username, password);
+					case 2 -> new Doctor(userid, username, password);
+					default -> new Patient(userid, username, password); // case 3
+				};
 			} else { // Login failed	
 				if (LoginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) { // Still have chance to login
 					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", LoginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
