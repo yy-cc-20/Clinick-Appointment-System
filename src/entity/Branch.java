@@ -4,15 +4,22 @@ public class Branch{
     private String branchId;
     private String branchName;
     private String branchAddress;
-    private String receptionistId;
+    private Receptionist receptionist;
     private String telNo;
 
     public Branch(String branchId, String branchName, String branchAddress, String receptionistId, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
         this.branchAddress = branchAddress;
-        this.receptionistId = receptionistId;
+        this.receptionist = findReceptionist(receptionistId);
         this.telNo = telNo;
+    }
+
+    public Branch(){}
+
+    private Receptionist findReceptionist(String receptionistId){
+        Receptionist receptionist = new Receptionist();
+        return receptionist;
     }
 
     public String getBranchId() {
@@ -39,13 +46,6 @@ public class Branch{
         this.branchAddress = branchAddress;
     }
 
-    public String getReceptionistId() {
-        return receptionistId;
-    }
-
-    public void setReceptionistId(String receptionistId) {
-        this.receptionistId = receptionistId;
-    }
 
     public String getTelNo() {
         return telNo;
@@ -54,4 +54,5 @@ public class Branch{
     public void setTelNo(String telNo) {
         this.telNo = telNo;
     }
+
 }

@@ -1,7 +1,5 @@
 package entity;
 
-import entity.Appointment;
-
 public class Patient extends User {
     private String ic;
     private String phoneNo;
@@ -19,6 +17,8 @@ public class Patient extends User {
         this.phoneNo = phoneNo;
         this.address = address;
     }
+
+    public Patient(){}
 
     public String getIc() {
         return ic;
