@@ -31,10 +31,6 @@ public class ClinickAppointmentSystem {
 		// userid: 1
 		// username: username
 		// password: password
-		
-		ConsoleUI.displaySystemName("Clinic Booking System");
-		User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
-		// From systemUser can know the username, id, password, user type
 
 		// instantiating the user interfaces
    		MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
