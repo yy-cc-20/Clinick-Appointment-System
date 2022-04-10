@@ -15,6 +15,7 @@ public class MakeAppointmentUI {
     private final MakeAppointmentController controller = new MakeAppointmentController();
     private Appointment appointmentToBook;
 
+    // view the appointments
     public void viewAppointment() {
         List<Appointment> theAppointments = controller.getAllAppointments();
         if (theAppointments.size() == 0) {

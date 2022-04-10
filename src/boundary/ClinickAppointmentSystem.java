@@ -58,22 +58,19 @@ public class ClinickAppointmentSystem {
 			choiceNo = KeyboardInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
 
 			switch (choiceNo) {
-			case 1:
-				// Just to test the method, you may change the position of the code
-				ConsoleUI.displayFunctionName("Account Setting");
-				new ManageAccountUI(systemUser).changePassword();
-				break;
-
-			case 2: // Modify Account Info
-				ConsoleUI.displayFunctionName(" Modify Account Details ");
-				break;
-
-			case 3: // logout and exit the program
-				ConsoleUI.displayFunctionName(" Program Stopped ");
-
-				SingletonScanner.scanner.close();
-				DatabaseConnection.closeConnection(); /** @throws SQLException */
-				System.exit(0);
+				case 1 -> {
+					// Just to test the method, you may change the position of the code
+					ConsoleUI.displayFunctionName("Account Setting");
+					new ManageAccountUI(systemUser).changePassword();
+				}
+				case 2 -> // Modify Account Info
+						ConsoleUI.displayFunctionName(" Modify Account Details ");
+				case 3 -> { // logout and exit the program
+					ConsoleUI.displayFunctionName(" Program Stopped ");
+					SingletonScanner.scanner.close();
+					DatabaseConnection.closeConnection(); /** @throws SQLException */
+					System.exit(0);
+				}
 			}
 			ConsoleUI.clearScreen();
 		}

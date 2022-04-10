@@ -18,6 +18,7 @@ public class Branch{
     public Branch(){}
 
     private Receptionist findReceptionist(String receptionistId){
+        // connect to database
         Receptionist receptionist = new Receptionist();
         return receptionist;
     }
