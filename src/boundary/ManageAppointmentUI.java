@@ -41,10 +41,12 @@ public class ManageAppointmentUI {
 
     public void recordAttendance() {
         searchAppointmentToModify();
+        // KeyboardInput.askAttendance;
         String attendance = KeyboardInput.askString("attendance record (Attended/Absent)");
+        switch (attendance){
+            case "Attended"
+        }
         selectedAppointment.get(0).setAttendance(attendance);
         MakeAppointmentUI.displayAppointment(selectedAppointment);
     }
-}
-
 }

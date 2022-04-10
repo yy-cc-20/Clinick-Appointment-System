@@ -4,6 +4,8 @@ package boundary;
 // to ask for attribute of a specific data type
 // @param is the text that will be shown in the user interface
 
+import entity.Attendance;
+
 public class KeyboardInput {
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
@@ -77,6 +79,10 @@ public class KeyboardInput {
             if (input.equals("\n"))
                 return null;
         }
+    }
+
+    public static Attendance askAttendance(){
+
     }
 
     // used to ask the name cannot be null
