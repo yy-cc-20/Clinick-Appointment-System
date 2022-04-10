@@ -2,7 +2,10 @@ package boundary;
 
 import java.sql.SQLException;
 
-import entity.*;
+import entity.DataList;
+import entity.DatabaseConnection;
+import entity.IDataStore;
+import entity.User;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {

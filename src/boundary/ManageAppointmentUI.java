@@ -2,9 +2,10 @@ package src.boundary;
 
 import java.util.List;
 
-import src.controller.ManageAppointmentController;
-import src.entity.Appointment;
-import src.boundary.MakeAppointmentUI;
+import boundary.KeyboardInput;
+import controller.ManageAppointmentController;
+import entity.Appointment;
+import boundary.MakeAppointmentUI;
 
 public class ManageAppointmentUI {
 

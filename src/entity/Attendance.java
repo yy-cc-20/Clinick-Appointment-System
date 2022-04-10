@@ -11,7 +11,8 @@ public enum Attendance {
 		this.attendance = attendance;
 	}
 
-	public String getAttendance() {
+	// get the attendance in String
+	public String toString() {
 		return attendance;
 	}
 }
