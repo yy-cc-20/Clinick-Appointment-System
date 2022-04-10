@@ -1,7 +1,6 @@
 package boundary;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import entity.*;
@@ -14,7 +13,7 @@ import controller.MakeAppointmentController;
 
 public class MakeAppointmentUI {
 
-    private final MakeAppointmentController controller = new MakeAppointmentController();
+    private static final MakeAppointmentController controller = new MakeAppointmentController();
     private Appointment appointmentToBook;
 
     // view the appointments
@@ -73,7 +72,10 @@ public class MakeAppointmentUI {
         viewSlots(service);
         boolean slotAvailable = false;
         int startSlot;
-
+        // todo
+        // service id, branch id,
+        // assign doctor
+        // allocation id where service id, branch id, and doctor id are the same
         while (!slotAvailable) {
             Slot.displaySlots();
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
@@ -115,8 +117,9 @@ public class MakeAppointmentUI {
 //        }
     }
 
-    public void displayServices() {
+    public static void displayServices() {
         List<Allocation> allocations = controller.getAllAllocations();
+        // todo filter allocations
         Allocation allocation;
 
         System.out.println("Available services:");
@@ -131,5 +134,4 @@ public class MakeAppointmentUI {
                     + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
         }
     }
-
 }

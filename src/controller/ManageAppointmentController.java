@@ -10,6 +10,6 @@ public class ManageAppointmentController {
         return new ArrayList<>();
     }
 
-    public void cancelAppointment(List<Appointment> selectedAppointment) {
+    public void cancelAppointment(Appointment selectedAppointment) {
     }
 }
