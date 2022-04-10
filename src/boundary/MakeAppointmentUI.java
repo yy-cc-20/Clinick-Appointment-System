@@ -29,7 +29,6 @@ public class MakeAppointmentUI {
             for (Appointment theAppointment : theAppointments) {
                 displayAppointment(theAppointment);
             }
-
         }
     }
 
