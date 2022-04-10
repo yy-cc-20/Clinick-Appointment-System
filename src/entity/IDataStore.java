@@ -7,7 +7,16 @@ public interface IDataStore {
 	void importDoctorList();
 	void importPatientList();
 	void importReceptionistList();
+	void importAppointmentList();
+	void importAllocationList();
+	void importBranchList();
+	void importServiceList();
 	List<Doctor> getDoctorList();
 	List<Patient> getPatientList();
 	List<Receptionist> getReceptionistList();
+	List<Appointment> getAppointmentList();
+	List<Allocation> getAllocationList();
+	List<Branch> getBranchList();
+	List<Service> getServiceList();
+
 }

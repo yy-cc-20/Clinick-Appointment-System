@@ -1,5 +1,6 @@
 package boundary;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import entity.*;
@@ -28,7 +29,6 @@ public class MakeAppointmentUI {
             for (Appointment theAppointment : theAppointments) {
                 displayAppointment(theAppointment);
             }
-
         }
     }
 
@@ -100,7 +100,7 @@ public class MakeAppointmentUI {
     public void viewSlots(Service service) {
         displayServices();
         int choice = KeyboardInput.askPositiveInt("a service (1-15)");
-        String date = KeyboardInput.askString("a date (DD/MM/YYYY)");
+        LocalDate date = KeyboardInput.askDate("a date (DD/MM/YYYY)");
         controller.getAvailableTimeSlots(choice, date);
 
         System.out.println("Available time slots for service " + service.getServiceName());

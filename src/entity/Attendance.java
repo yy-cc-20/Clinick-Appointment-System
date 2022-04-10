@@ -1,6 +1,6 @@
 package entity;
 
-import boundary.ConsoleUI;
+import boundary.KeyboardInput;
 
 public enum Attendance {
   	ATTENDED("Attended"),
@@ -27,7 +27,7 @@ public enum Attendance {
 
 	public static Attendance askAttendance(){
 		displayAttendanceChoice();
-		int choice = ConsoleUI.askChoice(1, 3);
+		int choice = KeyboardInput.askChoice(1, 3, "Select attendance");
 
 		return switch (choice) {
 			case 1 -> ATTENDED;

@@ -18,7 +18,9 @@ public class ManageAppointmentUI {
         if (selectedAppointment.size() == 0) {
             System.out.println("No such appointment found.");
         } else {
-            MakeAppointmentUI.displayAppointment(selectedAppointment);
+            for (Appointment theAppointment : selectedAppointment) {
+                MakeAppointmentUI.displayAppointment(theAppointment);
+            }
         }
     }
 
@@ -27,15 +29,17 @@ public class ManageAppointmentUI {
         // call viewSlots?
         // MakeAppointmentUI.viewSlots();
 
-        if(KeyboardInput.askBoolean("Update appointment")){
+        if (KeyboardInput.askBoolean("Update appointment")) {
+            // todo
             System.out.println("Appointment updated.");
         }
     }
 
     public void cancelAppointment() {
         searchAppointmentToModify();
-        if(KeyboardInput.askBoolean("Cancel appointment")){
+        if (KeyboardInput.askBoolean("Cancel appointment")) {
             controller.cancelAppointment(selectedAppointment);
+            // todo
             System.err.println("Appointment cancelled.");
         }
     }
@@ -45,6 +49,8 @@ public class ManageAppointmentUI {
         // KeyboardInput.askAttendance;
         Attendance attendance = Attendance.askAttendance();
         selectedAppointment.get(0).setAttendance(attendance);
-        MakeAppointmentUI.displayAppointment(selectedAppointment);
+        for (Appointment theAppointment : selectedAppointment) {
+            MakeAppointmentUI.displayAppointment(theAppointment);
+        }
     }
 }
