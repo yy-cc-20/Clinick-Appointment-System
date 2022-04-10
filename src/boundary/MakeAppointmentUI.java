@@ -11,7 +11,7 @@ import entity.TimeSlot;
 
 public class MakeAppointmentUI {
 
-    private MakeAppointmentController controller = new MakeAppointmentController();
+    private final MakeAppointmentController controller = new MakeAppointmentController();
 
     public void viewAppointment() {
         displayAppointment(controller.getAllAppointments());
@@ -26,7 +26,7 @@ public class MakeAppointmentUI {
                     "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t| Patient \t| Doctor ID \t| Doctor \t| Attendance");
             for (int i = 0; i < theAppointments.size(); i++) {
                 anAppointment = theAppointments.get(i);
-                System.out.println(anAppointment.getId() + " \t| " + anAppointment.getDate() + " \t| "
+                System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getDate() + " \t| "
                         + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                         + anAppointment.getAllocation().getService().getName() + " \t| "
                         + anAppointment.getAllocation().getBranch().getName() + " \t| "
