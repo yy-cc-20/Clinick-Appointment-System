@@ -1,5 +1,6 @@
 package controller;
 
+import entity.Allocation;
 import entity.Appointment;
 import entity.Service;
 
@@ -22,5 +23,8 @@ public class MakeAppointmentController {
     }
 
     public void addAppointment(Appointment appointmentToBook) {
+    }
+
+    public List<Allocation> getAllAllocations() {
     }
 }

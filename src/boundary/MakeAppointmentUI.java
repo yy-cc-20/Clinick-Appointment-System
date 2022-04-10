@@ -1,13 +1,9 @@
 package boundary;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import entity.Service;
-import entity.Patient;
+import entity.*;
 import controller.MakeAppointmentController;
-import entity.Appointment;
-import entity.TimeSlot;
 
 // view appointment
 // search appointment
@@ -17,6 +13,7 @@ import entity.TimeSlot;
 public class MakeAppointmentUI {
 
     private final MakeAppointmentController controller = new MakeAppointmentController();
+    private Appointment appointmentToBook;
 
     public void viewAppointment() {
         List<Appointment> theAppointments = controller.getAllAppointments();
@@ -82,7 +79,7 @@ public class MakeAppointmentUI {
 
             if (slotAvailable) {
                 System.out.println("Slot " + startSlot + "-" + (startSlot + service.getTimeSlotRequired()) + " selected.");
-                Appointment appointmentToBook = new Appointment(appointmentId, appointmentDate, patientId, allocationId,
+                appointmentToBook = new Appointment(appointmentId, appointmentDate, patientId, allocationId,
                         attendance, timeSlot);
                 displayAppointment(appointmentToBook);
                 if (KeyboardInput.askBoolean("Book appointment")) {
@@ -116,19 +113,19 @@ public class MakeAppointmentUI {
     }
 
     public void displayServices() {
-        List<Service> theServices = controller.getAllServices();
-        Service aService;
+        List<Allocation> allocations = controller.getAllAllocations();
+        Allocation allocation;
 
         System.out.println("Available services:");
         System.out.println();
         System.out.println(
                 "No \t| Service \t| Service ID \t| Branch Address \t| Telephone No \t| Description \t| Price \t| Required Time Slot");
-        for (int i = 0; i < theServices.size(); i++) {
-            aService = theServices.get(i);
-            System.out.println(i + " \t| " + aService.getServiceName() + " \t| " + aService.getServiceId() + " \t| "
-                    + aService.getAllocation().getBranch().getAddress() + " \t| "
-                    + aService.getAllocation().getBranch().getTelNo() + " \t| "
-                    + aService.getDescription() + aService.getPrice() + aService.getTimeSlotRequired());
+        for (int i = 0; i < allocations.size(); i++) {
+            allocation = allocations.get(i);
+            System.out.println((i+1) + " \t| " + allocation.getService().getServiceName() + " \t| " + allocation.getService().getServiceId() + " \t| "
+                    + allocation.getBranch().getBranchAddress() + " \t| "
+                    + allocation.getBranch().getTelNo() + " \t| "
+                    + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
         }
     }
 
