@@ -4,6 +4,12 @@ import entity.User;
 import boundary.*;
 import controller.ManageAccountController;
 
+/*
+ * How to use this class:
+ * new ManageAccountUI(systemUser).changePassword(); // Just 1 line
+ * the new password will be updated to the database
+ */
+
 public class ManageAccountUI {
     private ManageAccountController controller;
     private User currentUser;

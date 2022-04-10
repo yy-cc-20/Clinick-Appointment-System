@@ -59,10 +59,9 @@ public class ClinickAppointmentSystem {
 
 			switch (choiceNo) {
 			case 1:
-				// Just to test the method, you may change the sequence of the code
+				// Just to test the method, you may change the position of the code
 				ConsoleUI.displayFunctionName("Account Setting");
 				new ManageAccountUI(systemUser).changePassword();
-
 				break;
 
 			case 2: // Modify Account Info

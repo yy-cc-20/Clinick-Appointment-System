@@ -8,11 +8,20 @@ import controller.LoginController;
 import entity.*;
 import boundary.KeyboardInput;
 
+/*
+ * How to use this class:
+ * 
+ * User systemUser = new LoginUI().login(); 
+ * 
+ * Suspend the user to login for 10 seconds after 3 failed login attempts
+ * From the return user object can know the username, id, password and user type
+ */
+
 public class LoginUI {
 	private final LoginController loginController = new LoginController();
 	
 	// Use this method for login
-	// lock account and exit program if fail too many times
+	// Lock account and exit program if fail too many times
 	public User login() {
 		int role;
 		int userid;
@@ -47,14 +56,14 @@ public class LoginUI {
 					loginController.resetFailedLoginAttempts();
 				}
 			}
-		} // end while
+		} // End while
 	}
 	
-	// TODO a bug: if the user restart the program, the lockTimeEnded is loss, the account will not be locked
+	// TODO a bug: If the user restart the program, the lockTimeEnded is loss, the account will not be locked
 	private void lockAccount() {
 		LocalDateTime lockTimeEnded = LocalDateTime.now().plusSeconds(LoginController.LOCK_TIME_LENGTH); // Untill when the account will be unlocked
 		
-		Toolkit.getDefaultToolkit().beep(); // emit a beep sound
+		Toolkit.getDefaultToolkit().beep(); // Emit a beep sound
 		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s)."); // cannot act as a String data member, as the time interval is changing
 		
 		// If user keep pressing the keyboard while being suspended from login

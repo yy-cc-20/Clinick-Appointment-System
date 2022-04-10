@@ -29,8 +29,8 @@ public class SetUpDatabase {
 		
 		// Good practice for autocommit statement
 		conn.setAutoCommit(false); // So that multiple SQL statements can all run inside the same transaction
-		st.addBatch("INSERT INTO doctor (username, password) VALUES ('username', 'password');");
-		st.addBatch("INSERT INTO doctor (username, password) VALUES ('testing', 'password');");
+		st.addBatch("INSERT IGNORE INTO doctor (username, password) VALUES ('username', 'password');"); // "IGNORE" == insert into if not exists
+		st.addBatch("INSERT IGNORE INTO doctor (username, password) VALUES ('testing', 'password');");
 		st.executeBatch();
 		// Should anything go wrong with any of the insert statements, the whole transaction
 		// would be rolled back, so will not have inconsistent data in the database
