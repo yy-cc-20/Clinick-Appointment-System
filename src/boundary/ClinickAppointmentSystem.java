@@ -1,5 +1,8 @@
 /**
- * @project Clinik Appointment System
+ * @subject UECS2344 SOFTWARE DESIGN 
+ * @trimester January 2022
+ * 
+ * @system Clinik Appointment System
  * @date 15.04.2022
  * 
  * @author Ling Sun Shuai 2004562 P2 
@@ -10,7 +13,7 @@
  * 
  * @database JDBC MySQL, driver class version: 8.0.28
  * 
- * @description Digitize the process of making an appointment.
+ * @description A console program aims to digitize the process of making an appointment.
  * 
  */
 
