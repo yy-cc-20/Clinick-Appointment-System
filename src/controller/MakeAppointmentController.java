@@ -17,4 +17,7 @@ public class MakeAppointmentController {
 
     public List<Service> getAllServices() {
     }
+
+    public void getAvailableTimeSlots(int choice, String date) {
+    }
 }

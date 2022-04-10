@@ -84,7 +84,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void viewSlots() {
+    public void viewSlots() {
         displayServices();
         int choice = KeyboardInput.askPositiveInt("a service (1-15)");
         String date = KeyboardInput.askString("a date (DD/MM/YYYY)");

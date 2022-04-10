@@ -2,14 +2,12 @@ package boundary;
 
 import java.util.List;
 
-import boundary.KeyboardInput;
 import controller.ManageAppointmentController;
 import entity.Appointment;
-import boundary.MakeAppointmentUI;
 
 public class ManageAppointmentUI {
 
-    private ManageAppointmentController controller = new ManageAppointmentController();
+    private final ManageAppointmentController controller = new ManageAppointmentController();
     private List<Appointment> selectedAppointment;
 
     public void searchAppointmentToModify() {
@@ -18,7 +16,6 @@ public class ManageAppointmentUI {
 
         if (selectedAppointment.size() == 0) {
             System.out.println("No such appointment found.");
-            return;
         } else {
             MakeAppointmentUI.displayAppointment(selectedAppointment);
         }
