@@ -1,11 +1,55 @@
 package boundary;
 
+import entity.User;
 
 // display message on the screen
 
 public class ConsoleUI { // UI: user interface
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
+
+    // instantiating the user interfaces
+    MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
+    ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
+    ManagePatientUI managePatientInterface = new ManagePatientUI();
+    ManageAccountUI manageAccountInterface;
+
+    // start the user interface
+    public void start() {
+        displaySystemName("Clinic Booking System");
+        User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login
+                                                 // attempts
+        // From systemUser can know the username, id, password, user type
+
+        clearScreen();
+
+        int choiceNo; // the action that user wants to perform
+        final int beginChoiceNo = 1;
+        final int endChoiceNo = 3;
+
+        while (true) {
+            displaySystemName("System Name");
+            // ConsoleUI.displayMenu(); // need to change the menu
+            choiceNo = KeyboardInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
+
+            switch (choiceNo) {
+                case 1 -> {
+                    // Just to test the method, you may change the position of the code
+                    displayFunctionName("Account Setting");
+                    manageAccountInterface = new ManageAccountUI(systemUser);
+                    manageAccountInterface.changePassword();
+                }
+                case 2 -> // Modify Account Info
+                    displayFunctionName(" Modify Account Details ");
+                case 3 -> { // logout and exit the program
+                    displayFunctionName(" Program Stopped ");
+                    SingletonScanner.scanner.close();
+                    System.exit(0);
+                }
+            }
+            ConsoleUI.clearScreen();
+        }
+    }
 
     // clear screen
     public static void clearScreen() {
@@ -58,6 +102,7 @@ public class ConsoleUI { // UI: user interface
     }
 
     // display the menus for each unique user in this program
+
     public static void displayMenuForReceptionist() {
         System.out.println("         Menu             ");
         System.out.println(" 1. View Appointment      ");
@@ -95,4 +140,5 @@ public class ConsoleUI { // UI: user interface
         System.out.println(" 4. View Slots            ");
         System.out.println(" 0. Exit Application      ");
     }
+
 }
