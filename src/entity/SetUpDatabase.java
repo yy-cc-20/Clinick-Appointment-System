@@ -42,4 +42,38 @@ public class SetUpDatabase {
 		conn.commit();           
 		conn.setAutoCommit(true); // Set back to default, so other part of the code will not be affected
 	}
+	
+	public void setUpDatabase() throws SQLException {
+		try {
+			st = conn.createStatement();
+			st.executeUpdate("CREATE TABLE Service (serviceId VARCHAR(25), serviceName VARCHAR(25), price double, description VARCHAR(250), timeSlotRequired int, PRIMARY KEY (serviceId))");
+			//st.executeUpdate("CREATE TABLE Branch (branchId VARCHAR(25), branchName VARCHAR(25), branchAddress VARCHAR(250), receptionistId VARCHAR(25), telNo VARCHAR(25), PRIMARY KEY (branchId), FOREIGN KEY (receptionistId) REFERENCES Receptionist(id))");
+
+			st.executeUpdate("INSERT INTO Service VALUES ('S0001', 'Heart Screening', 1799, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Echocardiogram, Stress Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis', 3");
+			//st.executeUpdate("INSERT INTO Branch VALUES ()");
+			//st.executeUpdate("INSERT INTO Branch VALUES ()");
+			st.executeUpdate("UPDATE Appointment SET attendance = 'Attended' WHERE id = 1111");
+			st.executeUpdate("DELETE FROM Appointment WHERE id = 1111");
+			PreparedStatement pst = conn.prepareStatement("INSERT INTO Appointment (id, date, service) VALUES (?, ?, ?)");
+			pst.setInt(1, 50);
+			pst.setString(2, "date");
+			pst.setString(2, "service");
+			pst.executeUpdate(); // no args
+
+			
+			
+			ResultSet serviceResult = st.executeQuery("SELECT * FROM Service");
+			ResultSet branchResult = st.executeQuery("SELECT * FROM Branch");
+			
+			while(serviceResult.next()) {
+				String data = "";
+				for(int i = 1; i < 6; i++) {
+					data += serviceResult.getString(i) + " ";
+				}
+				System.out.println(data);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -11,9 +11,9 @@ public class ViewSlotsUI {
 	
 	public static void viewService() {
 		
-		+----+---------+--------+---------+-------+-------------+
-		| No | Service | Branch | Tel. No | Price | Description |
-		+----+---------+--------+---------+-------+-------------+
+		+----+---------+-------+-------------+
+		| No | Service | Price | Description |
+		+----+---------+-------+-------------+
 	}
 
 	public static void viewBranchFilteredByService(int serviceId) {
