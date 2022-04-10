@@ -57,7 +57,7 @@ public enum TimeSlot {
 		};
 	}
 
-	static void displayTimeSlot(){
+	public static void displayTimeSlot(){
 		System.out.printf("%nSelect time slot.%n%n");
 		System.out.println("1. 0800AM");
 		System.out.println("2. 0830AM");

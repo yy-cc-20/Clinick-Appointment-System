@@ -59,12 +59,14 @@ public class MakeAppointmentUI {
 
     public void makeAppointment() {
         Patient selectedPatient = ManagePatientUI.searchPatient();
+//        Service service = new Service();
         viewSlots();
         boolean slotAvailable = false;
         int startSlot;
 
         while (!slotAvailable) {
-            startSlot = KeyboardInput.askPositiveInt("starting time slot");
+            TimeSlot.displayTimeSlot();
+            startSlot = ConsoleUI.askEventNo(1, 14);
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {
