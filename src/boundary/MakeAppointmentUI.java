@@ -31,6 +31,7 @@ public class MakeAppointmentUI {
             for (int i = 0; i < theAppointments.size(); i++) {
                 anAppointment = theAppointments.get(i);
                 System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
+                        // todo: get the time
                         + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                         + anAppointment.getAllocation().getService().getServiceName() + " \t| "
                         + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "

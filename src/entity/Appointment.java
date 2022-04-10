@@ -54,6 +54,7 @@ public class Appointment {
         return timeSlots;
     }
 
+    // todo: find a way to retrieve the timeslot status
     private TimeSlot getTimeSlot(String timeSlot){
         return switch (timeSlot) {
             case "SLOT_1" -> TimeSlot.SLOT_1;
