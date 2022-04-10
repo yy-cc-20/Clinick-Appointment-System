@@ -6,7 +6,7 @@
  * 2. Load and register the driver
  * 		2.1 Download the driver class
  * 		Database | Driver class			 | Download 
- * 		MySQL    | com.mysql.jdbc.Driver | mysql-connector-java-6.0.6.jar (https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28)
+ * 		MySQL    | com.mysql.jdbc.Driver | mysql-connector-java-8.0.28.jar (https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28)
  * 		Access: not supported by JDK1.8 and latter
  * 		Oracle: need username and password to access to
  * 

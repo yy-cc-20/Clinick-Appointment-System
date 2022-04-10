@@ -1,3 +1,19 @@
+/**
+ * @project Clinik Appointment System
+ * @date 15.04.2022
+ * 
+ * @author Ling Sun Shuai 2004562 P2 
+ * @author Kong Suet Hua 2005756 P5
+ * @author Olivia Ong Yee Ming 2004564 P5
+ * @author Tan Jia Qi 1904022 P2
+ * @author Yang Chu Yan 2005912 P2
+ * 
+ * @database JDBC MySQL, driver class version: 8.0.28
+ * 
+ * @description Digitize the process of making an appointment.
+ * 
+ */
+
 package boundary;
 
 import java.sql.SQLException;
@@ -26,7 +42,7 @@ public class ClinickAppointmentSystem {
 		
 		ConsoleUI.displaySystemName("Clinic Booking System");
 		User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
-		// From systemUser, you can know the username, id, password, user type
+		// From systemUser can know the username, id, password, user type
 		
 		ConsoleUI.clearScreen();
 							
@@ -55,10 +71,7 @@ public class ClinickAppointmentSystem {
 				ConsoleUI.displayFunctionName(" Program Stopped ");
 
 				SingletonScanner.scanner.close();
-				DatabaseConnection.closeConnection();
-
-				SingletonScanner.scanner.close();
-
+				DatabaseConnection.closeConnection(); /** @throws SQLException */
 				System.exit(0);
 			}
 			ConsoleUI.clearScreen();
