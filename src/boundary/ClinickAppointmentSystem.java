@@ -22,7 +22,7 @@ public class ClinickAppointmentSystem {
 		// password: password
 		
 		ConsoleUI.displaySystemName("Clinic Booking System");
-		User systemUser = new LoginView().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
+		User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 		// From systemUser, you can know the username, id, password, user type
 		
 		ConsoleUI.clearScreen();
@@ -40,7 +40,7 @@ public class ClinickAppointmentSystem {
 			case 1:
 				// Just to test the method, you may change the sequence of the code
 				ConsoleUI.displayFunctionName("Account Setting");
-				new ManageAccountView().modifyAccount(systemUser);
+				new ManageAccountUI().modifyAccount(systemUser);
 
 				break;
 

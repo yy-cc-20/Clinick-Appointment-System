@@ -1,4 +1,4 @@
-package src.boundary;
+package boundary;
 
 import src.controller.ManagePatientController;
 import src.entity.Patient;
