@@ -1,7 +1,7 @@
 package boundary;
 
-import src.controller.ManagePatientController;
-import src.entity.Patient;
+import controller.ManagePatientController;
+import entity.Patient;
 
 public class ManagePatientUI {
 

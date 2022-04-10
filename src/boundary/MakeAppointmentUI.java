@@ -2,13 +2,12 @@ package boundary;
 
 import java.util.List;
 
-import src.entity.Service;
-import src.entity.Patient;
-import src.controller.MakeAppointmentController;
-import src.entity.Appointment;
-import src.entity.User;
-import src.boundary.ManagePatientUI;
-import src.entity.TimeSlot;
+import entity.Service;
+import entity.Patient;
+import controller.MakeAppointmentController;
+import entity.Appointment;
+import entity.User;
+import entity.TimeSlot;
 
 public class MakeAppointmentUI {
 

@@ -26,11 +26,12 @@ public enum TimeSlot {
 
 	private final String time;
 
-	private TimeSlot(String time) {
+	TimeSlot(String time) {
 		this.time = time;
 	}
 
-	public String getTime() {
+	// get the timeslot in String
+	public String toString() {
 		return time;
 	}
 	
