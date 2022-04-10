@@ -50,7 +50,7 @@ public class ClinickAppointmentSystem {
 		while (true) {
 			ConsoleUI.displaySystemName("System Name");
 			//ConsoleUI.displayMenu(); // need to change the menu
-			choiceNo = KeyboardInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
+			choiceNo = ConsoleInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
 
 			switch (choiceNo) {
 				case 1 -> {
