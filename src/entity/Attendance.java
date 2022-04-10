@@ -30,9 +30,9 @@ public enum Attendance {
 		int choice = ConsoleUI.askEventNo(1, 3);
 
 		return switch (choice) {
-			case 1 -> Attendance.ATTENDED;
-			case 2 -> Attendance.ABSENT;
-			default -> Attendance.NAN; // case 3
+			case 1 -> ATTENDED;
+			case 2 -> ABSENT;
+			default -> NAN; // case 3
 		};
 	}
 }
