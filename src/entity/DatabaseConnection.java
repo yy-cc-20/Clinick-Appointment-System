@@ -60,7 +60,7 @@ public class DatabaseConnection {
 		// TODO 1. Drop other table here
 		
 		// Create table
-		st.executeUpdate("CREATE TABLE `clinick-appointment-system`.`doctor` (`userid` INT NOT NULL AUTO_INCREMENT, " +
+		st.executeUpdate("CREATE TABLE IF NOT EXISTS `clinick-appointment-system`.`doctor` (`userid` INT NOT NULL AUTO_INCREMENT, " +
 				"`username` VARCHAR(45) NOT NULL, `password` VARCHAR(45) NOT NULL, PRIMARY KEY (`userid`));");
 		// TODO 2. Continue create other table
 		
