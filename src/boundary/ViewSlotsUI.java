@@ -1,87 +1,110 @@
 package boundary;
 
-import entity.TimeSlot;
+import java.time.LocalDate;
+import java.util.List;
+
+import entity.*;
 
 /*
- * Display available time slot filtered by service and branch
+ * Display available time slot filtered by service, branch and date.
  * Did not let the user select the desired time slot
+ * Provide information of the selected service, selected branch, selected date and available time slots.
  */
 
 public class ViewSlotsUI {
+	// TODO calculate the column width according to the length of the info in order to display the table more neatly
+	
+	// All information
+	List<Service> services;
+	List<Branch> branches;
+	List<Doctor> doctors;
+	List<Appointment> appointments;
+	List<Allocation> allocations;
+	
+	// Filter
+	int serviceId;
+	int branchId;
+	LocalDate date;
+	
+	// Result
+	int[] availableTimeSlots; 
+	// index: the time slot
+	// value: the seats available for that time
+	
+	public ViewSlotsUI() {
+		/*
+		 * ([X] to back to the previous page)
+			select service
+			select branch
+			select date
+		 */
+		viewService();
+		int serviceId = ConsoleInput.askChoice(1, services.size(), "Select a service");
+		
+		System.out.printf("%n>%s<%n", services.get(serviceId).getName());
+		viewBranchFilteredByService();
+		
+	}
+	
+	public int getSelectedServiceId() {
+		return serviceId;
+	}
+	
+	public int getSelectedBranchId() {
+		return branchId;
+	}
+	
+    public void viewSlots(Service service) {
+        displayServices();
+        int choice = ConsoleInput.askPositiveInt("a service (1-15)");
+        LocalDate date = ConsoleInput.askDate("a date (DD/MM/YYYY)");
+        controller.getAvailableTimeSlots(choice, date);
+
+        System.out.println("Available time slots for service " + service.getServiceName());
+        System.out.println();
+        // todo: check the timeslot status
+        System.out.println("Slot No \t| Start Time \t| Status");
+//        for (TimeSlot slot : TimeSlot.values()) {
+//            int i = slot.ordinal() + 1;
+//            System.out.println(i + " \t| " + slot + " \t| " + status);
+//        }
+    }
+
+    public void displayServices() {
+        List<Allocation> allocations = controller.getAllAllocations();
+        // todo filter allocations
+        Allocation allocation;
+
+        System.out.println("Available services:");
+        System.out.println();
+        System.out.println(
+                "No \t| Service \t| Service ID \t| Branch Address \t| Telephone No \t| Description \t| Price \t| Required Time Slot");
+        for (int i = 0; i < allocations.size(); i++) {
+            allocation = allocations.get(i);
+            System.out.println((i+1) + " \t| " + allocation.getService().getServiceName() + " \t| " + allocation.getService().getServiceId() + " \t| "
+                    + allocation.getBranch().getBranchAddress() + " \t| "
+                    + allocation.getBranch().getTelNo() + " \t| "
+                    + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
+        }
+    }
 
 	public static void viewService() {
-<<<<<<< HEAD
-		
+		ArrayList<Service> services
 		+----+---------+-------+-------------+
 		| No | Service | Price | Description |
 		+----+---------+-------+-------------+
-=======
 
-		+----+---------+--------+---------+-------+-------------+
-		| No | Service | Branch | Tel. No | Price | Description |
-		+----+---------+--------+---------+-------+-------------+
->>>>>>> 447d29ed249dae10152884653a5b8f1075bc28fd
 	}
 
-	public static void viewBranchFilteredByService(int serviceId) {
+	public static void viewBranchFilteredByService(int serviceId, ArrayList<Branch> branches, ArrayList<Allocation> allocations) {
 
 		> service name <
-		+----+---------+---------+---------+-------------+
-		| No | Branch  | Tel. No | Address | Description |
-		+----+---------+---------+---------+-------------+
+		+----+--------+---------+---------+-------------+
+		| No | Branch | Tel. No | Address | Description |
+		+----+--------+---------+---------+-------------+
 	}
-
-	public static void viewAvailableTimeSlot(int serviceId, int branchId) {
-
-	}
-	([X] to back to the previous page)
-	select service
-	select branch
-
-	public static int viewAvailableTimeSlot(int serviceId)
-
-
-	show available time slot
-
-	return timeslot
-
-
-	public static TimeSlot askTimeSlot(){
-		displayTimeSlot();
-		int choice = ConsoleInput.askChoice(1, 13, "Select time slot");
-
-		return switch (choice) {
-			case 1 -> SLOT_1;
-			case 2 -> SLOT_2;
-			case 3 -> SLOT_3;
-			case 4 -> SLOT_4;
-			case 5 -> SLOT_5;
-			case 6 -> SLOT_6;
-			case 7 -> SLOT_7;
-			case 8 -> SLOT_8;
-			case 9 -> SLOT_9;
-			case 10 -> SLOT_10;
-			case 11 -> SLOT_11;
-			case 12 -> SLOT_12;
-			case 13 -> SLOT_13;
-			default -> SLOT_14; // case 14
-		};
-	}
-
-	public static void displayTimeSlot(){
-		System.out.println(" 1. 0800 AM");
-		System.out.println(" 2. 0830 AM");
-		System.out.println(" 3. 0900 AM");
-		System.out.println(" 4. 0930 AM");
-		System.out.println(" 5. 1000 AM");
-		System.out.println(" 6. 1030 AM");
-		System.out.println(" 7. 1100 AM");
-		System.out.println(" 8. 1130 AM");
-		System.out.println(" 9. 0200 PM");
-		System.out.println("10. 0230 PM");
-		System.out.println("11. 0300 PM");
-		System.out.println("12. 0330 PM");
-		System.out.println("13. 0400 PM");
-		System.out.println("14. 0430 PM");
-	}
+	
+	public static void viewTimeSlotFilteredByServiceBranchDate(int serviceId, int branchId, LocalDate date, ArrayList<Appointment> appointments) {
+		availableTimeSlots = new int[14];
+	}*/
 }

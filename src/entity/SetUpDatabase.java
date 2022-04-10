@@ -9,6 +9,7 @@ import java.sql.*;
 
 public class SetUpDatabase {
 	private static Statement st;
+	private 
 	
 	public static void setUpDatabaseIfNotExist() throws SQLException {
 		st = DatabaseConnection.getConnection().createStatement();
@@ -45,7 +46,6 @@ public class SetUpDatabase {
 	
 	public void setUpDatabase() throws SQLException {
 		try {
-			st = conn.createStatement();
 			st.executeUpdate("CREATE TABLE Service (serviceId VARCHAR(25), serviceName VARCHAR(25), price double, description VARCHAR(250), timeSlotRequired int, PRIMARY KEY (serviceId))");
 			//st.executeUpdate("CREATE TABLE Branch (branchId VARCHAR(25), branchName VARCHAR(25), branchAddress VARCHAR(250), receptionistId VARCHAR(25), telNo VARCHAR(25), PRIMARY KEY (branchId), FOREIGN KEY (receptionistId) REFERENCES Receptionist(id))");
 
