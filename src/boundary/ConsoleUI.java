@@ -54,7 +54,7 @@ public class ConsoleUI { // UI: user interface
         for (int i = 0; i < field / 2; ++i) {
             System.out.print('-');
         }
-        System.out.printf("%n%n");
+        System.out.printf("%n");
     }
 
     // display the menus for each unique user in this program
@@ -94,73 +94,5 @@ public class ConsoleUI { // UI: user interface
         System.out.println(" 3. Manage Account        ");
         System.out.println(" 4. View Slots            ");
         System.out.println(" 0. Exit Application      ");
-    }
-
-    // let user chose which eventNo he/she wants to perform
-    // assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
-    public static int askChoice(int beginChoiceNo, int endChoiceNo, String info) throws IllegalArgumentException {
-        if (beginChoiceNo > endChoiceNo) {
-            throw new IllegalArgumentException();
-        }
-
-        int eventNo;
-        final String errorMessage = "Sorry, input failed. Please enter the number of choice you want.%n";
-
-        while (true) {
-            try {
-                System.out.printf("%n> %s ", info);
-                eventNo = Integer.parseInt(SingletonScanner.scanner.nextLine());
-
-                if (eventNo >= beginChoiceNo && eventNo <= endChoiceNo) {
-                    break;
-                } else {
-                    System.out.print(errorMessage);
-                }
-            } catch (NumberFormatException e) {
-                System.out.print(errorMessage);
-                // 1. Apologise, the application should accept the responsibility for the problem
-                // 2. What happened (what went wrong / the problem, why / the cause)
-                // 3. How to fix it (where to find the bug / the solution)
-            }
-        }
-        return eventNo;
-    }
-
-    // let user chose which eventNo he/she wants to perform
-    // return the valid input
-    // assumption: the menu will be listed in sentence
-    // 				index is alphabet
-    // 				each alphabet between the range has an eventNo
-    public static char askChoice2(char beginEventNo, char endEventNo) throws IllegalArgumentException {
-        char eventNo = '?';
-        String input = "";
-        boolean isChar = false;
-        boolean isInRange = eventNo >= beginEventNo && eventNo <= endEventNo; // to form readable code
-
-        if (beginEventNo > endEventNo) {
-            throw new IllegalArgumentException();
-        }
-
-        do {
-            try {
-                isChar = false;
-                System.out.printf("%n> ");
-                input = SingletonScanner.scanner.nextLine();
-                if (input.length() == 1 && Character.isLetter(input.charAt(0))) {
-                    eventNo = input.charAt(0);
-                    isChar = true;
-                }
-                isInRange = eventNo >= beginEventNo && eventNo <= endEventNo; // write after the value is known
-                if (!isInRange) {
-                    System.out.println("Sorry, input failed. Please enter the letter of the corresponding action you want to perform.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Sorry, input failed. Please enter the letter of the corresponding action you want to perform.");
-                // 1. Apologize, the application should accept the responsibility for the problem
-                // 2. What happened (what went wrong / the problem, why / the cause)
-                // 3. How to fix it (where to find the bug / the solution)
-            }
-        } while (!isChar || !isInRange);
-        return eventNo;
     }
 }

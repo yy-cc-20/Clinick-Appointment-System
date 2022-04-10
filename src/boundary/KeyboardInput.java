@@ -1,13 +1,81 @@
 package boundary;
 
-// scanner with error handling and conditions
+// ask console input with error handling and restriction
 // to ask for attribute of a specific data type
-// @param is the text that will be shown in the user interface
+// @param info is the text that will be shown in the user interface
 
 public class KeyboardInput {
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
 
+    // let user chose which eventNo he/she wants to perform
+    // assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
+    public static int askChoice(int beginChoiceNo, int endChoiceNo, String info) throws IllegalArgumentException {
+        if (beginChoiceNo > endChoiceNo) {
+            throw new IllegalArgumentException();
+        }
+
+        int eventNo;
+        final String errorMessage = "Sorry, input failed. Please enter the number of choice you want.%n";
+
+        while (true) {
+            try {
+                System.out.printf("%n> %s ", info);
+                eventNo = Integer.parseInt(SingletonScanner.scanner.nextLine());
+
+                if (eventNo >= beginChoiceNo && eventNo <= endChoiceNo) {
+                    break;
+                } else {
+                    System.out.print(errorMessage);
+                }
+            } catch (NumberFormatException e) {
+                System.out.print(errorMessage);
+                // 1. Apologise, the application should accept the responsibility for the problem
+                // 2. What happened (what went wrong / the problem, why / the cause)
+                // 3. How to fix it (where to find the bug / the solution)
+            }
+        }
+        return eventNo;
+    }
+
+    // let user chose which eventNo he/she wants to perform
+    // return the valid input
+    // assumption: the menu will be listed in sentence
+    // 				index is alphabet
+    // 				each alphabet between the range has an eventNo
+    public static char askChoice2(char beginEventNo, char endEventNo) throws IllegalArgumentException {
+        char eventNo = '?';
+        String input = "";
+        boolean isChar = false;
+        boolean isInRange = eventNo >= beginEventNo && eventNo <= endEventNo; // to form readable code
+
+        if (beginEventNo > endEventNo) {
+            throw new IllegalArgumentException();
+        }
+
+        do {
+            try {
+                isChar = false;
+                System.out.printf("%n> ");
+                input = SingletonScanner.scanner.nextLine();
+                if (input.length() == 1 && Character.isLetter(input.charAt(0))) {
+                    eventNo = input.charAt(0);
+                    isChar = true;
+                }
+                isInRange = eventNo >= beginEventNo && eventNo <= endEventNo; // write after the value is known
+                if (!isInRange) {
+                    System.out.println("Sorry, input failed. Please enter the letter of the corresponding action you want to perform.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Sorry, input failed. Please enter the letter of the corresponding action you want to perform.");
+                // 1. Apologize, the application should accept the responsibility for the problem
+                // 2. What happened (what went wrong / the problem, why / the cause)
+                // 3. How to fix it (where to find the bug / the solution)
+            }
+        } while (!isChar || !isInRange);
+        return eventNo;
+    }
+    
     // @return 0 or positive int
     public static int askPositiveInt(String info) {
         int input;
