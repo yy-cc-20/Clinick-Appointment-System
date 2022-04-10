@@ -1,59 +1,17 @@
 package boundary;
 
-import entity.User;
-
 // display message on the screen
 
 public class ConsoleUI { // UI: user interface
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
-
-    // instantiating the user interfaces
-    MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
-    ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
-    ManagePatientUI managePatientInterface = new ManagePatientUI();
-
-    // start the user interface
-    public void start() {
-        displaySystemName("Clinic Booking System");
-        User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login
-                                                 // attempts
-        // From systemUser can know the username, id, password, user type
-
-        clearScreen();
-
-        int choiceNo; // the action that user wants to perform
-        final int beginChoiceNo = 1;
-        final int endChoiceNo = 3;
-
-        while (true) {
-            displaySystemName("System Name");
-            // ConsoleUI.displayMenu(); // need to change the menu
-            choiceNo = KeyboardInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
-
-            switch (choiceNo) {
-                case 1 -> {
-                    displayFunctionName("Account Setting");
-                    new ManageAccountUI(systemUser).changePassword();
-                }
-                case 2 -> // Modify Account Info
-                    displayFunctionName(" Modify Account Details ");
-                case 3 -> { // logout and exit the program
-                    displayFunctionName(" Program Stopped ");
-                    SingletonScanner.scanner.close();
-                    System.exit(0);
-                }
-            }
-            ConsoleUI.clearScreen();
-        }
-    }
+    private static int screenHeight = 22; // the number of lines
 
     // clear screen
     public static void clearScreen() {
         System.out.printf("%n[Enter] to continue...");
         SingletonScanner.scanner.nextLine(); // pause, wait for user to continue
-        // the number of lines
-        int screenHeight = 22;
+ 
         for (int i = 0; i < screenHeight; ++i) {
             System.out.println();
         }
