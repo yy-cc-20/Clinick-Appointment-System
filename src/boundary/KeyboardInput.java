@@ -4,6 +4,10 @@ package boundary;
 // to ask for attribute of a specific data type
 // @param info is the text that will be shown in the user interface
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class KeyboardInput {
     private static final String stringError = "Sorry, cannot contain \";\".";
     private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
@@ -180,6 +184,22 @@ public class KeyboardInput {
             }
         }
         return input;
+    }
+
+    // enter "-" to set the date as null
+    // ask user the date, set the valid date
+    public static LocalDate askDate(String dateName) {
+        String stringDate;
+        while (true) {
+            System.out.print("\nEnter " + dateName + " in \"dd/mm/yyyy\" format: ");
+            // the "%n" in dateName will not take effect if you use %s
+            try {
+                stringDate = SingletonScanner.scanner.nextLine();
+                return LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException e) {
+                System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
+            }
+        }
     }
 
     // @return true if answer "yes"
