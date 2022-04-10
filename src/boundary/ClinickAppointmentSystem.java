@@ -26,9 +26,6 @@ import entity.*;
 
 public class ClinickAppointmentSystem {
 	public static void main(String[] args) throws SQLException {
-		// Retrieve data from database
-		IDataStore dataList = DataList.getInstance(); // Already retrieved the data
-
 		// the test data is created in DataList
 		// role: doctor
 		// userid: 1
@@ -37,8 +34,8 @@ public class ClinickAppointmentSystem {
 
 		// instantiating the user interfaces
    		MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
-    		ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
-    		ManagePatientUI managePatientInterface = new ManagePatientUI();
+		ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
+		ManagePatientUI managePatientInterface = new ManagePatientUI();
 
 		ConsoleUI.displaySystemName("Clinic Booking System");
 		User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
