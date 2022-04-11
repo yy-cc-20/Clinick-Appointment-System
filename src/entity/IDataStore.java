@@ -20,4 +20,5 @@ public interface IDataStore {
 	List<Allocation> getAllocationList();
 	List<Branch> getBranchList();
 	List<Service> getServiceList();
+	List<Branch> getBranchesById(List<Integer> ids); // Return branch objects of the specified ids
 }

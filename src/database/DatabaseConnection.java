@@ -46,7 +46,7 @@ package database;
 import java.sql.*;
 
 public class DatabaseConnection {
-	private static Connection conn;
+	private static Connection conn; // Singleton
 	
 	/** @setup 5. Change the value of these variable to connect to your database */
 	private static int portNo = 3308;

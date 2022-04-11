@@ -34,7 +34,7 @@ public class ViewSlotsController {
 		return instance;
 	}
 	
-	/** @return branches that provide a particular service */
+	/** @return branches that provide a particular service */ 
 	public List<Branch> getBranchFilteredByService(int serviceId) {
 		List<Integer> branchIds;
 		List<Branch> branchResults;
@@ -46,7 +46,7 @@ public class ViewSlotsController {
 			e.printStackTrace();
 		}
 		branchIds = resultSetToIntArr(rs);
-		branchResults = getBranchesById(branchIds);
+		branchResults = DataList.getInstance().getBranchesById(branchIds);
 		return branchResults;
 	}
 	
@@ -124,14 +124,7 @@ public class ViewSlotsController {
 				availableDoctorsId.get(startSlotOrdinal + i).remove(Integer.valueOf(unavailableDoctorId));
 		}
 	}
-	
-	// Return branch objects of the specified ids
-	public List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
-		List<Branch> branches = new ArrayList<>();
-		
-		return branches;
-	}
-	
+
 	// Retrieve the integer from the ResultSet and return List<Integer>
 	public List<Integer> resultSetToIntArr(ResultSet rs) {
 		List<Integer> ints = new ArrayList<>();

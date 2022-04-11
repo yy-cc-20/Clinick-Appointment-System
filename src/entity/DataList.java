@@ -37,7 +37,28 @@ public class DataList implements IDataStore {
         return instance;
     }
 
-    public List<Doctor> getDoctorList() { // TODO retrieve from database
+	// Return branch objects of the specified ids
+	public List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
+		List<Branch> branches = new ArrayList<>();
+		
+		return branches;
+	}
+	
+    public List<Service> getServiceList() { // TODO called by ViewSlotsUI
+        if (serviceList == null)
+            return new ArrayList<Service>();
+        else
+            return serviceList;
+    }
+
+    public List<Branch> getBranchList() { 
+        if (branchList == null)
+            return new ArrayList<Branch>();
+        else
+            return branchList;
+    }
+
+    public List<Doctor> getDoctorList() {
         // Test data for login
         doctorList = new ArrayList<>();
         doctorList.add(new Doctor(1, "username", "password"));
@@ -48,25 +69,11 @@ public class DataList implements IDataStore {
         return doctorList;
     }
 
-    public List<Service> getServiceList() { // TODO retrieve from database
-        if (serviceList == null)
-            return new ArrayList<Service>();
-        else
-            return serviceList;
-    }
-
-    public List<Allocation> getAllocationList() {  // TODO retrieve from database
+    public List<Allocation> getAllocationList() {
         if (allocationList == null)
             return new ArrayList<Allocation>();
         else
             return allocationList;
-    }
-
-    public List<Branch> getBranchList() { // TODO retrieve from database
-        if (branchList == null)
-            return new ArrayList<Branch>();
-        else
-            return branchList;
     }
 
     public List<Patient> getPatientList() {

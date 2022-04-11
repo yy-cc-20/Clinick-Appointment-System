@@ -23,7 +23,6 @@ public class SetUpDatabase {
 					"DROP TABLE IF EXISTS Account",
 					"DROP TABLE IF EXISTS Service",
 					"DROP TABLE IF EXISTS Timeslot",
-	
 			};
 			for (int i = 0; i < recreateTables.length; i++) {
 				st.executeUpdate(recreateTables[i]);
