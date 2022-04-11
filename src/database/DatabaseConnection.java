@@ -25,12 +25,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 
 public class DatabaseConnection {
 
 	private static Connection conn;
-	private static Statement st;
 	private static String url = "jdbc:mysql://localhost:3308/clinick-appointment-system";
 	private static String username = "root";
 	private static String password = "root";
