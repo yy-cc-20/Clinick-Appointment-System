@@ -7,7 +7,7 @@ import java.util.List;
 public class SetUpDatabase {
 
 	private static Statement st;
-
+	
 	public static void setUpDatabaseIfNotExist() throws SQLException {
 		st = DatabaseConnection.getConnection().createStatement();
 

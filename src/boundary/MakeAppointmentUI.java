@@ -73,7 +73,7 @@ public class MakeAppointmentUI {
         boolean slotAvailable = false;
         int startSlot;
         // todo
-        // service id, branch id,
+        // service id, branch id, date
         // assign doctor
         // allocation id where service id, branch id, and doctor id are the same
         while (!slotAvailable) {
@@ -100,38 +100,43 @@ public class MakeAppointmentUI {
             }
         }
     }
+    
+	public static TimeSlot askTimeSlot() {
+		displayTimeSlot();
+		int choice = ConsoleInput.askChoice(1, 13, "Select time slot");
 
-    public void viewSlots(Service service) {
-        displayServices();
-        int choice = ConsoleInput.askPositiveInt("a service (1-15)");
-        LocalDate date = ConsoleInput.askDate("a date (DD/MM/YYYY)");
-        controller.getAvailableTimeSlots(choice, date);
+		return switch (choice) {
+			case 1 -> SLOT_1;
+			case 2 -> SLOT_2;
+			case 3 -> SLOT_3;
+			case 4 -> SLOT_4;
+			case 5 -> SLOT_5;
+			case 6 -> SLOT_6;
+			case 7 -> SLOT_7;
+			case 8 -> SLOT_8;
+			case 9 -> SLOT_9;
+			case 10 -> SLOT_10;
+			case 11 -> SLOT_11;
+			case 12 -> SLOT_12;
+			case 13 -> SLOT_13;
+			default -> SLOT_14; // case 14
+		};
+	}
 
-        System.out.println("Available time slots for service " + service.getServiceName());
-        System.out.println();
-        // todo: check the timeslot status
-        System.out.println("Slot No \t| Start Time \t| Status");
-//        for (TimeSlot slot : TimeSlot.values()) {
-//            int i = slot.ordinal() + 1;
-//            System.out.println(i + " \t| " + slot + " \t| " + status);
-//        }
-    }
-
-    public static void displayServices() {
-        List<Allocation> allocations = controller.getAllAllocations();
-        // todo filter allocations
-        Allocation allocation;
-
-        System.out.println("Available services:");
-        System.out.println();
-        System.out.println(
-                "No \t| Service \t| Service ID \t| Branch Address \t| Telephone No \t| Description \t| Price \t| Required Time Slot");
-        for (int i = 0; i < allocations.size(); i++) {
-            allocation = allocations.get(i);
-            System.out.println((i+1) + " \t| " + allocation.getService().getServiceName() + " \t| " + allocation.getService().getServiceId() + " \t| "
-                    + allocation.getBranch().getBranchAddress() + " \t| "
-                    + allocation.getBranch().getTelNo() + " \t| "
-                    + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
-        }
-    }
+	public static void displayTimeSlot() {
+		System.out.println(" 1. 0800 AM");
+		System.out.println(" 2. 0830 AM");
+		System.out.println(" 3. 0900 AM");
+		System.out.println(" 4. 0930 AM");
+		System.out.println(" 5. 1000 AM");
+		System.out.println(" 6. 1030 AM");
+		System.out.println(" 7. 1100 AM");
+		System.out.println(" 8. 1130 AM");
+		System.out.println(" 9. 0200 PM");
+		System.out.println("10. 0230 PM");
+		System.out.println("11. 0300 PM");
+		System.out.println("12. 0330 PM");
+		System.out.println("13. 0400 PM");
+		System.out.println("14. 0430 PM");
+	}
 }

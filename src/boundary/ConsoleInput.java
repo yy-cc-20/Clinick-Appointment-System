@@ -1,17 +1,33 @@
 package boundary;
 
-// ask console input with error handling and restriction
-// to ask for attribute of a specific data type
-// @param info is the text that will be shown in the user interface
+// Get console input with error handling and restriction
+// To ask for input of a specific data type
+// @param info the text that will be shown in the user interface
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ConsoleInput {
-    private static final String stringError = "Sorry, cannot contain \";\".";
-    private static final String errorMessage1 = "Sorry, cannot greater than 5 digits.";
-
+    private static final String STRING_ERROR = "Sorry, cannot contain \";\".";
+    private static final String ERROR_MESSAGE1 = "Sorry, cannot greater than 5 digits.";
+    
+    public static final DateTimeFormatter DATE_INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy"); // Input date format
+    
+    // Ask user the date, set the valid date
+    public static LocalDate askDate(String info) {
+        String stringDate;
+        while (true) {
+            System.out.print("%n" + info + " (dd/mm/yyyy) > "); // the "%n" in dateName will not take effect if you use %s
+            try {
+                stringDate = SingletonScanner.scanner.nextLine();
+                return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
+            } catch (DateTimeParseException e) {
+                System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
+            }
+        }
+    }
+    
     // let user chose which eventNo he/she wants to perform
     // assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
     public static int askChoice(int beginChoiceNo, int endChoiceNo, String info) throws IllegalArgumentException {
@@ -92,7 +108,7 @@ public class ConsoleInput {
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
-                    System.out.printf("%s%n%n", errorMessage1);
+                    System.out.printf("%s%n%n", ERROR_MESSAGE1);
                 } else {
                     return input;
                 }
@@ -130,7 +146,7 @@ public class ConsoleInput {
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
-                    System.out.printf("%s%n%n", errorMessage1);
+                    System.out.printf("%s%n%n", ERROR_MESSAGE1);
                 } else {
                     return input;
                 }
@@ -148,7 +164,7 @@ public class ConsoleInput {
             System.out.printf("%n%s> ", info);
             input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
-                System.out.printf("%s%n", stringError);
+                System.out.printf("%s%n", STRING_ERROR);
             } else {
                 return input.equals("") ? "-" : input;
             }
@@ -174,7 +190,7 @@ public class ConsoleInput {
             System.out.printf("%n%s> ", info);
             input = SingletonScanner.scanner.nextLine();
             if (hasDelimiter(input)) {
-                System.out.printf("%s%n", stringError);
+                System.out.printf("%s%n", STRING_ERROR);
             } else if (input.equals("")) {
                 System.out.println("PLease enter again.");
             } else if (input.length() > length) {
@@ -184,22 +200,6 @@ public class ConsoleInput {
             }
         }
         return input;
-    }
-
-    // enter "-" to set the date as null
-    // ask user the date, set the valid date
-    public static LocalDate askDate(String dateName) {
-        String stringDate;
-        while (true) {
-            System.out.print("%n" + dateName + " (dd/mm/yyyy) > ");
-            // the "%n" in dateName will not take effect if you use %s
-            try {
-                stringDate = SingletonScanner.scanner.nextLine();
-                return LocalDate.parse(stringDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (DateTimeParseException e) {
-                System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
-            }
-        }
     }
 
     // @return true if answer "yes"

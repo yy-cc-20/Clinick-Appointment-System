@@ -30,14 +30,14 @@ public class ManageAccountUI {
         while (true) {
             System.out.print("New password > ");
             inputPassword = SingletonScanner.scanner.nextLine();
-            if (inputPassword.equalsIgnoreCase("x"))
+            if (inputPassword.equalsIgnoreCase(ConsoleUI.CANCEL_KEY))
             	return;
             
             if (ManageAccountController.isValidPassword(inputPassword)) {
                 break;
             } else {
                 System.out.printf(ManageAccountController.PASSWORD_CRITERIA);
-                System.out.println("[X] to back to the previous page.");
+                System.out.println(ConsoleUI.CANCEL_OPERATION);
             }
         }
         

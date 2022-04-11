@@ -1,8 +1,15 @@
 package boundary;
 
+import java.time.format.DateTimeFormatter;
+
 // display message on the screen
 
-public class ConsoleUI { // UI: user interface
+public class ConsoleUI {
+	public static final String CANCEL_KEY = "X"; // To be checked by case insensitive
+	public static final String CANCEL_OPERATION = "[" + CANCEL_KEY + "] back to the previous page."; // To tell user how to stop the current method
+	
+    public static final DateTimeFormatter DATE_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Date format for displaying
+
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
     private static int screenHeight = 22; // the number of lines

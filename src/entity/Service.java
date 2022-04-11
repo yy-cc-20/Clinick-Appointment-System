@@ -25,7 +25,7 @@ public class Service {
         this.serviceId = serviceId;
     }
 
-    public String getServiceName() {
+    public String getName() {
         return serviceName;
     }
 
