@@ -10,6 +10,7 @@ public enum TimeSlot {
 	SLOT_6("1030AM"),
 	SLOT_7("1100AM"),
 	SLOT_8("1130AM"),
+	// Lunch break: 1200AM - 0200PM
 	SLOT_9("0200PM"),
 	SLOT_10("0230PM"),
 	SLOT_11("0300PM"),
