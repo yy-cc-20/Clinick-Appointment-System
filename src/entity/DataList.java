@@ -1,7 +1,10 @@
 package entity;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import database.DatabaseConnection;
 
 /* 
  * IDataStore dataList = DataList.getInstance(); // Already retrieved the data
@@ -16,9 +19,12 @@ public class DataList implements IDataStore {
 	private List<Allocation> allocationList;
 	private List<Branch> branchList;
 	private List<Service>  serviceList;
+	
+	private Statement st;
 
 	
-	private DataList() {
+	private DataList() throws SQLException {
+		st = DatabaseConnection.getConnection().createStatement();
 		importDoctorList();
 		importPatientList();
 		importReceptionistList();
@@ -26,7 +32,7 @@ public class DataList implements IDataStore {
 		importAllocationList();
 	} // Private constructor for singleton !!!
 
-	public static IDataStore getInstance() {
+	public static IDataStore getInstance() throws SQLException {
 		if (instance == null) {
 			instance = new DataList();
 		}
@@ -112,4 +118,74 @@ public class DataList implements IDataStore {
 		else
 			return serviceList;
 	}
+	
+
+	public List<String> getResultArray(ResultSet rs, ResultSet size) throws SQLException {
+		List<String> rsArray = new ArrayList<>();
+		try {
+			while (rs.next()) {
+				String data = "";
+				for (int i = 1; i < size.getInt(0); i++) {
+					data += rs.getString(i) + " ";
+				}
+				rsArray.add(data);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rsArray;
+	}
+
+	public void fetchAllSets(String tableName) throws SQLException {
+		try {
+			ResultSet rs = st.executeQuery("SELECT * FROM " + tableName + ";");
+			ResultSet size = st.executeQuery("SELECT COUNT(*) FROM " + tableName + ";");
+			getResultArray(rs, size);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void fetchFilteredSets(String tableName, String columnToFilter, String filter) throws SQLException {
+		try {
+			ResultSet rs = st.executeQuery("SELECT * FROM " + tableName + " WHERE " + columnToFilter + " = " + filter + ";");
+			ResultSet size = st.executeQuery("SELECT COUNT(*) FROM " + tableName + " WHERE " + columnToFilter + " = " + filter + ";");
+			getResultArray(rs, size);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void fetchSortedSets(String tableName, String columnToSort, String order) throws SQLException {
+		try {
+			// order can be asc or desc
+			ResultSet rs = st.executeQuery("SELECT * FROM " + tableName + " ORDER BY " + columnToSort + " " + order + ";");
+			ResultSet size = st.executeQuery("SELECT COUNT(*) FROM " + tableName + " ORDER BY " + columnToSort + ";");
+			getResultArray(rs, size);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateToTable(String tableName, String columnToUpdate, String columnToSearch, String valueToSearch,	String newValue) throws SQLException {
+		try {
+			st.executeUpdate("UPDATE " + tableName + " SET " + columnToUpdate + " = " + newValue + " WHERE " + columnToSearch + " = " + valueToSearch + ";");
+			// PreparedStatement pst = conn.prepareStatement("INSERT INTO Appointment (id, date, service) VALUES (?, ?, ?)");
+			// pst.setInt(1, 50);
+			// pst.setString(2, "date");
+			// pst.setString(2, "service");
+			// pst.executeUpdate(); // no args
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteFromTable(String tableName, String columnToSearch, String valueToSearch) throws SQLException {
+		try {
+			st.executeUpdate("DELETE FROM " + tableName + " WHERE " + columnToSearch + " = " + valueToSearch + ";");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

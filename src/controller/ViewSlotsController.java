@@ -8,16 +8,50 @@ import java.time.LocalDate;
 import entity.*;
 
 public class ViewSlotsController {
-	private static Connection conn = DatabaseConnection.getConnection();
-	private static PreparedStatement ps;
+	private static ViewSlotsController instance;
+	private static Statement st;
+	private static ResultSet rs;
+	private static String sql;
 	
-	/** @return branches that provide a particular service */
-	public static ArrayList<Branch> getBranchFilteredByService(int serviceId) {
+	private ViewSlotsController() throws SQLException {
+		st = DatabaseConnection.getConnection().createStatement();
+	}
+	
+	public ViewSlotsController getInstance() throws SQLException {
+		if (instance == null)
+			new ViewSlotsController();
+		return instance;
+	}
+	
+	/** @return branches that provide a particular service 
+	 * @throws SQLException */
+	public ArrayList<Branch> getBranchFilteredByService(int serviceId) throws SQLException {
 		
+		sql = "SELECT DISTINCT branchId FROM Allocation WHERE serviceId = " + serviceId;
+		rs = st.executeQuery(sql);
+		
+		ArrayList<Integer> branchIds = resultSetToIntArr(rs);
+		ArrayList<Branch> branchResults = getBranchesById(branchIds);
+		
+		return branchResults;
 	}
 	
 	/** @return doctors available to provide a particular service at a particular branch for different times on a particular date */
-	public static Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
+	public Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
 		
+	}
+	
+	// Return branch objects of the specified ids
+	public static ArrayList<Branch> getBranchesById(ArrayList<Integer> ids) {
+		ArrayList<Branch> branches = new ArrayList<>();
+	}
+	
+	// Retrieve the integer from ResultSet and return ArrayList<Integer>
+	public static ArrayList<Integer> resultSetToIntArr(ResultSet rs) throws SQLException {
+		ArrayList<Integer> ints = new ArrayList<>();
+		while (rs.next()) {
+			ints.add(rs.getInt(0));
+		}
+		return ints;
 	}
 }
