@@ -1,14 +1,32 @@
 package database;
 
-/** What this class does:
+/** 
+ * This class is using MySQL database.
+ * 
+ * @setup MySQL database in your computer
+ * 
+ * YouTube tutorial: https://www.youtube.com/watch?v=BOUMR85B-V0
+ * 1. Have MySQL connector downlowded (Download at https://dev.mysql.com/downloads/file/?id=510038)
+ * 
+ * 2. Open MySQL workbench, create a schema (as known as database) called "Clinick-Appointment-System"
+ * 
+ * 3. Download the JAR file "mysql-connector-java-8.0.28.jar" at https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28
+ * 
+ * 4. Add the JARs file  to the project build path:
+ * 		build path -> Library -> class path -> add external JARs 
+ * 		
+ * 5. Change the port number, username and password at the code below to be same as your MySQL database 
+ * 
+ * 6. You can run the main method in this class to test the connectivity to your database.
+ */
+
+/** 
+ * @description
+ *
+ * What this class does:
  * - connects to the database 
  * - call SetUpDatabase to create tables if tables not exist
- * 
- * This class is using MySQL database.
- * @setup have mysql connector downlowded
- * @setup open mysql workbench, create a schema (database) call Clinick-Appointment-System
- * @setup add external JARs file (mysql-connector-java-8.0.28.jar) to the build path.
- * 
+ *
  * This class is using the singleton design pattern. 
  * There is only one object created for the Connection class in the system.
  * 
@@ -23,9 +41,12 @@ package database;
 import java.sql.*;
 
 public class DatabaseConnection {
-
 	private static Connection conn;
-	private static String url = "jdbc:mysql://localhost:3308/clinick-appointment-system";
+	
+	/** @setup 4. Change the value of these variable to connect to your database */
+	private static int portNo = 3308;
+	private static String databaseName = "clinick-appointment-system";
+	private static String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
 	private static String username = "root";
 	private static String password = "root";
 

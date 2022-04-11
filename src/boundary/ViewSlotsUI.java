@@ -18,7 +18,6 @@ public class ViewSlotsUI {
 	// TODO calculate the column width according to the length of the info in order to display the table more neatly
 	private final static ViewSlotsUI instance = new ViewSlotsUI();
 	private List<Service> services = DataList.getInstance().getServiceList();
-	private List<Branch> branches = DataList.getInstance().getBranchList();
 	
 	// Filters
 	private int serviceId;
@@ -26,11 +25,14 @@ public class ViewSlotsUI {
 	private LocalDate date;
 	
 	// Result
+	private List<Branch> branchResults;
 	private Doctor[][] availableDoctors; 
 	// index: the time slot
 	// row: an array of the doctors available for that time
 	
-	private ViewSlotsUI()
+	private ViewSlotsUI() {
+		
+	}
 	
 	public ViewSlotsUI getInstance() {
 		return instance;
@@ -49,7 +51,7 @@ public class ViewSlotsUI {
 		viewBranchFilteredByService();
 		if (!ConsoleInput.askBoolean("Select branch"))
 			return false;
-		branchId = ConsoleInput.askChoice(1, services.size(), "Select branch");
+		branchId = ConsoleInput.askChoice(1, branchResults.size(), "Select branch");
 		date = ConsoleInput.askDateNoEarlierThanToday("Date");
 		
 		viewTimeSlotFilteredByServiceBranchDate();
@@ -89,7 +91,7 @@ public class ViewSlotsUI {
 	}
 
 	// Can be used by ChangeAppointmentUI
-	public void viewBranchFilteredByService() {
+	public int viewBranchFilteredByService() {
 		List<Branch> branchResult = ViewSlotsController.getBranchFilteredByService(serviceId);		
 		
 		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
@@ -102,6 +104,7 @@ public class ViewSlotsUI {
             				+ branchResult.get(i).getTelNo() +  " \t| "
             				+ branchResult.get(i).getBranchAddress() + " \t| ");
         }
+        return branchResult.size();
 	}
 	
 	// Can be used by ChangeAppointmentUI

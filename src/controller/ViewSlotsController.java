@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import database.DatabaseConnection;
 import java.sql.*;
@@ -27,32 +28,35 @@ public class ViewSlotsController {
 		return instance;
 	}
 	
-	/** @return branches that provide a particular service 
-	 * @throws SQLException */
-	public ArrayList<Branch> getBranchFilteredByService(int serviceId) throws SQLException {
+	/** @return branches that provide a particular service */
+	public static List<Branch> getBranchFilteredByService(int serviceId) throws SQLException {
 		
 		sql = "SELECT DISTINCT branchId FROM Allocation WHERE serviceId = " + serviceId;
 		rs = st.executeQuery(sql);
 		
-		ArrayList<Integer> branchIds = resultSetToIntArr(rs);
-		ArrayList<Branch> branchResults = getBranchesById(branchIds);
+		List<Integer> branchIds = resultSetToIntArr(rs);
+		List<Branch> branchResults = getBranchesById(branchIds);
 		
 		return branchResults;
 	}
 	
 	/** @return doctors available to provide a particular service at a particular branch for different times on a particular date */
-	public Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
+	public static Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
+		Doctor[][] availableDoctors = new Doctor[TimeSlot.values().length][];
 		
+		return availableDoctors;
 	}
 	
 	// Return branch objects of the specified ids
-	public static ArrayList<Branch> getBranchesById(ArrayList<Integer> ids) {
-		ArrayList<Branch> branches = new ArrayList<>();
+	public static List<Branch> getBranchesById(List<Integer> ids) {
+		List<Branch> branches = new ArrayList<>();
+		
+		return branches;
 	}
 	
 	// Retrieve the integer from the ResultSet and return ArrayList<Integer>
-	public static ArrayList<Integer> resultSetToIntArr(ResultSet rs) throws SQLException {
-		ArrayList<Integer> ints = new ArrayList<>();
+	public static List<Integer> resultSetToIntArr(ResultSet rs) throws SQLException {
+		List<Integer> ints = new ArrayList<>();
 		while (rs.next()) {
 			ints.add(rs.getInt(0));
 		}
