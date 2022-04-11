@@ -63,6 +63,8 @@ public class ViewSlotsController {
 		
 		// 3. Remove the doctors in charge that have an appointment during a time slot from that slot of the availableDoctorsId
 		int unavailableDoctorId;
+		List<Integer> unavailableDoctorsId;
+		
 		for (TimeSlot startSlot : TimeSlot.values()) {
 			sql = "SELECT doctorId FROM FROM Appointment NATURAL JOIN Allocation"
 					+ " WHERE serviceId = " + serviceId 
@@ -72,11 +74,15 @@ public class ViewSlotsController {
 			try {
 				rs = st.executeQuery(sql);
 				unavailableDoctorId = rs.getInt(0);
+				
+				unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal() + 1);
+				
+				removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, unavailableDoctorId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, unavailableDoctorId);
 		}
+		
 		return availableDoctorsId;
 		
 		/* If every service only consumes 1 time slot
@@ -102,6 +108,8 @@ public class ViewSlotsController {
 		}
 		return resultSetToIntArr(rs);
 	}
+	
+	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int slotstartSlot.ordinal() + 1)
 	
 	private void removeUnavailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
 		

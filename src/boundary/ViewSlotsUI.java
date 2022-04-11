@@ -20,13 +20,13 @@ public class ViewSlotsUI {
 	private List<Service> services = DataList.getInstance().getServiceList();
 	
 	// Filters
-	private int serviceId;
+	private Service service;
 	private int branchId;
 	private LocalDate date;
 	
 	// Result
 	private List<Branch> branchResults;
-	private Doctor[][] availableDoctors; 
+	private List<List<Integer>> availableDoctors; 
 	// index: the time slot
 	// row: an array of the doctors available for that time
 	
@@ -58,8 +58,8 @@ public class ViewSlotsUI {
 		return true;
 	}
 	
-	public int getSelectedServiceId() {
-		return serviceId;
+	public int getSelectedService() {
+		return service;
 	}
 	
 	public int getSelectedBranchId() {
@@ -70,7 +70,7 @@ public class ViewSlotsUI {
 		return date;
 	}
 	
-	public Doctor[][] getAvailableDoctors() {
+	public List<List<Integer>> getAvailableDoctors() {
 		// index: the time slot
 		// row: an array of the doctors available for that time
 		return availableDoctors;
