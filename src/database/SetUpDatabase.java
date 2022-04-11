@@ -65,6 +65,9 @@ public class SetUpDatabase {
 		}
 	}
 
+	// TODO combine this into Receptionist, Doctor, Patient table
+	// TODO In ManageAccountUI, Passwords must have at least 8 characters and contain at least one lowercase letter, one uppercase letter and one digit.
+	// TODO use the real name for username
 	private static void insertAccountTable() throws SQLException {
 		Connection conn = DatabaseConnection.getConnection();
 		conn.setAutoCommit(false); // So that multiple SQL statements can all run inside the same transaction
@@ -101,6 +104,7 @@ public class SetUpDatabase {
 		conn.setAutoCommit(true); // Set back to default, so other part of the code will not be affected
 	}
 
+	// TODO remove timeslotDate
 	private static void insertAllocationTable() throws SQLException {
 		Connection conn = DatabaseConnection.getConnection();
 		conn.setAutoCommit(false);
@@ -168,6 +172,7 @@ public class SetUpDatabase {
 		conn.setAutoCommit(true);
 	}
 
+	// TODO add date
 	private static void insertAppointmentTable() throws SQLException {
 		Connection conn = DatabaseConnection.getConnection();
 		conn.setAutoCommit(false);
@@ -255,6 +260,9 @@ public class SetUpDatabase {
 		conn.setAutoCommit(true);
 	}
 
+	// TODO patient and appointment is one-to-many
+	// create a table to connect patientId and appointmentId
+	
 	private static void insertPatientTable() throws SQLException {
 		Connection conn = DatabaseConnection.getConnection();
 		conn.setAutoCommit(false);

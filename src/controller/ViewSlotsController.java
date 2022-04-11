@@ -48,6 +48,8 @@ public class ViewSlotsController {
 	public static Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
 		List<Integer> doctorIds; // The id of doctors who work at the particular branch and provide the particular service
 		List<Doctor> doctors; // The doctors who work at the particular branch and provide the particular service
+		List<Appointment> appointments = getAppointmentsByServiceBranchDate(serviceId, branchId, date);
+		
 		Doctor[][] availableDoctors = new Doctor[TimeSlot.values().length][]; // The number of doctors available at different time of a particular day
 		// index: the time slot no
 		// value: the slots available for that time
@@ -63,6 +65,12 @@ public class ViewSlotsController {
 		
 		
 		return availableDoctors;
+	}
+	
+	public static List<Appointment> getAppointmentsByServiceBranchDate(int serviceId, int branchId, LocalDate date) {
+		List<Appointment> appointments;
+		
+		return appointments;
 	}
 	
 	// Return doctor objects of the specified ids

@@ -48,13 +48,6 @@ public class DataList implements IDataStore {
         return doctorList;
     }
 
-    public List<Branch> getBranchList() { // TODO retrieve from database
-        if (branchList == null)
-            return new ArrayList<Branch>();
-        else
-            return branchList;
-    }
-
     public List<Service> getServiceList() { // TODO retrieve from database
         if (serviceList == null)
             return new ArrayList<Service>();
@@ -68,7 +61,14 @@ public class DataList implements IDataStore {
         else
             return allocationList;
     }
-    
+
+    public List<Branch> getBranchList() { // TODO retrieve from database
+        if (branchList == null)
+            return new ArrayList<Branch>();
+        else
+            return branchList;
+    }
+
     public List<Patient> getPatientList() {
         if (patientList == null)
             return new ArrayList<Patient>();
