@@ -262,6 +262,7 @@ public class SetUpDatabase {
 
 	// TODO patient and appointment is one-to-many
 	// create a table to connect patientId and appointmentId
+	// 2 columns: patientId and appointmentId
 	
 	private static void insertPatientTable() throws SQLException {
 		Connection conn = DatabaseConnection.getConnection();
