@@ -52,10 +52,10 @@ public class ManagePatientUI {
             } else if (phoneNo != null && address == null) {
                 selectedPatient.setPhoneNo(phoneNo);
                 System.out.println("Phone number has been updated.");
-            } else if (phoneNo == null && address != null) {
+            } else if (phoneNo == null) {
                 selectedPatient.setAddress(address);
                 System.out.println("Address has been updated.");
-            } else if (phoneNo != null && address != null) {
+            } else {
                 selectedPatient.setPhoneNo(phoneNo);
                 selectedPatient.setAddress(address);
                 System.out.println("Phone number and address has been updated.");
