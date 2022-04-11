@@ -2,10 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 import boundary.ConsoleUI;
 import database.DatabaseConnection;
-import java.sql.*;
 import java.time.LocalDate;
 import entity.*;
 
@@ -15,10 +15,10 @@ public class ViewSlotsController {
 	private ResultSet rs;
 	private String sql;
 	
-	// the availability of doctors in charge at different time
+	// The availability of doctors in charge at different time
 	private List<List<Integer>> availableDoctorsId = new ArrayList<List<Integer>>(); // Have to write as new ArrayList<List<Integer>>()
-	// row: time slot number
-	// column: the id of the available doctors at that time		
+	// Row: time slot number starting from 0
+	// Column: the ids of the available doctors at that time		
 	
 	private ViewSlotsController() {
 		try {
@@ -52,22 +52,19 @@ public class ViewSlotsController {
 	
 	/** @return the id of doctors who are available to provide a particular service at a particular branch for different times on a particular date */
 	public List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date, int requiredSlots) {
+		List<Integer> doctorsInCharge;
+		List<Integer> unavailableDoctorsId;
 		
+		doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
 		
-		
-		// 1. Finds doctors that in charge of the selected service at the selected branch
-		List<Integer> doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
-		
-		// 2. Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
+		// Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
 		for (int i = 0; i < TimeSlot.values().length; ++i) {
 			availableDoctorsId.add(doctorsInCharge);
 		}
 		
-		// 3. Remove the doctors in charge that have an appointment during a time slot from that slot of the availableDoctorsId
-		List<Integer> unavailableDoctorsId;
-		
+		// Remove the doctors in charge that have an appointment at a time slot from availableDoctorsId
 		for (TimeSlot startSlot : TimeSlot.values()) {
-			unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal() + 1);
+			unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal());
 			
 			for (int id : unavailableDoctorsId)
 				removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, id);
@@ -99,11 +96,12 @@ public class ViewSlotsController {
 		return resultSetToIntArr(rs);
 	}
 	
-	/** @param slot start from 1 */
+	/** @param slot start from 0 */
 	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int slot) {
 		List<Integer> returnIds = new ArrayList<>();
+		slot += 1; // In database it starts from 1
 		
-		sql = "SELECT doctorId FROM FROM Appointment NATURAL JOIN Allocation"
+		sql = "SELECT doctorId FROM Appointment NATURAL JOIN Allocation"
 				+ " WHERE serviceId = " + serviceId 
 				+ " AND branchId = " + branchId 
 				+ " AND date = " + date.format(ConsoleUI.DATE_SQL_FORMATTER) 
@@ -123,7 +121,7 @@ public class ViewSlotsController {
 	private void removeUnavailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
 		for (int i = 0; i < requiredSlots; ++i) {
 			if (startSlotOrdinal + i < availableDoctorsId.size())
-				availableDoctorsId.get(startSlotOrdinal + i).remove(unavailableDoctorId);
+				availableDoctorsId.get(startSlotOrdinal + i).remove(Integer.valueOf(unavailableDoctorId));
 		}
 	}
 	
