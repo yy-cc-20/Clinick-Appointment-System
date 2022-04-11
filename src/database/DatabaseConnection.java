@@ -76,7 +76,7 @@ public class DatabaseConnection {
 	public static void closeConnection() throws SQLException {
 		conn.close();
 	}
-	
+	/*
 	// DatabaseConnectionTest
 	public static void main(String[] args) throws SQLException {
 		Statement st = DatabaseConnection.getConnection().createStatement();
@@ -87,7 +87,7 @@ public class DatabaseConnection {
 			}
 			System.out.println("DatabaseConnection test success!");
 		}
-	}
+	}*/
 }
 
 /* Notes on how to use JDBC
