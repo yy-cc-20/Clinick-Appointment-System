@@ -6,89 +6,89 @@ import java.util.List;
 
 import database.DatabaseConnection;
 
-/* 
+/*
  * IDataStore dataList = DataList.getInstance(); // Already retrieved the data
  */
 
 public class DataList implements IDataStore {
-	private static IDataStore instance;
-	private List<Doctor> doctorList; // Use List interface instead of ArrayList, more flexible, reduce the dependency
-	private List<Patient> patientList;
-	private List<Receptionist> receptionistList;
-	private List<Appointment> appointmentList;
-	private List<Allocation> allocationList;
-	private List<Branch> branchList;
-	private List<Service>  serviceList;
-	
-	private Statement st;
-	
-	private DataList() {
-		try {
-			st = DatabaseConnection.getConnection().createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	} // Private constructor for singleton
-	
-	public static IDataStore getInstance() {
-		if (instance == null) {
-			instance = new DataList();
-		}
-		return instance;
-	}
+    private static IDataStore instance;
+    private List<Doctor> doctorList; // Use List interface instead of ArrayList, more flexible, reduce the dependency
+    private List<Patient> patientList;
+    private List<Receptionist> receptionistList;
+    private List<Appointment> appointmentList;
+    private List<Allocation> allocationList;
+    private List<Branch> branchList;
+    private List<Service> serviceList;
 
-	public List<Doctor> getDoctorList() { // TODO retrieve from database
-		// Test data for login
-		doctorList = new ArrayList<>();
-		doctorList.add(new Doctor(1, "username", "password"));
-		
-		//if (doctorList == null)
-		//	return new ArrayList<Doctor>();
-		//else 
-		return doctorList;
-	}
-	
-	public List<Branch> getBranchList() { // TODO retrieve from database
-		if (branchList == null)
-		return new ArrayList<Branch>();
-		else
-		return branchList;
-	}
+    private Statement st;
 
-	public List<Service> getServiceList() { // TODO retrieve from database
-		if (serviceList == null)
-			return new ArrayList<Service>();
-		else
-			return serviceList;
-	}
+    private DataList() {
+        try {
+            st = DatabaseConnection.getConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } // Private constructor for singleton
 
-	public List<Patient> getPatientList() {
-		if (patientList == null)
-			return new ArrayList<Patient>();
-		else 
-			return patientList;
-	}
-	
-	public List<Receptionist> getReceptionistList() {
-		if (receptionistList == null)
-			return new ArrayList<Receptionist>();
-		else 
-			return receptionistList;
-	}
+    public static IDataStore getInstance() {
+        if (instance == null) {
+            instance = new DataList();
+        }
+        return instance;
+    }
 
-	public List<Appointment> getAppointmentList() {
-		if (appointmentList == null)
-			return new ArrayList<Appointment>();
-		else
-			return appointmentList;
-	}
+    public List<Doctor> getDoctorList() { // TODO retrieve from database
+        // Test data for login
+        doctorList = new ArrayList<>();
+        doctorList.add(new Doctor(1, "username", "password"));
 
-	public List<Allocation> getAllocationList() {
-		if (allocationList == null)
-			return new ArrayList<Allocation>();
-		else
-			return allocationList;
-	}
+        //if (doctorList == null)
+        //	return new ArrayList<Doctor>();
+        //else
+        return doctorList;
+    }
+
+    public List<Branch> getBranchList() { // TODO retrieve from database
+        if (branchList == null)
+            return new ArrayList<Branch>();
+        else
+            return branchList;
+    }
+
+    public List<Service> getServiceList() { // TODO retrieve from database
+        if (serviceList == null)
+            return new ArrayList<Service>();
+        else
+            return serviceList;
+    }
+
+    public List<Patient> getPatientList() {
+        if (patientList == null)
+            return new ArrayList<Patient>();
+        else
+            return patientList;
+    }
+
+    public List<Receptionist> getReceptionistList() {
+        if (receptionistList == null)
+            return new ArrayList<Receptionist>();
+        else
+            return receptionistList;
+    }
+
+    public List<Appointment> getAppointmentList() {
+        if (appointmentList == null)
+            return new ArrayList<Appointment>();
+        else
+            return appointmentList;
+    }
+
+    public List<Allocation> getAllocationList() {
+        if (allocationList == null)
+            return new ArrayList<Allocation>();
+        else
+            return allocationList;
+    }
 	
 /*
  * 	public void importDoctorList() {
