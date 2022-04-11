@@ -48,7 +48,7 @@ public class ClinickAppointmentSystem {
 		int choiceNo; // the action that user wants to perform
 		final int beginChoiceNo = 1; 
 		final int endChoiceNo = 3;
-
+		int i =1;
 		while (true) {
 			ConsoleUI.displaySystemName("System Name");
 			//ConsoleUI.displayMenu(); // need to change the menu
