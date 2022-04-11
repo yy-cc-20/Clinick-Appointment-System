@@ -11,7 +11,7 @@ public class SetUpDatabase {
 	public static void setUpDatabaseIfNotExist() throws SQLException {
 		st = DatabaseConnection.getConnection().createStatement();
 
-		// recreate the tables in the database in case the tables' structure has changed
+		// Recreate the tables in the database in case the tables' structure has changed
 		String[] recreateTables = {
 				"DROP TABLE IF EXISTS Appointment",
 				"DROP TABLE IF EXISTS Allocation",

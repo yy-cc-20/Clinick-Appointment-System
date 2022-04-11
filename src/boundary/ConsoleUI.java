@@ -49,16 +49,31 @@ public class ConsoleUI {
     }
 
     public static void displayFunctionName(String heading) {
-        int field = headingWidth - heading.length();
+        int field = headingWidth - heading.length() - 2;
 
         System.out.printf("%n");
 
         for (int i = 0; i < field / 2; ++i) { // display the heading in the center
             System.out.print('-');
         }
-        System.out.print(heading);
+        System.out.print(" " + heading + " ");
         for (int i = 0; i < field / 2; ++i) {
             System.out.print('-');
+        }
+        System.out.printf("%n");
+    }
+    
+    public static void displayTableName(String tableName) {
+        int field = headingWidth - tableName.length() - 2;
+
+        System.out.printf("%n");
+
+        for (int i = 0; i < field / 2; ++i) { // display the heading in the center
+            System.out.print(' ');
+        }
+        System.out.print("<" + tableName + ">");
+        for (int i = 0; i < field / 2; ++i) {
+            System.out.print(' ');
         }
         System.out.printf("%n");
     }

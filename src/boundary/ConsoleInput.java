@@ -207,7 +207,7 @@ public class ConsoleInput {
     public static boolean askBoolean(String info) {
         String ans;
         while (true) {
-            System.out.printf("%n%n%s%s> ", info, " [y/n]? ");
+            System.out.printf("%n%n%s%s ", info, " [y/n]?>");
             ans = SingletonScanner.scanner.nextLine().toLowerCase();
 
             if (ans.equalsIgnoreCase("y") || ans.equalsIgnoreCase("yes")) {

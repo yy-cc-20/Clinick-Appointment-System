@@ -28,24 +28,27 @@ public class ViewSlotsUI {
 	// index: the time slot
 	// row: an array of the doctors available for that time
 	
-	public ViewSlotsUI() {
-		/*
-		 * ([X] to back to the previous page)
-			select service
-			select branch
-			select date
-		 */
-		System.out.println(ConsoleUI.CANCEL_OPERATION);
+	// Exit if the user do not want to continue view the avilable time slots
+	/** @return false if the user did not continue to view the available time slots */
+	public boolean viewSlots() { 
 		
 		viewService();
-		serviceId = ConsoleInput.askChoice(1, services.size(), "Select service");
+		if (!ConsoleInput.askBoolean("Select branch"))
+			return false;
+		serviceId = ConsoleInput.askChoice(1, services.size(), "Service");
+		
 		
 		viewBranchFilteredByService();
+		if (!ConsoleInput.askBoolean("Select branch"))
+			return false;
 		branchId = ConsoleInput.askChoice(1, services.size(), "Select branch");
 		
+		if (!ConsoleInput.askBoolean("Select date"))
+			return false;
 		date = ConsoleInput.askDate("Date");
 		
 		viewTimeSlotFilteredByServiceBranchDate();
+		return true;
 	}
 	
 	public int getSelectedServiceId() {
@@ -65,33 +68,31 @@ public class ViewSlotsUI {
 	}
     
 	private void viewService() {
-		
-        System.out.println("Available services:");
+		Service service;
+        ConsoleUI.displayTableName("All Services");
         System.out.println();
         System.out.println("No \t| Service \t| Price \\t| Description \t|");
         
-        for (int i = 0; i < allocations.size(); i++) {
-            allocation = allocations.get(i);
-            System.out.println((i+1) + " \t| " + allocation.getService().getServiceName() + " \t| " + allocation.getService().getServiceId() + " \t| "
-                    + allocation.getBranch().getBranchAddress() + " \t| "
-                    + allocation.getBranch().getTelNo() + " \t| "
-                    + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
+        for (int i = 0; i < services.size(); i++) {
+            service = services.get(i);
+            System.out.println((i+1) + " \t| " + service.getServiceName() + " \t| " 
+            		+ service.getPrice() + " \t| " 
+                    + service.getDescription());
         }
 	}
 
 	private void viewBranchFilteredByService() {
 		List<Branch> branchResult = ViewSlotsController.getBranchFilteredByService(serviceId);		
 		
-		System.out.printf("%n>" + services.get(serviceId).getName() + "<%n");
+		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
         System.out.println();
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         
-        for (int i = 0; i < allocations.size(); i++) {
-            allocation = allocations.get(i);
-            System.out.println((i+1) + " \t| " + allocation.getService().getServiceName() + " \t| " + allocation.getService().getServiceId() + " \t| "
-                    + allocation.getBranch().getBranchAddress() + " \t| "
-                    + allocation.getBranch().getTelNo() + " \t| "
-                    + allocation.getService().getDescription() + allocation.getService().getPrice() + allocation.getService().getTimeSlotRequired());
+        for (int i = 0; i < branchResult.size(); i++) {
+            System.out.println((i+1) + " \t| " 
+            				+ branchResult.get(i).getBranchName() + " \t| " 
+            				+ branchResult.get(i).getTelNo() +  " \t| "
+            				+ branchResult.get(i).getBranchAddress() + " \t| ");
         }
 	}
 	
@@ -99,12 +100,17 @@ public class ViewSlotsUI {
 		availableDoctors = ViewSlotsController.getAvailableDoctors(serviceId, branchId, date);
 		// index: the time slot
 		// value: the slots available for that time
-
-		System.out.println(">" + services.get(serviceId).getName() + " AT " + branches.get(branchId).getBranchName() + " ON " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
+		
+		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
+		ConsoleUI.displayTableName("at " + branches.get(branchId).getBranchName());
+		ConsoleUI.displayTableName("on " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
+		System.out.println();
 		System.out.println("No \t| Start Time \t| Slots");
         for (TimeSlot slot : TimeSlot.values()) {
             int i = slot.ordinal() + 1;
-            System.out.println(i + " \t| " + slot + " \t| " + availableDoctors[slot.ordinal()].length);
+            System.out.println(i + " \t| " 
+            				+ slot + " \t| " 
+            				+ availableDoctors[slot.ordinal()].length);
         }
 	}
 }
