@@ -51,13 +51,6 @@ public class ManagePatientController {
     	sql = "INSERT INTO PATIENT('NAME','USER_ID','PHONE_NO','ADDRESS','PATIENT_IC') VALUES ('" + name + "', '-', '-', '-', '" + patientIc +"');";
     	try {
     	     rs = st.executeQuery(sql);
-    	    while(rs.next()) {
-    	    	Patient patient = new Patient();
-                patient.setName(1, rs.getString(1));
-                patient.setUserId(2, rs.getString(2));
-                patient.setPhoneNo(3,rs.getString(3));
-                patient.setAddress(4,rs.getString(4));
-                patient.setIc(patientIc);
     	    	}
   
     	} catch (SQLException e) {
