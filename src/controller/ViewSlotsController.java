@@ -36,20 +36,18 @@ public class ViewSlotsController {
 		sql = "SELECT DISTINCT branchId FROM Allocation WHERE serviceId = " + serviceId;
 		try {
 			rs = st.executeQuery(sql);
-			branchIds = resultSetToIntArr(rs);
-			branchResults = getBranchesById(branchIds);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (branchResults == null)
-			return new ArrayList<Branch>();
+		branchIds = resultSetToIntArr(rs);
+		branchResults = getBranchesById(branchIds);
 		return branchResults;
 	}
 	
 	/** @return doctors available to provide a particular service at a particular branch for different times on a particular date */
 	public static Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
 		Doctor[][] availableDoctors = new Doctor[TimeSlot.values().length][];
-		
+		sql = 
 		return availableDoctors;
 	}
 	
@@ -61,10 +59,14 @@ public class ViewSlotsController {
 	}
 	
 	// Retrieve the integer from the ResultSet and return ArrayList<Integer>
-	public static List<Integer> resultSetToIntArr(ResultSet rs) throws SQLException {
+	public static List<Integer> resultSetToIntArr(ResultSet rs) {
 		List<Integer> ints = new ArrayList<>();
-		while (rs.next()) {
-			ints.add(rs.getInt(0));
+		try {
+			while (rs.next()) {
+				ints.add(rs.getInt(0));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return ints;
 	}
