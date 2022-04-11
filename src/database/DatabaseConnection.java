@@ -1,7 +1,8 @@
 package database;
 
 /** 
- * This class is using MySQL database.
+ * This system is using MySQL database. If you want to run the system, you must first connect to the 
+ * MySQL database in your computer.
  * 
  * @setup MySQL database in your computer
  * 
@@ -11,13 +12,17 @@ package database;
  * 2. Open MySQL workbench, create a schema (as known as database) called "Clinick-Appointment-System"
  * 
  * 3. Download the JAR file "mysql-connector-java-8.0.28.jar" at https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28
+ * 	  This is the latest MySQL driver. Some older JDK might not be able to support this MySQL driver.
  * 
- * 4. Add the JARs file  to the project build path:
+ * 4. Add the JARs file to the project build path:
  * 		build path -> Library -> class path -> add external JARs 
  * 		
- * 5. Change the port number, username and password at the code below to be same as your MySQL database 
+ * 5. Change the port number, username and password at the attributes of this class to the same as your MySQL database 
  * 
- * 6. You can run the main method in this class to test the connectivity to your database.
+ * 6. You can run the main method in this class to check the connectivity to your database.
+ * 
+ * 7. You are done. Now you can run the main method of boundary.ClinickAppointmentSystem to start the system.
+ * 
  */
 
 /** 
@@ -43,7 +48,7 @@ import java.sql.*;
 public class DatabaseConnection {
 	private static Connection conn;
 	
-	/** @setup 4. Change the value of these variable to connect to your database */
+	/** @setup 5. Change the value of these variable to connect to your database */
 	private static int portNo = 3308;
 	private static String databaseName = "clinick-appointment-system";
 	private static String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
@@ -80,6 +85,7 @@ public class DatabaseConnection {
 			while (rs.next()) { // Move the cursor to the next row, return false if empty
 				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
 			}
+			System.out.println("DatabaseConnection test success!");
 		}
 	}
 }

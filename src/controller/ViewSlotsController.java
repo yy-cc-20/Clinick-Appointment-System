@@ -29,14 +29,20 @@ public class ViewSlotsController {
 	}
 	
 	/** @return branches that provide a particular service */
-	public static List<Branch> getBranchFilteredByService(int serviceId) throws SQLException {
+	public static List<Branch> getBranchFilteredByService(int serviceId) {
+		List<Integer> branchIds;
+		List<Branch> branchResults;
 		
 		sql = "SELECT DISTINCT branchId FROM Allocation WHERE serviceId = " + serviceId;
-		rs = st.executeQuery(sql);
-		
-		List<Integer> branchIds = resultSetToIntArr(rs);
-		List<Branch> branchResults = getBranchesById(branchIds);
-		
+		try {
+			rs = st.executeQuery(sql);
+			branchIds = resultSetToIntArr(rs);
+			branchResults = getBranchesById(branchIds);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (branchResults == null)
+			return new ArrayList<Branch>();
 		return branchResults;
 	}
 	
