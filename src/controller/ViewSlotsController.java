@@ -23,7 +23,7 @@ public class ViewSlotsController {
 		}
 	}
 	
-	public ViewSlotsController getInstance() {
+	public static ViewSlotsController getInstance() {
 		if (instance == null)
 			new ViewSlotsController();
 		return instance;

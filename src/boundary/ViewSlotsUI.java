@@ -18,9 +18,10 @@ public class ViewSlotsUI {
 	// TODO calculate the column width according to the length of the info in order to display the table more neatly
 	private final static ViewSlotsUI instance = new ViewSlotsUI();
 	private List<Service> services = DataList.getInstance().getServiceList();
+	private ViewSlotsController controller = ViewSlotsController.getInstance();
 	
 	// Filters
-	private Service service;
+	private int serviceId;
 	private int branchId;
 	private LocalDate date;
 	
@@ -39,7 +40,7 @@ public class ViewSlotsUI {
 	}
 	
 	// Can be used by MakeAppointmentUI
-	// Exit if the user do not want to continue view the avilable time slots
+	// Exit if the user do not want to continue view the available time slots
 	/** @return false if the user did not continue to view the available time slots */
 	public boolean viewSlots() { 
 		
@@ -58,8 +59,8 @@ public class ViewSlotsUI {
 		return true;
 	}
 	
-	public int getSelectedService() {
-		return service;
+	public int getSelectedServiceId() {
+		return serviceId;
 	}
 	
 	public int getSelectedBranchId() {
