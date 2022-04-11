@@ -21,6 +21,8 @@
 package boundary;
 
 import java.sql.*;
+
+import database.DatabaseConnection;
 import entity.*;
 
 public class ClinickAppointmentSystem {

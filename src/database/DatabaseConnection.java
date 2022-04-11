@@ -1,4 +1,4 @@
-package entity;
+package database;
 
 /** What this class does:
  * - connects to the database 

@@ -14,20 +14,19 @@ import entity.*;
 
 public class ViewSlotsUI {
 	// TODO calculate the column width according to the length of the info in order to display the table more neatly
-	private final ViewSlotsController controller = new ViewSlotsController();	
+
+	List<Service> services = DataList.getInstance().getServiceList();
+	List<Branch> branches = DataList.getInstance().getBranchList();
 	
-	List<Service> services;
-	List<Branch> branches;
-	
-	// Filter
+	// Filters
 	int serviceId;
 	int branchId;
 	LocalDate date;
 	
 	// Result
-	int[] availableTimeSlots; 
+	Doctor[][] availableDoctors; 
 	// index: the time slot
-	// value: the seats available for that time
+	// row: an array of the doctors available for that time
 	
 	public ViewSlotsUI() {
 		/*
@@ -61,19 +60,15 @@ public class ViewSlotsUI {
 		return date;
 	}
 	
-	public int[] getAvailableTimeSlots() {
-		return availableTimeSlots;
+	public Doctor[][] getAvailableDoctors() {
+		return availableDoctors;
 	}
     
 	private void viewService() {
-		+----+---------+-------+-------------+
-		| No | Service | Price | Description |
-		+----+---------+-------+-------------+
-		
 		
         System.out.println("Available services:");
         System.out.println();
-        System.out.println("No \t| Service \t| Price \\t| Description \t| Estimated Time (hr)");
+        System.out.println("No \t| Service \t| Price \\t| Description \t|");
         
         for (int i = 0; i < allocations.size(); i++) {
             allocation = allocations.get(i);
@@ -85,7 +80,7 @@ public class ViewSlotsUI {
 	}
 
 	private void viewBranchFilteredByService() {
-		List<Branch> branchResult = controller.getBranchFilteredByService(serviceId);		
+		List<Branch> branchResult = ViewSlotsController.getBranchFilteredByService(serviceId);		
 		
 		System.out.printf("%n>" + services.get(serviceId).getName() + "<%n");
         System.out.println();
@@ -101,7 +96,7 @@ public class ViewSlotsUI {
 	}
 	
 	private void viewTimeSlotFilteredByServiceBranchDate() {
-		availableTimeSlots = controller.getAvailableTimeSlot(serviceId, branchId, date);
+		availableDoctors = ViewSlotsController.getAvailableDoctors(serviceId, branchId, date);
 		// index: the time slot
 		// value: the slots available for that time
 
@@ -109,7 +104,7 @@ public class ViewSlotsUI {
 		System.out.println("No \t| Start Time \t| Slots");
         for (TimeSlot slot : TimeSlot.values()) {
             int i = slot.ordinal() + 1;
-            System.out.println(i + " \t| " + slot + " \t| " + availableTimeSlots[slot.ordinal()]);
+            System.out.println(i + " \t| " + slot + " \t| " + availableDoctors[slot.ordinal()].length);
         }
 	}
 }

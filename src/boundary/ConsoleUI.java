@@ -9,6 +9,7 @@ public class ConsoleUI {
 	public static final String CANCEL_OPERATION = "[" + CANCEL_KEY + "] back to the previous page."; // To tell user how to stop the current method
 	
     public static final DateTimeFormatter DATE_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Date format for displaying
+    public static final DateTimeFormatter DATE_SQL_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-ddy"); // Date format for SQL query
 
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters

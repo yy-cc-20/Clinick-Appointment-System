@@ -12,7 +12,7 @@ public class ConsoleInput {
     private static final String STRING_ERROR = "Sorry, cannot contain \";\".";
     private static final String ERROR_MESSAGE1 = "Sorry, cannot greater than 5 digits.";
     
-    public static final DateTimeFormatter DATE_INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy"); // Input date format
+    public static final DateTimeFormatter DATE_INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy"); // Input date format, "1-1-2022" and "01-01-2022" are both acceptable
     
     // Ask user the date, set the valid date
     public static LocalDate askDate(String info) {

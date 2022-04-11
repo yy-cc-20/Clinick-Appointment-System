@@ -99,14 +99,14 @@ public class DataList implements IDataStore {
 			return allocationList;
 	}
 
-	public List<Branch> getBranchList() {
+	public List<Branch> getBranchList() { // TODO retrieve from database
 		if (branchList == null)
 		return new ArrayList<Branch>();
 		else
 		return branchList;
 	}
 
-	public List<Service> getServiceList() {
+	public List<Service> getServiceList() { // TODO retrieve from database
 		if (serviceList == null)
 			return new ArrayList<Service>();
 		else
