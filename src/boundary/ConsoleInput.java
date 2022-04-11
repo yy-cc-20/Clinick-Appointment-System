@@ -28,6 +28,26 @@ public class ConsoleInput {
         }
     }
     
+    // Ask user the date, set the valid date
+    // Only accept date after today
+    public static LocalDate askDateNoEarlierThanToday(String info) {
+        String stringDate;
+        LocalDate date;
+        while (true) {
+            System.out.print("%n" + info + " (dd/mm/yyyy) > "); // the "%n" in dateName will not take effect if you use %s
+            try {
+                stringDate = SingletonScanner.scanner.nextLine();
+                date = LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
+                if (date.isAfter(LocalDate.now().minusDays(1)))
+                	return date;
+                else
+                	System.out.printf("%n%s%n", "Sorry, please select a date no earlier than today.");
+            } catch (DateTimeParseException e) {
+                System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
+            }
+        }
+    }
+    
     // let user chose which eventNo he/she wants to perform
     // assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
     public static int askChoice(int beginChoiceNo, int endChoiceNo, String info) throws IllegalArgumentException {
