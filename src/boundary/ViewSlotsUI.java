@@ -15,7 +15,8 @@ import entity.*;
  */
 
 public class ViewSlotsUI {
-	// TODO calculate the column width according to the length of the info in order to display the table more neatly
+	// TODO calculate the column width according to the length of the info to display the table neatly
+	
 	private final static ViewSlotsUI instance = new ViewSlotsUI();
 	private List<Service> services = DataList.getInstance().getServiceList();
 	private ViewSlotsController controller = ViewSlotsController.getInstance();
@@ -95,7 +96,7 @@ public class ViewSlotsUI {
 
 	// Can be used by ChangeAppointmentUI
 	public int viewBranchFilteredByService() {
-		List<Branch> branchResult = ViewSlotsController.getBranchFilteredByService(serviceId);		
+		List<Branch> branchResult = controller.getBranchFilteredByService(serviceId);		
 		
 		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
         System.out.println();
@@ -112,8 +113,8 @@ public class ViewSlotsUI {
 	
 	// Can be used by ChangeAppointmentUI
 	public void viewTimeSlotFilteredByServiceBranchDate() {
-		availableDoctors = ViewSlotsController.getAvailableDoctors(serviceId, branchId, date, requiredSlots);
-		// index: the time slot no
+		availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, services.get(serviceId).getTimeSlotRequired());
+		// index: the time slot number
 		// value: the slots available for that time
 		
 		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
@@ -125,7 +126,7 @@ public class ViewSlotsUI {
             int i = slot.ordinal() + 1;
             System.out.println(i + " \t| " 
             				+ slot + " \t| " 
-            				+ availableDoctors[slot.ordinal()].length + " \t| " );
+            				+ availableDoctors.get(slot.ordinal()).size() + " \t| " );
         }
 	}
 }
