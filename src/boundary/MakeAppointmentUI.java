@@ -1,15 +1,17 @@
 package boundary;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import entity.*;
 import controller.MakeAppointmentController;
 
-// view appointment
-// search appointment
-// make appointment
-// view slots
+// 1. view appointment
+// 2. search appointment
+// 3. make appointment
+// 4. view slots
 
 public class MakeAppointmentUI {
 
@@ -17,28 +19,27 @@ public class MakeAppointmentUI {
     private Appointment appointmentToBook;
     private User theUser;
 
-    public MakeAppointmentUI(User theUser){
+    public MakeAppointmentUI(User theUser) {
         this.theUser = theUser;
     }
 
-    // view the appointments
+    // 1. view the appointments
     public void viewAppointment() {
         List<Appointment> appointments = controller.getAllAppointments(theUser);
         displayAppointments(appointments);
     }
 
-    private void displayAppointmentHeading(){
+    private void displayAppointmentHeading() {
         ConsoleUI.displayTableName("Appointments");
         System.out.println(
                 "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t" +
                         "| Patient \t| Doctor ID \t| Doctor \t| Attendance");
     }
 
-    private void displayAppointments(List<Appointment> appointmentsToDisplay){
+    private void displayAppointments(List<Appointment> appointmentsToDisplay) {
         if (appointmentsToDisplay.size() == 0) {
             System.out.println("No appointment to display.");
-        }
-        else {
+        } else {
             displayAppointmentHeading();
             for (Appointment theAppointment : appointmentsToDisplay) {
                 displayAppointmentDetails(theAppointment);
@@ -58,28 +59,45 @@ public class MakeAppointmentUI {
                 + anAppointment.getAttendance());
     }
 
+    // 2. search appointments
     public void searchAppointment() {
         System.out.println("Search by:           ");
         System.out.println(" 1. Appointment ID   ");
         System.out.println(" 2. Date             ");
         System.out.println(" 3. Service Name     ");
-        System.out.println(" 4. Branch           ");
+        System.out.println(" 4. Branch Name      ");
         System.out.println(" 5. Patient Name     ");
         System.out.println(" 6. Doctor Name      ");
         System.out.println(" 7. Attendance Record");
         System.out.println();
 
-        int choice = ConsoleInput.askPositiveInt("your selection");
-        String searchKeyword = ConsoleInput.askString("search keyword");
+        int choice = ConsoleInput.askChoice(1, 7, "your selection");
+        String searchKeyword = "";
+        switch (choice) {
+            case 1 -> {
+                int id = ConsoleInput.askPositiveInt("appointment ID");
+                searchKeyword = String.valueOf(id);
+            }
+            case 2 -> {
+                LocalDate date = ConsoleInput.askDate("appointment date");
+                searchKeyword = date.format(ConsoleInput.DATE_INPUT_FORMATTER);
+            }
+            case 7 -> {
+                Attendance attendance = Attendance.askAttendance();
+                searchKeyword = attendance.toString();
+            }
+            default -> {
+                searchKeyword = ConsoleInput.askString("search keyword");
+            }
+        }
+        searchKeyword = searchKeyword.toLowerCase();
         List<Appointment> selectedAppointments = controller.searchAppointment(choice, searchKeyword);
 
-        System.out.println("Search Results: ");
-        System.out.println();
-        for (Appointment theAppointment : selectedAppointments) {
-            displayAppointmentDetails(theAppointment);
-        }
+        System.out.println("Search Results: \n");
+        displayAppointments(selectedAppointments);
     }
 
+    // 3. make an appointment
     public void makeAppointment() {
         Patient selectedPatient = ManagePatientUI.searchPatient();
         Service service = new Service();
@@ -96,7 +114,7 @@ public class MakeAppointmentUI {
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
             if (slotAvailable) {
-                System.out.println("Slot " + startSlot + "-" + (startSlot + service.getTimeSlotRequired()) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
                 LocalDate today = LocalDate.now();
 //                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
 //                        Attendance.NAN, startSlot);
@@ -114,7 +132,7 @@ public class MakeAppointmentUI {
             }
         }
     }
-    
+
 //	public static TimeSlot askTimeSlot() {
 //		displayTimeSlot();
 //		int choice = ConsoleInput.askChoice(1, 13, "Select starting time slot");
@@ -137,5 +155,5 @@ public class MakeAppointmentUI {
 //		};
 //	}
 
-	
+
 }
