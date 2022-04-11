@@ -25,6 +25,7 @@ public class Appointment {
 
     public Appointment(){}
 
+    // todo connect to database
     private Patient findPatient(String patientId){
         Patient patient = new Patient();
         return patient;

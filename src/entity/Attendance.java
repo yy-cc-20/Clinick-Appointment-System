@@ -18,6 +18,7 @@ public enum Attendance {
 		return attendance;
 	}
 
+	// todo need to move this in to boundary class?
 	static void displayAttendanceChoice(){
 		System.out.printf("%nSelect attendance.%n%n");
 		System.out.println("1. Attended");

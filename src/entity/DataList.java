@@ -46,14 +46,14 @@ public class DataList implements IDataStore {
 	
     public List<Service> getServiceList() { // TODO called by ViewSlotsUI
         if (serviceList == null)
-            return new ArrayList<Service>();
+            return new ArrayList<>();
         else
             return serviceList;
     }
 
     public List<Branch> getBranchList() { 
         if (branchList == null)
-            return new ArrayList<Branch>();
+            return new ArrayList<>();
         else
             return branchList;
     }
@@ -71,28 +71,28 @@ public class DataList implements IDataStore {
 
     public List<Allocation> getAllocationList() {
         if (allocationList == null)
-            return new ArrayList<Allocation>();
+            return new ArrayList<>();
         else
             return allocationList;
     }
 
     public List<Patient> getPatientList() {
         if (patientList == null)
-            return new ArrayList<Patient>();
+            return new ArrayList<>();
         else
             return patientList;
     }
 
     public List<Receptionist> getReceptionistList() {
         if (receptionistList == null)
-            return new ArrayList<Receptionist>();
+            return new ArrayList<>();
         else
             return receptionistList;
     }
 
     public List<Appointment> getAppointmentList() {
         if (appointmentList == null)
-            return new ArrayList<Appointment>();
+            return new ArrayList<>();
         else
             return appointmentList;
     }
