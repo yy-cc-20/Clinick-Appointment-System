@@ -90,11 +90,11 @@ public class MakeAppointmentController {
     }
 
     public boolean checkSlotAvailability(int startSlot) {
-        // sql query
+        // todo sql query?
         return true;
     }
 
-
     public void addAppointment(Appointment appointmentToBook) {
+        // todo: add a new entry to table appointment
     }
 }

@@ -1,9 +1,7 @@
 package boundary;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import entity.*;
 import controller.MakeAppointmentController;
@@ -15,9 +13,11 @@ import controller.MakeAppointmentController;
 
 public class MakeAppointmentUI {
 
-    private MakeAppointmentController controller = new MakeAppointmentController();
+    // todo: create getInstance method for UIs? or add static to use the method
+    // todo: sql query or for loop statements
+    private final MakeAppointmentController controller = new MakeAppointmentController();
     private Appointment appointmentToBook;
-    private User theUser;
+    private final User theUser;
 
     public MakeAppointmentUI(User theUser) {
         this.theUser = theUser;
@@ -71,7 +71,7 @@ public class MakeAppointmentUI {
         System.out.println(" 7. Attendance Record");
         System.out.println();
 
-        int choice = ConsoleInput.askChoice(1, 7, "your selection");
+        int choice = ConsoleInput.askChoice(1, 7, "Your selection");
         String searchKeyword = "";
         switch (choice) {
             case 1 -> {
@@ -93,7 +93,7 @@ public class MakeAppointmentUI {
         searchKeyword = searchKeyword.toLowerCase();
         List<Appointment> selectedAppointments = controller.searchAppointment(choice, searchKeyword);
 
-        System.out.println("Search Results: \n");
+        System.out.println("\nSearch Results: \n");
         displayAppointments(selectedAppointments);
     }
 

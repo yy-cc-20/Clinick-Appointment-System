@@ -5,7 +5,7 @@ import entity.Patient;
 
 public class ManagePatientUI {
 
-    private static ManagePatientController controller = new ManagePatientController();
+    private static final ManagePatientController controller = new ManagePatientController();
 
     public static Patient searchPatient() {
         String patientIc = ConsoleInput.askString("patient IC");
@@ -29,7 +29,7 @@ public class ManagePatientUI {
                         + " \t| " + selectedPatient.getIc() + " \t| " + selectedPatient.getAddress());
     }
 
-    public static void createPatientProfile(String patientIc) {
+    public static Patient createPatientProfile(String patientIc) {
         String name = ConsoleInput.askString("new patient name");
 
         controller.addPatient(name, patientIc);
@@ -38,6 +38,7 @@ public class ManagePatientUI {
 
         Patient selectedPatient = controller.searchPatient(patientIc);
         displayPatient(selectedPatient);
+        return selectedPatient;
     }
 
     public void managePatientProfile() {
