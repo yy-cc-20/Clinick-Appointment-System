@@ -54,7 +54,7 @@ public class SetUpDatabase {
 			insertReceptionistTable();
 			insertBranchTable();
 			insertServiceTable();
-			insertTimeslotTable();
+			//insertTimeslotTable();
 			insertAllocationTable();
 			insertAppointmentTable();
 	
@@ -367,7 +367,7 @@ public class SetUpDatabase {
 		conn.commit();
 		conn.setAutoCommit(true);
 	}
-
+/*
 	private static void insertTimeslotTable() throws SQLException {
 		Connection conn = DatabaseConnection.getConnection();
 		conn.setAutoCommit(false);
@@ -383,4 +383,5 @@ public class SetUpDatabase {
 		conn.commit();
 		conn.setAutoCommit(true);
 	}
+	*/
 }

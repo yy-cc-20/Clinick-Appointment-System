@@ -62,6 +62,13 @@ public class DataList implements IDataStore {
             return serviceList;
     }
 
+    public List<Allocation> getAllocationList() {  // TODO retrieve from database
+        if (allocationList == null)
+            return new ArrayList<Allocation>();
+        else
+            return allocationList;
+    }
+    
     public List<Patient> getPatientList() {
         if (patientList == null)
             return new ArrayList<Patient>();
@@ -83,12 +90,6 @@ public class DataList implements IDataStore {
             return appointmentList;
     }
 
-    public List<Allocation> getAllocationList() {
-        if (allocationList == null)
-            return new ArrayList<Allocation>();
-        else
-            return allocationList;
-    }
 	
 /*
  * 	public void importDoctorList() {

@@ -17,7 +17,7 @@ package database;
  * 4. Add the JARs file to the project build path:
  * 		build path -> Library -> class path -> add external JARs 
  * 		
- * 5. Change the port number, username and password at the attributes of this class to the same as your MySQL database 
+ * 5. Change the port number, user name and password for the attributes of this class to the same as your MySQL database 
  * 
  * 6. You can run the main method in this class to check the connectivity to your database.
  * 

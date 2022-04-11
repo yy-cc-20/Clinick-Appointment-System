@@ -46,13 +46,34 @@ public class ViewSlotsController {
 	
 	/** @return doctors available to provide a particular service at a particular branch for different times on a particular date */
 	public static Doctor[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
-		Doctor[][] availableDoctors = new Doctor[TimeSlot.values().length][];
-		sql = 
+		List<Integer> doctorIds; // The id of doctors who work at the particular branch and provide the particular service
+		List<Doctor> doctors; // The doctors who work at the particular branch and provide the particular service
+		Doctor[][] availableDoctors = new Doctor[TimeSlot.values().length][]; // The number of doctors available at different time of a particular day
+		// index: the time slot no
+		// value: the slots available for that time
+		
+		sql = "SELECT DISTINCT doctorId FROM Allocation WHERE serviceId = " + serviceId + " AND branchId = " + branchId;
+		try {
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		doctorIds = resultSetToIntArr(rs);
+		doctors = getDoctorsById(doctorIds);
+		
+		
 		return availableDoctors;
 	}
 	
+	// Return doctor objects of the specified ids
+	public static List<Doctor> getDoctorsById(List<Integer> ids) { // TODO called by ViewSlotsController
+		List<Doctor> doctors = new ArrayList<>();
+		
+		return doctors;
+	}
+	
 	// Return branch objects of the specified ids
-	public static List<Branch> getBranchesById(List<Integer> ids) {
+	public static List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
 		List<Branch> branches = new ArrayList<>();
 		
 		return branches;

@@ -71,6 +71,8 @@ public class ViewSlotsUI {
 	}
 	
 	public Doctor[][] getAvailableDoctors() {
+		// index: the time slot
+		// row: an array of the doctors available for that time
 		return availableDoctors;
 	}
     
@@ -110,7 +112,7 @@ public class ViewSlotsUI {
 	// Can be used by ChangeAppointmentUI
 	public void viewTimeSlotFilteredByServiceBranchDate() {
 		availableDoctors = ViewSlotsController.getAvailableDoctors(serviceId, branchId, date);
-		// index: the time slot
+		// index: the time slot no
 		// value: the slots available for that time
 		
 		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
