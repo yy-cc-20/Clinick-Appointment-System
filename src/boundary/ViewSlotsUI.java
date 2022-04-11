@@ -10,42 +10,45 @@ import entity.*;
  * Display available time slot filtered by service, branch and date.
  * Did not let the user select the desired time slot
  * Provide information of the selected service, selected branch, selected date and available time slots.
+ * 
+ * Can be used by MakeAppointmentUI
  */
 
 public class ViewSlotsUI {
 	// TODO calculate the column width according to the length of the info in order to display the table more neatly
-
-	List<Service> services = DataList.getInstance().getServiceList();
-	List<Branch> branches = DataList.getInstance().getBranchList();
+	private final static ViewSlotsUI instance = new ViewSlotsUI();
+	private List<Service> services = DataList.getInstance().getServiceList();
+	private List<Branch> branches = DataList.getInstance().getBranchList();
 	
 	// Filters
-	int serviceId;
-	int branchId;
-	LocalDate date;
+	private int serviceId;
+	private int branchId;
+	private LocalDate date;
 	
 	// Result
-	Doctor[][] availableDoctors; 
+	private Doctor[][] availableDoctors; 
 	// index: the time slot
 	// row: an array of the doctors available for that time
 	
+	public ViewSlotsUI getInstance() {
+		return instance;
+	}
+	
+	// Can be used by MakeAppointmentUI
 	// Exit if the user do not want to continue view the avilable time slots
 	/** @return false if the user did not continue to view the available time slots */
 	public boolean viewSlots() { 
 		
 		viewService();
-		if (!ConsoleInput.askBoolean("Select branch"))
+		if (!ConsoleInput.askBoolean("Select service"))
 			return false;
 		serviceId = ConsoleInput.askChoice(1, services.size(), "Service");
-		
 		
 		viewBranchFilteredByService();
 		if (!ConsoleInput.askBoolean("Select branch"))
 			return false;
 		branchId = ConsoleInput.askChoice(1, services.size(), "Select branch");
-		
-		if (!ConsoleInput.askBoolean("Select date"))
-			return false;
-		date = ConsoleInput.askDate("Date");
+		date = ConsoleInput.askDateNoEarlierThanToday("Date");
 		
 		viewTimeSlotFilteredByServiceBranchDate();
 		return true;
@@ -67,7 +70,8 @@ public class ViewSlotsUI {
 		return availableDoctors;
 	}
     
-	private void viewService() {
+	// Can be used by ChangeAppointmentUI
+	public void viewService() {
 		Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
@@ -75,13 +79,15 @@ public class ViewSlotsUI {
         
         for (int i = 0; i < services.size(); i++) {
             service = services.get(i);
-            System.out.println((i+1) + " \t| " + service.getServiceName() + " \t| " 
+            System.out.println((i + 1) + " \t| " 
+            		+ service.getServiceName() + " \t| " 
             		+ service.getPrice() + " \t| " 
-                    + service.getDescription());
+                    + service.getDescription() + " \t| ");
         }
 	}
 
-	private void viewBranchFilteredByService() {
+	// Can be used by ChangeAppointmentUI
+	public void viewBranchFilteredByService() {
 		List<Branch> branchResult = ViewSlotsController.getBranchFilteredByService(serviceId);		
 		
 		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
@@ -89,14 +95,15 @@ public class ViewSlotsUI {
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         
         for (int i = 0; i < branchResult.size(); i++) {
-            System.out.println((i+1) + " \t| " 
+            System.out.println((i + 1) + " \t| " 
             				+ branchResult.get(i).getBranchName() + " \t| " 
             				+ branchResult.get(i).getTelNo() +  " \t| "
             				+ branchResult.get(i).getBranchAddress() + " \t| ");
         }
 	}
 	
-	private void viewTimeSlotFilteredByServiceBranchDate() {
+	// Can be used by ChangeAppointmentUI
+	public void viewTimeSlotFilteredByServiceBranchDate() {
 		availableDoctors = ViewSlotsController.getAvailableDoctors(serviceId, branchId, date);
 		// index: the time slot
 		// value: the slots available for that time
@@ -110,7 +117,7 @@ public class ViewSlotsUI {
             int i = slot.ordinal() + 1;
             System.out.println(i + " \t| " 
             				+ slot + " \t| " 
-            				+ availableDoctors[slot.ordinal()].length);
+            				+ availableDoctors[slot.ordinal()].length + " \t| " );
         }
 	}
 }
