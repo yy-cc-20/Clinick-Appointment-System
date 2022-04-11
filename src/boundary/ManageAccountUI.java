@@ -13,7 +13,11 @@ import controller.ManageAccountController;
 public class ManageAccountUI {
     private ManageAccountController controller;
     private User currentUser;
-    
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
     public ManageAccountUI(User uc) {
     	this.currentUser = uc;
     	controller = new ManageAccountController(currentUser);

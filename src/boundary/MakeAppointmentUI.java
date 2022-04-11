@@ -69,7 +69,7 @@ public class MakeAppointmentUI {
     public void makeAppointment() {
         Patient selectedPatient = ManagePatientUI.searchPatient();
         Service service = new Service();
-        viewSlots(service);
+//        viewSlots(service);
         boolean slotAvailable = false;
         int startSlot;
         // todo
@@ -77,7 +77,7 @@ public class MakeAppointmentUI {
         // assign doctor
         // allocation id where service id, branch id, and doctor id are the same
         while (!slotAvailable) {
-            Slot.displaySlots();
+            TimeSlot.displaySlots();
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
             slotAvailable = controller.checkSlotAvailability(startSlot);
 
@@ -101,27 +101,27 @@ public class MakeAppointmentUI {
         }
     }
     
-	public static TimeSlot askTimeSlot() {
-		displayTimeSlot();
-		int choice = ConsoleInput.askChoice(1, 13, "Select starting time slot");
-
-		return switch (choice) {
-			case 1 -> SLOT_1;
-			case 2 -> SLOT_2;
-			case 3 -> SLOT_3;
-			case 4 -> SLOT_4;
-			case 5 -> SLOT_5;
-			case 6 -> SLOT_6;
-			case 7 -> SLOT_7;
-			case 8 -> SLOT_8;
-			case 9 -> SLOT_9;
-			case 10 -> SLOT_10;
-			case 11 -> SLOT_11;
-			case 12 -> SLOT_12;
-			case 13 -> SLOT_13;
-			default -> SLOT_14; // case 14
-		};
-	}
+//	public static TimeSlot askTimeSlot() {
+//		displayTimeSlot();
+//		int choice = ConsoleInput.askChoice(1, 13, "Select starting time slot");
+//
+//		return switch (choice) {
+//			case 1 -> SLOT_1;
+//			case 2 -> SLOT_2;
+//			case 3 -> SLOT_3;
+//			case 4 -> SLOT_4;
+//			case 5 -> SLOT_5;
+//			case 6 -> SLOT_6;
+//			case 7 -> SLOT_7;
+//			case 8 -> SLOT_8;
+//			case 9 -> SLOT_9;
+//			case 10 -> SLOT_10;
+//			case 11 -> SLOT_11;
+//			case 12 -> SLOT_12;
+//			case 13 -> SLOT_13;
+//			default -> SLOT_14; // case 14
+//		};
+//	}
 
 	
 }

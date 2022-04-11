@@ -25,11 +25,4 @@ public class MakeAppointmentController {
 
     public void addAppointment(Appointment appointmentToBook) {
     }
-
-    public List<Allocation> getAllAllocations() {
-        return new ArrayList<>();
-    }
-
-    public void getAvailableTimeSlots(int choice, LocalDate date) {
-    }
 }
