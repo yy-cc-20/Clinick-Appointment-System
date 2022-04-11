@@ -13,26 +13,40 @@ import controller.MakeAppointmentController;
 
 public class MakeAppointmentUI {
 
-    private static final MakeAppointmentController controller = new MakeAppointmentController();
+    private MakeAppointmentController controller = new MakeAppointmentController();
     private Appointment appointmentToBook;
+    private User theUser;
+
+    public MakeAppointmentUI(User theUser){
+        this.theUser = theUser;
+    }
 
     // view the appointments
     public void viewAppointment() {
-        List<Appointment> theAppointments = controller.getAllAppointments();
-        if (theAppointments.size() == 0) {
+        List<Appointment> appointments = controller.getAllAppointments(theUser);
+        displayAppointments(appointments);
+    }
+
+    private void displayAppointmentHeading(){
+        ConsoleUI.displayTableName("Appointments");
+        System.out.println(
+                "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t" +
+                        "| Patient \t| Doctor ID \t| Doctor \t| Attendance");
+    }
+
+    private void displayAppointments(List<Appointment> appointmentsToDisplay){
+        if (appointmentsToDisplay.size() == 0) {
             System.out.println("No appointment to display.");
         }
         else {
-            System.out.println(
-                    "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t" +
-                            "| Patient \t| Doctor ID \t| Doctor \t| Attendance");
-            for (Appointment theAppointment : theAppointments) {
-                displayAppointment(theAppointment);
+            displayAppointmentHeading();
+            for (Appointment theAppointment : appointmentsToDisplay) {
+                displayAppointmentDetails(theAppointment);
             }
         }
     }
 
-    public static void displayAppointment(Appointment anAppointment) {
+    public static void displayAppointmentDetails(Appointment anAppointment) {
         System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
                 // todo: get the time
                 + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
@@ -62,7 +76,7 @@ public class MakeAppointmentUI {
         System.out.println("Search Results: ");
         System.out.println();
         for (Appointment theAppointment : selectedAppointments) {
-            displayAppointment(theAppointment);
+            displayAppointmentDetails(theAppointment);
         }
     }
 
@@ -86,7 +100,7 @@ public class MakeAppointmentUI {
                 LocalDate today = LocalDate.now();
 //                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
 //                        Attendance.NAN, startSlot);
-                displayAppointment(appointmentToBook);
+                displayAppointmentDetails(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
                     System.out.println("Appointment booked. Booking ID is " + appointmentToBook.getAppointmentId());

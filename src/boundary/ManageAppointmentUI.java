@@ -19,7 +19,7 @@ public class ManageAppointmentUI {
             System.out.println("No such appointment found.");
         } else {
             selectedAppointment = selectedAppointments.get(0);
-            MakeAppointmentUI.displayAppointment(selectedAppointment);
+            MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
         }
     }
 
@@ -44,7 +44,7 @@ public class ManageAppointmentUI {
         // KeyboardInput.askAttendance;
         Attendance attendance = Attendance.askAttendance();
         selectedAppointment.setAttendance(attendance);
-        MakeAppointmentUI.displayAppointment(selectedAppointment);
+        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
     }
     
 }

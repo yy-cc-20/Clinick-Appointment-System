@@ -1,12 +1,15 @@
 package boundary;
 
 import database.DatabaseConnection;
+import entity.Receptionist;
+import entity.User;
 
 import java.sql.SQLException;
 
 public class testingForMakeApt {
     public static void main(String[] args) {
-        MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI();
+        User user = new Receptionist();
+        MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(user);
 
         int choiceNo; // the action that user wants to perform
         final int beginChoiceNo = 1;
