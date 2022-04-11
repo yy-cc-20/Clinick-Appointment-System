@@ -8,56 +8,61 @@ public class SetUpDatabase {
 
 	private static Statement st;
 	
-	public static void setUpDatabaseIfNotExist() throws SQLException {
-		st = DatabaseConnection.getConnection().createStatement();
-
-		// Recreate the tables in the database in case the tables' structure has changed
-		String[] recreateTables = {
-				"DROP TABLE IF EXISTS Appointment",
-				"DROP TABLE IF EXISTS Allocation",
-				"DROP TABLE IF EXISTS Branch",
-				"DROP TABLE IF EXISTS Doctor",
-				"DROP TABLE IF EXISTS Patient",
-				"DROP TABLE IF EXISTS Receptionist",
-				"DROP TABLE IF EXISTS Account",
-				"DROP TABLE IF EXISTS Service",
-				"DROP TABLE IF EXISTS Timeslot",
-
-		};
-		for (int i = 0; i < recreateTables.length; i++) {
-			st.executeUpdate(recreateTables[i]);
-		}
+	public static void setUpDatabaseIfNotExist() {
+		try {
+			st = DatabaseConnection.getConnection().createStatement();
 		
-		
-		// create all necessary tables
-		String[] createTables = {
-				"CREATE TABLE IF NOT EXISTS Account (id INT AUTO_INCREMENT, username VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL, PRIMARY KEY (id))",
-				"CREATE TABLE IF NOT EXISTS Doctor (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL, accountId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (accountId) REFERENCES Account(id))",
-				"CREATE TABLE IF NOT EXISTS Patient (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL, ic VARCHAR(25) NOT NULL, phone VARCHAR(25), address VARCHAR(100), accountId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (accountId) REFERENCES Account(id))",
-				"CREATE TABLE IF NOT EXISTS Receptionist (id INT AUTO_INCREMENT, name VARCHAR(25) NOT NULL, accountId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (accountId) REFERENCES Account(id))",
-				"CREATE TABLE IF NOT EXISTS Branch (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL, address VARCHAR(250), telNo VARCHAR(25), receptionistId INT, PRIMARY KEY (id), FOREIGN KEY (receptionistId) REFERENCES Receptionist(id))",
-				"CREATE TABLE IF NOT EXISTS Service (id INT AUTO_INCREMENT, name VARCHAR(25) NOT NULL, price double NOT NULL, description VARCHAR(250), timeSlotRequired int NOT NULL, PRIMARY KEY (id))",
-				"CREATE TABLE IF NOT EXISTS Timeslot (date DATE, slotlist VARCHAR(250) NOT NULL, PRIMARY KEY (date))",
-				"CREATE TABLE IF NOT EXISTS Allocation (id INT AUTO_INCREMENT, branchId INT NOT NULL, serviceId INT NOT NULL, doctorId INT NOT NULL, timeslotDate DATE NOT NULL, PRIMARY KEY (id), FOREIGN KEY (branchId) REFERENCES Branch(id), FOREIGN KEY (serviceId) REFERENCES Service(id), FOREIGN KEY (doctorId) REFERENCES Doctor(id), FOREIGN KEY (timeslotDate) REFERENCES Timeslot(date))",
-				"CREATE TABLE IF NOT EXISTS Appointment (id INT AUTO_INCREMENT, attendance VARCHAR(10), startSlot INT NOT NULL, patientId INT NOT NULL, allocationId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (patientId) REFERENCES Patient(id), FOREIGN KEY (allocationId) REFERENCES Allocation(id))",
+			// Recreate the tables in the database in case the tables' structure has changed
+			String[] recreateTables = {
+					"DROP TABLE IF EXISTS Appointment",
+					"DROP TABLE IF EXISTS Allocation",
+					"DROP TABLE IF EXISTS Branch",
+					"DROP TABLE IF EXISTS Doctor",
+					"DROP TABLE IF EXISTS Patient",
+					"DROP TABLE IF EXISTS Receptionist",
+					"DROP TABLE IF EXISTS Account",
+					"DROP TABLE IF EXISTS Service",
+					"DROP TABLE IF EXISTS Timeslot",
+	
 			};
-
-		for (int i = 0; i < createTables.length; i++) {
-			st.executeUpdate(createTables[i]);
+			for (int i = 0; i < recreateTables.length; i++) {
+				st.executeUpdate(recreateTables[i]);
+			}
+			
+			
+			// create all necessary tables
+			String[] createTables = {
+					"CREATE TABLE IF NOT EXISTS Account (id INT AUTO_INCREMENT, username VARCHAR(25) NOT NULL, password VARCHAR(25) NOT NULL, PRIMARY KEY (id))",
+					"CREATE TABLE IF NOT EXISTS Doctor (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL, accountId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (accountId) REFERENCES Account(id))",
+					"CREATE TABLE IF NOT EXISTS Patient (id INT AUTO_INCREMENT, name VARCHAR(100) NOT NULL, ic VARCHAR(25) NOT NULL, phone VARCHAR(25), address VARCHAR(100), accountId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (accountId) REFERENCES Account(id))",
+					"CREATE TABLE IF NOT EXISTS Receptionist (id INT AUTO_INCREMENT, name VARCHAR(25) NOT NULL, accountId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (accountId) REFERENCES Account(id))",
+					"CREATE TABLE IF NOT EXISTS Branch (id INT AUTO_INCREMENT, name VARCHAR(50) NOT NULL, address VARCHAR(250), telNo VARCHAR(25), receptionistId INT, PRIMARY KEY (id), FOREIGN KEY (receptionistId) REFERENCES Receptionist(id))",
+					"CREATE TABLE IF NOT EXISTS Service (id INT AUTO_INCREMENT, name VARCHAR(25) NOT NULL, price double NOT NULL, description VARCHAR(250), timeSlotRequired int NOT NULL, PRIMARY KEY (id))",
+					"CREATE TABLE IF NOT EXISTS Timeslot (date DATE, slotlist VARCHAR(250) NOT NULL, PRIMARY KEY (date))",
+					"CREATE TABLE IF NOT EXISTS Allocation (id INT AUTO_INCREMENT, branchId INT NOT NULL, serviceId INT NOT NULL, doctorId INT NOT NULL, timeslotDate DATE NOT NULL, PRIMARY KEY (id), FOREIGN KEY (branchId) REFERENCES Branch(id), FOREIGN KEY (serviceId) REFERENCES Service(id), FOREIGN KEY (doctorId) REFERENCES Doctor(id), FOREIGN KEY (timeslotDate) REFERENCES Timeslot(date))",
+					"CREATE TABLE IF NOT EXISTS Appointment (id INT AUTO_INCREMENT, attendance VARCHAR(10), startSlot INT NOT NULL, patientId INT NOT NULL, allocationId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (patientId) REFERENCES Patient(id), FOREIGN KEY (allocationId) REFERENCES Allocation(id))",
+				};
+	
+			for (int i = 0; i < createTables.length; i++) {
+				st.executeUpdate(createTables[i]);
+			}
+	
+			// insert data into all tables
+			insertAccountTable();
+			insertDoctorTable();
+			insertPatientTable();
+			insertReceptionistTable();
+			insertBranchTable();
+			insertServiceTable();
+			insertTimeslotTable();
+			insertAllocationTable();
+			insertAppointmentTable();
+	
+			// conn.commit(); // Cannot call commit when autocommit is true
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		// insert data into all tables
-		insertAccountTable();
-		insertDoctorTable();
-		insertPatientTable();
-		insertReceptionistTable();
-		insertBranchTable();
-		insertServiceTable();
-		insertTimeslotTable();
-		insertAllocationTable();
-		insertAppointmentTable();
-
-		// conn.commit(); // Cannot call commit when autocommit is true
 	}
 
 	private static void insertAccountTable() throws SQLException {

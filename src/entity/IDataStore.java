@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface IDataStore {
 	// Use List interface instead of ArrayList, more flexible, reduce the dependency
+	/*
 	void importDoctorList();
 	void importPatientList();
 	void importReceptionistList();
@@ -11,6 +12,7 @@ public interface IDataStore {
 	void importAllocationList();
 	void importBranchList();
 	void importServiceList();
+	*/
 	List<Doctor> getDoctorList();
 	List<Patient> getPatientList();
 	List<Receptionist> getReceptionistList();
@@ -18,5 +20,4 @@ public interface IDataStore {
 	List<Allocation> getAllocationList();
 	List<Branch> getBranchList();
 	List<Service> getServiceList();
-
 }

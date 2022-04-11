@@ -29,7 +29,7 @@ public class DatabaseConnection {
 	private static String username = "root";
 	private static String password = "root";
 
-	public DatabaseConnection() throws SQLException {
+	public DatabaseConnection() {
 		try {
 			conn = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {

@@ -13,11 +13,15 @@ public class ViewSlotsController {
 	private static ResultSet rs;
 	private static String sql;
 	
-	private ViewSlotsController() throws SQLException {
-		st = DatabaseConnection.getConnection().createStatement();
+	private ViewSlotsController() {
+		try {
+			st = DatabaseConnection.getConnection().createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public ViewSlotsController getInstance() throws SQLException {
+	public ViewSlotsController getInstance() {
 		if (instance == null)
 			new ViewSlotsController();
 		return instance;
@@ -46,7 +50,7 @@ public class ViewSlotsController {
 		ArrayList<Branch> branches = new ArrayList<>();
 	}
 	
-	// Retrieve the integer from ResultSet and return ArrayList<Integer>
+	// Retrieve the integer from the ResultSet and return ArrayList<Integer>
 	public static ArrayList<Integer> resultSetToIntArr(ResultSet rs) throws SQLException {
 		ArrayList<Integer> ints = new ArrayList<>();
 		while (rs.next()) {

@@ -21,62 +21,47 @@ public class DataList implements IDataStore {
 	private List<Service>  serviceList;
 	
 	private Statement st;
-
 	
-	private DataList() throws SQLException {
-		st = DatabaseConnection.getConnection().createStatement();
-		importDoctorList();
-		importPatientList();
-		importReceptionistList();
-		importAppointmentList();
-		importAllocationList();
-	} // Private constructor for singleton !!!
-
-	public static IDataStore getInstance() throws SQLException {
+	private DataList() {
+		try {
+			st = DatabaseConnection.getConnection().createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	} // Private constructor for singleton
+	
+	public static IDataStore getInstance() {
 		if (instance == null) {
 			instance = new DataList();
 		}
 		return instance;
 	}
-	
-	public void importDoctorList() {
+
+	public List<Doctor> getDoctorList() { // TODO retrieve from database
 		// Test data for login
 		doctorList = new ArrayList<>();
 		doctorList.add(new Doctor(1, "username", "password"));
-	}
-	
-	public void importPatientList() {
 		
+		//if (doctorList == null)
+		//	return new ArrayList<Doctor>();
+		//else 
+		return doctorList;
 	}
 	
-	public void importReceptionistList() {
-		
+	public List<Branch> getBranchList() { // TODO retrieve from database
+		if (branchList == null)
+		return new ArrayList<Branch>();
+		else
+		return branchList;
 	}
 
-	public void importAllocationList() {
+	public List<Service> getServiceList() { // TODO retrieve from database
+		if (serviceList == null)
+			return new ArrayList<Service>();
+		else
+			return serviceList;
 	}
 
-	public void importBranchList() {
-
-	}
-
-	public void importServiceList() {
-
-	}
-
-	public void importAppointmentList() {
-	}
-
-	public void importTimeSlotList() {
-	}
-	
-	public List<Doctor> getDoctorList() {
-		if (doctorList == null)
-			return new ArrayList<Doctor>();
-		else 
-			return doctorList;
-	}
-	
 	public List<Patient> getPatientList() {
 		if (patientList == null)
 			return new ArrayList<Patient>();
@@ -104,22 +89,37 @@ public class DataList implements IDataStore {
 		else
 			return allocationList;
 	}
+	
+/*
+ * 	public void importDoctorList() {
 
-	public List<Branch> getBranchList() { // TODO retrieve from database
-		if (branchList == null)
-		return new ArrayList<Branch>();
-		else
-		return branchList;
-	}
-
-	public List<Service> getServiceList() { // TODO retrieve from database
-		if (serviceList == null)
-			return new ArrayList<Service>();
-		else
-			return serviceList;
 	}
 	
+	public void importPatientList() {
+		
+	}
+	
+	public void importReceptionistList() {
+		
+	}
 
+	public void importAllocationList() {
+	}
+
+	public void importBranchList() {
+
+	}
+
+	public void importServiceList() {
+
+	}
+
+	public void importAppointmentList() {
+	}
+
+	public void importTimeSlotList() {
+	}
+	
 	public List<String> getResultArray(ResultSet rs, ResultSet size) throws SQLException {
 		List<String> rsArray = new ArrayList<>();
 		try {
@@ -187,5 +187,5 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 	}
-
+*/
 }

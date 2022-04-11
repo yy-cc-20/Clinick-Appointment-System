@@ -30,6 +30,8 @@ public class ViewSlotsUI {
 	// index: the time slot
 	// row: an array of the doctors available for that time
 	
+	private ViewSlotsUI()
+	
 	public ViewSlotsUI getInstance() {
 		return instance;
 	}
