@@ -109,7 +109,9 @@ public class ViewSlotsController {
 		return resultSetToIntArr(rs);
 	}
 	
-	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int slotstartSlot.ordinal() + 1)
+	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int slot) {
+		
+	}
 	
 	private void removeUnavailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
 		

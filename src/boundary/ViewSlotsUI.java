@@ -15,7 +15,7 @@ import entity.*;
  */
 
 public class ViewSlotsUI {
-	// TODO calculate the column width according to the length of the info to display the table neatly
+	// TODO To have column size determined by the longest info in the column so to display the table neatly
 	
 	private final static ViewSlotsUI instance = new ViewSlotsUI();
 	private List<Service> services = DataList.getInstance().getServiceList();
