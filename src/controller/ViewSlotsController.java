@@ -11,9 +11,9 @@ import entity.*;
 
 public class ViewSlotsController {
 	private static ViewSlotsController instance;
-	private static Statement st;
-	private static ResultSet rs;
-	private static String sql;
+	private Statement st;
+	private ResultSet rs;
+	private String sql;
 	
 	private ViewSlotsController() {
 		try {
@@ -30,7 +30,7 @@ public class ViewSlotsController {
 	}
 	
 	/** @return branches that provide a particular service */
-	public static List<Branch> getBranchFilteredByService(int serviceId) {
+	public List<Branch> getBranchFilteredByService(int serviceId) {
 		List<Integer> branchIds;
 		List<Branch> branchResults;
 				
@@ -46,41 +46,23 @@ public class ViewSlotsController {
 	}
 	
 	/** @return the id of doctors who are available to provide a particular service at a particular branch for different times on a particular date */
-	public static List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
-		int requiredSlots;
+	public List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date, int requiredSlots) {
 		
 		// the availability of doctors in charge at different time
 		List<List<Integer>> availableDoctorsId = new ArrayList<List<Integer>>(); // Have to write as new ArrayList<List<Integer>>()
 		// row: time slot number
-		// column: the id of the available doctors at that time
+		// column: the id of the available doctors at that time		
 		
-		// 1. Finds the required number of time slots for the selected service
-		sql = "SELECT timeSlotRequired FROM Service WHERE serviceId = serviceId";
-		try {
-			rs = st.executeQuery(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		requiredSlots = rs.getInt(0);
+		// 1. Finds doctors that in charge of the selected service at the selected branch
+		List<Integer> doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
 		
-		
-		// 2. Finds doctors that in charge of the selected service at the selected branch
-		sql = "SELECT doctorId FROM Allocation WHERE serviceId = serviceId AND branchId = branchId"; 
-		try {
-			rs = st.executeQuery(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		// 3. Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
-		List<Integer>doctorsInCharge = resultSetToIntArr(rs);
+		// 2. Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
 		for (int i = 0; i < TimeSlot.values().length; ++i) {
 			availableDoctorsId.add(doctorsInCharge);
 		}
 		
-		
-		// 4. Remove the doctors in charge that have an appointment during a time slot from that slot of the availableDoctorsId
+		// 3. Remove the doctors in charge that have an appointment during a time slot from that slot of the availableDoctorsId
+		int unavailableDoctorId;
 		for (TimeSlot startSlot : TimeSlot.values()) {
 			sql = "SELECT doctorId FROM FROM Appointment NATURAL JOIN Allocation"
 					+ " WHERE serviceId = " + serviceId 
@@ -89,11 +71,11 @@ public class ViewSlotsController {
 					+ " AND startSlot = " + (startSlot.ordinal() + 1);
 			try {
 				rs = st.executeQuery(sql);
+				unavailableDoctorId = rs.getInt(0);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			int unavailableDoctorId = rs.getInt(0);
-			removeFromAvailableDoctors(startSlot.ordinal(), requiredSlots, unavailableDoctorId);
+			removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, unavailableDoctorId);
 		}
 		return availableDoctorsId;
 		
@@ -111,19 +93,29 @@ public class ViewSlotsController {
 		*/
 	}
 
-	private void removeFromAvailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
+	public List<Integer> getDoctorsInCharge(int serviceId, int branchId) {
+		sql = "SELECT doctorId FROM Allocation WHERE serviceId = " + serviceId  + " AND branchId = " + branchId; 
+		try {
+			rs = st.executeQuery(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSetToIntArr(rs);
+	}
+	
+	private void removeUnavailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
 		
 	}
 	
 	// Return branch objects of the specified ids
-	public static List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
+	public List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
 		List<Branch> branches = new ArrayList<>();
 		
 		return branches;
 	}
 	
 	// Retrieve the integer from the ResultSet and return List<Integer>
-	public static List<Integer> resultSetToIntArr(ResultSet rs) {
+	public List<Integer> resultSetToIntArr(ResultSet rs) {
 		List<Integer> ints = new ArrayList<>();
 		try {
 			while (rs.next()) {
