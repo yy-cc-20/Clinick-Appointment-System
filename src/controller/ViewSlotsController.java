@@ -45,37 +45,8 @@ public class ViewSlotsController {
 		return branchResults;
 	}
 	
-	/** @return doctors available to provide a particular service at a particular branch for different times on a particular date */
-	public static int[][] getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
-/*		List<Integer> doctorIds; // The id of doctors who work at the particular branch and provide the particular service
-		List<Doctor> doctors; // The doctors who work at the particular branch and provide the particular service
-		List<Appointment> appointments = getAppointmentsByServiceBranchDate(serviceId, branchId, date);
-		
-		1. Finds the required number of time slots for the selected service
-		SELECT timeSlotRequired FROM Service WHERE serviceId = serviceId
-		
-		2. Finds doctors that in charge of the selected service at the selected branch
-		SELECT allocationId FROM Allocation WHERE serviceId = serviceId AND branchId = branchId (from the alocationId can know the doctor)
-		SELECT doctorId FROM Allocation WHERE serviceId = serviceId AND branchId = branchId 
-				
-		List<Integer>doctorsInCharge = result;
-		int[] doctorsInChargeArr = new int[doctorsInCharge.size()];
-		doctorsInChargeArr = doctorsInCharge.toArray(doctorsInChargeArr);
-		
-		3. Initializes the availableDoctors[][] with all the doctors incharge
-		int[][] availableDoctorIds = new int[TimeSlot.values().length][];
-		for (int[] time : availableDoctors)
-			time = doctorInchargeArr.clone();
-		
-		index: time slot number
-		row: the id of the available doctors at that time
-		
-		4. remove the doctors in charge that have an appointment during a time slot from that slot of the availableDoctors[][]
-		
-		4.1 find the appointments for doctors in charge on the selected date
-		for(int doctorId : doctorsInChargeArr)
-			SELECT startSlot FROM Appointment NATURAL JOIN Allocation WHERE doctorId = doctorId AND date = date
-		*/	
+	/** @return the id of doctors who are available to provide a particular service at a particular branch for different times on a particular date */
+	public static List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date) {
 		int requiredSlots;
 		
 		// the availability of doctors in charge at different time
@@ -121,8 +92,8 @@ public class ViewSlotsController {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-			removeFromAvailable(startSlot, numberOfRequiredSlots, doctorId);
+			int unavailableDoctorId = rs.getInt(0);
+			removeFromAvailableDoctors(startSlot.ordinal(), requiredSlots, unavailableDoctorId);
 		}
 		return availableDoctorsId;
 		
@@ -140,6 +111,10 @@ public class ViewSlotsController {
 		*/
 	}
 
+	private void removeFromAvailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
+		
+	}
+	
 	// Return branch objects of the specified ids
 	public static List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
 		List<Branch> branches = new ArrayList<>();
