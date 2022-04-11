@@ -103,7 +103,7 @@ public class MakeAppointmentUI {
     
 	public static TimeSlot askTimeSlot() {
 		displayTimeSlot();
-		int choice = ConsoleInput.askChoice(1, 13, "Select time slot");
+		int choice = ConsoleInput.askChoice(1, 13, "Select starting time slot");
 
 		return switch (choice) {
 			case 1 -> SLOT_1;

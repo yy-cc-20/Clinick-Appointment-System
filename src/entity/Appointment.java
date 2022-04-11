@@ -6,14 +6,14 @@ import java.time.format.DateTimeFormatter;
 public class Appointment {
     private static final String pattern = "dd/MM/yyyy"; // date format
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-    private String appointmentId;
+    private int appointmentId;
     private LocalDate appointmentDate;
     private Patient patient;
     private Allocation allocation;
     private Attendance attendance;
     private int startSlot;
 
-    public Appointment(String appointmentId, String appointmentDate, String patientId, String allocationId,
+    public Appointment(int appointmentId, String appointmentDate, String patientId, String allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, formatter);
@@ -75,7 +75,7 @@ public class Appointment {
 //        };
 //    }
 
-    public String getAppointmentId() {
+    public int getAppointmentId() {
         return appointmentId;
     }
 
@@ -113,7 +113,7 @@ public class Appointment {
         return allocation;
     }
 
-    public void setAppointmentId(String appointmentId) {
+    public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
     }
 
