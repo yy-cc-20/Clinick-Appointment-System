@@ -18,6 +18,10 @@ public class User {
         username = theUsername;
         password = thePassword;
     }
+	
+    public User(String theUsername) {
+    	 username = theUsername;
+	}
 
     public int getUserId(){
     	return userId;
