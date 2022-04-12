@@ -60,8 +60,10 @@ public class ClinickAppointmentSystem {
 					ConsoleUI.displayFunctionName("Account Setting");
 					new ManageAccountUI(systemUser).changePassword();
 				}
-				case 2 -> // Modify Account Info
-						ConsoleUI.displayFunctionName(" Modify Account Details ");
+				case 2 -> {// Modify Account Info
+						ConsoleUI.displayFunctionName("View Services and Time Slots");
+						ViewSlotsUI.getInstance().viewSlots();
+				}
 				case 3 -> { // logout and exit the program
 					ConsoleUI.displayFunctionName(" Program Stopped ");
 					SingletonScanner.scanner.close();

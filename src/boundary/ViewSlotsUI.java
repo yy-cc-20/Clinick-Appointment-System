@@ -167,9 +167,9 @@ public class ViewSlotsUI {
             				+ availableDoctors.get(slot.ordinal()).size() + " \t| " );
         }
 	}
-	
+	/*
 	// ViewSlotsUI test
 	public static void main(String[] args) {
 		ViewSlotsUI.getInstance().viewSlots();
-	}
+	}*/
 }

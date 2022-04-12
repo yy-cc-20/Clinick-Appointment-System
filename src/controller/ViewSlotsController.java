@@ -54,9 +54,10 @@ public class ViewSlotsController {
 	/** @return the id of doctors who are available to provide a particular service at a particular branch for different times on a particular date */
 	public List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date, int requiredSlots) {
 		
+		// 1.
 		List<Integer> doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
 		
-		// Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
+		// 2. Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
 		int[] doctorsInChargeArr = new int[doctorsInCharge.size()];
 		doctorsInChargeArr = doctorsInCharge.stream().mapToInt(Integer::intValue).toArray().clone();
 		//System.out.println(Arrays.toString(doctorsInChargeArr));
@@ -69,7 +70,7 @@ public class ViewSlotsController {
 
 		//System.out.println("initial: " + Arrays.deepToString(availableDoctors));
 		
-		// Remove the doctors in charge that have an appointment at a time slot from availableDoctorsId
+		// 3. Remove the doctors in charge that have an appointment at a time slot from availableDoctorsId
 		List<Integer> unavailableDoctorsId;
 		for (TimeSlot startSlot : TimeSlot.values()) {
 			unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal() + 1);
@@ -83,7 +84,7 @@ public class ViewSlotsController {
 		}
 		//System.out.println("after remove " + Arrays.deepToString(availableDoctors));
 		
-		// Convert availableDoctor from array to arrayList
+		// 4. Convert availableDoctor from array to arrayList
 		availableDoctorsId = new ArrayList<List<Integer>>();
 		List<Integer> temp;
 		for (int[] aTime : availableDoctors) {
@@ -97,7 +98,9 @@ public class ViewSlotsController {
 		
 		return availableDoctorsId;
 		
-		/* Using ArrayList to do the same thing
+		/* Using ArrayList to do the same thing 
+		 * removeUnavailableDoctors() has a bug so did not use arraylist
+		 * 
 		// Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
 		for (int i = 0; i < TimeSlot.values().length; ++i) {
 			availableDoctorsId.add(doctorsInCharge);
@@ -171,6 +174,9 @@ public class ViewSlotsController {
 				availableDoctorsId.get(startSlotOrdinal + i).remove(Integer.valueOf(unavailableDoctorId));
 		}
 		/* Problem: remove an element in a list, will result in all the element in the 2D list being removed
+		 * 
+		 * The code below shows this problem:
+		 * 
 		List<List<String>> someNo = new ArrayList<List<String>>();
 		List<String> someNo2 = new ArrayList<>();
 		someNo2.add("2");
@@ -202,7 +208,7 @@ public class ViewSlotsController {
 		}
 		return ints;
 	}
-	
+	/*
 	// ViewSlotsController test
 	public static void main(String[] args) throws SQLException {
 
@@ -215,12 +221,9 @@ public class ViewSlotsController {
 		List<Integer> ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
 		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is is 2, 3
 		System.out.println();
-		
-
-		// removeUnavailableDoctors test
-		
+				
 		// getAvailableDoctors test
 		List<List<Integer>> ids2 = ViewSlotsController.getInstance().getAvailableDoctors(2, 1, LocalDate.of(2022, 4, 25), 3);
 		System.out.println(Arrays.deepToString(ids2.toArray()));
-	}
+	}*/
 }
