@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class testingForMakeApt {
     public static void main(String[] args) throws SQLException {
-        User user = new Patient();
+        User user = new Patient(1,"asd", "a");
         MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(user);
 
         int choiceNo; // the action that user wants to perform
@@ -24,6 +24,7 @@ public class testingForMakeApt {
 
             switch (choiceNo) {
                 case 1 -> {
+                    // todo has a bug
                     makeAppointmentInterface.viewAppointment();
                 }
                 case 2 -> {
