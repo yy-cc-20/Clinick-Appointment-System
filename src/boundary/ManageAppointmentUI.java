@@ -26,7 +26,7 @@ public class ManageAppointmentUI {
     public void updateAppointment() {
         searchAppointmentToModify();
 		if (ConsoleInput.askBoolean("Update appointment")) {
-			controller.updateAppointment(selectedAppointment);
+//			controller.updateAppointment(selectedAppointment);
 			System.out.println("Appointment updated.");
 		}
     }
