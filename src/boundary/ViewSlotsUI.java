@@ -28,6 +28,7 @@ public class ViewSlotsUI {
 	
 	// Result
 	private List<Branch> branchResults;
+	private int indexOfSelectedBranch;
 	private List<List<Integer>> availableDoctors; 
 	// index: the time slot
 	// row: an array of the doctors available for that time
@@ -70,8 +71,8 @@ public class ViewSlotsUI {
 					continue;
 				else
 					return false;
-			branchId = ConsoleInput.askPositiveInt("Branch");
-
+			indexOfSelectedBranch = ConsoleInput.askPositiveInt("Branch") - 1;
+			branchId = branchResults.get(indexOfSelectedBranch).getBranchId();
 			
 			date = ConsoleInput.askDateNoEarlierThanToday("Date");
 			viewTimeSlotFilteredByServiceBranchDate();
@@ -137,7 +138,7 @@ public class ViewSlotsUI {
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         
         for (int i = 0; i < branchResults.size(); i++) {
-            System.out.println(branchResults.get(i).getBranchId() + " \t| " 
+            System.out.println(i + 1 + " \t| " 
             				+ branchResults.get(i).getBranchName() + " \t| " 
             				+ branchResults.get(i).getTelNo() +  " \t| "
             				+ branchResults.get(i).getBranchAddress() + " \t| ");
@@ -147,19 +148,18 @@ public class ViewSlotsUI {
 	
 	// Can be used by ChangeAppointmentUI
 	public void viewTimeSlotFilteredByServiceBranchDate() {
-		System.out.println("ViewSlotsUI.viewTimeSlotFilteredByServiceBranchDate testing");
-		try {
+		//System.out.println("ViewSlotsUI.viewTimeSlotFilteredByServiceBranchDate testing");
+	
 		availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, services.get(serviceId).getTimeSlotRequired());
 		// index: the time slot number
 		// value: the slots available for that time
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		ConsoleUI.displayTableName("Available Time Slots For " + services.get(serviceId).getServiceName());
-		ConsoleUI.displayTableName("at " + branchResults.get(branchId).getBranchName());
-		ConsoleUI.displayTableName("on " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
 		System.out.println();
-		System.out.println("No \t| Start Time \t| Slots \t|");
+		System.out.println();
+		ConsoleUI.displayTableName("Available Time Slots For " + services.get(serviceId).getServiceName());
+		ConsoleUI.displayTableName("At " + branchResults.get(indexOfSelectedBranch).getBranchName());
+		ConsoleUI.displayTableName("On " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
+		System.out.println();
+		System.out.println("No \t| Start Time \t| Slots |");
         for (TimeSlot slot : TimeSlot.values()) {
             int i = slot.ordinal() + 1;
             System.out.println(i + " \t| " 

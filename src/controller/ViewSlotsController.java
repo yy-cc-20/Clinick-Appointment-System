@@ -70,9 +70,9 @@ public class ViewSlotsController {
 			for (int id : unavailableDoctorsId)
 				removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, id);
 			
-			System.out.println("available doctor id: " + Arrays.deepToString(availableDoctorsId.toArray()));
+			//System.out.println("available doctor id: " + Arrays.deepToString(availableDoctorsId.toArray()));
 		}
-		System.out.println("ViewSlotsController.getAvailableDoctors testing");
+		//System.out.println("ViewSlotsController.getAvailableDoctors testing");
 		return availableDoctorsId;
 		
 		/* If every service only consumes 1 time slot
@@ -100,7 +100,7 @@ public class ViewSlotsController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ViewSlotsController.getDoctorsInCharge testing");
+		//System.out.println("ViewSlotsController.getDoctorsInCharge testing");
 		return returnIds;
 	}
 	
@@ -119,7 +119,7 @@ public class ViewSlotsController {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				returnIds.add(rs.getInt("doctorId")); // The column index of MySQL starts from 1
-				System.out.println("unavailable doctorid: " + rs.getInt("doctorId") + " startSlot" + startSlot);
+				//System.out.println("unavailable doctorid: " + rs.getInt("doctorId") + " startSlot" + startSlot);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -133,7 +133,7 @@ public class ViewSlotsController {
 			if (startSlotOrdinal + i < availableDoctorsId.size())
 				availableDoctorsId.get(startSlotOrdinal + i).remove(Integer.valueOf(unavailableDoctorId));
 		}
-		System.out.println("ViewSlotsController.removeUnavailableDoctors testing");
+		//System.out.println("ViewSlotsController.removeUnavailableDoctors testing");
 	}
 
 	// Retrieve the integer from the ResultSet and return List<Integer>
@@ -175,9 +175,10 @@ public class ViewSlotsController {
 		someNo.add(someNo2);
 		
 		System.out.println("Before: " + Arrays.deepToString(someNo.toArray()));
-		System.out.println(Arrays.deepToString(someNo.get(0).toArray()));
+		System.out.println("First list: " + Arrays.deepToString(someNo.get(0).toArray()));
 		someNo.get(0).remove(1);
-		System.out.println(Arrays.deepToString(someNo.get(0).toArray()));
+		System.out.println("Remove second element from the first list: " + Arrays.deepToString(someNo.get(0).toArray()));
+		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
 		
 		for (int i = 0; i < 3; ++i) {
 			if (0 + i < someNo.size())
@@ -185,8 +186,6 @@ public class ViewSlotsController {
 			System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
 		}
 		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
-
-		
 		
 		// getAvailableDoctors test
 		List<List<Integer>> ids2 = ViewSlotsController.getInstance().getAvailableDoctors(2, 1, LocalDate.of(2022, 4, 25), 3);
