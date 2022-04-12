@@ -41,13 +41,11 @@ public class ClinickAppointmentSystem {
 			ConsoleUI.displaySystemName("Clinick Booking System");
 			systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
-	
-			
+
 			makeAppointmentUI = new MakeAppointmentUI(systemUser);
 			manageAppointmentUI = new ManageAppointmentUI();
 			managePatientUI = new ManagePatientUI();
 			manageAccountUI = new ManageAccountUI(systemUser);
-			
 			
 			ConsoleUI.clearScreen();
 			

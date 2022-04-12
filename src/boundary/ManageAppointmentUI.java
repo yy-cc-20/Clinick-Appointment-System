@@ -28,7 +28,7 @@ public class ManageAppointmentUI {
         String newDate = ConsoleInput.askDateNoEarlierThanToday("new date").toString();
         // TODO : view the slots and select a newStartSlot
 		if (ConsoleInput.askBoolean("Update appointment")) {
-			controller.updateAppointmentTime(selectedAppointment.getAppointmentId(), newDate, newStartSlot);
+//			controller.updateAppointmentTime(selectedAppointment.getAppointmentId(), newDate, newStartSlot);
 			System.out.println("Appointment updated.");
 		}
     }
