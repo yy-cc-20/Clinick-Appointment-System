@@ -59,7 +59,7 @@ public class ConsoleInput {
         }
 
         int eventNo;
-        final String errorMessage = "Sorry, input failed. Please enter the number of choice you want.%n";
+        final String errorMessage = "Sorry, input failed. Please enter the number of choice you want.";
 
         while (true) {
             try {
@@ -69,7 +69,7 @@ public class ConsoleInput {
                 if (eventNo >= beginChoiceNo && eventNo <= endChoiceNo) {
                     break;
                 } else {
-                    System.out.print(errorMessage);
+                    System.out.println(errorMessage);
                 }
             } catch (NumberFormatException e) {
                 System.out.print(errorMessage);
@@ -128,7 +128,7 @@ public class ConsoleInput {
             System.out.printf("%n%s> ", info);
             try {
                 input = Integer.parseInt(SingletonScanner.scanner.nextLine());
-                if (input < 0) {
+                if (input <= 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
                     System.out.printf("%s%n%n", ERROR_MESSAGE1);

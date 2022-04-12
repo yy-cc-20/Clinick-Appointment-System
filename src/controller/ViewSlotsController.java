@@ -139,7 +139,7 @@ public class ViewSlotsController {
 		}
 		return ints;
 	}
-	/*
+	
 	// ViewSlotsController test
 	public static void main(String[] args) {
 		String sql = "SELECT COUNT(*) FROM Allocation";
@@ -158,5 +158,5 @@ public class ViewSlotsController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }

@@ -51,7 +51,7 @@ public class DatabaseConnection {
 	/** @setup 5. Change the value of these variable to connect to your database */
 	private static final int portNo = 3308;
 	private static final String databaseName = "clinick-appointment-system";
-	private static String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
+	private static final String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
 	private static String username = "root";
 	private static String password = "root";
 
@@ -64,7 +64,7 @@ public class DatabaseConnection {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		//DatabaseSetup.setupDatabase();
+		DatabaseSetup.setupDatabase();
 	} // Private constructor for singleton
 
 	public static Connection getConnection() throws SQLException {

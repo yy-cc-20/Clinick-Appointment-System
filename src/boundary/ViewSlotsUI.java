@@ -55,7 +55,7 @@ public class ViewSlotsUI {
 			}			
 			if (!ConsoleInput.askBoolean("Select service"))
 				return false;
-			serviceId = ConsoleInput.askChoice(1, servicesFound, "Service");
+			serviceId = ConsoleInput.askPositiveInt("Service");
 			
 			
 			branchesFound = viewBranchFilteredByService();
@@ -70,7 +70,7 @@ public class ViewSlotsUI {
 					continue;
 				else
 					return false;
-			branchId = ConsoleInput.askChoice(1, branchesFound, "Branch");
+			branchId = ConsoleInput.askPositiveInt("Branch");
 
 			
 			date = ConsoleInput.askDateNoEarlierThanToday("Date");
