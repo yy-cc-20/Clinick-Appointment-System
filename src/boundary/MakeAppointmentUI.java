@@ -110,7 +110,15 @@ public class MakeAppointmentUI {
         Service service = new Service();
 
         Patient selectedPatient = ManagePatientUI.searchPatient();
+        if(selectedPatient == null){
+            System.out.println("Back to the menu");
+            return;
+        }
         boolean cont = ViewSlotsUI.getInstance().viewSlots();
+        if (!cont) {
+            System.out.println("Back to the menu");
+            return;
+        }
 
         boolean slotAvailable = false;
         int startSlot;

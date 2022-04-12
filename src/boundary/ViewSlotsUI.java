@@ -54,6 +54,7 @@ public class ViewSlotsUI {
 		if (!ConsoleInput.askBoolean("Select branch"))
 			return false;
 		branchId = ConsoleInput.askChoice(1, branchResults.size(), "Select branch");
+
 		date = ConsoleInput.askDateNoEarlierThanToday("Date");
 		
 		viewTimeSlotFilteredByServiceBranchDate();

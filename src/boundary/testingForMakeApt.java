@@ -1,10 +1,7 @@
 package boundary;
 
-import database.DatabaseConnection;
 import entity.Receptionist;
 import entity.User;
-
-import java.sql.SQLException;
 
 public class testingForMakeApt {
     public static void main(String[] args) {
@@ -24,10 +21,12 @@ public class testingForMakeApt {
                 case 1 -> {
                     makeAppointmentInterface.viewAppointment();
                 }
-                case 2 -> // Modify Account Info
+                case 2 -> {
                     makeAppointmentInterface.searchAppointment();
-                case 3 ->  // logout and exit the program
+                }
+                case 3 -> {
                     makeAppointmentInterface.makeAppointment();
+                }
             }
             ConsoleUI.clearScreen();
         }

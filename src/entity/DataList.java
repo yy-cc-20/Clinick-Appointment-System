@@ -195,7 +195,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (appointmentList == null)
-			return new ArrayList<Appointment>();
+			return new ArrayList<>();
 		else
 			return appointmentList;
 	}

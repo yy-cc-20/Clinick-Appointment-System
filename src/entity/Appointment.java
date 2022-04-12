@@ -1,11 +1,11 @@
 package entity;
 
+import boundary.ConsoleUI;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Appointment {
-    private static final String pattern = "dd/MM/yyyy"; // date format
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
     private int appointmentId;
     private LocalDate appointmentDate;
     private Patient patient;
@@ -16,7 +16,7 @@ public class Appointment {
     public Appointment(int appointmentId, String appointmentDate, String patientId, String allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
-        this.appointmentDate = LocalDate.parse(appointmentDate, formatter);
+        this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
         this.patient = findPatient(patientId);
         this.allocation = findAllocation(allocationId);
         this.attendance = retrieveAttendance(attendance);
@@ -81,7 +81,7 @@ public class Appointment {
     }
 
     public String getAppointmentDate() {
-        return appointmentDate.format(formatter);
+        return appointmentDate.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
     }
 
     public Patient getPatient() {
