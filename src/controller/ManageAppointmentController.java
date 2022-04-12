@@ -42,7 +42,7 @@ public class ManageAppointmentController {
 
     public void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot) {
         // after viewing the available slots, wants to update the date and startSlot => allocationId changes 
-        DataList.getInstance().updateAppointmentTime(appointmentId, newDate, newStartSlot);
+        //DataList.getInstance().updateAppointmentTime(appointmentId, newDate, newStartSlot);
     }
 
     public void updateAppointmentAttendance(int appointmentId, String updatedAttendance) {
