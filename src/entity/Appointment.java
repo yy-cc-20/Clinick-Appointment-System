@@ -100,6 +100,7 @@ public class Appointment {
             case 2 -> "1 hour";
             case 3 -> "1 hour 30 mins";
             case 4 -> "2 hours";
+            case 5 -> "2 hours 30 mins";
             default -> throw new IllegalStateException("Unexpected value: " + required);
         };
     }
