@@ -53,11 +53,51 @@ public class ViewSlotsController {
 	
 	/** @return the id of doctors who are available to provide a particular service at a particular branch for different times on a particular date */
 	public List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date, int requiredSlots) {
-		List<Integer> doctorsInCharge;
+		
+		List<Integer> doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
+		
+		// Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
+		int[] doctorsInChargeArr = new int[doctorsInCharge.size()];
+		doctorsInChargeArr = doctorsInCharge.stream().mapToInt(Integer::intValue).toArray().clone();
+		//System.out.println(Arrays.toString(doctorsInChargeArr));
+		
+		int availableDoctors[][] = new int[TimeSlot.values().length][];
+		for (int i = 0; i < availableDoctors.length; ++i) {
+			availableDoctors[i] = new int[doctorsInCharge.size()];
+			availableDoctors[i] = doctorsInChargeArr.clone();
+		}
+
+		//System.out.println("initial: " + Arrays.deepToString(availableDoctors));
+		
+		// Remove the doctors in charge that have an appointment at a time slot from availableDoctorsId
 		List<Integer> unavailableDoctorsId;
+		for (TimeSlot startSlot : TimeSlot.values()) {
+			unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal() + 1);
+			
+			for (int id : unavailableDoctorsId)
+				for (int i = 0; i < requiredSlots; ++i) // The service might consume more than 1 slots, remove the doctor from the following slots also
+					if (startSlot.ordinal() + i < availableDoctors.length)
+						for (int j = 0; j < availableDoctors[0].length; ++j) // Find the unavailable doctor and remove it
+							if (availableDoctors[startSlot.ordinal() + i][j] == id)
+								availableDoctors[startSlot.ordinal() + i][j] = 0;
+		}
+		//System.out.println("after remove " + Arrays.deepToString(availableDoctors));
 		
-		doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
+		// Convert availableDoctor from array to arrayList
+		availableDoctorsId = new ArrayList<List<Integer>>();
+		List<Integer> temp;
+		for (int[] aTime : availableDoctors) {
+			temp = new ArrayList<Integer>();
+			for (int doctorId : aTime)
+				if (doctorId > 0)
+					temp.add(doctorId);
+			availableDoctorsId.add(temp);
+			//System.out.println(Arrays.deepToString(temp.toArray()));
+		}
 		
+		return availableDoctorsId;
+		
+		/* Using ArrayList to do the same thing
 		// Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
 		for (int i = 0; i < TimeSlot.values().length; ++i) {
 			availableDoctorsId.add(doctorsInCharge);
@@ -69,11 +109,8 @@ public class ViewSlotsController {
 			
 			for (int id : unavailableDoctorsId)
 				removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, id);
-			
-			//System.out.println("available doctor id: " + Arrays.deepToString(availableDoctorsId.toArray()));
 		}
-		//System.out.println("ViewSlotsController.getAvailableDoctors testing");
-		return availableDoctorsId;
+		*/
 		
 		/* If every service only consumes 1 time slot
 		The doctors available during a time slot will be:
@@ -133,7 +170,24 @@ public class ViewSlotsController {
 			if (startSlotOrdinal + i < availableDoctorsId.size())
 				availableDoctorsId.get(startSlotOrdinal + i).remove(Integer.valueOf(unavailableDoctorId));
 		}
-		//System.out.println("ViewSlotsController.removeUnavailableDoctors testing");
+		/* Problem: remove an element in a list, will result in all the element in the 2D list being removed
+		List<List<String>> someNo = new ArrayList<List<String>>();
+		List<String> someNo2 = new ArrayList<>();
+		someNo2.add("2");
+		someNo2.add("3");
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		
+		System.out.println("Before: " + Arrays.deepToString(someNo.toArray()));
+		System.out.println("First list: " + Arrays.deepToString(someNo.get(0).toArray()));
+		someNo.get(0).remove(1);
+		System.out.println("Remove second element from the first list: " + Arrays.deepToString(someNo.get(0).toArray()));
+		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
+		*/
 	}
 
 	// Retrieve the integer from the ResultSet and return List<Integer>
@@ -162,30 +216,8 @@ public class ViewSlotsController {
 		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is is 2, 3
 		System.out.println();
 		
+
 		// removeUnavailableDoctors test
-		List<List<String>> someNo = new ArrayList<List<String>>();
-		List<String> someNo2 = new ArrayList<>();
-		someNo2.add("2");
-		someNo2.add("3");
-		someNo.add(someNo2);
-		someNo.add(someNo2);
-		someNo.add(someNo2);
-		someNo.add(someNo2);
-		someNo.add(someNo2);
-		someNo.add(someNo2);
-		
-		System.out.println("Before: " + Arrays.deepToString(someNo.toArray()));
-		System.out.println("First list: " + Arrays.deepToString(someNo.get(0).toArray()));
-		someNo.get(0).remove(1);
-		System.out.println("Remove second element from the first list: " + Arrays.deepToString(someNo.get(0).toArray()));
-		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
-		
-		for (int i = 0; i < 3; ++i) {
-			if (0 + i < someNo.size())
-				someNo.get(0 + i).remove(1);
-			System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
-		}
-		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
 		
 		// getAvailableDoctors test
 		List<List<Integer>> ids2 = ViewSlotsController.getInstance().getAvailableDoctors(2, 1, LocalDate.of(2022, 4, 25), 3);
