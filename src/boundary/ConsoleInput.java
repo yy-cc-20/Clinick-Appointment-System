@@ -249,9 +249,10 @@ public class ConsoleInput {
     public static boolean hasDelimiter(String text) {
         return text.contains(";");
     }
+    
     /*
     // ConsoleInput test
     public static void main(String[] args) {
-    	askDate("date");
+    	System.out.println(askDate("date"));
     }*/
 }

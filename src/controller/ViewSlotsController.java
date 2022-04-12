@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.sql.*;
 
-import boundary.ConsoleUI;
 import database.DatabaseConnection;
 import java.time.LocalDate;
 import entity.*;
@@ -66,12 +65,14 @@ public class ViewSlotsController {
 		
 		// Remove the doctors in charge that have an appointment at a time slot from availableDoctorsId
 		for (TimeSlot startSlot : TimeSlot.values()) {
-			unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal());
+			unavailableDoctorsId = getDoctorsHaveAppointment(serviceId, branchId, date, startSlot.ordinal() + 1);
 			
 			for (int id : unavailableDoctorsId)
 				removeUnavailableDoctors(startSlot.ordinal(), requiredSlots, id);
+			
+			System.out.println("available doctor id: " + Arrays.deepToString(availableDoctorsId.toArray()));
 		}
-		
+		System.out.println("ViewSlotsController.getAvailableDoctors testing");
 		return availableDoctorsId;
 		
 		/* If every service only consumes 1 time slot
@@ -89,33 +90,40 @@ public class ViewSlotsController {
 	}
 
 	public List<Integer> getDoctorsInCharge(int serviceId, int branchId) {
+		List<Integer> returnIds = new ArrayList<>();
 		sql = "SELECT doctorId FROM Allocation WHERE serviceId = " + serviceId  + " AND branchId = " + branchId; 
 		try {
 			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				returnIds.add(rs.getInt("doctorId"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultSetToIntArr(rs);
+		System.out.println("ViewSlotsController.getDoctorsInCharge testing");
+		return returnIds;
 	}
 	
-	/** @param slot start from 0 */
-	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int slot) {
+	/** @param slot start from 1 */
+	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int startSlot) {
 		List<Integer> returnIds = new ArrayList<>();
-		slot += 1; // In database it starts from 1
 		
-		sql = "SELECT doctorId FROM Appointment NATURAL JOIN Allocation"
-				+ " WHERE serviceId = " + serviceId 
-				+ " AND branchId = " + branchId 
-				+ " AND date = " + date.format(ConsoleUI.DATE_SQL_FORMATTER) 
-				+ " AND startSlot = " + slot;
+		sql = "SELECT doctorId FROM Allocation INNER JOIN Appointment ON Allocation.id = Appointment.allocationId WHERE serviceId = ? AND branchId = ? AND date = ? AND startSlot = ?";
 		try {
-			rs = st.executeQuery(sql);
-			while (rs.next())
+			PreparedStatement pstmt = DatabaseConnection.getConnection().prepareStatement(sql);
+			pstmt.setInt(1, serviceId);
+			pstmt.setInt(2, branchId);
+			pstmt.setDate(3, java.sql.Date.valueOf(date)); // The only way to compare SQL date
+			pstmt.setInt(4, startSlot);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
 				returnIds.add(rs.getInt("doctorId")); // The column index of MySQL starts from 1
+				System.out.println("unavailable doctorid: " + rs.getInt("doctorId") + " startSlot" + startSlot);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return returnIds;
 	}
 	
@@ -125,6 +133,7 @@ public class ViewSlotsController {
 			if (startSlotOrdinal + i < availableDoctorsId.size())
 				availableDoctorsId.get(startSlotOrdinal + i).remove(Integer.valueOf(unavailableDoctorId));
 		}
+		System.out.println("ViewSlotsController.removeUnavailableDoctors testing");
 	}
 
 	// Retrieve the integer from the ResultSet and return List<Integer>
@@ -141,22 +150,46 @@ public class ViewSlotsController {
 	}
 	
 	// ViewSlotsController test
-	public static void main(String[] args) {
-		String sql = "SELECT COUNT(*) FROM Allocation";
-		try {
-			Statement st = DatabaseConnection.getConnection().createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next())
-				System.out.println(rs.getInt(1));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws SQLException {
+
+		// getDoctorInCharge test
+		List<Integer> ids0 = ViewSlotsController.getInstance().getDoctorsInCharge(2, 1);
+		System.out.println(Arrays.deepToString(ids0.toArray())); // Correct output is is 2, 3
+		System.out.println();
 		
-		try {
-			List<Branch> branches = ViewSlotsController.getInstance().getBranchFilteredByService(1);
-			System.out.println(Arrays.deepToString(branches.toArray()));
-		} catch(Exception e) {
-			e.printStackTrace();
+		// getDoctorsHaveAppointment test
+		List<Integer> ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
+		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is is 2, 3
+		System.out.println();
+		
+		// removeUnavailableDoctors test
+		List<List<String>> someNo = new ArrayList<List<String>>();
+		List<String> someNo2 = new ArrayList<>();
+		someNo2.add("2");
+		someNo2.add("3");
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		someNo.add(someNo2);
+		
+		System.out.println("Before: " + Arrays.deepToString(someNo.toArray()));
+		System.out.println(Arrays.deepToString(someNo.get(0).toArray()));
+		someNo.get(0).remove(1);
+		System.out.println(Arrays.deepToString(someNo.get(0).toArray()));
+		
+		for (int i = 0; i < 3; ++i) {
+			if (0 + i < someNo.size())
+				someNo.get(0 + i).remove(1);
+			System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
 		}
+		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
+
+		
+		
+		// getAvailableDoctors test
+		List<List<Integer>> ids2 = ViewSlotsController.getInstance().getAvailableDoctors(2, 1, LocalDate.of(2022, 4, 25), 3);
+		System.out.println(Arrays.deepToString(ids2.toArray()));
 	}
 }

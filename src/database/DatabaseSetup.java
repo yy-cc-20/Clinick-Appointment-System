@@ -417,4 +417,5 @@ public class DatabaseSetup {
 		conn.commit();
 		conn.setAutoCommit(true);
 	}
+
 }

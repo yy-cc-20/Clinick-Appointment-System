@@ -147,16 +147,14 @@ public class ViewSlotsUI {
 	
 	// Can be used by ChangeAppointmentUI
 	public void viewTimeSlotFilteredByServiceBranchDate() {
+		System.out.println("ViewSlotsUI.viewTimeSlotFilteredByServiceBranchDate testing");
+		try {
 		availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, services.get(serviceId).getTimeSlotRequired());
-		
-		if (branchResults.size() == 0) {
-			System.out.println("No branch found.");
-			return branchResults.size();
-		}
-		
 		// index: the time slot number
 		// value: the slots available for that time
-		
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		ConsoleUI.displayTableName("Available Time Slots For " + services.get(serviceId).getServiceName());
 		ConsoleUI.displayTableName("at " + branchResults.get(branchId).getBranchName());
 		ConsoleUI.displayTableName("on " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
