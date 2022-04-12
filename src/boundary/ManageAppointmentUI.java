@@ -38,7 +38,7 @@ public class ManageAppointmentUI {
     public void cancelAppointment() {
         searchAppointmentToModify();
         if (ConsoleInput.askBoolean("Cancel appointment")) {
-            ccontroller.cancelAppointment(selectedAppointment.getAppointmentId());
+            controller.cancelAppointment(selectedAppointment.getAppointmentId());
             System.out.println("Appointment cancelled.");
         }
     }
