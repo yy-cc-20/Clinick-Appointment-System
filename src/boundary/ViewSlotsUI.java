@@ -158,7 +158,7 @@ public class ViewSlotsUI {
 		// value: the slots available for that time
 		
 		ConsoleUI.displayTableName("Available Time Slots For " + services.get(serviceId).getServiceName());
-		ConsoleUI.displayTableName("at " + branchResults.get(branchId).getBranchName());
+		ConsoleUI.displayTableName("at " + branchResults.get(branchId-1).getBranchName()); // branchId-1
 		ConsoleUI.displayTableName("on " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
 		System.out.println();
 		System.out.println("No \t| Start Time \t| Slots \t|");

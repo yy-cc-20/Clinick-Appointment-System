@@ -134,9 +134,9 @@ public class MakeAppointmentUI {
 
             if (slotAvailable) {
                 // todo: get allocation id
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
+//                System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
                 LocalDate date =viewSlotsUI.getSelectedDate();
-                appointmentToBook = new Appointment(date, selectedPatient, allocationId, Attendance.NAN, startSlot);
+//                appointmentToBook = new Appointment(date, selectedPatient, allocationId, Attendance.NAN, startSlot);
                 controller.addAppointment(appointmentToBook);
                 displayAppointmentDetails(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
@@ -145,7 +145,7 @@ public class MakeAppointmentUI {
                     System.out.println();
                 }
             } else {
-                System.out.println("Slot unavailable. Required time slot is " + service.getTimeSlotRequired());
+//                System.out.println("Slot unavailable. Required time slot is " + service.getTimeSlotRequired());
                 if (ConsoleInput.askBoolean("Go back to menu")) {
                     return;
                 }
