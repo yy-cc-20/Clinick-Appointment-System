@@ -38,13 +38,6 @@ public class DataList implements IDataStore {
 		try {
 			con = DatabaseConnection.getConnection();
 			st = con.createStatement();
-			doctorList = new ArrayList<>();
-			patientList = new ArrayList<>();
-			receptionistList = new ArrayList<>();
-			appointmentList = new ArrayList<>();
-			allocationList = new ArrayList<>();
-			branchList = new ArrayList<>();
-			serviceList = new ArrayList<>();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,12 +46,14 @@ public class DataList implements IDataStore {
 	public static IDataStore getInstance() {
 		if (instance == null) {
 			instance = new DataList();
+			System.out.println("Hello");
 		}
 		return instance;
 	}
 
 	public List<Appointment> getAppointmentList(String query, String column, String data) {
 		try {
+			appointmentList = new ArrayList<>();
 			// e.g., query = "filter" column = "id" data = "1"
 			// e.g., query = "sort" column = "id" data = "asc"
 			if (query == null)
@@ -98,6 +93,7 @@ public class DataList implements IDataStore {
 
 	public List<Branch> getBranchList(String query, String column, String data) {
 		try {
+			branchList = new ArrayList<>();
 			if (query == null)
 				rs = st.executeQuery("SELECT * FROM branch ORDER BY id;");
 			else if (query.equalsIgnoreCase("filter"))
@@ -124,6 +120,7 @@ public class DataList implements IDataStore {
 
 	public List<Service> getServiceList() {
 		try {
+			serviceList = new ArrayList<>();
 			rs = st.executeQuery("SELECT * FROM service ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -143,6 +140,7 @@ public class DataList implements IDataStore {
 
 	public List<Doctor> getDoctorList() {
 		try {
+			doctorList = new ArrayList<>();
 			rs = st.executeQuery("SELECT * FROM doctor ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -160,6 +158,7 @@ public class DataList implements IDataStore {
 
 	public List<Allocation> getAllocationList() {
 		try {
+			allocationList = new ArrayList<>();
 			rs = st.executeQuery("SELECT * FROM allocation ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -178,6 +177,7 @@ public class DataList implements IDataStore {
 
 	public List<Patient> getPatientList(String query, String column, String data) {
 		try {
+			patientList = new ArrayList<>();
 			rs = st.executeQuery("SELECT * FROM patient ORDER BY id;");
 			if (query == null)
 				rs = st.executeQuery("SELECT * FROM patient ORDER BY id;");
@@ -205,6 +205,7 @@ public class DataList implements IDataStore {
 
 	public List<Receptionist> getReceptionistList() {
 		try {
+			receptionistList = new ArrayList<>();
 			rs = st.executeQuery("SELECT * FROM receptionist ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -258,9 +259,7 @@ public class DataList implements IDataStore {
 			pstmt.setDate(1, new Date(new SimpleDateFormat("dd-MM-yyyy").parse(date).getTime()));
 			pstmt.setInt(2, startSlot);
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (SQLException | ParseException e) {
 			e.printStackTrace();
 		}
 	}
