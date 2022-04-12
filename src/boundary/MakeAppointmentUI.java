@@ -129,14 +129,12 @@ public class MakeAppointmentUI {
         // allocation id where service id, branch id, and doctor id are the same
         while (!allocated) {
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
-            // todo assign doctor
             Allocation allocation = controller.assignAllocation(viewSlotsUI);
             if(allocation != null){
                 slotRequired = allocation.getService().getTimeSlotRequired();
                 allocated = true;
             }
             if (allocated) {
-                // todo: get allocation id
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
