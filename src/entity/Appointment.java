@@ -9,7 +9,7 @@ public class Appointment {
     // todo: sql or method?
     private final List<Patient> patients = DataList.getInstance().getPatientList();
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
-    private final List<Service> services = DataList.getInstance().getServiceList();
+
     private int appointmentId;
     private LocalDate appointmentDate;
     private Patient patient;

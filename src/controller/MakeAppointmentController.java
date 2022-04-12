@@ -8,7 +8,7 @@ import entity.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class MakeAppointmentController {
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     public List<Appointment> getAllAppointments(User theUser) {
+        System.out.println(theUser.getClass());
         if (theUser instanceof Patient) {
             List<Appointment> patientAppointments = new ArrayList<>();
             for (Appointment appointment : appointments) {
@@ -33,9 +34,8 @@ public class MakeAppointmentController {
                 }
             }
             return doctorAppointments;
-        }
-
-        return appointments;
+        } else
+            return appointments;
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
