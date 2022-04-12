@@ -56,6 +56,7 @@ public class DataList implements IDataStore {
 		
 		return branchResults;
 		
+		//return getBranchList(null, "", "");
 	}
 
 	public List<Branch> getBranchList(String query, String column, String data) {

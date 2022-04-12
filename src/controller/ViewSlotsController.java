@@ -27,7 +27,6 @@ public class ViewSlotsController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("view slot constructor testing");
 	}
 	
 	public static ViewSlotsController getInstance() {
@@ -50,7 +49,6 @@ public class ViewSlotsController {
 		}
 		branchIds = resultSetToIntArr(rs);
 		branchResults = DataList.getInstance().getBranchesById(branchIds);
-		System.out.println("ViewSlotsController.getBranchFilteredByService(int) testing");
 		return branchResults;
 	}
 	
@@ -141,7 +139,7 @@ public class ViewSlotsController {
 		}
 		return ints;
 	}
-	
+	/*
 	// ViewSlotsController test
 	public static void main(String[] args) {
 		String sql = "SELECT COUNT(*) FROM Allocation";
@@ -160,5 +158,5 @@ public class ViewSlotsController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

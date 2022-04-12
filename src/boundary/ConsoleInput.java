@@ -19,7 +19,7 @@ public class ConsoleInput {
     public static LocalDate askDate(String info) {
         String stringDate;
         while (true) {
-            System.out.print(info + " (dd/mm/yyyy) > ");
+            System.out.print(info + " (e.g. 1-1-2022) > ");
             try {
                 stringDate = SingletonScanner.scanner.nextLine();
                 return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
@@ -35,7 +35,7 @@ public class ConsoleInput {
         String stringDate;
         LocalDate date;
         while (true) {
-            System.out.print("%n" + info + " (dd/mm/yyyy) > "); // the "%n" in dateName will not take effect if you use %s
+            System.out.print(info + " (e.g. 1-1-2022) > "); // the "%n" in dateName will not take effect if you use %s
             try {
                 stringDate = SingletonScanner.scanner.nextLine();
                 date = LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
@@ -247,4 +247,9 @@ public class ConsoleInput {
     public static boolean hasDelimiter(String text) {
         return text.contains(";");
     }
+    /*
+    // ConsoleInput test
+    public static void main(String[] args) {
+    	askDate("date");
+    }*/
 }
