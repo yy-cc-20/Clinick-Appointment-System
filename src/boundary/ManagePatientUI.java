@@ -7,14 +7,14 @@ public class ManagePatientUI {
 
     private static final ManagePatientController controller = new ManagePatientController();
 
-    public static Patient searchPatient() {
+    public Patient searchPatient() {
         String patientIc = ConsoleInput.askString("patient IC").toLowerCase();
         Patient selectedPatient = controller.searchPatient(patientIc);
 
         if (selectedPatient == null) {
             System.out.println("No patient with IC " + patientIc + " found.");
             if (ConsoleInput.askBoolean("Continue to create new patient profile"))
-                createPatientProfile(patientIc);
+                selectedPatient = createPatientProfile();
         } else {
             System.out.println("Search Results:");
             displayPatient(selectedPatient);
@@ -29,19 +29,17 @@ public class ManagePatientUI {
                         + " \t| " + selectedPatient.getIc() + " \t| " + selectedPatient.getAddress());
     }
 
-    public static Patient createPatientProfile(String patientIc) {
+    public Patient createPatientProfile() {
         String name = ConsoleInput.askString("New patient name");
         String phone = ConsoleInput.askString("New patient phone number");
         String ic = ConsoleInput.askString("New patient IC");
         String address = ConsoleInput.askString("New patient address");
 
-        controller.addPatient(name, patientIc, phone, address);
+        controller.addPatient(name, ic, phone, address);
         System.out.println("New patient ID generated.   ");
         System.out.println("New patient profile created.");
 
-        // testing purpose
-        Patient selectedPatient = new Patient(1, "hello", "pass");
-//        Patient selectedPatient = controller.searchPatient(patientIc);
+        Patient selectedPatient = controller.searchPatient(ic);
         displayPatient(selectedPatient);
         return selectedPatient;
     }

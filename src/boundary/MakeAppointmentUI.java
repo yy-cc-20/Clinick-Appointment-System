@@ -107,7 +107,9 @@ public class MakeAppointmentUI {
     // ask confirmation
     // add appointment
     public void makeAppointment() throws SQLException {
-        Patient selectedPatient = ManagePatientUI.searchPatient();
+        ManagePatientUI managePatientUI = new ManagePatientUI();
+        Patient selectedPatient = managePatientUI.searchPatient();
+
         if(selectedPatient == null){
             System.out.println("Back to the menu");
             return;
