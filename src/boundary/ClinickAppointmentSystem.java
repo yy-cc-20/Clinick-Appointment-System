@@ -34,13 +34,12 @@ public class ClinickAppointmentSystem {
 	private static ManageAccountUI manageAccountUI;
 	
 	public static void main(String... args) {
-		
-		
 		boolean toExit = false;
+		User systemUser;
 		
 		while (true) {
 			ConsoleUI.displaySystemName("Clinick Booking System");
-			User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
+			systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
 	
 			
