@@ -13,18 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
-    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList();
+    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList("sort", "date","");
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     public List<Appointment> getAllAppointments(User theUser) {
+        String id = Integer.toString(theUser.getUserId());
+
         if (theUser instanceof Patient) {
-            List<Appointment> patientAppointments = new ArrayList<>();
-            for (Appointment appointment : appointments) {
-                if (appointment.getPatient().getUserId() == theUser.getUserId()) {
-                    patientAppointments.add(appointment);
-                }
-            }
-            return patientAppointments;
+            return DataList.getInstance().getAppointmentList("filter", "patientId", id);
         } else if (theUser instanceof Doctor) {
             List<Appointment> doctorAppointments = new ArrayList<>();
             for (Appointment appointment : appointments) {
