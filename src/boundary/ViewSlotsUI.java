@@ -111,11 +111,11 @@ public class ViewSlotsUI {
 		Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
-        System.out.println("No \t| Service \t| Price \t| Description \t|");
+        System.out.println("No \t| Service \t| Price (RM) \t| Description \t|");
         
         for (int i = 0; i < services.size(); i++) {
             service = services.get(i);
-            System.out.println((i + 1) + " \t| " 
+            System.out.println(service.getServiceId() + " \t| " 
             		+ service.getServiceName() + " \t| " 
             		+ service.getPrice() + " \t| " 
                     + service.getDescription() + " \t| ");
@@ -137,7 +137,7 @@ public class ViewSlotsUI {
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         
         for (int i = 0; i < branchResults.size(); i++) {
-            System.out.println((i + 1) + " \t| " 
+            System.out.println(branchResults.get(i).getBranchId() + " \t| " 
             				+ branchResults.get(i).getBranchName() + " \t| " 
             				+ branchResults.get(i).getTelNo() +  " \t| "
             				+ branchResults.get(i).getBranchAddress() + " \t| ");

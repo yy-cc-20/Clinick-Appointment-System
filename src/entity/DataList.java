@@ -55,6 +55,7 @@ public class DataList implements IDataStore {
 			branchResults.add(getBranchList("filter", "branchId", id.toString()).get(0));
 		
 		return branchResults;
+		
 	}
 
 	public List<Branch> getBranchList(String query, String column, String data) {

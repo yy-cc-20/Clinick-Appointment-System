@@ -19,7 +19,7 @@ public class ConsoleInput {
     public static LocalDate askDate(String info) {
         String stringDate;
         while (true) {
-            System.out.print("%n" + info + " (dd/mm/yyyy) > "); // the "%n" in dateName will not take effect if you use %s
+            System.out.print(info + " (dd/mm/yyyy) > ");
             try {
                 stringDate = SingletonScanner.scanner.nextLine();
                 return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);

@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.sql.*;
 
@@ -112,7 +113,7 @@ public class ViewSlotsController {
 		try {
 			rs = st.executeQuery(sql);
 			while (rs.next())
-				returnIds.add(rs.getInt(0));
+				returnIds.add(rs.getInt("doctorId")); // The column index of MySQL starts from 1
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -133,7 +134,7 @@ public class ViewSlotsController {
 		List<Integer> ints = new ArrayList<>();
 		try {
 			while (rs.next()) {
-				ints.add(rs.getInt(0));
+				ints.add(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,8 +144,19 @@ public class ViewSlotsController {
 	
 	// ViewSlotsController test
 	public static void main(String[] args) {
+		String sql = "SELECT COUNT(*) FROM Allocation";
 		try {
-		ViewSlotsController.getInstance().getBranchFilteredByService(1);
+			Statement st = DatabaseConnection.getConnection().createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next())
+				System.out.println(rs.getInt(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			List<Branch> branches = ViewSlotsController.getInstance().getBranchFilteredByService(1);
+			System.out.println(Arrays.deepToString(branches.toArray()));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
