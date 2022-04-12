@@ -120,7 +120,7 @@ public class ViewSlotsController {
 		return returnIds;
 	}
 	
-	/** @param slot start from 0 */
+	/** @param startSlotOrdinal start from 0 */
 	private void removeUnavailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
 		for (int i = 0; i < requiredSlots; ++i) {
 			if (startSlotOrdinal + i < availableDoctorsId.size())
