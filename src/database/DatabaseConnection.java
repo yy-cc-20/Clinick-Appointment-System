@@ -80,7 +80,8 @@ public class DatabaseConnection {
 			e.printStackTrace();
 		}
 	}
-	
+
+	// run me to test connection!!!
 	// DatabaseConnectionTest
 	public static void main(String[] args) throws SQLException {
 		Statement st = DatabaseConnection.getConnection().createStatement();
