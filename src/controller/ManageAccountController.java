@@ -32,11 +32,7 @@ public class ManageAccountController {
 		try {
 			Statement st = DatabaseConnection.getConnection().createStatement();
 			st.executeUpdate(sql);
-			ResultSet rs = st.executeQuery("SELECT password FROM doctor WHERE id = 1");
-			System.out.println(rs.getString("password"));
 		} catch (SQLException e) { // If the exception was not caught, the program will stop
-			e.getMessage();
-			e.getErrorCode();
 			e.printStackTrace();
 		}
     }
@@ -86,4 +82,8 @@ public class ManageAccountController {
 		} 
 		return false;
 	}
+	/*
+	public static void main(String[] args) {
+		new ManageAccountController(new Doctor(1, "", "")).updatePassword("password");
+	}*/
 }
