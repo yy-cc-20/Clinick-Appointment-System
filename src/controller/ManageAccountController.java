@@ -1,7 +1,6 @@
 package controller;
 // For the user to change their username and password
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 

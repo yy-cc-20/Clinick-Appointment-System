@@ -222,7 +222,7 @@ public class DataList implements IDataStore {
 
 	public void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId) {
 		try {
-			st.executeUpdate("INSERT IGNORE INTO apointment (date, attendance, startSlot, patientId, allocationId) " +
+			st.executeUpdate("INSERT IGNORE INTO appointment (date, attendance, startSlot, patientId, allocationId) " +
 					"VALUES ('" + date + "','" + attendance + "','" + startSlot + "','" + patientId + "','"
 					+ allocationId + "')");
 		} catch (SQLException e) {
