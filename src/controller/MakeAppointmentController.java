@@ -101,7 +101,7 @@ public class MakeAppointmentController {
     public void addAppointment(Appointment appointmentToBook) throws SQLException {
         // todo: add a new entry to table appointment
         Connection conn = DatabaseConnection.getConnection();
-        Statement st = DatabaseConnection.getConnection().createStatement();
+        Statement st = conn.createStatement();
         conn.setAutoCommit(false);
 
         String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
@@ -110,9 +110,8 @@ public class MakeAppointmentController {
         int patientId = appointmentToBook.getPatient().getUserId();
         int allocationId = appointmentToBook.getAllocation().getLinkId();
 
-        String sql = "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES (\"2022-04-15\", \"NAN\", 1, 1, 1)";
-        st.addBatch(sql);
-		st.executeBatch();
+        st.executeUpdate("INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) " +
+                "VALUES ('"+date+"','"+attendance+"','"+startSlot+"','"+patientId+"','"+allocationId+"')");
 		conn.commit();
 		conn.setAutoCommit(true);
     }
