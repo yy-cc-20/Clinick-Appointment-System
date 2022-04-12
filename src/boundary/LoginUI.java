@@ -6,7 +6,6 @@ import java.time.temporal.ChronoUnit;
 
 import controller.LoginController;
 import entity.*;
-import boundary.ConsoleInput;
 
 /*
  * How to use this class:

@@ -11,7 +11,7 @@ import entity.*;
  * Did not let the user select the desired time slot
  * Provide information of the selected service, selected branch, selected date and available time slots.
  * 
- * Can be used by MakeAppointmentUI
+ * Can be used by MakeAppointmentUI & CancelAppointmentUI
  */
 
 public class ViewSlotsUI {

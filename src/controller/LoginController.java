@@ -9,9 +9,7 @@ import entity.DataList;
 import entity.IDataStore;
 import entity.User;
 
-public class LoginController {
-	private IDataStore dataList = DataList.getInstance();
-		
+public class LoginController {		
 	// security: lock the system after a few failed logins
 	int failedLoginAttempt = 0; 
 	public static final int MAX_FAILED_LOGIN_ATTEMPT = 3;
@@ -24,7 +22,6 @@ public class LoginController {
 	 */
 	public String loginSuccessfully(int role, int userid, String password) {
 		String table;
-		User user = new User(userid, "", password);
 		
 		switch (role) {
 			case 1 -> table = "Receptionist";
@@ -55,39 +52,4 @@ public class LoginController {
 	public void resetFailedLoginAttempts() {
 		failedLoginAttempt = 0;
 	}
-	
-	/*
-	public String loginSuccessfully(int role, int userid, String password) {
-		User user = new User(userid, "", password);
-		
-		switch (role) {
-			case 1: 
-					for (int i = 0; i < dataList.getReceptionistList().size(); ++i) {
-						if (user.equals(dataList.getReceptionistList().get(i))) {
-							resetFailedLoginAttempts();
-							return dataList.getReceptionistList().get(i).getUsername();
-						}
-					}
-					break;
-			case 2: 
-					for (int i = 0; i < dataList.getDoctorList().size(); ++i) {
-						if (user.equals(dataList.getDoctorList().get(i))) {
-							resetFailedLoginAttempts();
-							return dataList.getDoctorList().get(i).getUsername();
-						}
-					}
-					break;
-			default: // case 3
-					for (int i = 0; i < dataList.getPatientList().size(); ++i) {
-						if (user.equals(dataList.getPatientList().get(i))) {
-							resetFailedLoginAttempts();
-							return dataList.getPatientList().get(i).getUsername();
-						}
-					}
-		}
-		
-		failedLoginAttempt++;
-		return "";
-	}
-	*/
 }

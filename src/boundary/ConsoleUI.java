@@ -95,7 +95,7 @@ public class ConsoleUI {
         System.out.println(" 9. Search Patient        ");
         System.out.println();
         System.out.println("10. Manage Account        ");
-        System.out.println("11. View Service and Time Slots for Booking");
+        System.out.println("11. View Services and Time Slots for Booking");
         System.out.println();
         System.out.println(" 0. Exit Application      ");
     }
@@ -116,7 +116,7 @@ public class ConsoleUI {
         System.out.println(" 1. View Appointment      ");
         System.out.println(" 2. Search Appointment    ");
         System.out.println(" 3. Manage Account        ");
-        System.out.println(" 4. View Service and Time Slots for Booking ");
+        System.out.println(" 4. View Services and Time Slots for Booking ");
         System.out.println(" 0. Exit Application      ");
     }
 }

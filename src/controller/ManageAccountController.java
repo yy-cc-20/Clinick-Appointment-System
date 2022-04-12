@@ -1,6 +1,11 @@
 package controller;
 // For the user to change their username and password
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import database.DatabaseConnection;
 import entity.*;
 
 public class ManageAccountController {
@@ -13,16 +18,25 @@ public class ManageAccountController {
 	
     public void updatePassword(String password) {
     	currentUser.setPassword(password);
-    	
-    	// TODO update to database
+    	String table;
     	if (currentUser instanceof Receptionist) {
-    		
+    		table = "Receptionist";
     	} else if (currentUser instanceof Doctor) {
-    		
+    		table = "Doctor";
     	} else if (currentUser instanceof Patient) {
-    		
+    		table = "Patient";
     	} else 
     		throw new IllegalArgumentException();
+    	
+    	String sql = "UPDATE " + table + " SET password = \"" + password + "\" WHERE id = " + currentUser.getUserId(); 
+		try {
+			Statement st = DatabaseConnection.getConnection().createStatement();
+			st.executeUpdate(sql);
+			ResultSet rs = st.executeQuery("SELECT password FROM doctor WHERE id = 1");
+			System.out.println(rs.getString("password"));
+		} catch (SQLException e) { // If the exception was not caught, the program will stop
+			e.printStackTrace();
+		}
     }
     
 

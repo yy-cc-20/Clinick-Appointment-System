@@ -120,7 +120,7 @@ public class ClinickAppointmentSystem {
 		}		
 	}
 	
-	/** @return true to logout, false to exit application */
+	/** @return false to logout, true to exit application */
 	static boolean startDoctorView(User systemUser) {
 		int choiceNo; // the action that user wants to perform
 		
@@ -155,7 +155,7 @@ public class ClinickAppointmentSystem {
 		}
 	}
 	
-	/** @return true to logout, false to exit application */
+	/** @return false to logout, true to exit application */
 	static boolean startPatientView(User systemUser) {
 		int choiceNo; // the action that user wants to perform
 		

@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.sql.*;
 
@@ -214,12 +213,12 @@ public class ViewSlotsController {
 
 		// getDoctorInCharge test
 		List<Integer> ids0 = ViewSlotsController.getInstance().getDoctorsInCharge(2, 1);
-		System.out.println(Arrays.deepToString(ids0.toArray())); // Correct output is is 2, 3
+		System.out.println(Arrays.deepToString(ids0.toArray())); // Correct output is 2, 3
 		System.out.println();
 		
 		// getDoctorsHaveAppointment test
 		List<Integer> ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
-		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is is 2, 3
+		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is 2, 3
 		System.out.println();
 				
 		// getAvailableDoctors test

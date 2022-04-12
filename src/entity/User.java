@@ -2,7 +2,7 @@ package entity;
 
 public class User {
     private int userId;
-    private String username; // Immutable
+    private String username;
     private String password;
 
     public User() {
@@ -34,11 +34,6 @@ public class User {
     
     public String getUsername() {
         return username;
-    }
-
-    // For login
-    public boolean equals(User aUser) {
-        return userId == aUser.userId && password.equals(aUser.password);
     }
 }
  
