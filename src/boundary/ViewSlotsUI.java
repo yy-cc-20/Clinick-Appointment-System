@@ -42,23 +42,44 @@ public class ViewSlotsUI {
 	
 	// Can be used by MakeAppointmentUI
 	// Exit if the user do not want to continue view the available time slots
-	/** @return false if the user did not continue to view the available time slots */
+	/** @return false if the user did not continue to view the available time slots 
+	 * 		or no result was found
+	 * */
 	public boolean viewSlots() { 
-		
-		viewService();
-		if (!ConsoleInput.askBoolean("Select service"))
-			return false;
-		serviceId = ConsoleInput.askChoice(1, services.size(), "Service");
-		
-		viewBranchFilteredByService();
-		if (!ConsoleInput.askBoolean("Select branch"))
-			return false;
-		branchId = ConsoleInput.askChoice(1, branchResults.size(), "Select branch");
+		int servicesFound;
+		int branchesFound;
+		while (true) {
+			servicesFound = viewService();
+			if (servicesFound <= 0) {
+				return false;
+			}			
+			if (!ConsoleInput.askBoolean("Select service"))
+				return false;
+			serviceId = ConsoleInput.askChoice(1, servicesFound, "Service");
+			
+			
+			branchesFound = viewBranchFilteredByService();
+			if (branchesFound <= 0) {
+				if (ConsoleInput.askBoolean("Continue searching"))
+					continue;
+				else
+					return false;
+			}			
+			if (!ConsoleInput.askBoolean("Select branch"))
+				if (ConsoleInput.askBoolean("Continue searching"))
+					continue;
+				else
+					return false;
+			branchId = ConsoleInput.askChoice(1, branchesFound, "Branch");
 
-		date = ConsoleInput.askDateNoEarlierThanToday("Date");
-		
-		viewTimeSlotFilteredByServiceBranchDate();
-		return true;
+			
+			date = ConsoleInput.askDateNoEarlierThanToday("Date");
+			viewTimeSlotFilteredByServiceBranchDate();
+			if (ConsoleInput.askBoolean("Continue searching"))
+				continue;
+			else
+				return true;
+		}
 	}
 	
 	public int getSelectedServiceId() {
@@ -80,7 +101,13 @@ public class ViewSlotsUI {
 	}
     
 	// Can be used by ChangeAppointmentUI
-	public void viewService() {
+	/** @return number of row of results */
+	public int viewService() {
+		if (services.size() == 0) {
+			System.out.println("No service found.");
+			return services.size();
+		}
+			
 		Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
@@ -93,23 +120,29 @@ public class ViewSlotsUI {
             		+ service.getPrice() + " \t| " 
                     + service.getDescription() + " \t| ");
         }
+        return services.size();
 	}
 
 	// Can be used by ChangeAppointmentUI
 	public int viewBranchFilteredByService() {
-		List<Branch> branchResult = controller.getBranchFilteredByService(serviceId);		
+		branchResults = controller.getBranchFilteredByService(serviceId);		
+		
+		if (branchResults.size() == 0) {
+			System.out.println("No branch found.");
+			return branchResults.size();
+		}
 		
 		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
         System.out.println();
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         
-        for (int i = 0; i < branchResult.size(); i++) {
+        for (int i = 0; i < branchResults.size(); i++) {
             System.out.println((i + 1) + " \t| " 
-            				+ branchResult.get(i).getBranchName() + " \t| " 
-            				+ branchResult.get(i).getTelNo() +  " \t| "
-            				+ branchResult.get(i).getBranchAddress() + " \t| ");
+            				+ branchResults.get(i).getBranchName() + " \t| " 
+            				+ branchResults.get(i).getTelNo() +  " \t| "
+            				+ branchResults.get(i).getBranchAddress() + " \t| ");
         }
-        return branchResult.size();
+        return branchResults.size();
 	}
 	
 	// Can be used by ChangeAppointmentUI
@@ -129,5 +162,10 @@ public class ViewSlotsUI {
             				+ slot + " \t| " 
             				+ availableDoctors.get(slot.ordinal()).size() + " \t| " );
         }
+	}
+	
+	// ViewSlotsUI test
+	public static void main(String[] args) {
+		ViewSlotsUI.getInstance().viewSlots();
 	}
 }

@@ -55,7 +55,7 @@ public class DatabaseConnection {
 	private static String username = "root";
 	private static String password = "root";
 
-	public DatabaseConnection() {
+	private DatabaseConnection() {
 		try {
 			conn = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
@@ -64,8 +64,8 @@ public class DatabaseConnection {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		DatabaseSetup.setupDatabase();
-	}
+		//DatabaseSetup.setupDatabase();
+	} // Private constructor for singleton
 
 	public static Connection getConnection() throws SQLException {
 		if (conn == null)
@@ -76,7 +76,7 @@ public class DatabaseConnection {
 	public static void closeConnection() throws SQLException {
 		conn.close();
 	}
-	/*
+	
 	// DatabaseConnectionTest
 	public static void main(String[] args) throws SQLException {
 		Statement st = DatabaseConnection.getConnection().createStatement();
@@ -87,7 +87,7 @@ public class DatabaseConnection {
 			}
 			System.out.println("DatabaseConnection test success!");
 		}
-	}*/
+	}
 }
 
 /* Notes on how to use JDBC

@@ -48,10 +48,13 @@ public class DataList implements IDataStore {
 	}
 
 	// Return branch objects of the specified ids
-	public List<Branch> getBranchesById(List<Integer> ids) { // TODO called by ViewSlotsController
-		List<Branch> branches = new ArrayList<>();
+	public List<Branch> getBranchesById(List<Integer> ids) {
+		List<Branch> branchResults = new ArrayList<>();
 
-		return branches;
+		for (Integer id : ids)
+			branchResults.add(getBranchList("filter", "branchId", id.toString()).get(0));
+		
+		return branchResults;
 	}
 
 	public List<Branch> getBranchList(String query, String column, String data) {
@@ -77,13 +80,11 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (branchList == null)
-			return new ArrayList<>();
-		else
-			return branchList;
+		
+		return branchList;
 	}
 
-	public List<Service> getServiceList() { // TODO called by ViewSlotsUI
+	public List<Service> getServiceList() { 
 		try {
 			rs = st.executeQuery("SELECT * FROM service;");
 			while (rs.next()) {
@@ -98,10 +99,7 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (serviceList == null)
-			return new ArrayList<>();
-		else
-			return serviceList;
+		return serviceList;
 	}
 
 	public List<Doctor> getDoctorList() {
@@ -116,10 +114,7 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (doctorList == null)
-			return new ArrayList<>();
-		else
-			return doctorList;
+		return doctorList;
 	}
 
 	public List<Allocation> getAllocationList() {
@@ -137,10 +132,7 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (allocationList == null)
-			return new ArrayList<>();
-		else
-			return allocationList;
+		return allocationList;
 	}
 
 	public List<Patient> getPatientList() {
@@ -159,10 +151,7 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (patientList == null)
-			return new ArrayList<>();
-		else
-			return patientList;
+		return patientList;
 	}
 
 	public List<Receptionist> getReceptionistList() {
@@ -178,10 +167,7 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (receptionistList == null)
-			return new ArrayList<>();
-		else
-			return receptionistList;
+		return receptionistList;
 	}
 
 	public List<Appointment> getAppointmentList() {
@@ -201,10 +187,7 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (appointmentList == null)
-			return new ArrayList<>();
-		else
-			return appointmentList;
+		return appointmentList;
 	}
 
 	/*

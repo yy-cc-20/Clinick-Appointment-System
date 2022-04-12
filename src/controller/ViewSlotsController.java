@@ -26,18 +26,20 @@ public class ViewSlotsController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("view slot constructor testing");
 	}
 	
 	public static ViewSlotsController getInstance() {
 		if (instance == null)
-			new ViewSlotsController();
+			instance = new ViewSlotsController();
 		return instance;
 	}
 	
 	/** @return branches that provide a particular service */ 
 	public List<Branch> getBranchFilteredByService(int serviceId) {
+		
 		List<Integer> branchIds;
-		List<Branch> branchResults;
+		List<Branch> branchResults = new ArrayList<Branch>(); // Avoid return null
 				
 		sql = "SELECT DISTINCT branchId FROM Allocation WHERE serviceId = " + serviceId;
 		try {
@@ -47,6 +49,7 @@ public class ViewSlotsController {
 		}
 		branchIds = resultSetToIntArr(rs);
 		branchResults = DataList.getInstance().getBranchesById(branchIds);
+		System.out.println("ViewSlotsController.getBranchFilteredByService(int) testing");
 		return branchResults;
 	}
 	
@@ -136,5 +139,14 @@ public class ViewSlotsController {
 			e.printStackTrace();
 		}
 		return ints;
+	}
+	
+	// ViewSlotsController test
+	public static void main(String[] args) {
+		try {
+		ViewSlotsController.getInstance().getBranchFilteredByService(1);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
