@@ -2,7 +2,6 @@ package boundary;
 
 import controller.MakeAppointmentController;
 import entity.Appointment;
-import entity.Patient;
 import entity.Receptionist;
 import entity.User;
 
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 
 public class testingForMakeApt {
     public static void main(String[] args) throws SQLException {
-        User user = new Patient(1,"asd", "a");
+        User user = new Receptionist(1,"asd", "a");
         MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(user);
 
         int choiceNo; // the action that user wants to perform

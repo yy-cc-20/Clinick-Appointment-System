@@ -10,6 +10,7 @@ public class Branch{
     private Receptionist receptionist;
     private String telNo;
 
+    // todo id string to int
     public Branch(int branchId, String branchName, String branchAddress, String receptionistId, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
