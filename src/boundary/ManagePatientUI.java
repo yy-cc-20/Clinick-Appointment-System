@@ -4,7 +4,6 @@ import controller.ManagePatientController;
 import entity.Patient;
 
 public class ManagePatientUI {
-
     private static final ManagePatientController controller = new ManagePatientController();
 
     public Patient searchPatient() {
@@ -34,8 +33,9 @@ public class ManagePatientUI {
         String phone = ConsoleInput.askString("New patient phone number");
         String ic = ConsoleInput.askString("New patient IC");
         String address = ConsoleInput.askString("New patient address");
+        String password = ConsoleInput.askString("New password");
 
-        controller.addPatient(name, ic, phone, address);
+        controller.addPatient(name, ic, phone, address, password);
         System.out.println("New patient ID generated.   ");
         System.out.println("New patient profile created.");
 
@@ -49,18 +49,18 @@ public class ManagePatientUI {
         String phoneNo = ConsoleInput.askStringV2("new patient phone number (PRESS ENTER TO SKIP)");
         String address = ConsoleInput.askStringV2("new patient address (PRESS ENTER TO SKIP)");
 
+        int patientId = selectedPatient.getUserId();
         if (ConsoleInput.askBoolean("Confirm changes")) {
             if (phoneNo == null && address == null) {
                 System.out.println("No changes has been made.");
             } else if (phoneNo != null && address == null) {
-                selectedPatient.setPhoneNo(phoneNo);
+                controller.updatePatientProfile(phoneNo, selectedPatient.getAddress(), patientId);
                 System.out.println("Phone number has been updated.");
             } else if (phoneNo == null) {
-                selectedPatient.setAddress(address);
+                controller.updatePatientProfile(selectedPatient.getPhoneNo(), address, patientId);
                 System.out.println("Address has been updated.");
             } else {
-                selectedPatient.setPhoneNo(phoneNo);
-                selectedPatient.setAddress(address);
+                controller.updatePatientProfile(phoneNo, address, patientId);
                 System.out.println("Phone number and address has been updated.");
             }
         }
