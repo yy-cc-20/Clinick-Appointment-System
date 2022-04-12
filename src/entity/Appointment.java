@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Appointment {
     // todo: sql or method?
-    private final List<Patient> patients = DataList.getInstance().getPatientList();
+    private final List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     private int appointmentId;

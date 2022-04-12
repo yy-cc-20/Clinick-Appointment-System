@@ -5,7 +5,7 @@ import java.util.List;
 public interface IDataStore {
 	// Use List interface instead of ArrayList, more flexible, reduce the dependency
 	List<Doctor> getDoctorList();
-	List<Patient> getPatientList();
+	List<Patient> getPatientList(String query, String column, String data);
 	List<Receptionist> getReceptionistList();
 	List<Appointment> getAppointmentList(String query, String column, String data);
 	List<Allocation> getAllocationList();
