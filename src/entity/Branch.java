@@ -11,7 +11,7 @@ public class Branch{
     private String telNo;
 
     // todo id string to int
-    public Branch(int branchId, String branchName, String branchAddress, String receptionistId, String telNo) {
+    public Branch(int branchId, String branchName, String branchAddress, int receptionistId, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
         this.branchAddress = branchAddress;
@@ -21,9 +21,9 @@ public class Branch{
 
     public Branch(){}
 
-    private Receptionist findReceptionist(String receptionistId){
+    private Receptionist findReceptionist(int receptionistId){
         for (Receptionist value : receptionists) {
-            if (value.getUserId() == Integer.parseInt(receptionistId)) {
+            if (value.getUserId() == receptionistId) {
                 return value;
             }
         }

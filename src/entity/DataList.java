@@ -78,7 +78,7 @@ public class DataList implements IDataStore {
 				String address = rs.getString("address");
 				String telNo = rs.getString("telNo");
 				int receptionistId = rs.getInt("receptionistId");
-				Branch branch = new Branch(id, name, address, Integer.toString(receptionistId), telNo);
+				Branch branch = new Branch(id, name, address, receptionistId, telNo);
 				branchList.add(branch);
 			}
 			System.out.println("branchList " + branchList.size());
