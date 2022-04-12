@@ -1,11 +1,14 @@
 package controller;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import database.DatabaseConnection;
 import entity.*;
 
 public class ManagePatientController {
-
+	private final List<Patient> patients = DataList.getInstance().getPatientList();
 	private static ManagePatientController instance;
 	private Statement st;
 	private ResultSet rs;
@@ -26,23 +29,11 @@ public class ManagePatientController {
 	}
 
     public Patient searchPatient(String patientIc) {
-
-//    	sql = "SELECT * FROM PATIENT WHERE patientIc = " + patientIc;
-//    	try {
-//    	     rs = st.executeQuery(sql);
-//    	    while(rs.next()) {
-//    	    	Patient patient = new Patient();
-//                patient.setName(1, rs.getString(1));
-//                patient.setUserId(2, rs.getString(2));
-//                patient.setPhoneNo(3,rs.getString(3));
-//                patient.setAddress(4,rs.getString(4));
-//                patient.setIc(patientIc);
-//    	    	}
-//			return patient;
-//    	} catch (SQLException e) {
-//    	    	e.printStackTrace();
-//    	    }
-
+		for (Patient patient : patients) {
+			if (patient.getIc().toLowerCase().contains(patientIc)) {
+				return patient;
+			}
+		}
         return null;
     }
 

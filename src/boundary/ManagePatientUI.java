@@ -8,7 +8,7 @@ public class ManagePatientUI {
     private static final ManagePatientController controller = new ManagePatientController();
 
     public static Patient searchPatient() {
-        String patientIc = ConsoleInput.askString("patient IC");
+        String patientIc = ConsoleInput.askString("patient IC").toLowerCase();
         Patient selectedPatient = controller.searchPatient(patientIc);
 
         if (selectedPatient == null) {

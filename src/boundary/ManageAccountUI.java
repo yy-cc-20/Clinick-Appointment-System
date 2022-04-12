@@ -1,7 +1,6 @@
 package boundary;
 
 import entity.User;
-import boundary.*;
 import controller.ManageAccountController;
 
 /*

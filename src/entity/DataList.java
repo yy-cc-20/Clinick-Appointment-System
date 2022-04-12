@@ -28,6 +28,13 @@ public class DataList implements IDataStore {
 	private DataList() {
 		try {
 			st = DatabaseConnection.getConnection().createStatement();
+			doctorList = new ArrayList<>();
+			patientList = new ArrayList<>();
+			receptionistList = new ArrayList<>();
+			appointmentList = new ArrayList<>();
+			allocationList = new ArrayList<>();
+			branchList = new ArrayList<>();
+			serviceList = new ArrayList<>();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +78,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (branchList == null)
-			return new ArrayList<Branch>();
+			return new ArrayList<>();
 		else
 			return branchList;
 	}
@@ -92,7 +99,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (serviceList == null)
-			return new ArrayList<Service>();
+			return new ArrayList<>();
 		else
 			return serviceList;
 	}
@@ -110,7 +117,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (doctorList == null)
-			return new ArrayList<Doctor>();
+			return new ArrayList<>();
 		else
 			return doctorList;
 	}
@@ -131,7 +138,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (allocationList == null)
-			return new ArrayList<Allocation>();
+			return new ArrayList<>();
 		else
 			return allocationList;
 	}
@@ -153,7 +160,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (patientList == null)
-			return new ArrayList<Patient>();
+			return new ArrayList<>();
 		else
 			return patientList;
 	}
@@ -172,7 +179,7 @@ public class DataList implements IDataStore {
 			e.printStackTrace();
 		}
 		if (receptionistList == null)
-			return new ArrayList<Receptionist>();
+			return new ArrayList<>();
 		else
 			return receptionistList;
 	}

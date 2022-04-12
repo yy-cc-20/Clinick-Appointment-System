@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
-    // todo get arraylist from database
     private final List<Appointment> appointments = DataList.getInstance().getAppointmentList();
 
     public List<Appointment> getAllAppointments(User theUser) {
