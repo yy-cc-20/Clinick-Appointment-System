@@ -28,8 +28,14 @@ import database.DatabaseConnection;
 import entity.*;
 
 public class ClinickAppointmentSystem {
+	private static MakeAppointmentUI makeAppointmentUI;
+	private static ManageAppointmentUI manageAppointmentUI;
+	private static ManagePatientUI managePatientUI;
+	private static ManageAccountUI manageAccountUI;
+	
 	public static void main(String... args) {
-
+		
+		
 		boolean toExit = false;
 		
 		while (true) {
@@ -37,6 +43,13 @@ public class ClinickAppointmentSystem {
 			User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
 	
+			
+			makeAppointmentUI = new MakeAppointmentUI(systemUser);
+			manageAppointmentUI = new ManageAppointmentUI();
+			managePatientUI = new ManagePatientUI();
+			manageAccountUI = new ManageAccountUI(systemUser);
+			
+			
 			ConsoleUI.clearScreen();
 			
 			if (systemUser instanceof Receptionist) 
@@ -60,10 +73,7 @@ public class ClinickAppointmentSystem {
 	/** @return false to logout, true to exit application */
 	static boolean startReceptionistView(User systemUser) {
 		int choiceNo; // the action that user wants to perform
-		MakeAppointmentUI makeAppointmentUI = new MakeAppointmentUI(systemUser);
-		ManageAppointmentUI manageAppointmentUI = new ManageAppointmentUI();
-		ManagePatientUI managePatientUI = new ManagePatientUI();
-
+		
 		while (true) {
 			ConsoleUI.displayMenuForReceptionist();
 			choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
@@ -107,7 +117,7 @@ public class ClinickAppointmentSystem {
 				}
 				case 10 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					new ManageAccountUI(systemUser).changePassword();
+					manageAccountUI.changePassword();
 				}
 				case 11 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
@@ -177,7 +187,7 @@ public class ClinickAppointmentSystem {
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					new ManageAccountUI(systemUser).changePassword();
+					manageAccountUI.changePassword();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
