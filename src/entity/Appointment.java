@@ -12,9 +12,17 @@ public class Appointment {
     private Attendance attendance;
     private int startSlot;
 
-    public Appointment(int appointmentId, String appointmentDate, String patientId, String allocationId,
+    public Appointment(int appointmentId, String appointmentDate, String patientId, int allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
+        this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
+        this.patient = findPatient(patientId);
+        this.allocation = findAllocation(allocationId);
+        this.attendance = retrieveAttendance(attendance);
+        this.startSlot = startSlot;
+    }
+
+    public Appointment(String appointmentDate, String patientId, int allocationId, String attendance, int startSlot) {
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
         this.patient = findPatient(patientId);
         this.allocation = findAllocation(allocationId);
@@ -30,7 +38,7 @@ public class Appointment {
         return patient;
     }
 
-    private Allocation findAllocation(String appointmentId){
+    private Allocation findAllocation(int appointmentId){
         Allocation allocation = new Allocation();
         return allocation;
     }
@@ -45,41 +53,15 @@ public class Appointment {
         }
     }
 
-//    private ArrayList<TimeSlot> retrieveTimeSlot(String[] timeSlot) {
-//        ArrayList<TimeSlot> timeSlots = new ArrayList<>();
-//
-//        for (String s : timeSlot) {
-//            timeSlots.add(getTimeSlot(s));
-//        }
-//
-//        return timeSlots;
-//    }
-
-    // todo: find a way to retrieve the timeslot status
-//    private TimeSlot getTimeSlot(String timeSlot){
-//        return switch (timeSlot) {
-//            case "SLOT_1" -> TimeSlot.SLOT_1;
-//            case "SLOT_2" -> TimeSlot.SLOT_2;
-//            case "SLOT_3" -> TimeSlot.SLOT_3;
-//            case "SLOT_4" -> TimeSlot.SLOT_4;
-//            case "SLOT_5" -> TimeSlot.SLOT_5;
-//            case "SLOT_6" -> TimeSlot.SLOT_6;
-//            case "SLOT_7" -> TimeSlot.SLOT_7;
-//            case "SLOT_8" -> TimeSlot.SLOT_8;
-//            case "SLOT_9" -> TimeSlot.SLOT_9;
-//            case "SLOT_10" -> TimeSlot.SLOT_10;
-//            case "SLOT_11" -> TimeSlot.SLOT_11;
-//            case "SLOT_12" -> TimeSlot.SLOT_12;
-//            case "SLOT_13" -> TimeSlot.SLOT_13;
-//            default -> TimeSlot.SLOT_14;
-//        };
-//    }
-
     public int getAppointmentId() {
         return appointmentId;
     }
 
-    public String getAppointmentDate() {
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public String getAppointmentDateString() {
         return appointmentDate.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
     }
 
@@ -107,6 +89,10 @@ public class Appointment {
             case 4 -> "2 hours";
             default -> throw new IllegalStateException("Unexpected value: " + required);
         };
+    }
+
+    public int getStartSlot() {
+        return startSlot;
     }
 
     public Allocation getAllocation() {
