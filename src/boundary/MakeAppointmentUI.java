@@ -72,7 +72,7 @@ public class MakeAppointmentUI {
         System.out.println();
 
         int choice = ConsoleInput.askChoice(1, 7, "Your selection");
-        String searchKeyword = "";
+        String searchKeyword;
         switch (choice) {
             case 1 -> {
                 int id = ConsoleInput.askPositiveInt("appointment ID");
@@ -119,6 +119,8 @@ public class MakeAppointmentUI {
             System.out.println("Back to the menu");
             return;
         }
+
+        ViewSlotsUI.getInstance().getAvailableDoctors();
 
         boolean slotAvailable = false;
         int startSlot;

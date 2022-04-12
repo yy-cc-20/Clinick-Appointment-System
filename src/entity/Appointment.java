@@ -3,7 +3,6 @@ package entity;
 import boundary.ConsoleUI;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Appointment {
     private int appointmentId;
