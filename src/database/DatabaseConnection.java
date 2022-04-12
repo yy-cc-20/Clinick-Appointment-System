@@ -49,8 +49,8 @@ public class DatabaseConnection {
 	private static Connection conn; // Singleton
 	
 	/** @setup 5. Change the value of these variable to connect to your database */
-	private static int portNo = 3308;
-	private static String databaseName = "clinick-appointment-system";
+	private static final int portNo = 3308;
+	private static final String databaseName = "clinick-appointment-system";
 	private static String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
 	private static String username = "root";
 	private static String password = "root";

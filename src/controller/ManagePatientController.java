@@ -38,15 +38,15 @@ public class ManagePatientController {
 //                patient.setAddress(4,rs.getString(4));
 //                patient.setIc(patientIc);
 //    	    	}
-//
+//			return patient;
 //    	} catch (SQLException e) {
 //    	    	e.printStackTrace();
 //    	    }
 
-        return new Patient();
+        return null;
     }
 
-    public void addPatient(String name, String patientIc) {
+    public void addPatient(String name, String patientIc, String phone, String address) {
 
 //    	sql = "INSERT INTO PATIENT('NAME','USER_ID','PHONE_NO','ADDRESS','PATIENT_IC') VALUES ('" + name + "', '-', '-', '-', '" + patientIc +"');";
 //    	try {
