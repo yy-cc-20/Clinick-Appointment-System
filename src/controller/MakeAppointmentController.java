@@ -103,12 +103,14 @@ public class MakeAppointmentController {
         Connection conn = DatabaseConnection.getConnection();
         Statement st = DatabaseConnection.getConnection().createStatement();
         conn.setAutoCommit(false);
+
         String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
         String attendance = appointmentToBook.getAttendance().toString();
         int startSlot = appointmentToBook.getStartSlot();
         int patientId = appointmentToBook.getPatient().getUserId();
         int allocationId = appointmentToBook.getAllocation().getLinkId();
-        String sql = "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES (date, attendance, startSlot, patientId, allocationId)";
+
+        String sql = "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES (\"2022-04-15\", \"NAN\", 1, 1, 1)";
         st.addBatch(sql);
 		st.executeBatch();
 		conn.commit();
