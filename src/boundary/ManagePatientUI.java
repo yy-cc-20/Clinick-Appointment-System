@@ -30,13 +30,18 @@ public class ManagePatientUI {
     }
 
     public static Patient createPatientProfile(String patientIc) {
-        String name = ConsoleInput.askString("new patient name");
+        String name = ConsoleInput.askString("New patient name");
+        String phone = ConsoleInput.askString("New patient phone number");
+        String ic = ConsoleInput.askString("New patient IC");
+        String address = ConsoleInput.askString("New patient address");
 
-        controller.addPatient(name, patientIc);
+        controller.addPatient(name, patientIc, phone, address);
         System.out.println("New patient ID generated.   ");
         System.out.println("New patient profile created.");
 
-        Patient selectedPatient = controller.searchPatient(patientIc);
+        // testing purpose
+        Patient selectedPatient = new Patient(1, "hello", "pass");
+//        Patient selectedPatient = controller.searchPatient(patientIc);
         displayPatient(selectedPatient);
         return selectedPatient;
     }

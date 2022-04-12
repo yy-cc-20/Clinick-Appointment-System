@@ -99,9 +99,19 @@ public class MakeAppointmentUI {
 
     // 3. make an appointment
     public void makeAppointment() {
-        Patient selectedPatient = ManagePatientUI.searchPatient();
+        // search patient
+        // view slots
+        // select starting time slot
+        // get allocation id
+        // check availability
+        // display appointment to book
+        // ask confirmation
+        // add appointment
         Service service = new Service();
-//        viewSlots(service);
+
+        Patient selectedPatient = ManagePatientUI.searchPatient();
+        boolean cont = ViewSlotsUI.getInstance().viewSlots();
+
         boolean slotAvailable = false;
         int startSlot;
         // todo

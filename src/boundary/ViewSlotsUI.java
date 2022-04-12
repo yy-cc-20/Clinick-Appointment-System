@@ -36,7 +36,7 @@ public class ViewSlotsUI {
 		
 	}
 	
-	public ViewSlotsUI getInstance() {
+	public static ViewSlotsUI getInstance() {
 		return instance;
 	}
 	
@@ -83,7 +83,7 @@ public class ViewSlotsUI {
 		Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
-        System.out.println("No \t| Service \t| Price \\t| Description \t|");
+        System.out.println("No \t| Service \t| Price \t| Description \t|");
         
         for (int i = 0; i < services.size(); i++) {
             service = services.get(i);
