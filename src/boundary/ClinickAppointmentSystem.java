@@ -18,6 +18,10 @@
  * 				Applying object-oriented programming concept, using entity-boundary-controller design pattern.
  */
 
+/**
+ * @login User id and password can be found at database.DatabaseSetUp
+ */
+
 package boundary;
 
 import database.DatabaseConnection;
@@ -53,12 +57,12 @@ public class ClinickAppointmentSystem {
 		}
 	}
 		
-	/** @return true to logout, false to exit application */
+	/** @return false to logout, true to exit application */
 	static boolean startReceptionistView(User systemUser) {
 		int choiceNo; // the action that user wants to perform
 		
 		while (true) {
-			ConsoleUI.displayMenuForDoctor();
+			ConsoleUI.displayMenuForReceptionist();
 			choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
 
 			switch (choiceNo) {
@@ -109,7 +113,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? true : false;
+					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? false : true;
 				}
 			}
 			ConsoleUI.clearScreen();
@@ -144,7 +148,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? true : false;
+					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? false : true;
 				}
 			}
 			ConsoleUI.clearScreen();
@@ -156,7 +160,7 @@ public class ClinickAppointmentSystem {
 		int choiceNo; // the action that user wants to perform
 		
 		while (true) {
-			ConsoleUI.displayMenuForDoctor();
+			ConsoleUI.displayMenuForPatient();
 			choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
 
 			switch (choiceNo) {
@@ -169,7 +173,7 @@ public class ClinickAppointmentSystem {
 					System.out.println("This feature is coming soon.");	
 				}
 				case 3 -> {
-					ConsoleUI.displayFunctionName("Account Setting");
+					ConsoleUI.displayFunctionName("Manage Account");
 					new ManageAccountUI(systemUser).changePassword();
 				}
 				case 4 -> {
@@ -179,7 +183,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? true : false;
+					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? false : true;
 				}
 			}
 			ConsoleUI.clearScreen();

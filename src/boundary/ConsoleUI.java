@@ -13,7 +13,7 @@ public class ConsoleUI {
 
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
-    private static int screenHeight = 22; // the number of lines
+    private static int screenHeight = 30; // the number of lines
 
     // clear screen
     public static void clearScreen() {
@@ -81,27 +81,28 @@ public class ConsoleUI {
     // display the menus for each unique user in this program
 
     public static void displayMenuForReceptionist() {
-        System.out.println("         Menu             ");
+        System.out.println("      -- Menu --          ");
         System.out.println(" 1. View Appointment      ");
         System.out.println(" 2. Search Appointment    ");
         System.out.println(" 3. Make Appointment      ");
-
+        System.out.println();
         System.out.println(" 4. Update Appointment    ");
         System.out.println(" 5. Cancel Appointment    ");
         System.out.println(" 6. Record Attendance     ");
-
+        System.out.println();
         System.out.println(" 7. Create Patient Profile");
         System.out.println(" 8. Manage Patient Profile");
         System.out.println(" 9. Search Patient        ");
-
+        System.out.println();
         System.out.println("10. Manage Account        ");
-        System.out.println("11. View Slots            ");
-
+        System.out.println("11. View Service and Time Slots for Booking");
+        System.out.println();
         System.out.println(" 0. Exit Application      ");
     }
 
     public static void displayMenuForDoctor() {
-        System.out.println("         Menu             ");
+        System.out.println("      -- Menu --          ");
+        System.out.println();
         System.out.println(" 1. View Appointment      ");
         System.out.println(" 2. Search Appointment    ");
         System.out.println(" 3. Search Patient        ");
@@ -110,11 +111,12 @@ public class ConsoleUI {
     }
 
     public static void displayMenuForPatient() {
-        System.out.println("         Menu             ");
+        System.out.println("      -- Menu --          ");
+        System.out.println();
         System.out.println(" 1. View Appointment      ");
         System.out.println(" 2. Search Appointment    ");
         System.out.println(" 3. Manage Account        ");
-        System.out.println(" 4. View Slots            ");
+        System.out.println(" 4. View Service and Time Slots for Booking ");
         System.out.println(" 0. Exit Application      ");
     }
 }
