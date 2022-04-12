@@ -81,6 +81,7 @@ public class DataList implements IDataStore {
 				Branch branch = new Branch(id, name, address, Integer.toString(receptionistId), telNo);
 				branchList.add(branch);
 			}
+			System.out.println("branchList " + branchList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -100,6 +101,7 @@ public class DataList implements IDataStore {
 				Service service = new Service(id, name, price, description, timeslotRequired);
 				serviceList.add(service);
 			}
+			System.out.println("serviceList " + serviceList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -116,6 +118,7 @@ public class DataList implements IDataStore {
 				Doctor doctor = new Doctor(id, name, password);
 				doctorList.add(doctor);
 			}
+			System.out.println("doctorList " + doctorList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -133,6 +136,7 @@ public class DataList implements IDataStore {
 				Allocation allocation = new Allocation(id, branchId, serviceId, doctorId);
 				allocationList.add(allocation);
 			}
+			System.out.println("allocationList " + allocationList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -152,6 +156,7 @@ public class DataList implements IDataStore {
 				Patient patient = new Patient(id, name, password, ic, phone, address);
 				patientList.add(patient);
 			}
+			System.out.println("patientList "+patientList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -168,6 +173,7 @@ public class DataList implements IDataStore {
 				Receptionist receptionist = new Receptionist(id, name, password);
 				receptionistList.add(receptionist);
 			}
+			System.out.println("receptionistList "+receptionistList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -188,6 +194,7 @@ public class DataList implements IDataStore {
 						allocationId, attendance, startSlot);
 				appointmentList.add(appointment);
 			}
+			System.out.println("appointmentList " + appointmentList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

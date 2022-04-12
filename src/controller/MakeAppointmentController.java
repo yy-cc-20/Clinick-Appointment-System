@@ -17,7 +17,6 @@ public class MakeAppointmentController {
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     public List<Appointment> getAllAppointments(User theUser) {
-        System.out.println(theUser.getClass());
         if (theUser instanceof Patient) {
             List<Appointment> patientAppointments = new ArrayList<>();
             for (Appointment appointment : appointments) {
