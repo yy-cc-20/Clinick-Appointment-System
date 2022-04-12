@@ -131,7 +131,9 @@ public class MakeAppointmentUI {
         // allocation id where service id, branch id, and doctor id are the same
         while (!allocated) {
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
-            Allocation allocation = controller.assignAllocation(viewSlotsUI);
+
+            Allocation allocation = controller.assignAllocation(viewSlotsUI, startSlot);
+
             if(allocation != null){
                 slotRequired = allocation.getService().getTimeSlotRequired();
                 allocated = true;
