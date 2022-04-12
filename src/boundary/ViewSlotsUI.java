@@ -146,7 +146,7 @@ public class ViewSlotsUI {
 	}
 	
 	// Can be used by ChangeAppointmentUI
-	public void viewTimeSlotFilteredByServiceBranchDate() {
+	public int viewTimeSlotFilteredByServiceBranchDate() {
 		availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, services.get(serviceId).getTimeSlotRequired());
 		
 		if (branchResults.size() == 0) {
@@ -168,6 +168,7 @@ public class ViewSlotsUI {
             				+ slot + " \t| " 
             				+ availableDoctors.get(slot.ordinal()).size() + " \t| " );
         }
+		return branchResults.size();
 	}
 	
 	// ViewSlotsUI test

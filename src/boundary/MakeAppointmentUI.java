@@ -99,16 +99,15 @@ public class MakeAppointmentUI {
     }
 
     // 3. make an appointment
+    // search patient
+    // view slots
+    // select starting time slot
+    // get allocation id
+    // check availability
+    // display appointment to book
+    // ask confirmation
+    // add appointment
     public void makeAppointment() throws SQLException {
-        // search patient
-        // view slots
-        // select starting time slot
-        // get allocation id
-        // check availability
-        // display appointment to book
-        // ask confirmation
-        // add appointment
-
         Patient selectedPatient = ManagePatientUI.searchPatient();
         if(selectedPatient == null){
             System.out.println("Back to the menu");
@@ -124,18 +123,21 @@ public class MakeAppointmentUI {
 
         boolean slotAvailable = false;
         int startSlot;
-        // todo
+
         // service id, branch id, date
         // assign doctor
         // allocation id where service id, branch id, and doctor id are the same
         while (!slotAvailable) {
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
+            // todo assign doctor
             slotAvailable = controller.checkSlotAvailability(viewSlotsUI, startSlot);
 
             if (slotAvailable) {
+                // todo: get allocation id
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
-                LocalDate date = LocalDate.now();
+                LocalDate date =viewSlotsUI.getSelectedDate();
                 appointmentToBook = new Appointment(date, selectedPatient, allocationId, Attendance.NAN, startSlot);
+                controller.addAppointment(appointmentToBook);
                 displayAppointmentDetails(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
