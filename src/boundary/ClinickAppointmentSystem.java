@@ -125,7 +125,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") != 1;
+					return ConsoleInput.askChoice(1, 2, "Select number") == 2;
 				}
 			}
 			ConsoleUI.clearScreen();
@@ -160,7 +160,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") != 1;
+					return ConsoleInput.askChoice(1, 2, "Select number") == 2;
 				}
 			}
 			ConsoleUI.clearScreen();
@@ -195,7 +195,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") != 1;
+					return ConsoleInput.askChoice(1, 2, "Select number") == 2;
 				}
 			}
 			ConsoleUI.clearScreen();
