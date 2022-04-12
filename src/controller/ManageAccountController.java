@@ -35,6 +35,8 @@ public class ManageAccountController {
 			ResultSet rs = st.executeQuery("SELECT password FROM doctor WHERE id = 1");
 			System.out.println(rs.getString("password"));
 		} catch (SQLException e) { // If the exception was not caught, the program will stop
+			e.getMessage();
+			e.getErrorCode();
 			e.printStackTrace();
 		}
     }

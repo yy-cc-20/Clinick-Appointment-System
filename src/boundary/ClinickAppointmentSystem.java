@@ -33,7 +33,7 @@ public class ClinickAppointmentSystem {
 		boolean toExit = false;
 		
 		while (true) {
-			ConsoleUI.displaySystemName("Clinic Booking System");
+			ConsoleUI.displaySystemName("Clinick Booking System");
 			User systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
 	
@@ -63,7 +63,6 @@ public class ClinickAppointmentSystem {
 		MakeAppointmentUI makeAppointmentUI = new MakeAppointmentUI(systemUser);
 		ManageAppointmentUI manageAppointmentUI = new ManageAppointmentUI();
 		ManagePatientUI managePatientUI = new ManagePatientUI();
-		ManageAccountUI manageAccountUI = new ManageAccountUI(systemUser);
 
 		while (true) {
 			ConsoleUI.displayMenuForReceptionist();
@@ -107,8 +106,8 @@ public class ClinickAppointmentSystem {
 					managePatientUI.searchPatient();
 				}
 				case 10 -> {
-					ConsoleUI.displayFunctionName("Account Setting");
-					manageAccountUI.changePassword();
+					ConsoleUI.displayFunctionName("Manage Account");
+					new ManageAccountUI(systemUser).changePassword();
 				}
 				case 11 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
@@ -146,7 +145,7 @@ public class ClinickAppointmentSystem {
 					System.out.println("This feature is coming soon.");	
 				}
 				case 4 -> {
-					ConsoleUI.displayFunctionName("Account Setting");
+					ConsoleUI.displayFunctionName("Manage Account");
 					new ManageAccountUI(systemUser).changePassword();
 				}
 				case 0 -> { 
@@ -193,11 +192,4 @@ public class ClinickAppointmentSystem {
 			ConsoleUI.clearScreen();
 		}
 	}
-	
-	/*
-	// instantiating the user interfaces
-	MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(systemUser);
-	ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
-	ManagePatientUI managePatientInterface = new ManagePatientUI();
-	*/
 }
