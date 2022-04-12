@@ -20,19 +20,12 @@
 
 package boundary;
 
-import java.sql.*;
-
 import database.DatabaseConnection;
 import entity.*;
 
 public class ClinickAppointmentSystem {
-	public static void main(String... args) throws SQLException {
-		/*
-		// instantiating the user interfaces
-		MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(systemUser);
-		ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
-		ManagePatientUI managePatientInterface = new ManagePatientUI();
-		*/
+	public static void main(String... args) {
+
 		boolean toExit = false;
 		
 		while (true) {
@@ -51,56 +44,152 @@ public class ClinickAppointmentSystem {
 			
 			ConsoleUI.clearScreen();
 			
-			if (toExit)
+			if (toExit) {
+				ConsoleUI.displayFunctionName(" Program Stopped ");
+				SingletonScanner.scanner.close();
+				DatabaseConnection.closeConnection();
 				System.exit(0);
+			}
 		}
 	}
 		
 	/** @return true to logout, false to exit application */
 	static boolean startReceptionistView(User systemUser) {
+		int choiceNo; // the action that user wants to perform
 		
-		
+		while (true) {
+			ConsoleUI.displayMenuForDoctor();
+			choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
+
+			switch (choiceNo) {
+				case 1 -> {
+					ConsoleUI.displayFunctionName("View Appointment");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 2 -> {
+					ConsoleUI.displayFunctionName("Search Appointment");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 3 -> {
+					ConsoleUI.displayFunctionName("Make Appointment");
+					System.out.println("This feature is coming soon.");
+				}
+				case 4 -> {
+					ConsoleUI.displayFunctionName("Update Appointment");
+					System.out.println("This feature is coming soon.");
+				}
+				case 5 -> {
+					ConsoleUI.displayFunctionName("Cancel Appointment");
+					System.out.println("This feature is coming soon.");
+				}
+				case 6 -> {
+					ConsoleUI.displayFunctionName("Record Attendance");
+					System.out.println("This feature is coming soon.");
+				}
+				case 7 -> {
+					ConsoleUI.displayFunctionName("Create Patient Profile");
+					System.out.println("This feature is coming soon.");
+				}
+				case 8 -> {
+					ConsoleUI.displayFunctionName("Manage Patient Profile");
+					System.out.println("This feature is coming soon.");
+				}
+				case 9 -> {
+					ConsoleUI.displayFunctionName("Search Patient");
+					System.out.println("This feature is coming soon.");
+				}
+				case 10 -> {
+					ConsoleUI.displayFunctionName("Account Setting");
+					new ManageAccountUI(systemUser).changePassword();
+				}
+				case 11 -> {
+					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
+					ViewSlotsUI.getInstance().viewSlots();
+				}
+				case 0 -> { 
+					System.out.println("[1]Switch Account");
+					System.out.println("[2]Exit Application");
+					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? true : false;
+				}
+			}
+			ConsoleUI.clearScreen();
+		}		
 	}
 	
 	/** @return true to logout, false to exit application */
 	static boolean startDoctorView(User systemUser) {
+		int choiceNo; // the action that user wants to perform
 		
+		while (true) {
+			ConsoleUI.displayMenuForDoctor();
+			choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
+
+			switch (choiceNo) {
+				case 1 -> {
+					ConsoleUI.displayFunctionName("View Appointment");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 2 -> {
+					ConsoleUI.displayFunctionName("Search Appointment");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 3 -> {
+					ConsoleUI.displayFunctionName("Search Patient");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 4 -> {
+					ConsoleUI.displayFunctionName("Account Setting");
+					new ManageAccountUI(systemUser).changePassword();
+				}
+				case 0 -> { 
+					System.out.println("[1]Switch Account");
+					System.out.println("[2]Exit Application");
+					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? true : false;
+				}
+			}
+			ConsoleUI.clearScreen();
+		}
 	}
 	
 	/** @return true to logout, false to exit application */
 	static boolean startPatientView(User systemUser) {
+		int choiceNo; // the action that user wants to perform
 		
+		while (true) {
+			ConsoleUI.displayMenuForDoctor();
+			choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
+
+			switch (choiceNo) {
+				case 1 -> {
+					ConsoleUI.displayFunctionName("View Appointment");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 2 -> {
+					ConsoleUI.displayFunctionName("Search Appointment");
+					System.out.println("This feature is coming soon.");	
+				}
+				case 3 -> {
+					ConsoleUI.displayFunctionName("Account Setting");
+					new ManageAccountUI(systemUser).changePassword();
+				}
+				case 4 -> {
+					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
+					ViewSlotsUI.getInstance().viewSlots();
+				}
+				case 0 -> { 
+					System.out.println("[1]Switch Account");
+					System.out.println("[2]Exit Application");
+					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? true : false;
+				}
+			}
+			ConsoleUI.clearScreen();
+		}
 	}
 	
 	/*
-
-	int choiceNo; // the action that user wants to perform
-	final int beginChoiceNo = 1; 
-	final int endChoiceNo = 3;
-	
-	while (true) {
-		ConsoleUI.displaySystemName("System Name");
-		//ConsoleUI.displayMenu(); // need to change the menu
-		choiceNo = ConsoleInput.askChoice(beginChoiceNo, endChoiceNo, "Your choice");
-
-		switch (choiceNo) {
-			case 1 -> {
-				// Just to test the method, you may change the position of the code
-				ConsoleUI.displayFunctionName("Account Setting");
-				new ManageAccountUI(systemUser).changePassword();
-			}
-			case 2 -> {// Modify Account Info
-					ConsoleUI.displayFunctionName("View Services and Time Slots");
-					ViewSlotsUI.getInstance().viewSlots();
-			}
-			case 3 -> { // logout and exit the program
-				ConsoleUI.displayFunctionName(" Program Stopped ");
-				SingletonScanner.scanner.close();
-				DatabaseConnection.closeConnection();  @throws SQLException
-				System.exit(0);
-			}
-		}
-		ConsoleUI.clearScreen();
-	}
+	// instantiating the user interfaces
+	MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(systemUser);
+	ManageAppointmentUI manageAppointmentInterface = new ManageAppointmentUI();
+	ManagePatientUI managePatientInterface = new ManagePatientUI();
 	*/
 }

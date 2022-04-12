@@ -73,8 +73,12 @@ public class DatabaseConnection {
 		return conn; // Already connect to database
 	}
 	
-	public static void closeConnection() throws SQLException {
-		conn.close();
+	public static void closeConnection() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// DatabaseConnectionTest
