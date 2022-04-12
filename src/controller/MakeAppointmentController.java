@@ -1,6 +1,7 @@
 package controller;
 
 import boundary.ConsoleUI;
+import boundary.ViewSlotsUI;
 import database.DatabaseConnection;
 import entity.*;
 
@@ -93,13 +94,12 @@ public class MakeAppointmentController {
         return results;
     }
 
-    public boolean checkSlotAvailability(int startSlot) {
-        // todo sql query?
+    public boolean checkSlotAvailability(ViewSlotsUI viewSlotsUI, int startSlot) {
+        List<List<Integer>> availableDoctors = viewSlotsUI.getAvailableDoctors();
         return true;
     }
 
     public void addAppointment(Appointment appointmentToBook) throws SQLException {
-        // todo: add a new entry to table appointment
         Connection conn = DatabaseConnection.getConnection();
         Statement st = conn.createStatement();
         conn.setAutoCommit(false);

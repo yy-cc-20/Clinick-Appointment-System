@@ -115,13 +115,12 @@ public class MakeAppointmentUI {
             System.out.println("Back to the menu");
             return;
         }
-        boolean cont = ViewSlotsUI.getInstance().viewSlots();
-        if (!cont) {
+        ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        boolean contViewSlot = viewSlotsUI.viewSlots();
+        if (!contViewSlot) {
             System.out.println("Back to the menu");
             return;
         }
-
-        List<List<Integer>> availableDoctors = ViewSlotsUI.getInstance().getAvailableDoctors();
 
         boolean slotAvailable = false;
         int startSlot;
@@ -130,15 +129,13 @@ public class MakeAppointmentUI {
         // assign doctor
         // allocation id where service id, branch id, and doctor id are the same
         while (!slotAvailable) {
-            TimeSlot.displaySlots();
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
-            slotAvailable = controller.checkSlotAvailability(startSlot);
+            slotAvailable = controller.checkSlotAvailability(viewSlotsUI, startSlot);
 
             if (slotAvailable) {
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
-                LocalDate today = LocalDate.now();
-//                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
-//                        Attendance.NAN, startSlot);
+                LocalDate date = LocalDate.now();
+                appointmentToBook = new Appointment(date, selectedPatient, allocationId, Attendance.NAN, startSlot);
                 displayAppointmentDetails(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
