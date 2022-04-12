@@ -141,19 +141,19 @@ public class ClinickAppointmentSystem {
 			switch (choiceNo) {
 				case 1 -> {
 					ConsoleUI.displayFunctionName("View Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.viewAppointment();
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Search Patient");
-					System.out.println("This feature is coming soon.");	
+					managePatientUI.searchPatient();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					new ManageAccountUI(systemUser).changePassword();
+					manageAccountUI.changePassword();
 				}
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
@@ -176,15 +176,15 @@ public class ClinickAppointmentSystem {
 			switch (choiceNo) {
 				case 1 -> {
 					ConsoleUI.displayFunctionName("View Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.viewAppointment();
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					manageAccountUI.changePassword();
+					managePatientUI.managePatientProfile();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
