@@ -10,8 +10,7 @@ public class Patient extends User {
         super(userid, username, password);
     }
 
-    public Patient(int userid, String username, String password, String ic, String phoneNo, String address,
-                   Appointment[] appointments) {
+    public Patient(int userid, String username, String password, String ic, String phoneNo, String address) {
         super(userid, username, password);
         this.ic = ic;
         this.phoneNo = phoneNo;

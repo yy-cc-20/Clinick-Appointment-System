@@ -64,7 +64,7 @@ public class DatabaseConnection {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		SetUpDatabase.setUpDatabaseIfNotExist();
+		DatabaseSetup.setupDatabase();
 	}
 
 	public static Connection getConnection() throws SQLException {

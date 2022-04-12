@@ -15,7 +15,7 @@ public class Allocation {
         this.timeSlotList = timeSlotList;
     }
 
-    public Allocation(int linkId, String branchId, String serviceId, String doctorId, String date) {
+    public Allocation(int linkId, String branchId, String serviceId, String doctorId) {
         this.linkId = linkId;
         this.branch = findBranch(branchId);
         this.service = findService(serviceId);
