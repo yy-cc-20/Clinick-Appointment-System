@@ -64,7 +64,7 @@ public class DataList implements IDataStore {
 			// e.g., query = "filter" column = "id" data = "1"
 			// e.g., query = "sort" column = "id" data = "asc"
 			if (query == null)
-				rs = st.executeQuery("SELECT * FROM branch;");
+				rs = st.executeQuery("SELECT * FROM branch ORDER BY id;");
 			else if (query.equalsIgnoreCase("filter"))
 				rs = st.executeQuery("SELECT * FROM branch WHERE " + column + " = " + data + ";");
 			else if (query.equalsIgnoreCase("sort"))
@@ -88,7 +88,7 @@ public class DataList implements IDataStore {
 
 	public List<Service> getServiceList() { 
 		try {
-			rs = st.executeQuery("SELECT * FROM service;");
+			rs = st.executeQuery("SELECT * FROM service ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -106,6 +106,7 @@ public class DataList implements IDataStore {
 
 	public List<Doctor> getDoctorList() {
 		try {			
+			rs = st.executeQuery("SELECT * FROM doctor ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -121,7 +122,7 @@ public class DataList implements IDataStore {
 
 	public List<Allocation> getAllocationList() {
 		try {
-			rs = st.executeQuery("SELECT * FROM allocation;");
+			rs = st.executeQuery("SELECT * FROM allocation ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int branchId = rs.getInt("branchId");
@@ -138,7 +139,7 @@ public class DataList implements IDataStore {
 
 	public List<Patient> getPatientList() {
 		try {
-			rs = st.executeQuery("SELECT * FROM patient;");
+			rs = st.executeQuery("SELECT * FROM patient ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -157,7 +158,7 @@ public class DataList implements IDataStore {
 
 	public List<Receptionist> getReceptionistList() {
 		try {
-			rs = st.executeQuery("SELECT * FROM receptionist;");
+			rs = st.executeQuery("SELECT * FROM receptionist ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
@@ -173,7 +174,7 @@ public class DataList implements IDataStore {
 
 	public List<Appointment> getAppointmentList() {
 		try {
-			rs = st.executeQuery("SELECT * FROM appointment;");
+			rs = st.executeQuery("SELECT * FROM appointment ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				Date date = rs.getDate("date");
