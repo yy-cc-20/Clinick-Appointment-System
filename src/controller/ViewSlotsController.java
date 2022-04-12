@@ -143,7 +143,7 @@ public class ViewSlotsController {
 		return returnIds;
 	}
 	
-	/** @param slot start from 1 */
+	/** @param startSlot start from 1 */
 	public List<Integer> getDoctorsHaveAppointment(int serviceId, int branchId, LocalDate date, int startSlot) {
 		List<Integer> returnIds = new ArrayList<>();
 		

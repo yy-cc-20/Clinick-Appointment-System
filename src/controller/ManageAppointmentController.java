@@ -64,7 +64,7 @@ public class ManageAppointmentController {
 //        } while (!found);
     }
 
-    public void updateAppointment(ArrayList<Appointment> appointmentList) {
+    public void updateAppointment(Appointment appointmentList) {
 //        String id, date, allocation, attendance, startSlot;
 //        boolean found = false;
 //
@@ -149,6 +149,4 @@ public class ManageAppointmentController {
 //            }
 //        } while (!found);
     }
-
-
 }

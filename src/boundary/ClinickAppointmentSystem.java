@@ -60,7 +60,11 @@ public class ClinickAppointmentSystem {
 	/** @return false to logout, true to exit application */
 	static boolean startReceptionistView(User systemUser) {
 		int choiceNo; // the action that user wants to perform
-		
+		MakeAppointmentUI makeAppointmentUI = new MakeAppointmentUI(systemUser);
+		ManageAppointmentUI manageAppointmentUI = new ManageAppointmentUI();
+		ManagePatientUI managePatientUI = new ManagePatientUI();
+		ManageAccountUI manageAccountUI = new ManageAccountUI(systemUser);
+
 		while (true) {
 			ConsoleUI.displayMenuForReceptionist();
 			choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
@@ -68,43 +72,43 @@ public class ClinickAppointmentSystem {
 			switch (choiceNo) {
 				case 1 -> {
 					ConsoleUI.displayFunctionName("View Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.viewAppointment();
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Make Appointment");
-					System.out.println("This feature is coming soon.");
+					makeAppointmentUI.viewAppointment();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("Update Appointment");
-					System.out.println("This feature is coming soon.");
+					manageAppointmentUI.updateAppointment();
 				}
 				case 5 -> {
 					ConsoleUI.displayFunctionName("Cancel Appointment");
-					System.out.println("This feature is coming soon.");
+					manageAppointmentUI.cancelAppointment();
 				}
 				case 6 -> {
 					ConsoleUI.displayFunctionName("Record Attendance");
-					System.out.println("This feature is coming soon.");
+					manageAppointmentUI.recordAttendance();
 				}
 				case 7 -> {
 					ConsoleUI.displayFunctionName("Create Patient Profile");
-					System.out.println("This feature is coming soon.");
+					managePatientUI.createPatientProfile();
 				}
 				case 8 -> {
 					ConsoleUI.displayFunctionName("Manage Patient Profile");
-					System.out.println("This feature is coming soon.");
+					managePatientUI.managePatientProfile();
 				}
 				case 9 -> {
 					ConsoleUI.displayFunctionName("Search Patient");
-					System.out.println("This feature is coming soon.");
+					managePatientUI.searchPatient();
 				}
 				case 10 -> {
 					ConsoleUI.displayFunctionName("Account Setting");
-					new ManageAccountUI(systemUser).changePassword();
+					manageAccountUI.changePassword();
 				}
 				case 11 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
@@ -113,7 +117,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? false : true;
+					return ConsoleInput.askChoice(1, 2, "Select number") != 1;
 				}
 			}
 			ConsoleUI.clearScreen();
@@ -148,7 +152,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? false : true;
+					return ConsoleInput.askChoice(1, 2, "Select number") != 1;
 				}
 			}
 			ConsoleUI.clearScreen();
@@ -183,7 +187,7 @@ public class ClinickAppointmentSystem {
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
 					System.out.println("[2]Exit Application");
-					return ConsoleInput.askChoice(1, 2, "Select number") == 1 ? false : true;
+					return ConsoleInput.askChoice(1, 2, "Select number") != 1;
 				}
 			}
 			ConsoleUI.clearScreen();

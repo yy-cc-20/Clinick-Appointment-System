@@ -11,7 +11,7 @@ public class ManageAppointmentUI {
     private final ManageAppointmentController controller = new ManageAppointmentController();
     private static Appointment selectedAppointment;
 
-	public void searchAppointmentToModify() {
+	private void searchAppointmentToModify() {
 		int appointmentId = ConsoleInput.askInt("appointment ID");
 		List<Appointment> selectedAppointments = controller.searchAppointment(1, appointmentId);
 
@@ -26,7 +26,7 @@ public class ManageAppointmentUI {
     public void updateAppointment() {
         searchAppointmentToModify();
 		if (ConsoleInput.askBoolean("Update appointment")) {
-//			controller.updateAppointment(selectedAppointment);
+			controller.updateAppointment(selectedAppointment);
 			System.out.println("Appointment updated.");
 		}
     }
