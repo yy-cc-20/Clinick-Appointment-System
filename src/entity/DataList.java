@@ -127,8 +127,7 @@ public class DataList implements IDataStore {
 				int branchId = rs.getInt("branchId");
 				int serviceId = rs.getInt("serviceId");
 				int doctorId = rs.getInt("doctorId");
-				Allocation allocation = new Allocation(id, Integer.toString(branchId), Integer.toString(serviceId),
-						Integer.toString(doctorId));
+				Allocation allocation = new Allocation(id, branchId, serviceId, doctorId);
 				allocationList.add(allocation);
 			}
 		} catch (SQLException e) {

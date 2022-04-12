@@ -1,6 +1,9 @@
 package entity;
 
+import java.util.List;
+
 public class Branch{
+    private final List<Receptionist> receptionists = DataList.getInstance().getReceptionistList();
     private int branchId;
     private String branchName;
     private String branchAddress;
@@ -18,9 +21,12 @@ public class Branch{
     public Branch(){}
 
     private Receptionist findReceptionist(String receptionistId){
-        // todo connect to database
-        Receptionist receptionist = new Receptionist();
-        return receptionist;
+        for (Receptionist value : receptionists) {
+            if (value.getUserId() == Integer.parseInt(receptionistId)) {
+                return value;
+            }
+        }
+        return null;
     }
 
     public int getBranchId() {

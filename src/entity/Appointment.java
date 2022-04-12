@@ -9,6 +9,7 @@ public class Appointment {
     // todo: sql or method?
     private final List<Patient> patients = DataList.getInstance().getPatientList();
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
+    private final List<Service> services = DataList.getInstance().getServiceList();
     private int appointmentId;
     private LocalDate appointmentDate;
     private Patient patient;
@@ -40,7 +41,6 @@ public class Appointment {
     private Patient findPatient(String patientId){
         for (Patient value : patients) {
             if (value.getUserId() == Integer.parseInt(patientId)) {
-                System.out.println(value.getUserId());
                 return value;
             }
         }
@@ -50,7 +50,6 @@ public class Appointment {
     private Allocation findAllocation(int appointmentId){
         for (Allocation value : allocations) {
             if (value.getLinkId() == appointmentId) {
-                System.out.println(value.getLinkId());
                 return value;
             }
         }
