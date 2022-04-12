@@ -1,5 +1,7 @@
 package boundary;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import controller.ManageAppointmentController;
@@ -13,7 +15,7 @@ public class ManageAppointmentUI {
 
 	private void searchAppointmentToModify() {
 		int appointmentId = ConsoleInput.askInt("appointment ID");
-		List<Appointment> selectedAppointments = controller.searchAppointment(1, appointmentId);
+		List<Appointment> selectedAppointments = controller.searchAppointment(1, Integer.toString(appointmentId));
 
 		if (selectedAppointments.size() == 0) {
 			System.out.println("No such appointment found.");
@@ -25,8 +27,10 @@ public class ManageAppointmentUI {
 
     public void updateAppointment() {
         searchAppointmentToModify();
+        String newDate = ConsoleInput.askDateNoEarlierThanToday("new date").toString();
+        // TODO : view the slots and select a newStartSlot
 		if (ConsoleInput.askBoolean("Update appointment")) {
-			controller.updateAppointment(selectedAppointment);
+			controller.updateAppointmentTime(selectedAppointment.getAppointmentId(), newDate, newStartSlot);
 			System.out.println("Appointment updated.");
 		}
     }
@@ -34,7 +38,7 @@ public class ManageAppointmentUI {
     public void cancelAppointment() {
         searchAppointmentToModify();
         if (ConsoleInput.askBoolean("Cancel appointment")) {
-            controller.cancelAppointment(selectedAppointment);
+            ccontroller.cancelAppointment(selectedAppointment.getAppointmentId());
             System.out.println("Appointment cancelled.");
         }
     }
@@ -42,7 +46,7 @@ public class ManageAppointmentUI {
     public void recordAttendance() {
         searchAppointmentToModify();
         Attendance attendance = Attendance.askAttendance();
-        selectedAppointment.setAttendance(attendance);
+        controller.updateAppointmentAttendance(selectedAppointment.getAppointmentId(), attendance.toString());
         MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
     }
 
