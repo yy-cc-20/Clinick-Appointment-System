@@ -2,6 +2,7 @@ package boundary;
 
 import controller.MakeAppointmentController;
 import entity.Appointment;
+import entity.Patient;
 import entity.Receptionist;
 import entity.User;
 
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 
 public class testingForMakeApt {
     public static void main(String[] args) throws SQLException {
-        User user = new Receptionist();
+        User user = new Patient();
         MakeAppointmentUI makeAppointmentInterface = new MakeAppointmentUI(user);
 
         int choiceNo; // the action that user wants to perform
@@ -32,7 +33,7 @@ public class testingForMakeApt {
                     makeAppointmentInterface.makeAppointment();
                 }
                 case 4 -> {
-                    Appointment appointment = new Appointment("2022-04-16", 1, 1,"NAN",1);
+                    Appointment appointment = new Appointment("2022-04-16", 1, 1, "NAN", 1);
                     MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
                     makeAppointmentController.addAppointment(appointment);
                 }

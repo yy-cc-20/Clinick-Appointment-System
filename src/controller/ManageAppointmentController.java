@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ManageAppointmentController {
     //    Scanner input = new Scanner(System.in);
-    public List<Appointment> searchAppointment(int i, String appointmentId) {
+    public List<Appointment> searchAppointment(int i, int appointmentId) {
         return new ArrayList<>();
     }
 
