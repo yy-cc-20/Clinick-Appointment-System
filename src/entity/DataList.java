@@ -52,7 +52,7 @@ public class DataList implements IDataStore {
 		List<Branch> branchResults = new ArrayList<>();
 
 		for (Integer id : ids)
-			branchResults.add(getBranchList("filter", "branchId", id.toString()).get(0));
+			branchResults.add(getBranchList("filter", "id", id.toString()).get(0));
 		
 		return branchResults;
 		
@@ -182,7 +182,7 @@ public class DataList implements IDataStore {
 				int patientId = rs.getInt("patientId");
 				int allocationId = rs.getInt("allocationId");
 				Appointment appointment = new Appointment(id, date.toString(), Integer.toString(patientId),
-						Integer.toString(allocationId), attendance, startSlot);
+						allocationId, attendance, startSlot);
 				appointmentList.add(appointment);
 			}
 		} catch (SQLException e) {

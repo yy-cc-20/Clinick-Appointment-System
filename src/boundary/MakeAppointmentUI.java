@@ -1,5 +1,6 @@
 package boundary;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class MakeAppointmentUI {
     }
 
     public static void displayAppointmentDetails(Appointment anAppointment) {
-        System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDate() + " \t| "
+        System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDateString() + " \t| "
                 // todo: get the time
                 + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                 + anAppointment.getAllocation().getService().getServiceName() + " \t| "
@@ -98,7 +99,7 @@ public class MakeAppointmentUI {
     }
 
     // 3. make an appointment
-    public void makeAppointment() {
+    public void makeAppointment() throws SQLException {
         // search patient
         // view slots
         // select starting time slot
@@ -120,7 +121,7 @@ public class MakeAppointmentUI {
             return;
         }
 
-        ViewSlotsUI.getInstance().getAvailableDoctors();
+        List<List<Integer>> availableDoctors = ViewSlotsUI.getInstance().getAvailableDoctors();
 
         boolean slotAvailable = false;
         int startSlot;
