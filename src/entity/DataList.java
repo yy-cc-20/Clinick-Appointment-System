@@ -1,7 +1,11 @@
 package entity;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import database.DatabaseConnection;
@@ -53,10 +57,10 @@ public class DataList implements IDataStore {
 
 		for (Integer id : ids)
 			branchResults.add(getBranchList("filter", "id", id.toString()).get(0));
-		
+
 		return branchResults;
-		
-		//return getBranchList(null, "", "");
+
+		// return getBranchList(null, "", "");
 	}
 
 	public List<Branch> getBranchList(String query, String column, String data) {
@@ -82,11 +86,11 @@ public class DataList implements IDataStore {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return branchList;
 	}
 
-	public List<Service> getServiceList() { 
+	public List<Service> getServiceList() {
 		try {
 			rs = st.executeQuery("SELECT * FROM service ORDER BY id;");
 			while (rs.next()) {
@@ -105,7 +109,7 @@ public class DataList implements IDataStore {
 	}
 
 	public List<Doctor> getDoctorList() {
-		try {			
+		try {
 			rs = st.executeQuery("SELECT * FROM doctor ORDER BY id;");
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -191,63 +195,5 @@ public class DataList implements IDataStore {
 		}
 		return appointmentList;
 	}
-
-	/*
-	public void importDoctorList() {
-
-	}
-
-	public void importPatientList() {
-
-	}
-
-	public void importReceptionistList() {
-
-	}
-
-	public void importAllocationList() {
-
-	}
-
-	public void importBranchList() {
-
-	}
-
-	public void importServiceList() {
-
-	}
-
-	public void importAppointmentList() {
-
-	}
-
-	public void importTimeSlotList() {
-
-	}
-
-	public void updateToTable(String tableName, String columnToUpdate, String columnToSearch, String valueToSearch,
-			String newValue) throws SQLException {
-		try {
-			st.executeUpdate("UPDATE " + tableName + " SET " + columnToUpdate + " = " + newValue + " WHERE "
-					+ columnToSearch + " = " + valueToSearch + ";");
-			// PreparedStatement pst = conn.prepareStatement("INSERT INTO Appointment (id,
-			// date, service) VALUES (?, ?, ?)");
-			// pst.setInt(1, 50);
-			// pst.setString(2, "date");
-			// pst.setString(2, "service");
-			// pst.executeUpdate(); // no args
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void deleteFromTable(String tableName, String columnToSearch, String valueToSearch) throws SQLException {
-		try {
-			st.executeUpdate("DELETE FROM " + tableName + " WHERE " + columnToSearch + " = " + valueToSearch + ";");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
 
 }
