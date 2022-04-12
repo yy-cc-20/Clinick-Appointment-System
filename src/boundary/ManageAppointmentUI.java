@@ -1,5 +1,6 @@
 package boundary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controller.ManageAppointmentController;
@@ -11,20 +12,9 @@ public class ManageAppointmentUI {
     private final ManageAppointmentController controller = new ManageAppointmentController();
     private static Appointment selectedAppointment;
 
-	private void searchAppointmentToModify() {
-		int appointmentId = ConsoleInput.askInt("appointment ID");
-		List<Appointment> selectedAppointments = controller.searchAppointment(1, Integer.toString(appointmentId));
-
-		if (selectedAppointments.size() == 0) {
-			System.out.println("No such appointment found.");
-		} else {
-			selectedAppointment = selectedAppointments.get(0);
-			MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
-		}
-	}
-
     public void updateAppointment() {
-        searchAppointmentToModify();
+        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+
         String newDate = ConsoleInput.askDateNoEarlierThanToday("new date").toString();
         // TODO : view the slots and select a newStartSlot
 		if (ConsoleInput.askBoolean("Update appointment")) {
@@ -34,7 +24,8 @@ public class ManageAppointmentUI {
     }
 
     public void cancelAppointment() {
-        searchAppointmentToModify();
+        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+        
         if (ConsoleInput.askBoolean("Cancel appointment")) {
             controller.cancelAppointment(selectedAppointment.getAppointmentId());
             System.out.println("Appointment cancelled.");
@@ -42,7 +33,8 @@ public class ManageAppointmentUI {
     }
 
     public void recordAttendance() {
-        searchAppointmentToModify();
+        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+
         Attendance attendance = Attendance.askAttendance();
         controller.updateAppointmentAttendance(selectedAppointment.getAppointmentId(), attendance.toString());
         MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);

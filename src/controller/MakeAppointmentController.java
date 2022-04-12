@@ -2,12 +2,7 @@ package controller;
 
 import boundary.ConsoleUI;
 import boundary.ViewSlotsUI;
-import database.DatabaseConnection;
 import entity.*;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,24 +119,12 @@ public class MakeAppointmentController {
     }
 
     public void addAppointment(Appointment appointmentToBook) {
-        try{
-            Connection conn = DatabaseConnection.getConnection();
-            Statement st = conn.createStatement();
-            conn.setAutoCommit(false);
-
             String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
             String attendance = appointmentToBook.getAttendance().toString();
             int startSlot = appointmentToBook.getStartSlot();
             int patientId = appointmentToBook.getPatient().getUserId();
             int allocationId = appointmentToBook.getAllocation().getLinkId();
 
-            st.executeUpdate("INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) " +
-                    "VALUES ('"+date+"','"+attendance+"','"+startSlot+"','"+patientId+"','"+allocationId+"')");
-            conn.commit();
-            conn.setAutoCommit(true);
-        } catch (SQLException sqlException){
-            System.out.println("Error: SQLException!");
-        }
-
+            DataList.getInstance().addAppointment(date, attendance, startSlot, patientId, allocationId);
     }
 }

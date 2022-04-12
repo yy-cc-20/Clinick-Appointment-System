@@ -167,7 +167,7 @@ public class DataList implements IDataStore {
 				Allocation allocation = new Allocation(id, branchId, serviceId, doctorId);
 				allocationList.add(allocation);
 			}
-//			System.out.println("allocationList " + allocationList.size());
+			System.out.println("allocationList " + allocationList.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
