@@ -9,6 +9,7 @@ public class Appointment {
     // todo: sql or method?
     private final List<Patient> patients = DataList.getInstance().getPatientList();
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
+    private final List<Service> services = DataList.getInstance().getServiceList();
     private int appointmentId;
     private LocalDate appointmentDate;
     private Patient patient;
@@ -16,7 +17,7 @@ public class Appointment {
     private Attendance attendance;
     private int startSlot;
 
-    public Appointment(int appointmentId, String appointmentDate, String patientId, int allocationId,
+    public Appointment(int appointmentId, String appointmentDate, int patientId, int allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
@@ -26,7 +27,7 @@ public class Appointment {
         this.startSlot = startSlot;
     }
 
-    public Appointment(String appointmentDate, String patientId, int allocationId, String attendance, int startSlot) {
+    public Appointment(String appointmentDate, int patientId, int allocationId, String attendance, int startSlot) {
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
         this.patient = findPatient(patientId);
         this.allocation = findAllocation(allocationId);
@@ -37,10 +38,9 @@ public class Appointment {
     public Appointment(){}
 
     // todo connect to database
-    private Patient findPatient(String patientId){
+    private Patient findPatient(int patientId){
         for (Patient value : patients) {
-            if (value.getUserId() == Integer.parseInt(patientId)) {
-                System.out.println(value.getUserId());
+            if (value.getUserId() == patientId) {
                 return value;
             }
         }
@@ -50,7 +50,6 @@ public class Appointment {
     private Allocation findAllocation(int appointmentId){
         for (Allocation value : allocations) {
             if (value.getLinkId() == appointmentId) {
-                System.out.println(value.getLinkId());
                 return value;
             }
         }
@@ -101,6 +100,7 @@ public class Appointment {
             case 2 -> "1 hour";
             case 3 -> "1 hour 30 mins";
             case 4 -> "2 hours";
+            case 5 -> "2 hours 30 mins";
             default -> throw new IllegalStateException("Unexpected value: " + required);
         };
     }

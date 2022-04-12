@@ -2,7 +2,7 @@
  * @subject 	UECS2344 SOFTWARE DESIGN 
  * @trimester 	January 2022
  * 
- * @system 		Clinik Appointment System
+ * @system 		Clinick Appointment System
  * @date 		15/04/2022
  * 
  * @author 		Ling Sun Shuai      2004562 P2 

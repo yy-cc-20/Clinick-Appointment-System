@@ -1,17 +1,20 @@
 package controller;
 
 import boundary.ConsoleUI;
+import boundary.ViewSlotsUI;
 import database.DatabaseConnection;
 import entity.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
     private final List<Appointment> appointments = DataList.getInstance().getAppointmentList();
+    private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     public List<Appointment> getAllAppointments(User theUser) {
         if (theUser instanceof Patient) {
@@ -93,13 +96,27 @@ public class MakeAppointmentController {
         return results;
     }
 
-    public boolean checkSlotAvailability(int startSlot) {
-        // todo sql query?
-        return true;
+    public Allocation assignAllocation(ViewSlotsUI viewSlotsUI) {
+        List<List<Integer>> availableDoctors = viewSlotsUI.getAvailableDoctors();
+        int branchId = viewSlotsUI.getSelectedBranchId();
+        int serviceId = viewSlotsUI.getSelectedServiceId();
+        // todo select a doctor
+
+        int doctorId = 0;
+        Allocation allocation = null;
+        for (Allocation value : allocations) {
+            if (value.getBranch().getBranchId() == branchId) {
+                if (value.getService().getServiceId() == serviceId) {
+                    if (value.getDoctor().getUserId() == doctorId) {
+                        allocation = value;
+                    }
+                }
+            }
+        }
+        return allocation;
     }
 
     public void addAppointment(Appointment appointmentToBook) throws SQLException {
-        // todo: add a new entry to table appointment
         Connection conn = DatabaseConnection.getConnection();
         Statement st = conn.createStatement();
         conn.setAutoCommit(false);

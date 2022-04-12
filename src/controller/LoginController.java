@@ -32,13 +32,13 @@ public class LoginController {
 			case 3 -> table = "Patient";
 			default -> throw new IllegalArgumentException();
 		}
-		String sql = "SELECT username FROM " + table + " WHERE userid = " + userid + " AND password = " + password;
+		String sql = "SELECT name FROM " + table + " WHERE id = " + userid + " AND password = '" +  password + "';";
 		
 		try {
 			Statement st = DatabaseConnection.getConnection().createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) // Found user
-				return rs.getString(0);
+				return rs.getString(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

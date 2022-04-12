@@ -1,9 +1,9 @@
 package controller;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.sql.Statement;
+import java.sql.SQLException;
 import database.DatabaseConnection;
 import entity.*;
 
@@ -11,8 +11,6 @@ public class ManagePatientController {
 	private final List<Patient> patients = DataList.getInstance().getPatientList();
 	private static ManagePatientController instance;
 	private Statement st;
-	private ResultSet rs;
-	private String sql;
 
 	public ManagePatientController() {
 		try {
@@ -38,15 +36,17 @@ public class ManagePatientController {
     }
 
     public void addPatient(String name, String patientIc, String phone, String address) {
-
-//    	sql = "INSERT INTO PATIENT('NAME','USER_ID','PHONE_NO','ADDRESS','PATIENT_IC') VALUES ('" + name + "', '-', '-', '-', '" + patientIc +"');";
-//    	try {
-//    	     rs = st.executeQuery(sql);
-//    	    	}
-//
-//    	} catch (SQLException e) {
-//    	    	e.printStackTrace();
-//    	    }
+    	
+    	List<Patient> patientList = new ArrayList<>();
+    	patientList.add(new Patient(name, patientIc, phone, address));
+    	
+/*    	try {
+    		st.executeUpdate("INSERT INTO PATIENT(name, patientIc, phone, address)" +
+    			"VALUES ('"+name+"','"+patientIc+"', '"+phone+"','"+address+"')");
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+   	    }
+*/
     }
 }
 

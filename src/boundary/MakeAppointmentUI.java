@@ -17,7 +17,6 @@ public class MakeAppointmentUI {
     // todo: create getInstance method for UIs? or add static to use the method
     // todo: sql query or for loop statements
     private final MakeAppointmentController controller = new MakeAppointmentController();
-    private Appointment appointmentToBook;
     private final User theUser;
 
     public MakeAppointmentUI(User theUser) {
@@ -99,46 +98,48 @@ public class MakeAppointmentUI {
     }
 
     // 3. make an appointment
+    // search patient
+    // view slots
+    // select starting time slot
+    // get allocation id
+    // check availability
+    // display appointment to book
+    // ask confirmation
+    // add appointment
     public void makeAppointment() throws SQLException {
-        // search patient
-        // view slots
-        // select starting time slot
-        // get allocation id
-        // check availability
-        // display appointment to book
-        // ask confirmation
-        // add appointment
-        Service service = new Service();
-
         Patient selectedPatient = ManagePatientUI.searchPatient();
         if(selectedPatient == null){
             System.out.println("Back to the menu");
             return;
         }
-        boolean cont = ViewSlotsUI.getInstance().viewSlots();
-        if (!cont) {
+        ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        boolean contViewSlot = viewSlotsUI.viewSlots();
+
+        if (!contViewSlot) {
             System.out.println("Back to the menu");
             return;
         }
 
-        List<List<Integer>> availableDoctors = ViewSlotsUI.getInstance().getAvailableDoctors();
-
-        boolean slotAvailable = false;
+        boolean allocated = false;
         int startSlot;
-        // todo
+        int slotRequired = 0;
+
         // service id, branch id, date
         // assign doctor
         // allocation id where service id, branch id, and doctor id are the same
-        while (!slotAvailable) {
-            TimeSlot.displaySlots();
+        while (!allocated) {
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
-            slotAvailable = controller.checkSlotAvailability(startSlot);
-
-            if (slotAvailable) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
-                LocalDate today = LocalDate.now();
-//                appointmentToBook = new Appointment(appointmentId, today, patientId, allocationId,
-//                        Attendance.NAN, startSlot);
+            // todo assign doctor
+            Allocation allocation = controller.assignAllocation(viewSlotsUI);
+            if(allocation != null){
+                slotRequired = allocation.getService().getTimeSlotRequired();
+                allocated = true;
+            }
+            if (allocated) {
+                // todo: get allocation id
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired) + " selected.");
+                String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
+                Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
                 displayAppointmentDetails(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
@@ -146,35 +147,11 @@ public class MakeAppointmentUI {
                     System.out.println();
                 }
             } else {
-                System.out.println("Slot unavailable. Required time slot is " + service.getTimeSlotRequired());
+                System.out.println("Slot unavailable. Required time slot is " + slotRequired);
                 if (ConsoleInput.askBoolean("Go back to menu")) {
                     return;
                 }
             }
         }
     }
-
-//	public static TimeSlot askTimeSlot() {
-//		displayTimeSlot();
-//		int choice = ConsoleInput.askChoice(1, 13, "Select starting time slot");
-//
-//		return switch (choice) {
-//			case 1 -> SLOT_1;
-//			case 2 -> SLOT_2;
-//			case 3 -> SLOT_3;
-//			case 4 -> SLOT_4;
-//			case 5 -> SLOT_5;
-//			case 6 -> SLOT_6;
-//			case 7 -> SLOT_7;
-//			case 8 -> SLOT_8;
-//			case 9 -> SLOT_9;
-//			case 10 -> SLOT_10;
-//			case 11 -> SLOT_11;
-//			case 12 -> SLOT_12;
-//			case 13 -> SLOT_13;
-//			default -> SLOT_14; // case 14
-//		};
-//	}
-
-
 }
