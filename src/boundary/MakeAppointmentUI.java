@@ -17,7 +17,6 @@ public class MakeAppointmentUI {
     // todo: create getInstance method for UIs? or add static to use the method
     // todo: sql query or for loop statements
     private final MakeAppointmentController controller = new MakeAppointmentController();
-    private Appointment appointmentToBook;
     private final User theUser;
 
     public MakeAppointmentUI(User theUser) {
@@ -121,23 +120,26 @@ public class MakeAppointmentUI {
             return;
         }
 
-        boolean slotAvailable = false;
+        boolean allocated = false;
         int startSlot;
+        int slotRequired = 0;
 
         // service id, branch id, date
         // assign doctor
         // allocation id where service id, branch id, and doctor id are the same
-        while (!slotAvailable) {
+        while (!allocated) {
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
             // todo assign doctor
-            slotAvailable = controller.checkSlotAvailability(viewSlotsUI, startSlot);
-
-            if (slotAvailable) {
+            Allocation allocation = controller.assignAllocation(viewSlotsUI);
+            if(allocation != null){
+                slotRequired = allocation.getService().getTimeSlotRequired();
+                allocated = true;
+            }
+            if (allocated) {
                 // todo: get allocation id
-//                System.out.println("Slot " + startSlot + "-" + ( startSlot + service.getTimeSlotRequired() ) + " selected.");
-                LocalDate date =viewSlotsUI.getSelectedDate();
-//                appointmentToBook = new Appointment(date, selectedPatient, allocationId, Attendance.NAN, startSlot);
-                controller.addAppointment(appointmentToBook);
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired) + " selected.");
+                String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
+                Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
                 displayAppointmentDetails(appointmentToBook);
                 if (ConsoleInput.askBoolean("Book appointment")) {
                     controller.addAppointment(appointmentToBook);
@@ -145,7 +147,7 @@ public class MakeAppointmentUI {
                     System.out.println();
                 }
             } else {
-//                System.out.println("Slot unavailable. Required time slot is " + service.getTimeSlotRequired());
+                System.out.println("Slot unavailable. Required time slot is " + slotRequired);
                 if (ConsoleInput.askBoolean("Go back to menu")) {
                     return;
                 }

@@ -17,7 +17,7 @@ public class Appointment {
     private Attendance attendance;
     private int startSlot;
 
-    public Appointment(int appointmentId, String appointmentDate, String patientId, int allocationId,
+    public Appointment(int appointmentId, String appointmentDate, int patientId, int allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
@@ -27,7 +27,7 @@ public class Appointment {
         this.startSlot = startSlot;
     }
 
-    public Appointment(String appointmentDate, String patientId, int allocationId, String attendance, int startSlot) {
+    public Appointment(String appointmentDate, int patientId, int allocationId, String attendance, int startSlot) {
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
         this.patient = findPatient(patientId);
         this.allocation = findAllocation(allocationId);
@@ -38,9 +38,9 @@ public class Appointment {
     public Appointment(){}
 
     // todo connect to database
-    private Patient findPatient(String patientId){
+    private Patient findPatient(int patientId){
         for (Patient value : patients) {
-            if (value.getUserId() == Integer.parseInt(patientId)) {
+            if (value.getUserId() == patientId) {
                 return value;
             }
         }

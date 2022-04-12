@@ -8,11 +8,13 @@ import entity.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
     private final List<Appointment> appointments = DataList.getInstance().getAppointmentList();
+    private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     public List<Appointment> getAllAppointments(User theUser) {
         if (theUser instanceof Patient) {
@@ -94,9 +96,24 @@ public class MakeAppointmentController {
         return results;
     }
 
-    public boolean checkSlotAvailability(ViewSlotsUI viewSlotsUI, int startSlot) {
+    public Allocation assignAllocation(ViewSlotsUI viewSlotsUI) {
         List<List<Integer>> availableDoctors = viewSlotsUI.getAvailableDoctors();
-        return true;
+        int branchId = viewSlotsUI.getSelectedBranchId();
+        int serviceId = viewSlotsUI.getSelectedServiceId();
+        // todo select a doctor
+
+        int doctorId = 0;
+        Allocation allocation = null;
+        for (Allocation value : allocations) {
+            if (value.getBranch().getBranchId() == branchId) {
+                if (value.getService().getServiceId() == serviceId) {
+                    if (value.getDoctor().getUserId() == doctorId) {
+                        allocation = value;
+                    }
+                }
+            }
+        }
+        return allocation;
     }
 
     public void addAppointment(Appointment appointmentToBook) throws SQLException {
