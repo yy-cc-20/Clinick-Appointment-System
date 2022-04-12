@@ -35,7 +35,11 @@ public class ConsoleInput {
         String stringDate;
         LocalDate date;
         while (true) {
+
             System.out.print(info + " (e.g. 1-1-2022) > "); // the "%n" in dateName will not take effect if you use %s
+
+            System.out.printf("%n" + info + " (dd/mm/yyyy) > "); // the "%n" in dateName will not take effect if you use %s
+
             try {
                 stringDate = SingletonScanner.scanner.nextLine();
                 date = LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
