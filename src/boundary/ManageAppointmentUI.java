@@ -13,7 +13,7 @@ public class ManageAppointmentUI {
 
 	public void searchAppointmentToModify() {
 		int appointmentId = ConsoleInput.askInt("appointment ID");
-		List<Appointment> selectedAppointments = controller.searchAppointment(1, appointmentId);
+		List<Appointment> selectedAppointments = controller.searchAppointment(1, Integer.toString(appointmentId));
 
 		if (selectedAppointments.size() == 0) {
 			System.out.println("No such appointment found.");
