@@ -3,8 +3,12 @@ package entity;
 import boundary.ConsoleUI;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Appointment {
+    // todo: sql or method?
+    private final List<Patient> patients = DataList.getInstance().getPatientList();
+    private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
     private int appointmentId;
     private LocalDate appointmentDate;
     private Patient patient;
@@ -34,13 +38,23 @@ public class Appointment {
 
     // todo connect to database
     private Patient findPatient(String patientId){
-        Patient patient = new Patient();
-        return patient;
+        for (Patient value : patients) {
+            if (value.getUserId() == Integer.parseInt(patientId)) {
+                System.out.println(value.getUserId());
+                return value;
+            }
+        }
+        return null;
     }
 
     private Allocation findAllocation(int appointmentId){
-        Allocation allocation = new Allocation();
-        return allocation;
+        for (Allocation value : allocations) {
+            if (value.getLinkId() == appointmentId) {
+                System.out.println(value.getLinkId());
+                return value;
+            }
+        }
+        return null;
     }
 
     private Attendance retrieveAttendance(String attendance) {
