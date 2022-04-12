@@ -82,7 +82,7 @@ public class ClinickAppointmentSystem {
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					makeAppointmentUI.searchAppointment();
+					MakeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Make Appointment");
@@ -145,7 +145,7 @@ public class ClinickAppointmentSystem {
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					makeAppointmentUI.searchAppointment();
+					MakeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Search Patient");
@@ -180,7 +180,7 @@ public class ClinickAppointmentSystem {
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					makeAppointmentUI.searchAppointment();
+					MakeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
