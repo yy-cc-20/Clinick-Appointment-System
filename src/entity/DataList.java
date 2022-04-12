@@ -186,7 +186,7 @@ public class DataList implements IDataStore {
 				int startSlot = rs.getInt("startSlot");
 				int patientId = rs.getInt("patientId");
 				int allocationId = rs.getInt("allocationId");
-				Appointment appointment = new Appointment(id, date.toString(), Integer.toString(patientId),
+				Appointment appointment = new Appointment(id, date.toString(), patientId,
 						allocationId, attendance, startSlot);
 				appointmentList.add(appointment);
 			}

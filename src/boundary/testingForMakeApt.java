@@ -32,7 +32,7 @@ public class testingForMakeApt {
                     makeAppointmentInterface.makeAppointment();
                 }
                 case 4 -> {
-                    Appointment appointment = new Appointment("2022-04-16", "1", 1,"NAN",1);
+                    Appointment appointment = new Appointment("2022-04-16", 1, 1,"NAN",1);
                     MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
                     makeAppointmentController.addAppointment(appointment);
                 }
