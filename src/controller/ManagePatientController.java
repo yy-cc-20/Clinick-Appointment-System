@@ -40,12 +40,13 @@ public class ManagePatientController {
     	List<Patient> patientList = new ArrayList<>();
     	patientList.add(new Patient(name, patientIc, phone, address));
     	
-    	try {
+/*    	try {
     		st.executeUpdate("INSERT INTO PATIENT(name, patientIc, phone, address)" +
     			"VALUES ('"+name+"','"+patientIc+"', '"+phone+"','"+address+"')");
     	} catch (SQLException e) {
     		e.printStackTrace();
    	    }
+*/
     }
 }
 
