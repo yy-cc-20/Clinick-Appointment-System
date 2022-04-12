@@ -38,15 +38,20 @@ public class ManagePatientController {
     }
 
     public void addPatient(String name, String patientIc, String phone, String address) {
-
-//    	sql = "INSERT INTO PATIENT('NAME','USER_ID','PHONE_NO','ADDRESS','PATIENT_IC') VALUES ('" + name + "', '-', '-', '-', '" + patientIc +"');";
+    	
+    	List<Patient> patientList = new ArrayList<>();
+    	patientList.add(new Patient(name, patientIc, phone, address));
+    	
+//    	sql = "INSERT INTO PATIENT(name, patientIc, phone, address)" +
+//    			"VALUES ('"+name+"','"+patientIc+"', '"+phone+"','"+address+"')";
+//		st.executeUpdate(sql);
 //    	try {
-//    	     rs = st.executeQuery(sql);
-//    	    	}
+//   	     rs = st.executeQuery(sql);
+//   	    	}
 //
-//    	} catch (SQLException e) {
-//    	    	e.printStackTrace();
-//    	    }
-    }
+//   	} catch (SQLException e) {
+//   	    	e.printStackTrace();
+//   	    }
+   }
 }
 
