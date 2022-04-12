@@ -17,7 +17,7 @@ public class Patient extends User {
         this.address = address;
     }
     
-        public Patient(String name, String patientIc, String phone, String address) {
+    public Patient(String name, String patientIc, String phone, String address) {
     	super(name);
         this.ic = patientIc;
         this.phoneNo = phone;
