@@ -24,8 +24,8 @@ public class Allocation {
 
 
     // todo connect to database
-    private Branch findBranch(String branchId){
-        List<Branch> branches = DataList.getInstance().getBranchList(null, "","");
+    private Branch findBranch(String branchId) {
+        List<Branch> branches = DataList.getInstance().getBranchList(null, "", "");
         for (Branch value : branches) {
             if (value.getBranchId() == Integer.parseInt(branchId)) {
                 return value;
@@ -34,7 +34,7 @@ public class Allocation {
         return null;
     }
 
-    private Service findService(String serviceId){
+    private Service findService(String serviceId) {
         List<Service> services = DataList.getInstance().getServiceList();
         for (Service value : services) {
             if (value.getServiceId() == Integer.parseInt(serviceId)) {
@@ -44,7 +44,7 @@ public class Allocation {
         return null;
     }
 
-    private Doctor findDoctor(String doctorId){
+    private Doctor findDoctor(String doctorId) {
         List<Doctor> doctors = DataList.getInstance().getDoctorList();
         for (Doctor value : doctors) {
             if (value.getUserId() == Integer.parseInt(doctorId)) {

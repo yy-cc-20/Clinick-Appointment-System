@@ -6,9 +6,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Appointment {
-    // todo: sql or method?
-    private final List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
-    private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
     private int appointmentId;
     private LocalDate appointmentDate;
@@ -40,6 +37,7 @@ public class Appointment {
 
     // todo connect to database
     private Patient findPatient(int patientId) {
+        List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
         for (Patient value : patients) {
             if (value.getUserId() == patientId) {
                 return value;
@@ -49,6 +47,7 @@ public class Appointment {
     }
 
     private Allocation findAllocation(int appointmentId) {
+        List<Allocation> allocations = DataList.getInstance().getAllocationList();
         for (Allocation value : allocations) {
             if (value.getLinkId() == appointmentId) {
                 return value;
