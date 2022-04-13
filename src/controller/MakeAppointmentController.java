@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
-    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList("sort", "date", "");
+    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
     private final List<Service> services = DataList.getInstance().getServiceList();
 
