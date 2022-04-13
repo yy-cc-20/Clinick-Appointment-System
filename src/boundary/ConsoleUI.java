@@ -111,13 +111,14 @@ public class ConsoleUI {
     }
 
     public static void displayMenuForPatient() {
-        System.out.println("      -- Menu --          ");
+        System.out.println("      -- Menu --                            ");
         System.out.println();
-        System.out.println(" 1. View Appointment      ");
-        System.out.println(" 2. Search Appointment    ");
-        System.out.println(" 3. Manage Account        ");
-        System.out.println(" 4. View Services and Time Slots for Booking ");
-        System.out.println(" 0. Exit Application      ");
+        System.out.println(" 1. View Appointment                        ");
+        System.out.println(" 2. Search Appointment                      ");
+        System.out.println(" 3. Manage Account                          ");
+        System.out.println(" 4. Manage Profile                          ");
+        System.out.println(" 5. View Services and Time Slots for Booking");
+        System.out.println(" 0. Exit Application                        ");
     }
     
     public static void displayMenuForGuest() {

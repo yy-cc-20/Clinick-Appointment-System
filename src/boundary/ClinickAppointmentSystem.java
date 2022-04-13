@@ -35,7 +35,7 @@ public class ClinickAppointmentSystem {
 	private static ManageAccountUI manageAccountUI;
 	
 	public static void main(String... args) {
-		boolean toExit = false;
+		boolean toExit;
 		
 		while (true) {
 			// Guest Mode 
@@ -48,7 +48,7 @@ public class ClinickAppointmentSystem {
 
 			makeAppointmentUI = new MakeAppointmentUI(systemUser);
 			manageAppointmentUI = new ManageAppointmentUI();
-			managePatientUI = new ManagePatientUI();
+			managePatientUI = new ManagePatientUI(systemUser);
 			manageAccountUI = new ManageAccountUI(systemUser);
 			
 			if (systemUser instanceof Receptionist) 
@@ -223,11 +223,14 @@ public class ClinickAppointmentSystem {
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					//todo combine these 2
 					managePatientUI.managePatientProfile();
 					manageAccountUI.changePassword();
 				}
 				case 4 -> {
+					ConsoleUI.displayFunctionName("Manage Profile");
+					managePatientUI.managePatientProfile();
+				}
+				case 5 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
 					ViewSlotsUI.getInstance().viewSlots();
 				}
