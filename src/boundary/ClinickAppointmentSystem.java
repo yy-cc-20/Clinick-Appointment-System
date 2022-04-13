@@ -62,7 +62,7 @@ public class ClinickAppointmentSystem {
 			
 			if (toExit) {
 				ConsoleUI.displayFunctionName(" Program Stopped ");
-				SingletonScanner.scanner.close();
+				SingletonScanner.close();
 				DatabaseConnection.closeConnection();
 				System.exit(0);
 			}

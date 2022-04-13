@@ -36,7 +36,7 @@ public class LoginUI {
 			role = ConsoleInput.askChoice(1, 3, "Login as");
 			userid = ConsoleInput.askInt("User ID");
 			System.out.print("Password> ");
-			password = SingletonScanner.scanner.nextLine();
+			password = SingletonScanner.nextLine();
 			
 			// Interact with the controller
 			username = loginController.loginSuccessfully(role, userid, password);
@@ -67,8 +67,8 @@ public class LoginUI {
 		System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s)."); // cannot act as a String data member, as the time interval is changing
 		
 		// If user keep pressing the keyboard while being suspended from login
-		while (!lockTimeEnded.isBefore(LocalDateTime.now()) && SingletonScanner.scanner.hasNextLine()) {
-			SingletonScanner.scanner.nextLine(); // Allow the user press the keyboard and response to it
+		while (!lockTimeEnded.isBefore(LocalDateTime.now()) && SingletonScanner.hasNextLine()) {
+			SingletonScanner.nextLine(); // Allow the user press the keyboard and response to it
 			if (!lockTimeEnded.isBefore(LocalDateTime.now())) // Check again, to avoid display negative time interval when the suspended period is over
 				System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s).");
 		}

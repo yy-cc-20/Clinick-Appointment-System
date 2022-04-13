@@ -85,13 +85,11 @@ public class DatabaseConnection {
 	// DatabaseConnectionTest
 	public static void main(String[] args) throws SQLException {
 		Statement st = DatabaseConnection.getConnection().createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM Appointment NATURAL JOIN Allocation;");
-		if (rs != null) {
-			while (rs.next()) { // Move the cursor to the next row, return false if empty
-				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
-			}
-			System.out.println("DatabaseConnection test success!");
+		ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM Appointment ;");
+		while (rs.next()) { // Move the cursor to the next row, return false if empty
+			System.out.println("There are " + rs.getInt(1) + " appointment records.");
 		}
+		System.out.println("DatabaseConnection test success!");
 	}
 }
 

@@ -21,7 +21,7 @@ public class ConsoleInput {
         while (true) {
             System.out.print(info + " (e.g. 1-1-2022) > ");
             try {
-                stringDate = SingletonScanner.scanner.nextLine();
+                stringDate = SingletonScanner.nextLine();
                 return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
             } catch (DateTimeParseException e) {
                 System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
@@ -39,7 +39,7 @@ public class ConsoleInput {
             System.out.print(info + " (e.g. 1-1-2022) > "); // the "%n" in dateName will not take effect if you use %s
 
             try {
-                stringDate = SingletonScanner.scanner.nextLine();
+                stringDate = SingletonScanner.nextLine();
                 date = LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
                 if (date.isAfter(LocalDate.now().minusDays(1)))
                 	return date;
@@ -64,7 +64,7 @@ public class ConsoleInput {
         while (true) {
             try {
                 System.out.printf("%n%s> ", info);
-                eventNo = Integer.parseInt(SingletonScanner.scanner.nextLine());
+                eventNo = Integer.parseInt(SingletonScanner.nextLine());
 
                 if (eventNo >= beginChoiceNo && eventNo <= endChoiceNo) {
                     break;
@@ -100,7 +100,7 @@ public class ConsoleInput {
             try {
                 isChar = false;
                 System.out.printf("%n%s> ", info);
-                input = SingletonScanner.scanner.nextLine();
+                input = SingletonScanner.nextLine();
                 if (input.length() == 1 && Character.isLetter(input.charAt(0))) {
                     eventNo = input.charAt(0);
                     isChar = true;
@@ -127,7 +127,7 @@ public class ConsoleInput {
         while (true) {
             System.out.printf("%n%s> ", info);
             try {
-                input = Integer.parseInt(SingletonScanner.scanner.nextLine());
+                input = Integer.parseInt(SingletonScanner.nextLine());
                 if (input <= 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
@@ -149,7 +149,7 @@ public class ConsoleInput {
         while (true) {
             System.out.printf("%s> ", info);
             try {
-                input = Integer.parseInt(SingletonScanner.scanner.nextLine());
+                input = Integer.parseInt(SingletonScanner.nextLine());
                 return input;
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
@@ -165,7 +165,7 @@ public class ConsoleInput {
         while (true) {
             System.out.printf("%n%s> ", info);
             try {
-                input = Double.parseDouble(SingletonScanner.scanner.nextLine());
+                input = Double.parseDouble(SingletonScanner.nextLine());
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
@@ -185,7 +185,7 @@ public class ConsoleInput {
 
         while (true) {
             System.out.printf("%n%s> ", info);
-            input = SingletonScanner.scanner.nextLine();
+            input = SingletonScanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", STRING_ERROR);
             } else {
@@ -200,7 +200,7 @@ public class ConsoleInput {
 
         while (true) {
             System.out.printf("%n%s> ", info);
-            input = SingletonScanner.scanner.nextLine();
+            input = SingletonScanner.nextLine();
             if (input.equals("\n"))
                 return null;
         }
@@ -211,7 +211,7 @@ public class ConsoleInput {
         String input;
         while (true) {
             System.out.printf("%n%s> ", info);
-            input = SingletonScanner.scanner.nextLine();
+            input = SingletonScanner.nextLine();
             if (hasDelimiter(input)) {
                 System.out.printf("%s%n", STRING_ERROR);
             } else if (input.equals("")) {
@@ -231,7 +231,7 @@ public class ConsoleInput {
         String ans;
         while (true) {
             System.out.printf("%n%n%s%s ", info, " [y/n]?>");
-            ans = SingletonScanner.scanner.nextLine().toLowerCase();
+            ans = SingletonScanner.nextLine().toLowerCase();
 
             if (ans.equalsIgnoreCase("y") || ans.equalsIgnoreCase("yes")) {
                 return true;

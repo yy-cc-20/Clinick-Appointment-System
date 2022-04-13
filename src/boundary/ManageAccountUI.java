@@ -28,7 +28,7 @@ public class ManageAccountUI {
         
         while (true) {
             System.out.print("New password > ");
-            inputPassword = SingletonScanner.scanner.nextLine();
+            inputPassword = SingletonScanner.nextLine();
             if (inputPassword.equalsIgnoreCase(ConsoleUI.CANCEL_KEY))
             	return;
             
@@ -41,7 +41,7 @@ public class ManageAccountUI {
         }
         
         System.out.print("Confirm new password > ");
-        confirmedPassword = SingletonScanner.scanner.nextLine();
+        confirmedPassword = SingletonScanner.nextLine();
         
         if (inputPassword.equals(confirmedPassword)) {
         	controller.updatePassword(confirmedPassword);
