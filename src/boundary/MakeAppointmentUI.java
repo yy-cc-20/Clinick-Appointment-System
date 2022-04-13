@@ -1,6 +1,5 @@
 package boundary;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,8 +13,6 @@ import controller.MakeAppointmentController;
 
 public class MakeAppointmentUI {
 
-    // todo: create getInstance method for UIs? or add static to use the method
-    // todo: sql query or for loop statements
     private final static MakeAppointmentController controller = new MakeAppointmentController();
     private final User theUser;
 
@@ -65,6 +62,7 @@ public class MakeAppointmentUI {
 
         int choice = ConsoleInput.askChoice(1, 7, "Your selection");
         String searchKeyword;
+        // input validations for different fields
         switch (choice) {
             case 1 -> {
                 int id = ConsoleInput.askPositiveInt("appointment ID");
@@ -78,9 +76,7 @@ public class MakeAppointmentUI {
                 Attendance attendance = Attendance.askAttendance();
                 searchKeyword = attendance.toString();
             }
-            default -> {
-                searchKeyword = ConsoleInput.askString("search keyword");
-            }
+            default -> searchKeyword = ConsoleInput.askString("search keyword");
         }
         searchKeyword = searchKeyword.toLowerCase();
         List<Appointment> selectedAppointments = controller.searchAppointment(choice, searchKeyword);
@@ -91,26 +87,27 @@ public class MakeAppointmentUI {
     }
 
     // 3. make an appointment
+    // Steps:
     // search patient
     // view slots
     // select starting time slot
-    // get allocation id
-    // check availability
+    // check slot availability to get allocation id
     // display appointment to book
-    // ask confirmation
+    // ask confirmation to book
     // add appointment
-    public void makeAppointment() throws SQLException {
-        ManagePatientUI managePatientUI = new ManagePatientUI();
+    public void makeAppointment() {
+        // search patient
+        ManagePatientUI managePatientUI = new ManagePatientUI(theUser);
         List<Patient> searchedPatient = managePatientUI.searchPatient();
         Patient selectedPatient = managePatientUI.selectPatient(searchedPatient);
-
-        if(selectedPatient == null){
+        if (selectedPatient == null) {
             System.out.println("Back to the menu");
             return;
         }
+
+        // view slots
         ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
         boolean contViewSlot = viewSlotsUI.viewSlots();
-
         if (!contViewSlot) {
             System.out.println("Back to the menu");
             return;
@@ -120,24 +117,29 @@ public class MakeAppointmentUI {
         int startSlot;
         int slotRequired = 0;
 
-        // service id, branch id, date
-        // assign doctor
-        // allocation id where service id, branch id, and doctor id are the same
+        // after viewing slots can get the service id, branch id, date and available doctors.
+        // need to assign doctor to get the allocation id.
+        // allocation id contains service id, branch id and doctor id.
         while (!allocated) {
+            // select starting time slot
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
 
+            // check slot availability to get allocation id
             Allocation allocation = controller.assignAllocation(viewSlotsUI, startSlot);
 
-            if(allocation != null){
+            if (allocation != null) {
                 slotRequired = allocation.getService().getTimeSlotRequired();
                 allocated = true;
             }
             if (allocated) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired ) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
+                // display appointment to book
                 displayAppointmentDetails(appointmentToBook);
+                // ask confirmation to book
                 if (ConsoleInput.askBoolean("Book appointment")) {
+                    // add appointment
                     controller.addAppointment(appointmentToBook);
                     System.out.println("Appointment booked. Booking ID is " + appointmentToBook.getAppointmentId());
                     System.out.println();

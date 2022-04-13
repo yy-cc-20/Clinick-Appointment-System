@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-public class Branch{
+public class Branch {
     private final List<Receptionist> receptionists = DataList.getInstance().getReceptionistList();
     private int branchId;
     private String branchName;
@@ -19,9 +19,10 @@ public class Branch{
         this.telNo = telNo;
     }
 
-    public Branch(){}
+    public Branch() {
+    }
 
-    private Receptionist findReceptionist(int receptionistId){
+    private Receptionist findReceptionist(int receptionistId) {
         for (Receptionist value : receptionists) {
             if (value.getUserId() == receptionistId) {
                 return value;

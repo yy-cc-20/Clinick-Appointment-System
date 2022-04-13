@@ -14,7 +14,7 @@ public class ManageAppointmentUI {
     private final MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
     private static Appointment selectedAppointment;
 
-    private void searchAppointmentToModify(){
+    private void searchAppointmentToModify() {
         List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
         int appointmentId = ConsoleInput.askPositiveInt("Appointment ID");
         for (Appointment appointment : appointments) {
@@ -48,12 +48,12 @@ public class ManageAppointmentUI {
 
             Allocation allocation = makeAppointmentController.assignAllocation(viewSlotsUI, startSlot);
 
-            if(allocation != null){
+            if (allocation != null) {
                 slotRequired = allocation.getService().getTimeSlotRequired();
                 allocated = true;
             }
             if (allocated) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired ) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 if (ConsoleInput.askBoolean("Update appointment")) {
                     controller.updateAppointmentTime(selectedAppointment.getAppointmentId(), date, startSlot);

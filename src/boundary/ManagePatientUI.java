@@ -3,14 +3,18 @@ package boundary;
 import controller.ManagePatientController;
 import entity.DataList;
 import entity.Patient;
+import entity.Receptionist;
+import entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManagePatientUI {
     private static final ManagePatientController controller = new ManagePatientController();
+    private final User systemUser;
 
-    public ManagePatientUI() {
+    public ManagePatientUI(User systemUser) {
+        this.systemUser = systemUser;
     }
 
     public List<Patient> searchPatient() {
@@ -21,7 +25,8 @@ public class ManagePatientUI {
             System.out.println("No patient with IC " + patientIc + " found.");
             if (ConsoleInput.askBoolean("Continue to create new patient profile"))
                 searchedPatients = new ArrayList<>();
-                searchedPatients.add(createPatientProfile());
+            //todo
+            searchedPatients.add(createPatientProfile());
         } else {
             System.out.println("Search Results:");
             for (Patient selectedPatient : searchedPatients) {
@@ -32,11 +37,11 @@ public class ManagePatientUI {
         return searchedPatients;
     }
 
-    public Patient selectPatient(List<Patient> searchedPatients){
+    public Patient selectPatient(List<Patient> searchedPatients) {
         int patientId = ConsoleInput.askPositiveInt("Select a patient ID");
         Patient thePatient = null;
         for (Patient searchedPatient : searchedPatients) {
-            if(searchedPatient.getUserId() == patientId){
+            if (searchedPatient.getUserId() == patientId) {
                 thePatient = searchedPatient;
                 System.out.println("Selected Patient:");
                 displayPatient(thePatient);
@@ -69,14 +74,25 @@ public class ManagePatientUI {
     }
 
     public void managePatientProfile() {
-        List<Patient> searchedPatients = searchPatient();
-        Patient selectedPatient = selectPatient(searchedPatients);
-        if(selectedPatient == null){
-            System.out.println("No patient selected.");
-            return;
+        int patientId = 0;
+        String oriAddress = "";
+        String oriPhoneNo = "";
+        if (systemUser instanceof Receptionist) {
+            List<Patient> searchedPatients = searchPatient();
+            Patient selectedPatient = selectPatient(searchedPatients);
+            if (selectedPatient == null) {
+                System.out.println("No patient selected.");
+                return;
+            }
+            patientId = selectedPatient.getUserId();
+            oriAddress = selectedPatient.getAddress();
+            oriPhoneNo = selectedPatient.getPhoneNo();
+        } else if (systemUser instanceof Patient) {
+            patientId = systemUser.getUserId();
+            oriAddress = ( (Patient) systemUser ).getAddress();
+            oriPhoneNo = ( (Patient) systemUser ).getPhoneNo();
         }
 
-        int patientId = selectedPatient.getUserId();
         String phoneNo = ConsoleInput.askStringV2("new patient phone number (PRESS ENTER TO SKIP)");
         String address = ConsoleInput.askStringV2("new patient address (PRESS ENTER TO SKIP)");
 
@@ -84,10 +100,10 @@ public class ManagePatientUI {
             if (phoneNo == null && address == null) {
                 System.out.println("No changes has been made.");
             } else if (phoneNo != null && address == null) {
-                controller.updatePatientProfile(phoneNo, selectedPatient.getAddress(), patientId);
+                controller.updatePatientProfile(phoneNo, oriAddress, patientId);
                 System.out.println("Phone number has been updated.");
             } else if (phoneNo == null) {
-                controller.updatePatientProfile(selectedPatient.getPhoneNo(), address, patientId);
+                controller.updatePatientProfile(oriPhoneNo, address, patientId);
                 System.out.println("Address has been updated.");
             } else {
                 controller.updatePatientProfile(phoneNo, address, patientId);

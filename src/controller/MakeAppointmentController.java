@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
-    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList("sort", "date","");
+    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList("sort", "date", "");
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
     private final List<Service> services = DataList.getInstance().getServiceList();
 
@@ -95,7 +95,7 @@ public class MakeAppointmentController {
             }
         }
         int slotRequired = service.getTimeSlotRequired();
-        if(slotRequired + slotRequired-1 > 14){
+        if (slotRequired + slotRequired - 1 > 14) {
             return null;
         }
 
@@ -104,7 +104,7 @@ public class MakeAppointmentController {
         int serviceId = viewSlotsUI.getSelectedServiceId();
 
         // always choose the first doctor to assign
-        int doctorId = availableDoctors.get(startSlot-1).get(0);
+        int doctorId = availableDoctors.get(startSlot - 1).get(0);
         Allocation allocation = null;
         for (Allocation value : allocations) {
             if (value.getBranch().getBranchId() == branchId) {
@@ -119,12 +119,12 @@ public class MakeAppointmentController {
     }
 
     public void addAppointment(Appointment appointmentToBook) {
-            String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
-            String attendance = appointmentToBook.getAttendance().toString();
-            int startSlot = appointmentToBook.getStartSlot();
-            int patientId = appointmentToBook.getPatient().getUserId();
-            int allocationId = appointmentToBook.getAllocation().getLinkId();
+        String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
+        String attendance = appointmentToBook.getAttendance().toString();
+        int startSlot = appointmentToBook.getStartSlot();
+        int patientId = appointmentToBook.getPatient().getUserId();
+        int allocationId = appointmentToBook.getAllocation().getLinkId();
 
-            DataList.getInstance().addAppointment(date, attendance, startSlot, patientId, allocationId);
+        DataList.getInstance().addAppointment(date, attendance, startSlot, patientId, allocationId);
     }
 }

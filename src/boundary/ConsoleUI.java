@@ -5,15 +5,15 @@ import java.time.format.DateTimeFormatter;
 // display message on the screen
 
 public class ConsoleUI {
-	public static final String CANCEL_KEY = "X"; // To be checked by case insensitive
-	public static final String CANCEL_OPERATION = "[" + CANCEL_KEY + "] back to the previous page."; // To tell user how to stop the current method
-	
+    public static final String CANCEL_KEY = "X"; // To be checked by case-insensitive
+    public static final String CANCEL_OPERATION = "[" + CANCEL_KEY + "] back to the previous page."; // To tell user how to stop the current method
+
     public static final DateTimeFormatter DATE_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // Date format for displaying: 01-01-2022
     public static final DateTimeFormatter DATE_SQL_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Date format for SQL query
 
     // only static variable can be used in static method
     private static final int headingWidth = 50; // the number of characters
-    private static int screenHeight = 30; // the number of lines
+    private static final int screenHeight = 30; // the number of lines
 
     // clear screen
     public static void clearScreen() {
@@ -62,7 +62,7 @@ public class ConsoleUI {
         }
         System.out.printf("%n");
     }
-    
+
     public static void displayTableName(String tableName) {
         int field = headingWidth - tableName.length() - 2;
 
@@ -111,15 +111,24 @@ public class ConsoleUI {
     }
 
     public static void displayMenuForPatient() {
-        System.out.println("      -- Menu --          ");
+        System.out.println("      -- Menu --                            ");
         System.out.println();
-        System.out.println(" 1. View Appointment      ");
-        System.out.println(" 2. Search Appointment    ");
-        System.out.println(" 3. Manage Account        ");
-        System.out.println(" 4. View Services and Time Slots for Booking ");
-        System.out.println(" 0. Exit Application      ");
+        System.out.println(" 1. View Appointment                        ");
+        System.out.println(" 2. Search Appointment                      ");
+        System.out.println(" 3. Manage Account                          ");
+        System.out.println(" 4. Manage Profile                          ");
+        System.out.println(" 5. View Services and Time Slots for Booking");
+        System.out.println(" 0. Exit Application                        ");
     }
-    
+
+    public static void displayLoginMenu() {
+        System.out.println();
+        System.out.println("[1]Receptionist");
+        System.out.println("[2]Doctor");
+        System.out.println("[3]Patient");
+        System.out.println("[4]Guest Mode");
+    }
+
     public static void displayMenuForGuest() {
         System.out.println();
         System.out.println(" 1. View Services and Time Slots for Booking ");
@@ -127,7 +136,7 @@ public class ConsoleUI {
         System.out.println(" 0. Exit Application      ");
     }
 
-    public static void displayMenuForSearchingAppointment(){
+    public static void displayMenuForSearchingAppointment() {
         System.out.println("Search by:           ");
         System.out.println(" 1. Appointment ID   ");
         System.out.println(" 2. Date             ");

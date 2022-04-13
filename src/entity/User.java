@@ -18,20 +18,20 @@ public class User {
         username = theUsername;
         password = thePassword;
     }
-	
+
     public User(String theUsername) {
-    	 username = theUsername;
-	}
-
-    public int getUserId(){
-    	return userId;
-	}
-
-    
-    public void setPassword(String pw) {
-    	password = pw;
+        username = theUsername;
     }
-    
+
+    public int getUserId() {
+        return userId;
+    }
+
+
+    public void setPassword(String pw) {
+        password = pw;
+    }
+
     public String getUsername() {
         return username;
     }
