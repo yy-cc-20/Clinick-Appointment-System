@@ -253,7 +253,7 @@ public class DataList implements IDataStore {
 
     // provide the appointmentId to update, with the new date and startSlot
     public void updateAppointmentTime(int id, String date, int startSlot) {
-        String query = ( "UPDATE appointment SET date=?, startSlot=?, WHERE id=?" );
+        String query = ( "UPDATE appointment SET date=?, startSlot=? WHERE id=?" );
         try (PreparedStatement pstmt = con.prepareStatement(query)) {
             pstmt.setInt(3, id);
             pstmt.setDate(1, new Date(new SimpleDateFormat("dd-MM-yyyy").parse(date).getTime()));

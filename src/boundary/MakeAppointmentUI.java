@@ -132,7 +132,7 @@ public class MakeAppointmentUI {
                 allocated = true;
             }
             if (allocated) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired ) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
                 // display appointment to book

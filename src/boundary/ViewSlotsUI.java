@@ -53,6 +53,7 @@ public class ViewSlotsUI {
         int servicesFound;
         int branchesFound;
         while (true) {
+            ConsoleUI.clearScreen();
             servicesFound = viewService();
             if (servicesFound <= 0)
                 return false;
