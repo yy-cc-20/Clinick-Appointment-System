@@ -73,7 +73,7 @@ public class DataList implements IDataStore {
                         allocationId, attendance, startSlot);
                 appointmentList.add(appointment);
             }
-			System.out.println("appointmentList " + appointmentList.size());
+            System.out.println("appointmentList " + appointmentList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,7 +109,7 @@ public class DataList implements IDataStore {
                 Branch branch = new Branch(id, name, address, receptionistId, telNo);
                 branchList.add(branch);
             }
-			System.out.println("branchList " + branchList.size());
+            System.out.println("branchList " + branchList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }

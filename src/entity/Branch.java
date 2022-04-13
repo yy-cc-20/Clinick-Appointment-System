@@ -6,7 +6,7 @@ public class Branch {
     private int branchId;
     private String branchName;
     private String branchAddress;
-    private Receptionist receptionist;
+    private final Receptionist receptionist;
     private String telNo;
 
     public Branch(int branchId, String branchName, String branchAddress, int receptionistId, String telNo) {
@@ -15,9 +15,6 @@ public class Branch {
         this.branchAddress = branchAddress;
         this.receptionist = findReceptionist(receptionistId);
         this.telNo = telNo;
-    }
-
-    public Branch() {
     }
 
     private Receptionist findReceptionist(int receptionistId) {
@@ -54,6 +51,9 @@ public class Branch {
         this.branchAddress = branchAddress;
     }
 
+    public Receptionist getReceptionist() {
+        return receptionist;
+    }
 
     public String getTelNo() {
         return telNo;

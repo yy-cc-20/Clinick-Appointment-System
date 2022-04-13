@@ -27,6 +27,9 @@ public class User {
         return userId;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
     public void setPassword(String pw) {
         password = pw;

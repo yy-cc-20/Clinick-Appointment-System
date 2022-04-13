@@ -23,10 +23,10 @@ public class ManagePatientUI {
 
         if (searchedPatients == null) {
             System.out.println("No patient with IC " + patientIc + " found.");
-            if (ConsoleInput.askBoolean("Continue to create new patient profile"))
+            if (ConsoleInput.askBoolean("Continue to create new patient profile")) {
                 searchedPatients = new ArrayList<>();
-            //todo
-            searchedPatients.add(createPatientProfile());
+                searchedPatients.add(createPatientProfile());
+            }
         } else {
             System.out.println("Search Results:");
             for (Patient selectedPatient : searchedPatients) {

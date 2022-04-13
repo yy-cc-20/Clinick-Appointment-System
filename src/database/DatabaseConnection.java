@@ -22,7 +22,18 @@ package database;
  * 6. You can run the main method in this class to check the connectivity to your database.
  * <p>
  * 7. You are done. Now you can run the main method of boundary.ClinickAppointmentSystem to start the system.
- * 
+ * @description What this class does:
+ * - connects to the database
+ * - call SetUpDatabase to create tables if tables not exist
+ * <p>
+ * This class is using the singleton design pattern.
+ * There is only one object created for the Connection class in the system.
+ * <p>
+ * How to use this class:
+ * 1. Connection conn = DatabaseConnection.getConnection();
+ * 2. Statement st = conn.createStatement();
+ * 3. PreparedStatement pstmt = conn.prepareStatement("SQL query here");
+ * 4. st.executeUpdate("SQl query here");
  * @description What this class does:
  * - connects to the database
  * - call SetUpDatabase to create tables if tables not exist
@@ -67,17 +78,17 @@ public class DatabaseConnection {
     private static final String username = "root";
     private static final String password = "root";
 
-	private DatabaseConnection() {
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch (SQLException e) {
-			System.out.println("Error connecting to database.");
-			System.out.println("Exiting...");
-			e.printStackTrace();
-			System.exit(1);
-		}
-		DatabaseSetup.setupDatabaseIfNotExist();
-	} // Private constructor for singleton
+    private DatabaseConnection() {
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            System.out.println("Error connecting to database.");
+            System.out.println("Exiting...");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        DatabaseSetup.setupDatabaseIfNotExist();
+    } // Private constructor for singleton
 
     public static Connection getConnection() throws SQLException {
         if (conn == null)

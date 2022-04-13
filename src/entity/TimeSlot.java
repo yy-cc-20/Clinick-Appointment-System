@@ -1,7 +1,7 @@
 package entity;
 
 public enum TimeSlot {
-    // 1 slot = 30 mins
+    // 1 slot = 30 minutes
     SLOT_1("0800AM"),
     SLOT_2("0830AM"),
     SLOT_3("0900AM"),
