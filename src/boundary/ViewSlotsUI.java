@@ -228,14 +228,14 @@ public class ViewSlotsUI {
         return false;
     }
 
-    // ViewSlotsUI test
-    public static void main(String[] args) {
-        System.out.println(timeSlotsToHour(1));
-        System.out.println(timeSlotsToHour(2));
-        System.out.println(timeSlotsToHour(3));
-        System.out.println(timeSlotsToHour(4));
-        System.out.println(timeSlotsToHour(5));
-
-        ViewSlotsUI.getInstance().viewSlots();
-    }
+//    // ViewSlotsUI test
+//    public static void main(String[] args) {
+//        System.out.println(timeSlotsToHour(1));
+//        System.out.println(timeSlotsToHour(2));
+//        System.out.println(timeSlotsToHour(3));
+//        System.out.println(timeSlotsToHour(4));
+//        System.out.println(timeSlotsToHour(5));
+//
+//        ViewSlotsUI.getInstance().viewSlots();
+//    }
 }
