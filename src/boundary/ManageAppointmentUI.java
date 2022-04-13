@@ -16,6 +16,9 @@ public class ManageAppointmentUI {
 
     private void searchAppointmentToModify() {
         List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+        if(appointments.size() == 0){
+            return;
+        }
         int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId() == appointmentId) {
@@ -70,6 +73,9 @@ public class ManageAppointmentUI {
 
     public void cancelAppointment() {
         searchAppointmentToModify();
+        if(selectedAppointment == null){
+            return;
+        }
         if (ConsoleInput.askBoolean("Cancel appointment")) {
             controller.cancelAppointment(selectedAppointment.getAppointmentId());
             System.out.println("Appointment cancelled.");
@@ -77,17 +83,13 @@ public class ManageAppointmentUI {
     }
 
     public void recordAttendance() {
-        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
-        int appointmentId = ConsoleInput.askPositiveInt("Appointment ID");
-        for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId() == appointmentId) {
-                selectedAppointment = appointment;
-            }
+        searchAppointmentToModify();
+        if(selectedAppointment == null){
+            return;
         }
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
-
         Attendance attendance = Attendance.askAttendance();
         controller.updateAppointmentAttendance(selectedAppointment.getAppointmentId(), attendance.toString());
+        selectedAppointment.setAttendance(attendance);
         MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
     }
 
