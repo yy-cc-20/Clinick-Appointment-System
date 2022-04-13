@@ -404,10 +404,12 @@ public class DatabaseSetup {
 		conn.setAutoCommit(true);
 	}
 
-	// run me to test database setup!!!
-	// DatabaseSetupTest
-	public static void main(String[] args) {
-		DatabaseSetup.setupDatabaseIfNotExist();
-	}
+    // todo
+    // run me to test database setup!!!
+    // only run this once
+    // DatabaseSetupTest
+    public static void main(String[] args) {
+        DatabaseSetup.setupDatabaseIfNotExist();
+    }
 
 }
