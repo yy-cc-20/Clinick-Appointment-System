@@ -81,7 +81,7 @@ public class ClinickAppointmentSystem {
 					ViewSlotsUI.getInstance().viewSlots();
 				}
 				case 2 -> { 
-					ConsoleUI.displayFunctionName("Login");
+					ConsoleUI.displayFunctionName("Sign In");
 					loginUI.login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 					if (loginUI.getHasLogin()) {
 						ConsoleUI.clearScreen();
@@ -151,9 +151,9 @@ public class ClinickAppointmentSystem {
 					ViewSlotsUI.getInstance().viewSlots();
 				}
 				case 0 -> { 
-					System.out.println("[1]Switch Account");
-					System.out.println("[2]Exit Application");
-					toExit = ConsoleInput.askChoice(1, 2, "Select number") == 2;
+					System.out.println("[1]Sign out");
+					System.out.println("[0]Exit Application");
+					toExit = ConsoleInput.askChoice(0, 1, "Select number") == 0;
 					if (!toExit)
 						ConsoleUI.clearScreen();
 					return toExit;
@@ -190,9 +190,9 @@ public class ClinickAppointmentSystem {
 					manageAccountUI.changePassword();
 				}
 				case 0 -> { 
-					System.out.println("[1]Switch Account");
-					System.out.println("[2]Exit Application");
-					toExit = ConsoleInput.askChoice(1, 2, "Select number") == 2;
+					System.out.println("[1]Sign out");
+					System.out.println("[0]Exit Application");
+					toExit = ConsoleInput.askChoice(0, 1, "Select number") == 0;
 					if (!toExit)
 						ConsoleUI.clearScreen();
 					return toExit;
@@ -230,9 +230,9 @@ public class ClinickAppointmentSystem {
 					ViewSlotsUI.getInstance().viewSlots();
 				}
 				case 0 -> { 
-					System.out.println("[1]Switch Account");
-					System.out.println("[2]Exit Application");
-					toExit = ConsoleInput.askChoice(1, 2, "Select number") == 2;
+					System.out.println("[1]Sign out");
+					System.out.println("[0]Exit Application");
+					toExit = ConsoleInput.askChoice(0, 1, "Select number") == 0;
 					if (!toExit)
 						ConsoleUI.clearScreen();
 					return toExit;

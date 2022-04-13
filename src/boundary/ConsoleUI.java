@@ -123,7 +123,7 @@ public class ConsoleUI {
     public static void displayMenuForGuest() {
         System.out.println();
         System.out.println(" 1. View Services and Time Slots for Booking ");
-        System.out.println(" 2. Log In      ");
+        System.out.println(" 2. Sign In      ");
         System.out.println(" 0. Exit Application      ");
     }
 }

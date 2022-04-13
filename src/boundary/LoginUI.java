@@ -28,7 +28,7 @@ public class LoginUI {
 		while (true) {
 			// Get input from user ----------------
 			displayLoginMenu();
-			role = ConsoleInput.askChoice(1, 4, "Login as");
+			role = ConsoleInput.askChoice(1, 4, "Sign in as");
 			
 			if (role == 4) // Guest
 				break;
