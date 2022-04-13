@@ -86,11 +86,10 @@ public class Appointment {
         return attendance;
     }
 
-
-    // todo
     public String getTime() {
-        
-        return "";
+        String startTime = TimeSlot.getSlot(startSlot);
+        String endTime = TimeSlot.getSlot(startSlot + allocation.getService().getTimeSlotRequired() - 1);
+        return String.format("%s-%s", startTime, endTime);
     }
 
     public String getDuration() {

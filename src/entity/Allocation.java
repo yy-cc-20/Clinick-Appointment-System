@@ -22,8 +22,6 @@ public class Allocation {
         this.doctor = findDoctor(Integer.toString(doctorId));
     }
 
-
-    // todo connect to database
     private Branch findBranch(String branchId) {
         List<Branch> branches = DataList.getInstance().getBranchList(null, "", "");
         for (Branch value : branches) {

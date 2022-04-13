@@ -46,7 +46,6 @@ public class MakeAppointmentUI {
 
     public static void displayAppointmentDetails(Appointment anAppointment) {
         System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDateString() + " \t| "
-                // todo: get the time
                 + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                 + anAppointment.getAllocation().getService().getServiceName() + " \t| "
                 + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
