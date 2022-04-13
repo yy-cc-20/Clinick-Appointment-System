@@ -364,11 +364,11 @@ public class DatabaseSetup {
 		Connection conn = DatabaseConnection.getConnection();
 		conn.setAutoCommit(false);
 		String[] insertStatements = {
-				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Aw Kung Bang', 'Kungbang111')",
-				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Liana Yaacup binti Che Jaferi', 'Liana222')",
-				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Nurul Hasya binti Syarafuddin', 'Hasya333')",
-				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Rakesh Devaser a/l Shree', 'Rakesh444')",
-				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Nor Janni binti Syed Tumiran', 'Janni555')", };
+				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (1, 'Aw Kung Bang', 'Kungbang111')",
+				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (2, 'Liana Yaacup binti Che Jaferi', 'Liana222')",
+				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (3, 'Nurul Hasya binti Syarafuddin', 'Hasya333')",
+				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (4, 'Rakesh Devaser a/l Shree', 'Rakesh444')",
+				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (5, 'Nor Janni binti Syed Tumiran', 'Janni555')", };
 		for (String insertStatement : insertStatements) {
 			st.addBatch(insertStatement);
 		}

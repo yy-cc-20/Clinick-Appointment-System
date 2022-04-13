@@ -64,6 +64,7 @@ public class DatabaseConnection {
 			e.printStackTrace();
 			System.exit(1);
 		}
+		DatabaseSetup.setupDatabaseIfNotExist();
 	} // Private constructor for singleton
 
 	public static Connection getConnection() throws SQLException {
