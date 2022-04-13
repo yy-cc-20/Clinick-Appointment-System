@@ -4,7 +4,6 @@ public class Patient extends User {
     private String ic;
     private String phoneNo;
     private String address;
-    private Appointment[] appointments;
 
     public Patient(int userid, String username, String password) {
         super(userid, username, password);
@@ -37,10 +36,6 @@ public class Patient extends User {
 
     public String getAddress() {
         return address;
-    }
-
-    public Appointment[] getAppointments() {
-        return appointments;
     }
 
     public void setIc(String ic) {
