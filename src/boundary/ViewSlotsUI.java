@@ -168,7 +168,7 @@ public class ViewSlotsUI {
         
         System.out.println();
         
-        System.out.println("The estimated time for this service is " 
+        System.out.println("The estimated time required for this service is " 
         		+ timeSlotsToHour(findServiceRequiredSlotsFromId()) + " hr(s).");
 	}
 	
