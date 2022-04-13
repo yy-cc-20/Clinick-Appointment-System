@@ -45,6 +45,7 @@ public class ClinickAppointmentSystem {
 				
 			// The user has log in 
 			User systemUser = loginUI.getUser(); // From systemUser can know the username, id, password, user type
+
 			makeAppointmentUI = new MakeAppointmentUI(systemUser);
 			manageAppointmentUI = new ManageAppointmentUI();
 			managePatientUI = new ManagePatientUI();

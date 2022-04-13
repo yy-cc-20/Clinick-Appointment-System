@@ -126,5 +126,17 @@ public class ConsoleUI {
         System.out.println(" 2. Sign In      ");
         System.out.println(" 0. Exit Application      ");
     }
+
+    public static void displayMenuForSearchingAppointment(){
+        System.out.println("Search by:           ");
+        System.out.println(" 1. Appointment ID   ");
+        System.out.println(" 2. Date             ");
+        System.out.println(" 3. Service Name     ");
+        System.out.println(" 4. Branch Name      ");
+        System.out.println(" 5. Patient Name     ");
+        System.out.println(" 6. Doctor Name      ");
+        System.out.println(" 7. Attendance Record");
+        System.out.println();
+    }
 }
  
