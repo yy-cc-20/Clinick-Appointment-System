@@ -35,10 +35,11 @@ public class Appointment {
         this.startSlot = startSlot;
     }
 
-    public Appointment(){}
+    public Appointment() {
+    }
 
     // todo connect to database
-    private Patient findPatient(int patientId){
+    private Patient findPatient(int patientId) {
         for (Patient value : patients) {
             if (value.getUserId() == patientId) {
                 return value;
@@ -47,7 +48,7 @@ public class Appointment {
         return null;
     }
 
-    private Allocation findAllocation(int appointmentId){
+    private Allocation findAllocation(int appointmentId) {
         for (Allocation value : allocations) {
             if (value.getLinkId() == appointmentId) {
                 return value;
@@ -57,11 +58,11 @@ public class Appointment {
     }
 
     private Attendance retrieveAttendance(String attendance) {
-        if(attendance.equals("Attended")){
+        if (attendance.equals("Attended")) {
             return Attendance.ATTENDED;
-        } else if(attendance.equals("Absent")){
+        } else if (attendance.equals("Absent")) {
             return Attendance.ABSENT;
-        } else{
+        } else {
             return Attendance.NAN;
         }
     }
@@ -88,12 +89,12 @@ public class Appointment {
 
 
     // todo
-    public String getTime(){
+    public String getTime() {
 
         return "";
     }
 
-    public String getDuration(){
+    public String getDuration() {
         int required = allocation.getService().getTimeSlotRequired();
         return switch (required) {
             case 1 -> "30 mins";

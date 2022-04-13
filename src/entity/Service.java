@@ -15,7 +15,8 @@ public class Service {
         this.timeSlotRequired = timeSlotRequired;
     }
 
-    public Service() {}
+    public Service() {
+    }
 
     public int getServiceId() {
         return serviceId;
