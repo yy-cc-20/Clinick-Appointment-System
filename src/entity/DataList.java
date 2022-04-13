@@ -249,6 +249,9 @@ public class DataList implements IDataStore {
         }
     }
 
+<<<<<<< HEAD
+   
+=======
     // provide the appointmentId to update, with the new date and startSlot
     public void updateAppointmentTime(int id, String date, int startSlot) {
         String query = ( "UPDATE appointment SET date=?, startSlot=? WHERE id=?" );
@@ -285,4 +288,5 @@ public class DataList implements IDataStore {
         }
     }
 
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 }

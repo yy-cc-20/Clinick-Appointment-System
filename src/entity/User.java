@@ -1,9 +1,9 @@
 package entity;
 
 public class User {
-    private int userId;
-    private String username;
-    private String password;
+    protected int userId;
+    protected String username;
+    protected String password;
 
     public User() {
     }
@@ -23,6 +23,10 @@ public class User {
         username = theUsername;
     }
 
+    public void setUserId(int id) {
+    	userId = id;
+    }
+    
     public int getUserId() {
         return userId;
     }

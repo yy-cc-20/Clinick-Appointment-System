@@ -50,7 +50,7 @@ public class ViewSlotsController {
             e.printStackTrace();
         }
         branchIds = resultSetToIntArr(rs);
-        branchResults = DataList.getInstance().getBranchesById(branchIds);
+        branchResults = getBranchesById(branchIds);
         return branchResults;
     }
 
@@ -217,6 +217,17 @@ public class ViewSlotsController {
         }
         return ints;
     }
+    
+    // Return branch objects of the specified ids
+    public List<Branch> getBranchesById(List<Integer> ids) {
+    	List<Branch> branchResults = new ArrayList<>();
+        
+    	for (int id : ids)
+    		branchResults.add(DataList2.createBranchObject(id));
+
+        return branchResults;
+    }
+
 	/*
 	// ViewSlotsController test
 	public static void main(String[] args) throws SQLException {

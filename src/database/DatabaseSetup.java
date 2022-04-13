@@ -64,7 +64,7 @@ public class DatabaseSetup {
                 "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (17, 4, 10, 17)",
                 "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (18, 4, 10, 18)",
                 "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (19, 4, 11, 19)",
-                "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (20 ,4, 12, 20)",
+                "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (20, 4, 12, 20)",
                 "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (21, 5, 13, 21)",
                 "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (22, 5, 14, 22)",
                 "INSERT IGNORE INTO Allocation (id, branchId, serviceId, doctorId) VALUES (23, 5, 14, 23)",

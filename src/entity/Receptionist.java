@@ -5,6 +5,11 @@ public class Receptionist extends User {
         super(userid, username, password);
     }
 
+    // Copy constructor: create a new object with exactly the same properties
+    public Receptionist(Receptionist r) {
+    	super(r.userId, r.username, r.password);
+    }
+    
     public Receptionist() {
     }
 }

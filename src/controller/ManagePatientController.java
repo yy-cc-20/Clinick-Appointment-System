@@ -8,7 +8,7 @@ import entity.*;
 public class ManagePatientController {
 
     public List<Patient> searchPatient(String patientIc) {
-        List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
+        List<Patient> patients = DataList2.getPatientList();
         List<Patient> searchList = new ArrayList<>();
         boolean found = false;
         for (Patient patient : patients) {
