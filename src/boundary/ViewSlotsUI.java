@@ -29,6 +29,9 @@ public class ViewSlotsUI {
 	// Result
 	private List<Branch> branchResults;
 	private List<List<Integer>> availableDoctors; 
+	private String serviceName;
+	private int requiredSlots;
+	private String branchName;
 	
 	// index: the time slot
 	// row: an array of the doctors available for that time
@@ -45,19 +48,19 @@ public class ViewSlotsUI {
 	// Exit if the user do not want to continue view the available time slots
 	/** @return false if the user did not continue to view the available time slots 
 	 * 		or no result was found
-	 * */
+	 */
 	public boolean viewSlots() { 
 		int servicesFound;
 		int branchesFound;
 		while (true) {
 			servicesFound = viewService();
-			if (servicesFound <= 0) {
+			if (servicesFound <= 0)
 				return false;
-			}			
+						
 			if (!ConsoleInput.askBoolean("Select service"))
 				return false;
 			serviceId = ConsoleInput.askPositiveInt("Service");
-			
+			findServiceNameRequiredSlotsFromId();
 			
 			branchesFound = viewBranchFilteredByService();
 			if (branchesFound <= 0) {
@@ -132,7 +135,7 @@ public class ViewSlotsUI {
 			return branchResults.size();
 		}
 		
-		ConsoleUI.displayTableName(services.get(serviceId-1).getServiceName());
+		ConsoleUI.displayTableName(serviceName);
         System.out.println();
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         
@@ -149,12 +152,12 @@ public class ViewSlotsUI {
 	public void viewTimeSlotFilteredByServiceBranchDate() {
 		//System.out.println("ViewSlotsUI.viewTimeSlotFilteredByServiceBranchDate testing");
 	
-		availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, services.get(serviceId).getTimeSlotRequired());
+		availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, requiredSlots);
 		// index: the time slot number
 		// value: the slots available for that time
 		System.out.println();
 		System.out.println();
-		ConsoleUI.displayTableName("Available Time Slots For " + services.get(serviceId).getServiceName());
+		ConsoleUI.displayTableName("Available Time Slots For " + serviceName);
 		ConsoleUI.displayTableName("At " + findBranchNameFromId());
 		ConsoleUI.displayTableName("On " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
 		System.out.println();
@@ -169,7 +172,7 @@ public class ViewSlotsUI {
         System.out.println();
         
         System.out.println("The estimated time required for this service is " 
-        		+ timeSlotsToHour(findServiceRequiredSlotsFromId()) + " hr(s).");
+        		+ timeSlotsToHour(requiredSlots) + " hr(s).");
 	}
 	
 	public static double timeSlotsToHour(int slots) {
@@ -183,11 +186,12 @@ public class ViewSlotsUI {
 		return "Unknown Branch";
 	}
 	
-	public int findServiceRequiredSlotsFromId() {
+	public void findServiceNameRequiredSlotsFromId() {
 		for (Service s : services)
-			if (s.getServiceId() == serviceId)
-				return s.getTimeSlotRequired();
-		return 0;
+			if (s.getServiceId() == serviceId) {
+				serviceName = s.getServiceName();
+				requiredSlots = s.getTimeSlotRequired();
+			}
 	}
 	
 	/*
