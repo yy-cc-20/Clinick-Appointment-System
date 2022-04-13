@@ -11,10 +11,10 @@ import java.time.format.DateTimeParseException;
 public class ConsoleInput {
     private static final String STRING_ERROR = "Sorry, cannot contain \";\".";
     private static final String ERROR_MESSAGE1 = "Sorry, cannot greater than 5 digits.";
-    
+
     public static final DateTimeFormatter DATE_INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy"); // Input date format, "1-1-2022" and "01-01-2022" are both acceptable
     // There is another format for output in ConsoleUI
-    
+
     // Ask user the date, set the valid date
     public static LocalDate askDate(String info) {
         String stringDate;
@@ -25,11 +25,10 @@ public class ConsoleInput {
                 return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
             } catch (DateTimeParseException e) {
                 System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
-                continue;
             }
         }
     }
-    
+
     // Ask user the date, set the valid date
     // Only accept date after today
     public static LocalDate askDateNoEarlierThanToday(String info) {
@@ -43,16 +42,15 @@ public class ConsoleInput {
                 stringDate = SingletonScanner.nextLine();
                 date = LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
                 if (date.isAfter(LocalDate.now().minusDays(1)))
-                	return date;
+                    return date;
                 else
-                	System.out.printf("%n%s%n", "Sorry, please select a date no earlier than today.");
+                    System.out.printf("%n%s%n", "Sorry, please select a date no earlier than today.");
             } catch (DateTimeParseException e) {
                 System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
-                continue;
             }
         }
     }
-    
+
     // let user chose which eventNo he/she wants to perform
     // assumption: the menu will be listed in numbered sentence each number between the range has an eventNo
     public static int askChoice(int beginChoiceNo, int endChoiceNo, String info) throws IllegalArgumentException {
@@ -78,7 +76,6 @@ public class ConsoleInput {
                 // 1. Apologise, the application should accept the responsibility for the problem
                 // 2. What happened (what went wrong / the problem, why / the cause)
                 // 3. How to fix it (where to find the bug / the solution)
-                continue;
             }
         }
         return eventNo;
@@ -91,7 +88,7 @@ public class ConsoleInput {
     // 				each alphabet between the range has an eventNo
     public static char askChoice2(char beginEventNo, char endEventNo, String info) throws IllegalArgumentException {
         char eventNo = '?';
-        String input = "";
+        String input;
         boolean isChar = false;
         boolean isInRange = eventNo >= beginEventNo && eventNo <= endEventNo; // to form readable code
 
@@ -117,12 +114,11 @@ public class ConsoleInput {
                 // 1. Apologize, the application should accept the responsibility for the problem
                 // 2. What happened (what went wrong / the problem, why / the cause)
                 // 3. How to fix it (where to find the bug / the solution)
-                continue;
             }
         } while (!isChar || !isInRange);
         return eventNo;
     }
-    
+
     // @return 0 or positive int
     public static int askPositiveInt(String info) {
         int input;
@@ -141,12 +137,13 @@ public class ConsoleInput {
                 }
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
-                continue;
             }
         }
     }
-    
-    /** @return int */
+
+    /**
+     * @return int
+     */
     public static int askInt(String info) {
         int input;
         String errorMessage = "Please enter a number.";
@@ -158,7 +155,6 @@ public class ConsoleInput {
                 return input;
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
-                continue;
             }
         }
     }
@@ -181,7 +177,6 @@ public class ConsoleInput {
                 }
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
-                continue;
             }
         }
     }
@@ -190,17 +185,17 @@ public class ConsoleInput {
     public static String askString(String info) {
         String input;
 
-       // while (true) {
-            System.out.printf("%n%s> ", info);
-            input = SingletonScanner.nextLine();
-            //if (hasDelimiter(input)) {
-            //    System.out.printf("%s%n", STRING_ERROR);
-            //} else {
-                return input.equals("") ? "-" : input;
-            //}
-      //  }
+        // while (true) {
+        System.out.printf("%n%s> ", info);
+        input = SingletonScanner.nextLine();
+        //if (hasDelimiter(input)) {
+        //    System.out.printf("%s%n", STRING_ERROR);
+        //} else {
+        return input.equals("") ? "-" : input;
+        //}
+        //  }
     }
-    
+
     // @return null if user enters ENTER key 
     public static String askStringV2(String info) {
         String input;
@@ -219,7 +214,7 @@ public class ConsoleInput {
             System.out.printf("%n%s> ", info);
             input = SingletonScanner.nextLine();
             //if (hasDelimiter(input)) {
-              //  System.out.printf("%s%n", STRING_ERROR);
+            //  System.out.printf("%s%n", STRING_ERROR);
             //} else 
             if (input.equals("")) {
                 System.out.println("PLease enter again.");

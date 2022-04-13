@@ -1,6 +1,5 @@
 package boundary;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -99,12 +98,12 @@ public class MakeAppointmentUI {
     // display appointment to book
     // ask confirmation
     // add appointment
-    public void makeAppointment() throws SQLException {
+    public void makeAppointment() {
         ManagePatientUI managePatientUI = new ManagePatientUI(theUser);
         List<Patient> searchedPatient = managePatientUI.searchPatient();
         Patient selectedPatient = managePatientUI.selectPatient(searchedPatient);
 
-        if(selectedPatient == null){
+        if (selectedPatient == null) {
             System.out.println("Back to the menu");
             return;
         }
@@ -128,12 +127,12 @@ public class MakeAppointmentUI {
 
             Allocation allocation = controller.assignAllocation(viewSlotsUI, startSlot);
 
-            if(allocation != null){
+            if (allocation != null) {
                 slotRequired = allocation.getService().getTimeSlotRequired();
                 allocated = true;
             }
             if (allocated) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired ) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
                 displayAppointmentDetails(appointmentToBook);

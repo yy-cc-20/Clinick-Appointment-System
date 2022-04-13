@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ManagePatientUI {
     private static final ManagePatientController controller = new ManagePatientController();
-    private User systemUser;
+    private final User systemUser;
 
     public ManagePatientUI(User systemUser) {
         this.systemUser = systemUser;
@@ -25,6 +25,7 @@ public class ManagePatientUI {
             System.out.println("No patient with IC " + patientIc + " found.");
             if (ConsoleInput.askBoolean("Continue to create new patient profile"))
                 searchedPatients = new ArrayList<>();
+            //todo
             searchedPatients.add(createPatientProfile());
         } else {
             System.out.println("Search Results:");
