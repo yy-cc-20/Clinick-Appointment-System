@@ -27,7 +27,7 @@ public class LoginUI {
 
         while (true) {
             // Get input from user ----------------
-            displayLoginMenu();
+            ConsoleUI.displayLoginMenu();
             role = ConsoleInput.askChoice(1, 4, "Sign in as");
 
             if (role == 4) // Guest
@@ -72,13 +72,6 @@ public class LoginUI {
         return hasLogin;
     }
 
-    private void displayLoginMenu() {
-        System.out.println();
-        System.out.println("[1]Receptionist");
-        System.out.println("[2]Doctor");
-        System.out.println("[3]Patient");
-        System.out.println("[4]Guest Mode");
-    }
 
     // TODO a bug: If the user restart the program, the lockTimeEnded is loss, the account will not be locked
     private void lockAccount() {
