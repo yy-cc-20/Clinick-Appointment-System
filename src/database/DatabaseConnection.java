@@ -1,31 +1,43 @@
 package database;
 
-/** 
- * This system is using MySQL database. If you want to run the system, you must first connect to the 
+/**
+ * This system is using MySQL database. If you want to run the system, you must first connect to the
  * MySQL database in your computer.
- * 
+ *
  * @setup MySQL database in your computer
- * 
+ * <p>
  * YouTube tutorial: https://www.youtube.com/watch?v=BOUMR85B-V0
- * 1. Have MySQL connector downlowded (Download at https://dev.mysql.com/downloads/file/?id=510038)
- * 
+ * 1. Has MySQL connector downloaded (Download at https://dev.mysql.com/downloads/file/?id=510038)
+ * <p>
  * 2. Open MySQL workbench, create a schema (as known as database) called "Clinick-Appointment-System"
- * 
+ * <p>
  * 3. Download the JAR file "mysql-connector-java-8.0.28.jar" at https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.28
- * 	  This is the latest MySQL driver. Some older JDK might not be able to support this MySQL driver.
- * 
+ * This is the latest MySQL driver. Some older JDK might not be able to support this MySQL driver.
+ * <p>
  * 4. Add the JARs file to the project build path:
- * 		build path -> Library -> class path -> add external JARs 
- * 		
- * 5. Change the port number, user name and password for the attributes of this class to the same as your MySQL database 
- * 
+ * build path -> Library -> class path -> add external JARs
+ * <p>
+ * 5. Change the port number, username and password for the attributes of this class to the same as your MySQL database
+ * <p>
  * 6. You can run the main method in this class to check the connectivity to your database.
- * 
+ * <p>
  * 7. You are done. Now you can run the main method of boundary.ClinickAppointmentSystem to start the system.
  * 
+ * @description What this class does:
+ * - connects to the database
+ * - call SetUpDatabase to create tables if tables not exist
+ * <p>
+ * This class is using the singleton design pattern.
+ * There is only one object created for the Connection class in the system.
+ * <p>
+ * How to use this class:
+ * 1. Connection conn = DatabaseConnection.getConnection();
+ * 2. Statement st = conn.createStatement();
+ * 3. PreparedStatement pstmt = conn.prepareStatement("SQL query here");
+ * 4. st.executeUpdate("SQl query here");
  */
 
-/** 
+/**
  * @description
  *
  * What this class does:
@@ -34,26 +46,26 @@ package database;
  *
  * This class is using the singleton design pattern. 
  * There is only one object created for the Connection class in the system.
- * 
+ *
  * How to use this class:
  * 1. Connection conn = DatabaseConnection.getConnection();
  * 2. Statement st = conn.createStatement();
  * 3. PreparedStatement pstmt = conn.prepareStatement("SQL query here");
  * 4. st.executeUpdate("SQl query here");
- * 
+ *
  */
 
 import java.sql.*;
 
 public class DatabaseConnection {
-	private static Connection conn; // Singleton
-	
-	/** @setup 5. Change the value of these variable to connect to your database */
-	private static final int portNo = 3308;
-	private static final String databaseName = "clinick-appointment-system";
-	private static final String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
-	private static String username = "root";
-	private static String password = "root";
+    private static Connection conn; // Singleton
+
+    /** @setup 5. Change the value of these variable to connect to your database */
+    private static final int portNo = 3308;
+    private static final String databaseName = "clinick-appointment-system";
+    private static final String url = "jdbc:mysql://localhost:" + portNo + "/" + databaseName;
+    private static final String username = "root";
+    private static final String password = "root";
 
 	private DatabaseConnection() {
 		try {
@@ -67,30 +79,31 @@ public class DatabaseConnection {
 		DatabaseSetup.setupDatabaseIfNotExist();
 	} // Private constructor for singleton
 
-	public static Connection getConnection() throws SQLException {
-		if (conn == null)
-			new DatabaseConnection();
-		return conn; // Already connect to database
-	}
-	
-	public static void closeConnection() {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    public static Connection getConnection() throws SQLException {
+        if (conn == null)
+            new DatabaseConnection();
+        return conn; // Already connect to database
+    }
 
-	// run me to test connection!!!
-	// DatabaseConnectionTest
-	public static void main(String[] args) throws SQLException {
-		Statement st = DatabaseConnection.getConnection().createStatement();
-		ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM Appointment ;");
-		while (rs.next()) { // Move the cursor to the next row, return false if empty
-			System.out.println("There are " + rs.getInt(1) + " appointment records.");
-		}
-		System.out.println("DatabaseConnection test success!");
-	}
+
+    public static void closeConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // run me to test connection!!!
+    // DatabaseConnectionTest
+    public static void main(String[] args) throws SQLException {
+        Statement st = DatabaseConnection.getConnection().createStatement();
+        ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM Appointment ;");
+        while (rs.next()) { // Move the cursor to the next row, return false if empty
+            System.out.println("There are " + rs.getInt(1) + " appointment records.");
+        }
+        System.out.println("DatabaseConnection test success!");
+    }
 }
 
 /* Notes on how to use JDBC
