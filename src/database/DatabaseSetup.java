@@ -8,7 +8,7 @@ public class DatabaseSetup {
 
 	private static Statement st;
 
-	public static void setupDatabase() {
+	public static void setupDatabaseIfNotExist() {
 		try {
 			st = DatabaseConnection.getConnection().createStatement();
 
@@ -36,7 +36,6 @@ public class DatabaseSetup {
 
 			// conn.commit(); // Cannot call commit when autocommit is true
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
