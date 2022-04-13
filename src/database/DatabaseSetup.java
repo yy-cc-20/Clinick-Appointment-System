@@ -360,49 +360,49 @@ public class DatabaseSetup {
         conn.setAutoCommit(true);
     }
 
-	private static void insertReceptionistTable() throws SQLException {
-		Connection conn = DatabaseConnection.getConnection();
-		conn.setAutoCommit(false);
-		String[] insertStatements = {
-				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (1, 'Aw Kung Bang', 'Kungbang111')",
-				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (2, 'Liana Yaacup binti Che Jaferi', 'Liana222')",
-				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (3, 'Nurul Hasya binti Syarafuddin', 'Hasya333')",
-				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (4, 'Rakesh Devaser a/l Shree', 'Rakesh444')",
-				"INSERT IGNORE INTO Receptionist (id, name, password) VALUES (5, 'Nor Janni binti Syed Tumiran', 'Janni555')", };
-		for (String insertStatement : insertStatements) {
-			st.addBatch(insertStatement);
-		}
-		st.executeBatch();
-		conn.commit();
-		conn.setAutoCommit(true);
-	}
+    private static void insertReceptionistTable() throws SQLException {
+        Connection conn = DatabaseConnection.getConnection();
+        conn.setAutoCommit(false);
+        String[] insertStatements = {
+                "INSERT IGNORE INTO Receptionist (id, name, password) VALUES (1, 'Aw Kung Bang', 'Kungbang111')",
+                "INSERT IGNORE INTO Receptionist (id, name, password) VALUES (2, 'Liana Yaacup binti Che Jaferi', 'Liana222')",
+                "INSERT IGNORE INTO Receptionist (id, name, password) VALUES (3, 'Nurul Hasya binti Syarafuddin', 'Hasya333')",
+                "INSERT IGNORE INTO Receptionist (id, name, password) VALUES (4, 'Rakesh Devaser a/l Shree', 'Rakesh444')",
+                "INSERT IGNORE INTO Receptionist (id, name, password) VALUES (5, 'Nor Janni binti Syed Tumiran', 'Janni555')", };
+        for (String insertStatement : insertStatements) {
+            st.addBatch(insertStatement);
+        }
+        st.executeBatch();
+        conn.commit();
+        conn.setAutoCommit(true);
+    }
 
-	private static void insertServiceTable() throws SQLException {
-		Connection conn = DatabaseConnection.getConnection();
-		conn.setAutoCommit(false);
-		String[] insertStatements = {
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (1, 'Heart Screening', 1799, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Echocardiogram, Stress Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis', 3)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (2, 'Stroke Screening', 2699, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, MRA Brain, Diet Counselling', 3)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (3, 'Lung Cancer Screening', 690, 'Low Dose CT Scan without Contrast', 1)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (4, 'Eye Screening', 259, 'History & Clinical Examination, Visual Acuity, Auto-Refraction, Slit Lamp Examination, Intraocular Pressure, Eye Dilation', 2)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (5, 'Oral Health Screening', 159, 'History & Clinical Examination, Oral Cancer Screening, Gum Health Profile, Decay Risk Profile', 1)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (6, 'Bone Screening', 800, 'History & Clinical Examination, DEXA Scan, Laboratory Test, Nutritional & Body Fat Assessment', 2)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (7, 'Blood Screening', 250, 'Full Blood Count, Urea, Creatinine, Uric Acid, Glucose Fasting, Hepatitis B Screening, Liver Function Profile, Lipid Profile, Urine FEME', 1)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (8, 'Colonoscopy', 2099, 'History & Clinical Examination, Blood Test, Ultrasound of Abdomen, Fibroscan, CT Abdomen, Bowel Cleansing, Stress Test', 3)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (9, 'Gastroscopy', 1500, 'History & Clinical Examination, Blood Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis, CT Abdomen, Bowel Cleansing, Stress Test, H-Pylori Test', 3)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (10, 'Allergy Test', 999, 'Complete Hemogram, IgE Total Antibody', 1)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (11, 'Wellness Screeening', 1060, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ultrasound of Abdomen & Pelvis, Diet Counselling', 2)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (12, 'Men Health Screening', 1588, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Uroflowmetry and Residual Urine Volume, Chest X-Ray, Ultrasound of Abdomen & Pelvis, Diet Counselling', 4)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (13, 'Women Health Screening', 1999, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Thin Prep, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Chest X-Ray, 3D Mammogram, Ultrasound of Breast, Abdomen & Pelvis, Bone Mineral Density Scan, Diet Counselling', 5)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (14, 'Pre-Marital Screening', 299, 'Blood Test including Full Blood Count, Peripheral Blood Film, Blood Grouping, Hepatitis B Screening, and HIV', 5)",
-				"INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (15, 'Post-Covid Screening', 399, 'History & Clinical Examination, Anthropometry, Visual Acuity, Blood Test, Urine Test, Chest X-Ray, Lung Function Test', 5)", };
-		for (String insertStatement : insertStatements) {
-			st.addBatch(insertStatement);
-		}
-		st.executeBatch();
-		conn.commit();
-		conn.setAutoCommit(true);
-	}
+    private static void insertServiceTable() throws SQLException {
+        Connection conn = DatabaseConnection.getConnection();
+        conn.setAutoCommit(false);
+        String[] insertStatements = {
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (1, 'Heart Screening', 1799, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Echocardiogram, Stress Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis', 3)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (2, 'Stroke Screening', 2699, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, MRA Brain, Diet Counselling', 3)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (3, 'Lung Cancer Screening', 690, 'Low Dose CT Scan without Contrast', 1)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (4, 'Eye Screening', 259, 'History & Clinical Examination, Visual Acuity, Auto-Refraction, Slit Lamp Examination, Intraocular Pressure, Eye Dilation', 2)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (5, 'Oral Health Screening', 159, 'History & Clinical Examination, Oral Cancer Screening, Gum Health Profile, Decay Risk Profile', 1)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (6, 'Bone Screening', 800, 'History & Clinical Examination, DEXA Scan, Laboratory Test, Nutritional & Body Fat Assessment', 2)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (7, 'Blood Screening', 250, 'Full Blood Count, Urea, Creatinine, Uric Acid, Glucose Fasting, Hepatitis B Screening, Liver Function Profile, Lipid Profile, Urine FEME', 1)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (8, 'Colonoscopy', 2099, 'History & Clinical Examination, Blood Test, Ultrasound of Abdomen, Fibroscan, CT Abdomen, Bowel Cleansing, Stress Test', 3)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (9, 'Gastroscopy', 1500, 'History & Clinical Examination, Blood Test, Chest X-Ray, Ultrasound of Abdomen & Pelvis, CT Abdomen, Bowel Cleansing, Stress Test, H-Pylori Test', 3)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (10, 'Allergy Test', 999, 'Complete Hemogram, IgE Total Antibody', 1)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (11, 'Wellness Screeening', 1060, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ultrasound of Abdomen & Pelvis, Diet Counselling', 2)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (12, 'Men Health Screening', 1588, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Uroflowmetry and Residual Urine Volume, Chest X-Ray, Ultrasound of Abdomen & Pelvis, Diet Counselling', 4)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (13, 'Women Health Screening', 1999, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Thin Prep, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Chest X-Ray, 3D Mammogram, Ultrasound of Breast, Abdomen & Pelvis, Bone Mineral Density Scan, Diet Counselling', 5)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (14, 'Pre-Marital Screening', 299, 'Blood Test including Full Blood Count, Peripheral Blood Film, Blood Grouping, Hepatitis B Screening, and HIV', 5)",
+                "INSERT IGNORE INTO Service (id, name, price, description, timeSlotRequired) VALUES (15, 'Post-Covid Screening', 399, 'History & Clinical Examination, Anthropometry, Visual Acuity, Blood Test, Urine Test, Chest X-Ray, Lung Function Test', 5)", };
+        for (String insertStatement : insertStatements) {
+            st.addBatch(insertStatement);
+        }
+        st.executeBatch();
+        conn.commit();
+        conn.setAutoCommit(true);
+    }
 
     /*
     // run me to test database setup!!!

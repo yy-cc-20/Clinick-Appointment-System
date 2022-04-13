@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import boundary.ConsoleUI;
 import database.DatabaseConnection;
 
 /*
@@ -56,7 +57,7 @@ public class DataList implements IDataStore {
             // e.g., query = "filter" column = "id" data = "1"
             // e.g., query = "sort" column = "id" data = "asc"
             if (query == null)
-                rs = st.executeQuery("SELECT * FROM appointment ORDER BY id;");
+                rs = st.executeQuery("SELECT appointment.id, appointment.date, appointment.attendance, appointment.startSlot, appointment.patientId, appointment.allocationId FROM allocation, appointment, patient WHERE appointment.allocationId=allocation.id AND appointment.patientId=patient.id;");
             else if (query.equalsIgnoreCase("filter"))
                 rs = st.executeQuery("SELECT * FROM appointment WHERE " + column + " = " + data + ";");
             else if (query.equalsIgnoreCase("sort"))
@@ -73,7 +74,7 @@ public class DataList implements IDataStore {
                         allocationId, attendance, startSlot);
                 appointmentList.add(appointment);
             }
-//			System.out.println("appointmentList " + appointmentList.size());
+			System.out.println("appointmentList " + appointmentList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +95,7 @@ public class DataList implements IDataStore {
         try {
             branchList = new ArrayList<>();
             if (query == null)
-                rs = st.executeQuery("SELECT * FROM branch ORDER BY id;");
+                rs = st.executeQuery("SELECT branch.id, branch.name, branch.address, branch.telNo, branch.receptionistId FROM branch, receptionist WHERE branch.receptionistId = receptionist.Id;");
             else if (query.equalsIgnoreCase("filter"))
                 rs = st.executeQuery("SELECT * FROM branch WHERE " + column + " = " + data + ";");
             else if (query.equalsIgnoreCase("sort"))
@@ -109,7 +110,7 @@ public class DataList implements IDataStore {
                 Branch branch = new Branch(id, name, address, receptionistId, telNo);
                 branchList.add(branch);
             }
-//			System.out.println("branchList " + branchList.size());
+			System.out.println("branchList " + branchList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
