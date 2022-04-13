@@ -83,20 +83,20 @@ public class DatabaseSetup {
         conn.setAutoCommit(false);
         String[] insertStatements = {
                 // startSlot 1-14, patientId 1-50, allocationId 1-25
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-03', 'Attended',  3,   1,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-03', 'Attended', 11,   2,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-04', 'Attended',  8,   3,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-05', 'Attended',  1,   4,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-05', 'Attended',  7,   5,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-10', 'Attended',  2,   6,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-10', 'Attended',  5,   7,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-10', 'Attended',  8,   8,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-10', 'Attended', 12,   9,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-11', 'Attended',  6,  10,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       1,  11,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       5,  12,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       8,  13,  1)",
-                "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-27', 'NAN',       4,  14,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-03', 'Attended',  3,   1,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-03', 'Attended', 11,   2,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-04', 'Attended',  8,   3,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-05', 'Attended',  1,   4,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-05', 'Attended',  7,   5,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-10', 'Attended',  2,   6,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-03-10', 'Attended',  5,   7,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-10', 'Attended',  8,   8,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-10', 'Attended', 12,   9,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-11', 'Attended',  6,  10,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       1,  11,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       5,  12,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       8,  13,  1)",
+                "INSERT IGNORE INTO Appointment (id, date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-27', 'NAN',       4,  14,  1)",
                 "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-27', 'NAN',       8,  15,  1)",
                 "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-27', 'NAN',      11,  16,  1)",
                 "INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-29', 'NAN',       2,  17,  1)",
@@ -248,11 +248,11 @@ public class DatabaseSetup {
         Connection conn = DatabaseConnection.getConnection();
         conn.setAutoCommit(false);
         String[] insertStatements = {
-                "INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Klang Health Screening Centre', 'No.29, Jalan Bayu Tinggi 1A/KS6, Taman Bayu Tinggi, 41200 Klang, Selangor', '03-55699996', 1)",
-                "INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Cheras Health Screening Centre', 'No 37, 39, 41&43, Jalan 4/96A, Taman Cheras Makmur, Cheras 56100 Kuala Lumpur', '03-91309163', 2)",
-                "INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Seri Kembangan Health Screening Centre', 'No.1 & 3, Ground Floor, Jalan Besar Susur 1, 43300 Seri Kembangan, Selangor', '03-89599924', 3)",
-                "INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Kajang Health Screening Centre', 'No.40 & 41, Jalan Tukang, 43000 Kajang, Selangor', '03-87337433', 4)",
-                "INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Kudai Health Screening Centre', 'Tower 1, No.68, Jalan Pertama 1, Danga Utama Commercial Center, 81300 Skudai Johor Bahru', '07-5500323', 5)", };
+                "INSERT IGNORE INTO Branch (id, name, address, telNo, receptionistId) VALUES (1, 'Klang Health Screening Centre', 'No.29, Jalan Bayu Tinggi 1A/KS6, Taman Bayu Tinggi, 41200 Klang, Selangor', '03-55699996', 1)",
+                "INSERT IGNORE INTO Branch (id, name, address, telNo, receptionistId) VALUES (2, 'Cheras Health Screening Centre', 'No 37, 39, 41&43, Jalan 4/96A, Taman Cheras Makmur, Cheras 56100 Kuala Lumpur', '03-91309163', 2)",
+                "INSERT IGNORE INTO Branch (id, name, address, telNo, receptionistId) VALUES (3, 'Seri Kembangan Health Screening Centre', 'No.1 & 3, Ground Floor, Jalan Besar Susur 1, 43300 Seri Kembangan, Selangor', '03-89599924', 3)",
+                "INSERT IGNORE INTO Branch (id, name, address, telNo, receptionistId) VALUES (4, 'Kajang Health Screening Centre', 'No.40 & 41, Jalan Tukang, 43000 Kajang, Selangor', '03-87337433', 4)",
+                "INSERT IGNORE INTO Branch (id, name, address, telNo, receptionistId) VALUES (5, 'Kudai Health Screening Centre', 'Tower 1, No.68, Jalan Pertama 1, Danga Utama Commercial Center, 81300 Skudai Johor Bahru', '07-5500323', 5)", };
         for (String insertStatement : insertStatements) {
             st.addBatch(insertStatement);
         }
@@ -270,26 +270,26 @@ public class DatabaseSetup {
                 "INSERT IGNORE INTO Doctor (id, name, password) VALUES (3, 'Nor Hazmeera binti Syahir', 'Hazmeera333')",
                 "INSERT IGNORE INTO Doctor (id, name, password) VALUES (4, 'Saajid bin Irfaan', 'Saajid444')",
                 "INSERT IGNORE INTO Doctor (id, name, password) VALUES (5, 'Tian Yang', 'Tianyang555')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Gong Ming Yu', 'Mingyu666')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Liao Qing', 'Liaoqing777')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Sun Ming Zhu', 'Mingzhu888')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Siraaj bin Jaarallah', 'Siraaj999')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Haarith bin Maisoon', 'Haarith10')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Felixia Kong Shei Kam', 'Felixia11')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Sothinathan Goundar a/l Devaraj', 'Goundar12')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Yu Yang', 'Yuyang13')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Rena Lu', 'Renalu14')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Karina Yong', 'Karina15')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Sanjay Gupta', 'Sanjay16')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Ken Jeong', 'Kenjeong17')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Drew Pinsky', 'Pinsky18')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Alexie Oon Shun Nau', 'Alexie19')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Nor Asma binti Zuraiful', 'Zuraiful20')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Nur Mira binti Syed Shah Haizan', 'Haizan21')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('R. G. Waythamoorthy', 'Waythamoorthy22')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Anthony C. Griffin', 'Anthony23')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Caroline McGuire', 'Caroline24')",
-                "INSERT IGNORE INTO Doctor (id, name, password) VALUES ('Kang Min', 'Kangmin25')", };
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (6, 'Gong Ming Yu', 'Mingyu666')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (7, 'Liao Qing', 'Liaoqing777')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (8, 'Sun Ming Zhu', 'Mingzhu888')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (9, 'Siraaj bin Jaarallah', 'Siraaj999')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (10, 'Haarith bin Maisoon', 'Haarith10')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (11, 'Felixia Kong Shei Kam', 'Felixia11')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (12, 'Sothinathan Goundar a/l Devaraj', 'Goundar12')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (13, 'Yu Yang', 'Yuyang13')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (14, 'Rena Lu', 'Renalu14')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (15, 'Karina Yong', 'Karina15')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (16, 'Sanjay Gupta', 'Sanjay16')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (17, 'Ken Jeong', 'Kenjeong17')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (18, 'Drew Pinsky', 'Pinsky18')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (19, 'Alexie Oon Shun Nau', 'Alexie19')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (20, 'Nor Asma binti Zuraiful', 'Zuraiful20')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (21, 'Nur Mira binti Syed Shah Haizan', 'Haizan21')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (22, 'R. G. Waythamoorthy', 'Waythamoorthy22')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (23, 'Anthony C. Griffin', 'Anthony23')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (24, 'Caroline McGuire', 'Caroline24')",
+                "INSERT IGNORE INTO Doctor (id, name, password) VALUES (25, 'Kang Min', 'Kangmin25')", };
         for (String insertStatement : insertStatements) {
             st.addBatch(insertStatement);
         }
