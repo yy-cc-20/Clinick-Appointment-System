@@ -210,7 +210,7 @@ public class ClinickAppointmentSystem {
 		while (true) {
 			ConsoleUI.displaySystemName("Clinick Booking System");
 			ConsoleUI.displayMenuForPatient();
-			choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
+			choiceNo = ConsoleInput.askChoice(0, 5, "Your choice");
 
 			switch (choiceNo) {
 				case 1 -> {
@@ -223,7 +223,6 @@ public class ClinickAppointmentSystem {
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					managePatientUI.managePatientProfile();
 					manageAccountUI.changePassword();
 				}
 				case 4 -> {
