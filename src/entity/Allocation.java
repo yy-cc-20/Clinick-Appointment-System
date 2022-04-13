@@ -3,9 +3,6 @@ package entity;
 import java.util.List;
 
 public class Allocation {
-    private final List<Branch> branches = DataList.getInstance().getBranchList(null, "","");
-    private final List<Service> services = DataList.getInstance().getServiceList();
-    private final List<Doctor> doctors = DataList.getInstance().getDoctorList();
     private int linkId;
     private Branch branch;
     private Service service;
@@ -28,6 +25,7 @@ public class Allocation {
 
     // todo connect to database
     private Branch findBranch(String branchId){
+        List<Branch> branches = DataList.getInstance().getBranchList(null, "","");
         for (Branch value : branches) {
             if (value.getBranchId() == Integer.parseInt(branchId)) {
                 return value;
@@ -37,6 +35,7 @@ public class Allocation {
     }
 
     private Service findService(String serviceId){
+        List<Service> services = DataList.getInstance().getServiceList();
         for (Service value : services) {
             if (value.getServiceId() == Integer.parseInt(serviceId)) {
                 return value;
@@ -46,6 +45,7 @@ public class Allocation {
     }
 
     private Doctor findDoctor(String doctorId){
+        List<Doctor> doctors = DataList.getInstance().getDoctorList();
         for (Doctor value : doctors) {
             if (value.getUserId() == Integer.parseInt(doctorId)) {
                 return value;

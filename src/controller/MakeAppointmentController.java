@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
-    private final List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
-    private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
-    private final List<Service> services = DataList.getInstance().getServiceList();
 
     public List<Appointment> getAllAppointments(User theUser) {
+        List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
         String id = Integer.toString(theUser.getUserId());
 
         if (theUser instanceof Patient) {
@@ -30,6 +28,7 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
+        List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
         List<Appointment> results = new ArrayList<>();
 
         switch (choice) {
@@ -89,6 +88,8 @@ public class MakeAppointmentController {
     }
 
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
+        List<Allocation> allocations = DataList.getInstance().getAllocationList();
+        List<Service> services = DataList.getInstance().getServiceList();
         Service service = new Service();
         for (Service item : services) {
             if (item.getServiceId() == viewSlotsUI.getSelectedServiceId()) {

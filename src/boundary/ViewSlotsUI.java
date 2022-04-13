@@ -18,7 +18,6 @@ public class ViewSlotsUI {
     // TODO To have column size determined by the longest info in the column so to display the table neatly
 
     private final static ViewSlotsUI instance = new ViewSlotsUI();
-    private final List<Service> services = DataList.getInstance().getServiceList();
     private final ViewSlotsController controller = ViewSlotsController.getInstance();
 
     // Filters
@@ -124,6 +123,7 @@ public class ViewSlotsUI {
      * @return number of row of results
      */
     public int viewService() {
+        List<Service> services = DataList.getInstance().getServiceList();
         if (services.size() == 0) {
             System.out.println("No service found.");
             return services.size();
@@ -205,6 +205,7 @@ public class ViewSlotsUI {
     }
 
     public void findServiceNameRequiredSlotsFromId() {
+        List<Service> services = DataList.getInstance().getServiceList();
         for (Service s : services)
             if (s.getServiceId() == serviceId) {
                 serviceName = s.getServiceName();
@@ -222,6 +223,7 @@ public class ViewSlotsUI {
 
     // Check if the id is exists
     public boolean validateSelectedServiceId(int id) {
+        List<Service> services = DataList.getInstance().getServiceList();
         for (Service s : services)
             if (s.getServiceId() == id)
                 return true;
