@@ -39,6 +39,9 @@ public class ClinickAppointmentSystem {
 		
 		while (true) {
 			ConsoleUI.displaySystemName("Clinick Booking System");
+			
+			//toExit = startGuestView();
+			
 			systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
 
@@ -67,6 +70,10 @@ public class ClinickAppointmentSystem {
 		}
 	}
 		
+	static boolean startGuestView() {
+		displayMenuForGuest()
+	}
+	
 	/** @return false to logout, true to exit application */
 	static boolean startReceptionistView(User systemUser) {
 		int choiceNo; // the action that user wants to perform

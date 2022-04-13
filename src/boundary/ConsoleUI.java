@@ -119,5 +119,12 @@ public class ConsoleUI {
         System.out.println(" 4. View Services and Time Slots for Booking ");
         System.out.println(" 0. Exit Application      ");
     }
+    
+    public static void displayMenuForGuest() {
+        System.out.println("      -- Menu --          ");
+        System.out.println();
+        System.out.println(" 1. View Services and Time Slots for Booking ");
+        System.out.println(" 0. Exit Application      ");
+    }
 }
  
