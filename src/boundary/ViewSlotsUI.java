@@ -132,7 +132,7 @@ public class ViewSlotsUI {
 			return branchResults.size();
 		}
 		
-		ConsoleUI.displayTableName(services.get(serviceId).getServiceName());
+		ConsoleUI.displayTableName(services.get(serviceId-1).getServiceName());
         System.out.println();
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         

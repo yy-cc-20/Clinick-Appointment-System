@@ -28,16 +28,16 @@ import database.DatabaseConnection;
 import entity.*;
 
 public class ClinickAppointmentSystem {
+	private static final LoginUI loginUI = new LoginUI();
 	private static MakeAppointmentUI makeAppointmentUI;
 	private static ManageAppointmentUI manageAppointmentUI;
 	private static ManagePatientUI managePatientUI;
 	private static ManageAccountUI manageAccountUI;
-	private static LoginUI loginUI = new LoginUI();
 	
 	public static void main(String... args) {
 		boolean toExit = false;
 		
-		while (!toExit) {
+		while (true) {
 			// Guest Mode 
 			toExit = startGuestView();
 			if (toExit)
