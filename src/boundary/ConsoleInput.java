@@ -25,6 +25,7 @@ public class ConsoleInput {
                 return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
             } catch (DateTimeParseException e) {
                 System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
+                continue;
             }
         }
     }
@@ -47,6 +48,7 @@ public class ConsoleInput {
                 	System.out.printf("%n%s%n", "Sorry, please select a date no earlier than today.");
             } catch (DateTimeParseException e) {
                 System.out.printf("%n%s%n", "Sorry, please enter a valid date.");
+                continue;
             }
         }
     }
@@ -76,6 +78,7 @@ public class ConsoleInput {
                 // 1. Apologise, the application should accept the responsibility for the problem
                 // 2. What happened (what went wrong / the problem, why / the cause)
                 // 3. How to fix it (where to find the bug / the solution)
+                continue;
             }
         }
         return eventNo;
@@ -114,6 +117,7 @@ public class ConsoleInput {
                 // 1. Apologize, the application should accept the responsibility for the problem
                 // 2. What happened (what went wrong / the problem, why / the cause)
                 // 3. How to fix it (where to find the bug / the solution)
+                continue;
             }
         } while (!isChar || !isInRange);
         return eventNo;
@@ -137,6 +141,7 @@ public class ConsoleInput {
                 }
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
+                continue;
             }
         }
     }
@@ -153,6 +158,7 @@ public class ConsoleInput {
                 return input;
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
+                continue;
             }
         }
     }
@@ -175,6 +181,7 @@ public class ConsoleInput {
                 }
             } catch (NumberFormatException e) {
                 System.out.println(errorMessage);
+                continue;
             }
         }
     }

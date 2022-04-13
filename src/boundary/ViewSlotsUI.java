@@ -26,13 +26,11 @@ public class ViewSlotsUI {
 	private int branchId;
 	private LocalDate date;
 	
-	// Result
+	// Results
 	private List<Branch> branchResults;
-	private List<List<Integer>> availableDoctors; 
 	private String serviceName;
 	private int requiredSlots;
-	private String branchName;
-	
+	private List<List<Integer>> availableDoctors; 
 	// index: the time slot
 	// row: an array of the doctors available for that time
 	
@@ -56,26 +54,41 @@ public class ViewSlotsUI {
 			servicesFound = viewService();
 			if (servicesFound <= 0)
 				return false;
-						
-			if (!ConsoleInput.askBoolean("Select service"))
-				return false;
-			serviceId = ConsoleInput.askPositiveInt("Service");
-			findServiceNameRequiredSlotsFromId();
 			
+			// validate selected service's Id
+			while (true) {
+				if (!ConsoleInput.askBoolean("Select service"))
+					return false;
+				serviceId = ConsoleInput.askPositiveInt("Service");
+				if (validateSelectedServiceId(serviceId))
+					break;
+				else
+					System.out.println("Invalid input.");
+			}
+			
+			findServiceNameRequiredSlotsFromId();
 			branchesFound = viewBranchFilteredByService();
 			if (branchesFound <= 0) {
 				if (ConsoleInput.askBoolean("Continue searching"))
 					continue;
 				else
 					return false;
-			}			
-			if (!ConsoleInput.askBoolean("Select branch"))
-				if (ConsoleInput.askBoolean("Continue searching"))
-					continue;
+			}	
+					
+			// validate selected branch's Id
+			while (true) {
+				if (!ConsoleInput.askBoolean("Select branch"))
+					if (ConsoleInput.askBoolean("Continue searching"))
+						continue;
+					else
+						return false;
+				branchId = ConsoleInput.askPositiveInt("Branch");
+				if (validateSelectedBranchId(branchId))
+					break;
 				else
-					return false;
-			branchId = ConsoleInput.askPositiveInt("Branch");
-			
+					System.out.println("Invalid input.");
+			}
+						
 			date = ConsoleInput.askDateNoEarlierThanToday("Date");
 			viewTimeSlotFilteredByServiceBranchDate();
 			if (ConsoleInput.askBoolean("Continue searching"))
@@ -84,7 +97,7 @@ public class ViewSlotsUI {
 				return true;
 		}
 	}
-	
+
 	public int getSelectedServiceId() {
 		return serviceId;
 	}
@@ -194,7 +207,22 @@ public class ViewSlotsUI {
 			}
 	}
 	
-	/*
+	// Check if the id is exists
+	public boolean validateSelectedBranchId(int id) {
+		for (Branch b : branchResults)
+			if (b.getBranchId() == id)
+				return true;
+		return false;
+	}
+	
+	// Check if the id is exists
+	public boolean validateSelectedServiceId(int id) {
+		for (Service s : services)
+			if (s.getServiceId() == id)
+				return true;
+		return false;
+	}
+	
 	// ViewSlotsUI test
 	public static void main(String[] args) {
 		System.out.println(timeSlotsToHour(1));
@@ -204,5 +232,5 @@ public class ViewSlotsUI {
 		System.out.println(timeSlotsToHour(5));
 		
 		ViewSlotsUI.getInstance().viewSlots();
-	}*/
+	}
 }
