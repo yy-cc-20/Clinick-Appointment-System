@@ -19,17 +19,18 @@ import entity.*;
 public class LoginUI {
 	private final LoginController loginController = new LoginController();
 	private User user;
+	private boolean hasLogin;
 	
 	// Use this method for login
 	// Lock account and exit program if fail too many times
-	public LoginUI() {
+	public void login() {
 		int role;
 		int userid;
 		String password;
 		String username;
-		
+		hasLogin = false;
 		while (true) {
-			// Get input from user
+			// Get input from user ----------------
 			System.out.println();
 			System.out.println("[1]Receptionist");
 			System.out.println("[2]Doctor");
@@ -47,7 +48,7 @@ public class LoginUI {
 			System.out.print("Password> ");
 			password = SingletonScanner.nextLine();
 			
-			// Interact with the controller
+			// Interact with the controller -------------------
 			username = loginController.loginSuccessfully(role, userid, password);
 			if (!username.isBlank()) { // Successfully login
 				System.out.printf("%nHello " + username + "!%n");
@@ -57,6 +58,7 @@ public class LoginUI {
 					case 3 -> new Patient(userid, username, password);
 					default -> throw new IllegalArgumentException();
 				};
+				hasLogin = true;
 				break;
 			} else { // Login failed	
 				if (LoginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) { // Still have chance to login
@@ -71,6 +73,10 @@ public class LoginUI {
 	
 	public User getUser() {
 		return user;
+	}
+	
+	public boolean getHasLogin() {
+		return hasLogin;
 	}
 	
 	// TODO a bug: If the user restart the program, the lockTimeEnded is loss, the account will not be locked
