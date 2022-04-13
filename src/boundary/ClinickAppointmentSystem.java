@@ -223,6 +223,7 @@ public class ClinickAppointmentSystem {
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
 					managePatientUI.managePatientProfile();
+					manageAccountUI.changePassword();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");

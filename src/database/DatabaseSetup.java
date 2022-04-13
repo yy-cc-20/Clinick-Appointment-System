@@ -11,20 +11,6 @@ public class DatabaseSetup {
 	public static void setupDatabase() {
 		try {
 			st = DatabaseConnection.getConnection().createStatement();
-			
-// TODO delete drop tables statement
-			// drop all existing tables
-			String[] dropTables = { 
-					"DROP TABLE IF EXISTS Appointment", 
-					"DROP TABLE IF EXISTS Allocation",
-					"DROP TABLE IF EXISTS Branch", 
-					"DROP TABLE IF EXISTS Doctor", 
-					"DROP TABLE IF EXISTS Patient",
-					"DROP TABLE IF EXISTS Receptionist", 
-					"DROP TABLE IF EXISTS Service", };
-			for (int i = 0; i < dropTables.length; i++) {
-				st.executeUpdate(dropTables[i]);
-			}
 
 			// create all necessary tables
 			String[] createTables = {
@@ -39,7 +25,6 @@ public class DatabaseSetup {
 				st.executeUpdate(createTables[i]);
 			}
 
-// TODO check the table exists or not before insert the test data
 			// insert data into all tables
 			insertDoctorTable();
 			insertPatientTable();
