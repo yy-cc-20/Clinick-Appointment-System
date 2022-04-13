@@ -61,15 +61,7 @@ public class MakeAppointmentUI {
 
     // 2. search appointments
     public static List<Appointment> searchAppointment() {
-        System.out.println("Search by:           ");
-        System.out.println(" 1. Appointment ID   ");
-        System.out.println(" 2. Date             ");
-        System.out.println(" 3. Service Name     ");
-        System.out.println(" 4. Branch Name      ");
-        System.out.println(" 5. Patient Name     ");
-        System.out.println(" 6. Doctor Name      ");
-        System.out.println(" 7. Attendance Record");
-        System.out.println();
+        ConsoleUI.displayMenuForSearchingAppointment();
 
         int choice = ConsoleInput.askChoice(1, 7, "Your selection");
         String searchKeyword;
