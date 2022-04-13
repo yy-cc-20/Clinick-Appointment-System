@@ -9,7 +9,7 @@ import database.DatabaseConnection;
 import entity.*;
 
 public class ManagePatientController {
-	private final List<Patient> patients = DataList.getInstance().getPatientList();
+	private final List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
 
     public Patient searchPatient(String patientIc) {
 		for (Patient patient : patients) {

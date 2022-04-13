@@ -41,13 +41,11 @@ public class ClinickAppointmentSystem {
 			ConsoleUI.displaySystemName("Clinick Booking System");
 			systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
-	
-			
+
 			makeAppointmentUI = new MakeAppointmentUI(systemUser);
 			manageAppointmentUI = new ManageAppointmentUI();
 			managePatientUI = new ManagePatientUI();
 			manageAccountUI = new ManageAccountUI(systemUser);
-			
 			
 			ConsoleUI.clearScreen();
 			
@@ -84,7 +82,7 @@ public class ClinickAppointmentSystem {
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					makeAppointmentUI.searchAppointment();
+					MakeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Make Appointment");
@@ -143,19 +141,19 @@ public class ClinickAppointmentSystem {
 			switch (choiceNo) {
 				case 1 -> {
 					ConsoleUI.displayFunctionName("View Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.viewAppointment();
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					System.out.println("This feature is coming soon.");	
+					MakeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Search Patient");
-					System.out.println("This feature is coming soon.");	
+					managePatientUI.searchPatient();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					new ManageAccountUI(systemUser).changePassword();
+					manageAccountUI.changePassword();
 				}
 				case 0 -> { 
 					System.out.println("[1]Switch Account");
@@ -178,15 +176,15 @@ public class ClinickAppointmentSystem {
 			switch (choiceNo) {
 				case 1 -> {
 					ConsoleUI.displayFunctionName("View Appointment");
-					System.out.println("This feature is coming soon.");	
+					makeAppointmentUI.viewAppointment();
 				}
 				case 2 -> {
 					ConsoleUI.displayFunctionName("Search Appointment");
-					System.out.println("This feature is coming soon.");	
+					MakeAppointmentUI.searchAppointment();
 				}
 				case 3 -> {
 					ConsoleUI.displayFunctionName("Manage Account");
-					manageAccountUI.changePassword();
+					managePatientUI.managePatientProfile();
 				}
 				case 4 -> {
 					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");

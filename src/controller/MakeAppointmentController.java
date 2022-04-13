@@ -2,12 +2,7 @@ package controller;
 
 import boundary.ConsoleUI;
 import boundary.ViewSlotsUI;
-import database.DatabaseConnection;
 import entity.*;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +10,7 @@ import java.util.List;
 public class MakeAppointmentController {
     private final List<Appointment> appointments = DataList.getInstance().getAppointmentList("sort", "date","");
     private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
+    private final List<Service> services = DataList.getInstance().getServiceList();
 
     public List<Appointment> getAllAppointments(User theUser) {
         String id = Integer.toString(theUser.getUserId());
@@ -91,13 +87,24 @@ public class MakeAppointmentController {
         return results;
     }
 
-    public Allocation assignAllocation(ViewSlotsUI viewSlotsUI) {
+    public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
+        Service service = new Service();
+        for (Service item : services) {
+            if (item.getServiceId() == viewSlotsUI.getSelectedServiceId()) {
+                service = item;
+            }
+        }
+        int slotRequired = service.getTimeSlotRequired();
+        if(slotRequired + slotRequired-1 > 14){
+            return null;
+        }
+
         List<List<Integer>> availableDoctors = viewSlotsUI.getAvailableDoctors();
         int branchId = viewSlotsUI.getSelectedBranchId();
         int serviceId = viewSlotsUI.getSelectedServiceId();
-        // todo select a doctor
 
-        int doctorId = 0;
+        // always choose the first doctor to assign
+        int doctorId = availableDoctors.get(startSlot-1).get(0);
         Allocation allocation = null;
         for (Allocation value : allocations) {
             if (value.getBranch().getBranchId() == branchId) {
@@ -112,24 +119,12 @@ public class MakeAppointmentController {
     }
 
     public void addAppointment(Appointment appointmentToBook) {
-        try{
-            Connection conn = DatabaseConnection.getConnection();
-            Statement st = conn.createStatement();
-            conn.setAutoCommit(false);
-
             String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
             String attendance = appointmentToBook.getAttendance().toString();
             int startSlot = appointmentToBook.getStartSlot();
             int patientId = appointmentToBook.getPatient().getUserId();
             int allocationId = appointmentToBook.getAllocation().getLinkId();
 
-            st.executeUpdate("INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) " +
-                    "VALUES ('"+date+"','"+attendance+"','"+startSlot+"','"+patientId+"','"+allocationId+"')");
-            conn.commit();
-            conn.setAutoCommit(true);
-        } catch (SQLException sqlException){
-            System.out.println("Error: SQLException!");
-        }
-
+            DataList.getInstance().addAppointment(date, attendance, startSlot, patientId, allocationId);
     }
 }

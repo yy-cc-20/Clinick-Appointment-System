@@ -6,6 +6,9 @@ import entity.Patient;
 public class ManagePatientUI {
     private static final ManagePatientController controller = new ManagePatientController();
 
+    public ManagePatientUI() {
+    }
+
     public Patient searchPatient() {
         String patientIc = ConsoleInput.askString("patient IC").toLowerCase();
         Patient selectedPatient = controller.searchPatient(patientIc);

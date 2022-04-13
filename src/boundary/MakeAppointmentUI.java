@@ -16,7 +16,7 @@ public class MakeAppointmentUI {
 
     // todo: create getInstance method for UIs? or add static to use the method
     // todo: sql query or for loop statements
-    private final MakeAppointmentController controller = new MakeAppointmentController();
+    private final static MakeAppointmentController controller = new MakeAppointmentController();
     private final User theUser;
 
     public MakeAppointmentUI(User theUser) {
@@ -29,14 +29,14 @@ public class MakeAppointmentUI {
         displayAppointments(appointments);
     }
 
-    private void displayAppointmentHeading() {
+    private static void displayAppointmentHeading() {
         ConsoleUI.displayTableName("Appointments");
         System.out.println(
                 "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t" +
                         "| Patient \t| Doctor ID \t| Doctor \t| Attendance");
     }
 
-    private void displayAppointments(List<Appointment> appointmentsToDisplay) {
+    private static void displayAppointments(List<Appointment> appointmentsToDisplay) {
         if (appointmentsToDisplay.size() == 0) {
             System.out.println("No appointment to display.");
         } else {
@@ -60,7 +60,7 @@ public class MakeAppointmentUI {
     }
 
     // 2. search appointments
-    public void searchAppointment() {
+    public static List<Appointment> searchAppointment() {
         System.out.println("Search by:           ");
         System.out.println(" 1. Appointment ID   ");
         System.out.println(" 2. Date             ");
@@ -95,6 +95,7 @@ public class MakeAppointmentUI {
 
         System.out.println("\nSearch Results: \n");
         displayAppointments(selectedAppointments);
+        return selectedAppointments;
     }
 
     // 3. make an appointment
@@ -131,7 +132,9 @@ public class MakeAppointmentUI {
         // allocation id where service id, branch id, and doctor id are the same
         while (!allocated) {
             startSlot = ConsoleInput.askChoice(1, 14, "Select a starting time slot");
-            Allocation allocation = controller.assignAllocation(viewSlotsUI);
+
+            Allocation allocation = controller.assignAllocation(viewSlotsUI, startSlot);
+
             if(allocation != null){
                 slotRequired = allocation.getService().getTimeSlotRequired();
                 allocated = true;
