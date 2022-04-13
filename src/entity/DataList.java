@@ -159,6 +159,7 @@ public class DataList implements IDataStore {
         try {
             allocationList = new ArrayList<>();
             rs = st.executeQuery("SELECT * FROM allocation ORDER BY id;");
+            // rs.next returns false on second iteration
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int branchId = rs.getInt("branchId");
