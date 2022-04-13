@@ -11,7 +11,8 @@ public class DatabaseSetup {
 	public static void setupDatabase() {
 		try {
 			st = DatabaseConnection.getConnection().createStatement();
-
+			
+// TODO delete drop tables statement
 			// drop all existing tables
 			String[] dropTables = { 
 					"DROP TABLE IF EXISTS Appointment", 
@@ -38,6 +39,7 @@ public class DatabaseSetup {
 				st.executeUpdate(createTables[i]);
 			}
 
+// TODO check the table exists or not before insert the test data
 			// insert data into all tables
 			insertDoctorTable();
 			insertPatientTable();
