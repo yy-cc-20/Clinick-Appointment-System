@@ -79,7 +79,7 @@ public class DatabaseConnection {
 		DatabaseSetup.setupDatabaseIfNotExist();
 	} // Private constructor for singleton
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
         if (conn == null)
             new DatabaseConnection();
         return conn; // Already connect to database
@@ -98,9 +98,9 @@ public class DatabaseConnection {
     // DatabaseConnectionTest
     public static void main(String[] args) throws SQLException {
         Statement st = DatabaseConnection.getConnection().createStatement();
-        ResultSet rs = st.executeQuery("SELECT COUNT(*) FROM Appointment ;");
+        ResultSet rs = st.executeQuery("SELECT * FROM Allocation ;");
         while (rs.next()) { // Move the cursor to the next row, return false if empty
-            System.out.println("There are " + rs.getInt(1) + " appointment records.");
+			System.out.println(rs.getInt("id") + ", " + rs.getInt("serviceId") + ", " + rs.getInt("doctorId") + ", " + rs.getInt("branchId"));
         }
         System.out.println("DatabaseConnection test success!");
     }

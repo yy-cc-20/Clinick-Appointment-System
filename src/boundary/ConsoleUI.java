@@ -121,14 +121,6 @@ public class ConsoleUI {
         System.out.println(" 0. Exit Application                        ");
     }
 
-    public static void displayLoginMenu() {
-        System.out.println();
-        System.out.println("[1]Receptionist");
-        System.out.println("[2]Doctor");
-        System.out.println("[3]Patient");
-        System.out.println("[4]Guest Mode");
-    }
-
     public static void displayMenuForGuest() {
         System.out.println();
         System.out.println(" 1. View Services and Time Slots for Booking ");
@@ -136,16 +128,5 @@ public class ConsoleUI {
         System.out.println(" 0. Exit Application      ");
     }
 
-    public static void displayMenuForSearchingAppointment() {
-        System.out.println("Search by:           ");
-        System.out.println(" 1. Appointment ID   ");
-        System.out.println(" 2. Date             ");
-        System.out.println(" 3. Service Name     ");
-        System.out.println(" 4. Branch Name      ");
-        System.out.println(" 5. Patient Name     ");
-        System.out.println(" 6. Doctor Name      ");
-        System.out.println(" 7. Attendance Record");
-        System.out.println();
-    }
 }
  

@@ -15,6 +15,15 @@ public class Service {
         this.timeSlotRequired = timeSlotRequired;
     }
 
+    // Copy constructor: create a new object with exactly the same properties
+    public Service(Service s) {
+    	this.serviceId = s.serviceId;
+        this.serviceName = s.serviceName;
+        this.price = s.price;
+        this.description = s.description;
+        this.timeSlotRequired = s.timeSlotRequired;
+    }
+    
     public Service() {
     }
 

@@ -4,31 +4,48 @@ import java.util.List;
 
 public interface IDataStore {
     // Use List interface instead of ArrayList, more flexible, reduce the dependency
-    List<Doctor> getDoctorList();
+    static List<Doctor> getDoctorList() {
+		return null;}
 
-    List<Patient> getPatientList(String query, String column, String data);
+    List<Patient> getPatientList();
 
     List<Receptionist> getReceptionistList();
-
-    List<Appointment> getAppointmentList(String query, String column, String data);
-
+    
+    List<Appointment> getAppointmentList();
+    
+    List<Branch> getBranchList();
+    
     List<Allocation> getAllocationList();
-
-    List<Branch> getBranchList(String query, String column, String data);
-
+    
     List<Service> getServiceList();
 
-    List<Branch> getBranchesById(List<Integer> ids); // Return branch objects of the specified ids
+    //List<Appointment> getAppointmentList(String query, String column, String data);
 
-    void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId);
+    //List<Branch> getBranchList(String query, String column, String data);
 
-    void addPatientPartial(String name, String ic, String password);
+    //void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId);
 
-    void addPatientFull(String name, String ic, String phone, String address, String password);
+    //void addPatientPartial(String name, String ic, String password);
 
-    void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot);
+    //void addPatientFull(String name, String ic, String phone, String address, String password);
 
-    void updateAppointmentAttendance(int appointmentId, String updatedAttendance);
+    //void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot);
 
-    void cancelAppointment(int appointmentId);
+    //void updateAppointmentAttendance(int appointmentId, String updatedAttendance);
+
+    //void cancelAppointment(int appointmentId);
+
+	Service createServiceObject(int id);
+
+	Branch createBranchObject(int id);
+
+	Receptionist createReceptionistObject(int id);
+	
+	Doctor createDoctorObject(int id);
+	
+	Patient createPatientObject(int id);
+	
+	Appointment createAppointmentObject(int id);
+	
+	Allocation createAllocationObject(int id);
 }

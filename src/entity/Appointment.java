@@ -6,65 +6,57 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Appointment {
-    // todo: sql or method?
-    private final List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
-    private final List<Allocation> allocations = DataList.getInstance().getAllocationList();
+    //private static final List<Patient> patients = DataList.getInstance().getPatientList();
+    //private static final List<Allocation> allocations = DataList.getInstance().getAllocationList();
 
+    private int patientId;
     private int appointmentId;
     private LocalDate appointmentDate;
-    private Patient patient;
+    //private Patient patient; 
+    // If there is Patient as the data member of Appointment and List<Appointment> as the data member of the Patient
+    // It is not easily to create the objects
     private Allocation allocation;
     private Attendance attendance;
     private int startSlot;
 
+    // Copy constructor: create a new object with exactly the same properties
+    public Appointment(Appointment a) {
+		this.appointmentId = a.appointmentId;
+		this.appointmentDate = a.appointmentDate; // LocalDate is immutable, so can refer to the same object
+		this.patientId = a.patientId;
+		this.allocation = a.allocation;
+		this.attendance = a.attendance;
+		this.startSlot = a.startSlot;
+	}
+    
+    public Appointment(int appointmentId, LocalDate ad, int p, Allocation a, Attendance at, int startSlot) {
+		this.appointmentId = appointmentId;
+		this.appointmentDate = ad;
+		this.patientId = p;
+		this.allocation = new Allocation(a);
+		this.attendance = at;
+		this.startSlot = startSlot;
+	}
+    
     public Appointment(int appointmentId, String appointmentDate, int patientId, int allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
-        this.patient = findPatient(patientId);
-        this.allocation = findAllocation(allocationId);
-        this.attendance = retrieveAttendance(attendance);
+        this.patientId = patientId;
+        this.allocation = DataList2.createAllocationObject(allocationId);
+        this.attendance = DataList2.attendanceStringToEnum(attendance);
         this.startSlot = startSlot;
     }
 
     public Appointment(String appointmentDate, int patientId, int allocationId, String attendance, int startSlot) {
         this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
-        this.patient = findPatient(patientId);
-        this.allocation = findAllocation(allocationId);
-        this.attendance = retrieveAttendance(attendance);
+        this.patientId = patientId;
+        this.allocation = DataList2.createAllocationObject(allocationId);
+        this.attendance = DataList2.attendanceStringToEnum(attendance);
         this.startSlot = startSlot;
     }
 
     public Appointment() {
-    }
-
-    // todo connect to database
-    private Patient findPatient(int patientId) {
-        for (Patient value : patients) {
-            if (value.getUserId() == patientId) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    private Allocation findAllocation(int appointmentId) {
-        for (Allocation value : allocations) {
-            if (value.getLinkId() == appointmentId) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    private Attendance retrieveAttendance(String attendance) {
-        if (attendance.equals("Attended")) {
-            return Attendance.ATTENDED;
-        } else if (attendance.equals("Absent")) {
-            return Attendance.ABSENT;
-        } else {
-            return Attendance.NAN;
-        }
     }
 
     public int getAppointmentId() {
@@ -79,8 +71,8 @@ public class Appointment {
         return appointmentDate.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
     }
 
-    public Patient getPatient() {
-        return patient;
+    public int getPatientId() {
+        return patientId;
     }
 
     public Attendance getAttendance() {

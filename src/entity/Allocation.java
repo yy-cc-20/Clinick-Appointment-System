@@ -3,63 +3,46 @@ package entity;
 import java.util.List;
 
 public class Allocation {
-    private final List<Branch> branches = DataList.getInstance().getBranchList(null, "","");
-    private final List<Service> services = DataList.getInstance().getServiceList();
-    private final List<Doctor> doctors = DataList.getInstance().getDoctorList();
-    private int linkId;
-    private Branch branch;
+	//private final static List<Service> services = DataList.getInstance().getServiceList();
+    //private final static List<Branch> branches = DataList.getInstance().getBranchList(null, "","");
+    //private final static List<Doctor> doctors = DataList.getInstance().getDoctorList();
+    private int allocationId;
     private Service service;
+    private Branch branch;
     private Doctor doctor;
 
-    public Allocation(int linkId, String branchId, String serviceId, String doctorId) {
-        this.linkId = linkId;
-        this.branch = findBranch(branchId);
-        this.service = findService(serviceId);
-        this.doctor = findDoctor(doctorId);
+    // Copy constructor: create a new object with exactly the same properties
+    public Allocation(Allocation a) {
+    	allocationId = a.allocationId;
+    	service = new Service(a.service);
+    	branch = new Branch(a.branch);
+    	doctor = new Doctor(a.doctor);
+    }
+    
+    public Allocation(int id, Service s, Branch b, Doctor d) {
+    	allocationId = id;
+    	service = new Service(s);
+    	branch = new Branch(b);
+    	doctor = new Doctor(d);
     }
 
     public Allocation(int linkId, int branchId, int serviceId, int doctorId) {
-        this.linkId = linkId;
-        this.branch = findBranch(Integer.toString(branchId));
-        this.service = findService(Integer.toString(serviceId));
-        this.doctor = findDoctor(Integer.toString(doctorId));
+        this.allocationId = linkId;
+        this.branch = DataList2.createBranchObject(branchId);
+        this.service = DataList2.createServiceObject(serviceId);
+        this.doctor = DataList2.createDoctorObject(doctorId);
     }
 
-
-    // todo connect to database
-    private Branch findBranch(String branchId){
-        for (Branch value : branches) {
-            if (value.getBranchId() == Integer.parseInt(branchId)) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    private Service findService(String serviceId){
-        for (Service value : services) {
-            if (value.getServiceId() == Integer.parseInt(serviceId)) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    private Doctor findDoctor(String doctorId){
-        for (Doctor value : doctors) {
-            if (value.getUserId() == Integer.parseInt(doctorId)) {
-                return value;
-            }
-        }
-        return null;
+    public Allocation() {
+    	
     }
 
     public int getLinkId() {
-        return linkId;
+        return allocationId;
     }
 
     public void setLinkId(int linkId) {
-        this.linkId = linkId;
+        this.allocationId = linkId;
     }
 
     public Branch getBranch() {

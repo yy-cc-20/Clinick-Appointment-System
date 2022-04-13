@@ -1,9 +1,7 @@
 package entity;
 
-import java.util.List;
-
 public class Branch {
-    private final List<Receptionist> receptionists = DataList.getInstance().getReceptionistList();
+    //private static final List<Receptionist> receptionists = DataList.getInstance().getReceptionistList();
     private int branchId;
     private String branchName;
     private String branchAddress;
@@ -15,20 +13,28 @@ public class Branch {
         this.branchId = branchId;
         this.branchName = branchName;
         this.branchAddress = branchAddress;
-        this.receptionist = findReceptionist(receptionistId);
+        this.receptionist = DataList2.createReceptionistObject(receptionistId);
         this.telNo = telNo;
     }
 
-    public Branch() {
+    public Branch(int branchId, String branchName, String branchAddress, Receptionist rec, String telNo) {
+        this.branchId = branchId;
+        this.branchName = branchName;
+        this.branchAddress = branchAddress;
+        this.receptionist = new Receptionist(rec);
+        this.telNo = telNo;
     }
-
-    private Receptionist findReceptionist(int receptionistId) {
-        for (Receptionist value : receptionists) {
-            if (value.getUserId() == receptionistId) {
-                return value;
-            }
-        }
-        return null;
+    
+    // Copy constructor: create a new object with exactly the same properties
+    public Branch(Branch b) {
+    	this.branchId = b.branchId;
+        this.branchName = b.branchName;
+        this.branchAddress = b.branchAddress;
+        this.receptionist = new Receptionist(b.receptionist);
+        this.telNo = b.telNo;
+    }
+    
+    public Branch() {
     }
 
     public int getBranchId() {
@@ -55,6 +61,9 @@ public class Branch {
         this.branchAddress = branchAddress;
     }
 
+    public Receptionist getReceptionist() {
+    	return receptionist;
+    }
 
     public String getTelNo() {
         return telNo;
