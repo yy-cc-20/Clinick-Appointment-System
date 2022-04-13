@@ -40,7 +40,6 @@ public class MakeAppointmentController {
                     }
                 }
             }
-            // todo
             case 2 -> {
                 for (Appointment appointment : appointments) {
                     if (appointment.getAppointmentDateString().equals(searchKeyword)) {

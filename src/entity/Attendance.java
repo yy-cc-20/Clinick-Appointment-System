@@ -1,6 +1,7 @@
 package entity;
 
 import boundary.ConsoleInput;
+import boundary.ConsoleUI;
 
 public enum Attendance {
     ATTENDED("Attended"),
@@ -18,16 +19,8 @@ public enum Attendance {
         return attendance;
     }
 
-    // todo need to move this in to boundary class?
-    static void displayAttendanceChoice() {
-        System.out.printf("%nSelect attendance.%n%n");
-        System.out.println("1. Attended");
-        System.out.println("2. Absent");
-        System.out.println("3. NAN");
-    }
-
     public static Attendance askAttendance() {
-        displayAttendanceChoice();
+        ConsoleUI.displayAttendanceChoice();
         int choice = ConsoleInput.askChoice(1, 3, "Select attendance");
 
         return switch (choice) {

@@ -35,7 +35,6 @@ public class Appointment {
     public Appointment() {
     }
 
-    // todo connect to database
     private Patient findPatient(int patientId) {
         List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
         for (Patient value : patients) {

@@ -278,7 +278,6 @@ public class DataList implements IDataStore {
 
     // provide the appointmentId to update to cancel the appointment
     public void cancelAppointment(int id) {
-        // TODO : cancel the appointment
         String query = ( "DELETE FROM appointment WHERE id=?" );
         try (PreparedStatement pstmt = con.prepareStatement(query)) {
             pstmt.setInt(1, id);

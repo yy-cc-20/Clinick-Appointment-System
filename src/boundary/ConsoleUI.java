@@ -147,5 +147,12 @@ public class ConsoleUI {
         System.out.println(" 7. Attendance Record");
         System.out.println();
     }
+
+    public static void displayAttendanceChoice() {
+        System.out.printf("%nSelect attendance.%n%n");
+        System.out.println("1. Attended");
+        System.out.println("2. Absent");
+        System.out.println("3. NAN");
+    }
 }
  
