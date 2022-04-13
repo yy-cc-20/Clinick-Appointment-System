@@ -1,12 +1,10 @@
 package controller;
 
-import entity.Appointment;
 import entity.DataList;
 
-import java.util.List;
 
 public class ManageAppointmentController {
-    
+
 //    public List<Appointment> searchAppointment(int i, String data) {
 //        switch (i) {
 //            case 1 -> {
