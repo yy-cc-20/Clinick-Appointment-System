@@ -18,10 +18,11 @@ import entity.*;
 
 public class LoginUI {
 	private final LoginController loginController = new LoginController();
+	private User user;
 	
 	// Use this method for login
 	// Lock account and exit program if fail too many times
-	public User login() {
+	public LoginUI() {
 		int role;
 		int userid;
 		String password;
@@ -29,11 +30,19 @@ public class LoginUI {
 		
 		while (true) {
 			// Get input from user
+			System.out.println();
 			System.out.println("[1]Receptionist");
 			System.out.println("[2]Doctor");
 			System.out.println("[3]Patient");
+			System.out.println("[4]Guest Mode");
 			
-			role = ConsoleInput.askChoice(1, 3, "Login as");
+			role = ConsoleInput.askChoice(1, 4, "Login as");
+			
+			if (role == 4) {
+				user = new User();
+				return;
+			}
+						
 			userid = ConsoleInput.askInt("User ID");
 			System.out.print("Password> ");
 			password = SingletonScanner.nextLine();
@@ -42,12 +51,13 @@ public class LoginUI {
 			username = loginController.loginSuccessfully(role, userid, password);
 			if (!username.isBlank()) { // Successfully login
 				System.out.printf("%nHello " + username + "!%n");
-				return switch (role) {
+				user = switch (role) {
 					case 1 -> new Receptionist(userid, username, password);
 					case 2 -> new Doctor(userid, username, password);
 					case 3 -> new Patient(userid, username, password);
 					default -> throw new IllegalArgumentException();
 				};
+				break;
 			} else { // Login failed	
 				if (LoginController.MAX_FAILED_LOGIN_ATTEMPT > loginController.getFailedLoginAttempt()) { // Still have chance to login
 					System.out.printf("Username or password is invalid. Remains %d chance(s).%n%n", LoginController.MAX_FAILED_LOGIN_ATTEMPT - loginController.getFailedLoginAttempt());
@@ -57,6 +67,10 @@ public class LoginUI {
 				}
 			}
 		} // End while
+	}
+	
+	public User getUser() {
+		return user;
 	}
 	
 	// TODO a bug: If the user restart the program, the lockTimeEnded is loss, the account will not be locked
@@ -73,5 +87,10 @@ public class LoginUI {
 				System.out.print("Please try again after " +  ChronoUnit.SECONDS.between(LocalDateTime.now(), lockTimeEnded) + " second(s).");
 		}
 		System.out.println();
+	}
+	
+	// LoginUI test
+	public static void main(String[] args) {
+		System.out.println(new LoginUI().getUser().getUserId());
 	}
 }

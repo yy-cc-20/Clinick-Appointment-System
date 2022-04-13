@@ -183,15 +183,15 @@ public class ConsoleInput {
     public static String askString(String info) {
         String input;
 
-        while (true) {
+       // while (true) {
             System.out.printf("%n%s> ", info);
             input = SingletonScanner.nextLine();
-            if (hasDelimiter(input)) {
-                System.out.printf("%s%n", STRING_ERROR);
-            } else {
+            //if (hasDelimiter(input)) {
+            //    System.out.printf("%s%n", STRING_ERROR);
+            //} else {
                 return input.equals("") ? "-" : input;
-            }
-        }
+            //}
+      //  }
     }
     
     // @return null if user enters ENTER key 
@@ -212,9 +212,10 @@ public class ConsoleInput {
         while (true) {
             System.out.printf("%n%s> ", info);
             input = SingletonScanner.nextLine();
-            if (hasDelimiter(input)) {
-                System.out.printf("%s%n", STRING_ERROR);
-            } else if (input.equals("")) {
+            //if (hasDelimiter(input)) {
+              //  System.out.printf("%s%n", STRING_ERROR);
+            //} else 
+            if (input.equals("")) {
                 System.out.println("PLease enter again.");
             } else if (input.length() > length) {
                 System.out.printf("Sorry, cannot contain more than %d characters.%n", length);
@@ -242,14 +243,14 @@ public class ConsoleInput {
             }
         } // end of while
     }
-
+/*
     // input cannot contain delimiter
     // apply to String attribute
     // check if the String input contains delimiter used in the database
     public static boolean hasDelimiter(String text) {
         return text.contains(";");
     }
-    
+  */  
     /*
     // ConsoleInput test
     public static void main(String[] args) {

@@ -37,20 +37,26 @@ public class ClinickAppointmentSystem {
 		boolean toExit = false;
 		User systemUser;
 		
-		while (true) {
-			ConsoleUI.displaySystemName("Clinick Booking System");
+		while (!toExit) {
+			toExit = startGuestView();
+			if (toExit)
+				break;
 			
-			//toExit = startGuestView();
-			
-			systemUser = new LoginUI().login(); // Suspend the user to login for 10 seconds after 3 failed login attempts
+			systemUser = new LoginUI().getUser(); // Suspend the user to login for 10 seconds after 3 failed login attempts
 			// From systemUser can know the username, id, password, user type
 
+			ConsoleUI.clearScreen();
+			
+			if (systemUser.getUserId() == 0) 
+				continue; // Continue as guest
+			
+				
+			// *********** The user has log in ***********************
+			
 			makeAppointmentUI = new MakeAppointmentUI(systemUser);
 			manageAppointmentUI = new ManageAppointmentUI();
 			managePatientUI = new ManagePatientUI();
 			manageAccountUI = new ManageAccountUI(systemUser);
-			
-			ConsoleUI.clearScreen();
 			
 			if (systemUser instanceof Receptionist) 
 				toExit = startReceptionistView(systemUser);
@@ -59,19 +65,42 @@ public class ClinickAppointmentSystem {
 			else if (systemUser instanceof Patient) 
 				toExit = startPatientView(systemUser);
 			
-			ConsoleUI.clearScreen();
-			
 			if (toExit) {
-				ConsoleUI.displayFunctionName(" Program Stopped ");
-				SingletonScanner.close();
-				DatabaseConnection.closeConnection();
-				System.exit(0);
+				break;
 			}
-		}
-	}
+			
+			ConsoleUI.clearScreen();
+		} // End while
 		
+		System.out.println("Program stopped. ");
+		SingletonScanner.close();
+		DatabaseConnection.closeConnection();
+		System.exit(0);
+	}
+	
+	/** @return false to log in, true to exit application */
 	static boolean startGuestView() {
-		displayMenuForGuest()
+		int choiceNo; // the action that user wants to perform
+		
+		while (true) {
+			ConsoleUI.displaySystemName("Clinick Booking System");
+			ConsoleUI.displayMenuForGuest();
+			choiceNo = ConsoleInput.askChoice(0, 2, "Your choice");
+
+			switch (choiceNo) {
+				case 1 -> {
+					ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
+					ViewSlotsUI.getInstance().viewSlots();
+				}
+				case 2 -> { 
+						return false;
+				}
+				case 0 -> {
+					return true;
+				}
+			}
+			ConsoleUI.clearScreen();
+		}
 	}
 	
 	/** @return false to logout, true to exit application */
@@ -79,6 +108,7 @@ public class ClinickAppointmentSystem {
 		int choiceNo; // the action that user wants to perform
 		
 		while (true) {
+			ConsoleUI.displaySystemName("Clinick Booking System");
 			ConsoleUI.displayMenuForReceptionist();
 			choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
 
@@ -142,6 +172,7 @@ public class ClinickAppointmentSystem {
 		int choiceNo; // the action that user wants to perform
 		
 		while (true) {
+			ConsoleUI.displaySystemName("Clinick Booking System");
 			ConsoleUI.displayMenuForDoctor();
 			choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
 
@@ -177,6 +208,7 @@ public class ClinickAppointmentSystem {
 		int choiceNo; // the action that user wants to perform
 		
 		while (true) {
+			ConsoleUI.displaySystemName("Clinick Booking System");
 			ConsoleUI.displayMenuForPatient();
 			choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
 
