@@ -1,12 +1,8 @@
 package controller;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Statement;
-import java.sql.SQLException;
 
-import database.DatabaseConnection;
 import entity.*;
 
 public class ManagePatientController {
@@ -28,33 +24,11 @@ public class ManagePatientController {
     }
 
     public void addPatient(String name, String patientIc, String phone, String address, String password) {
-        try {
-            Connection conn = DatabaseConnection.getConnection();
-            Statement st = conn.createStatement();
-            conn.setAutoCommit(false);
-
-            st.executeUpdate("INSERT IGNORE INTO Patient (name, ic, phone, address, password) " +
-                    "VALUES ('" + name + "','" + patientIc + "','" + phone + "','" + address + "','" + password + "')");
-            conn.commit();
-            conn.setAutoCommit(true);
-        } catch (SQLException sqlException) {
-            System.out.println("Error: SQL Exception!");
-        }
-
+        DataList.getInstance().addPatientFull(name, patientIc, phone, address, password);
     }
 
-    public void updatePatientProfile(String phoneNo, String address, int patientIc) {
-        try {
-            Connection conn = DatabaseConnection.getConnection();
-            Statement st = conn.createStatement();
-            conn.setAutoCommit(false);
-
-            st.executeUpdate("UPDATE Patient SET phone='" + phoneNo + "', address='" + address + "' WHERE id='" + patientIc + "'");
-            conn.commit();
-            conn.setAutoCommit(true);
-        } catch (SQLException sqlException) {
-            System.out.println("Error: SQL Exception!");
-        }
+    public void updatePatientProfile(String phoneNo, String address, int patientId) {
+        DataList.getInstance().updatePatient(phoneNo, address, patientId);
     }
 }
 

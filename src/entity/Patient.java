@@ -7,7 +7,10 @@ public class Patient extends User {
     private String ic;
     private String phoneNo;
     private String address;
+<<<<<<< HEAD
     private List<Appointment> appointmentList;
+=======
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 
     // Copy constructor: create a new object with exactly the same properties
     public Patient(Patient p) {
@@ -59,10 +62,13 @@ public class Patient extends User {
         return address;
     }
 
+<<<<<<< HEAD
     public List<Appointment> getAppointments() {
         return appointmentList;
     }
 
+=======
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     public void setIc(String ic) {
         this.ic = ic;
     }
@@ -74,8 +80,11 @@ public class Patient extends User {
     public void setAddress(String address) {
         this.address = address;
     }
+<<<<<<< HEAD
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointmentList = new ArrayList<Appointment>(appointments);
     }
+=======
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 }

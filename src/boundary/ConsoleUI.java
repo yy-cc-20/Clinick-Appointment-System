@@ -128,5 +128,26 @@ public class ConsoleUI {
         System.out.println(" 0. Exit Application      ");
     }
 
+<<<<<<< HEAD
+=======
+    public static void displayMenuForSearchingAppointment() {
+        System.out.println("Search by:           ");
+        System.out.println(" 1. Appointment ID   ");
+        System.out.println(" 2. Date             ");
+        System.out.println(" 3. Service Name     ");
+        System.out.println(" 4. Branch Name      ");
+        System.out.println(" 5. Patient Name     ");
+        System.out.println(" 6. Doctor Name      ");
+        System.out.println(" 7. Attendance Record");
+        System.out.println();
+    }
+
+    public static void displayAttendanceChoice() {
+        System.out.printf("%nSelect attendance.%n%n");
+        System.out.println("1. Attended");
+        System.out.println("2. Absent");
+        System.out.println("3. NAN");
+    }
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 }
  

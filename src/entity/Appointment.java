@@ -1,13 +1,17 @@
 package entity;
 
 import boundary.ConsoleUI;
+import boundary.ViewSlotsUI;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class Appointment {
+<<<<<<< HEAD
     //private static final List<Patient> patients = DataList.getInstance().getPatientList();
     //private static final List<Allocation> allocations = DataList.getInstance().getAllocationList();
+=======
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 
     private int patientId;
     private int appointmentId;
@@ -59,6 +63,39 @@ public class Appointment {
     public Appointment() {
     }
 
+<<<<<<< HEAD
+=======
+    private Patient findPatient(int patientId) {
+        List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
+        for (Patient value : patients) {
+            if (value.getUserId() == patientId) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+    private Allocation findAllocation(int appointmentId) {
+        List<Allocation> allocations = DataList.getInstance().getAllocationList();
+        for (Allocation value : allocations) {
+            if (value.getLinkId() == appointmentId) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+    private Attendance retrieveAttendance(String attendance) {
+        if (attendance.equals("Attended")) {
+            return Attendance.ATTENDED;
+        } else if (attendance.equals("Absent")) {
+            return Attendance.ABSENT;
+        } else {
+            return Attendance.NAN;
+        }
+    }
+
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     public int getAppointmentId() {
         return appointmentId;
     }
@@ -79,23 +116,16 @@ public class Appointment {
         return attendance;
     }
 
-
-    // todo
     public String getTime() {
-
-        return "";
+        String startTime = TimeSlot.getSlot(startSlot);
+        String endTime = TimeSlot.getSlot(startSlot + allocation.getService().getTimeSlotRequired() - 1);
+        return String.format("%s-%s", startTime, endTime);
     }
 
     public String getDuration() {
         int required = allocation.getService().getTimeSlotRequired();
-        return switch (required) {
-            case 1 -> "30 mins";
-            case 2 -> "1 hour";
-            case 3 -> "1 hour 30 mins";
-            case 4 -> "2 hours";
-            case 5 -> "2 hours 30 mins";
-            default -> throw new IllegalStateException("Unexpected value: " + required);
-        };
+        double time = ViewSlotsUI.timeSlotsToHour(required);
+        return String.format("%f hr(s)", time);
     }
 
     public int getStartSlot() {

@@ -1,7 +1,7 @@
 package entity;
 
 public enum TimeSlot {
-    // 1 slot = 30 mins
+    // 1 slot = 30 minutes
     SLOT_1("0800AM"),
     SLOT_2("0830AM"),
     SLOT_3("0900AM"),
@@ -26,6 +26,53 @@ public enum TimeSlot {
 
     public String toString() {
         return time;
+    }
+
+    public static String getSlot(int slot) {
+        switch (slot) {
+            case 1 -> {
+                return SLOT_1.time;
+            }
+            case 2 -> {
+                return SLOT_2.time;
+            }
+            case 3 -> {
+                return SLOT_3.time;
+            }
+            case 4 -> {
+                return SLOT_4.time;
+            }
+            case 5 -> {
+                return SLOT_5.time;
+            }
+            case 6 -> {
+                return SLOT_6.time;
+            }
+            case 7 -> {
+                return SLOT_7.time;
+            }
+            case 8 -> {
+                return SLOT_8.time;
+            }
+            case 9 -> {
+                return SLOT_9.time;
+            }
+            case 10 -> {
+                return SLOT_10.time;
+            }
+            case 11 -> {
+                return SLOT_11.time;
+            }
+            case 12 -> {
+                return SLOT_12.time;
+            }
+            case 13 -> {
+                return SLOT_13.time;
+            }
+            default -> {
+                return SLOT_14.time;
+            }
+        }
     }
 
 //	public static void displaySlots(){

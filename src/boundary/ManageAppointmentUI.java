@@ -8,23 +8,18 @@ import entity.Allocation;
 import entity.Appointment;
 import entity.Attendance;
 
+// 1. update appointment
+// 2. cancel appointment
+// 3. record attendance
+
 public class ManageAppointmentUI {
 
     private final ManageAppointmentController controller = new ManageAppointmentController();
     private final MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
     private static Appointment selectedAppointment;
 
-    private void searchAppointmentToModify() {
-        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
-        int appointmentId = ConsoleInput.askPositiveInt("Appointment ID");
-        for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId() == appointmentId) {
-                selectedAppointment = appointment;
-            }
-        }
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
-    }
-
+    // 1. update appointment's time slot
+    // similar to make appointment
     public void updateAppointment() {
         searchAppointmentToModify();
 
@@ -53,7 +48,7 @@ public class ManageAppointmentUI {
                 allocated = true;
             }
             if (allocated) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired ) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 if (ConsoleInput.askBoolean("Update appointment")) {
                     controller.updateAppointmentTime(selectedAppointment.getAppointmentId(), date, startSlot);
@@ -68,26 +63,42 @@ public class ManageAppointmentUI {
         }
     }
 
-    public void cancelAppointment() {
-        searchAppointmentToModify();
-        if (ConsoleInput.askBoolean("Cancel appointment")) {
-            controller.cancelAppointment(selectedAppointment.getAppointmentId());
-            System.out.println("Appointment cancelled.");
-        }
-    }
-
-    public void recordAttendance() {
+    // search and select an appointment to modify
+    private void searchAppointmentToModify() {
         List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
-        int appointmentId = ConsoleInput.askPositiveInt("Appointment ID");
+        if(appointments.size() == 0){
+            return;
+        }
+        int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId() == appointmentId) {
                 selectedAppointment = appointment;
             }
         }
         MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+    }
 
+    // 2. cancel an appointment
+    public void cancelAppointment() {
+        searchAppointmentToModify();
+        if(selectedAppointment == null){
+            return;
+        }
+        if (ConsoleInput.askBoolean("Cancel appointment")) {
+            controller.cancelAppointment(selectedAppointment.getAppointmentId());
+            System.out.println("Appointment cancelled.");
+        }
+    }
+
+    // 3. record the attendance
+    public void recordAttendance() {
+        searchAppointmentToModify();
+        if(selectedAppointment == null){
+            return;
+        }
         Attendance attendance = Attendance.askAttendance();
         controller.updateAppointmentAttendance(selectedAppointment.getAppointmentId(), attendance.toString());
+        selectedAppointment.setAttendance(attendance);
         MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
     }
 

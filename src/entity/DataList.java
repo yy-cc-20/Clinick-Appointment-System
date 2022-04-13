@@ -56,7 +56,7 @@ public class DataList implements IDataStore {
             // e.g., query = "filter" column = "id" data = "1"
             // e.g., query = "sort" column = "id" data = "asc"
             if (query == null)
-                rs = st.executeQuery("SELECT * FROM appointment ORDER BY id;");
+                rs = st.executeQuery("SELECT * FROM appointment;");
             else if (query.equalsIgnoreCase("filter"))
                 rs = st.executeQuery("SELECT * FROM appointment WHERE " + column + " = " + data + ";");
             else if (query.equalsIgnoreCase("sort"))
@@ -73,7 +73,7 @@ public class DataList implements IDataStore {
                         allocationId, attendance, startSlot);
                 appointmentList.add(appointment);
             }
-//			System.out.println("appointmentList " + appointmentList.size());
+            System.out.println("appointmentList " + appointmentList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class DataList implements IDataStore {
         try {
             branchList = new ArrayList<>();
             if (query == null)
-                rs = st.executeQuery("SELECT * FROM branch ORDER BY id;");
+                rs = st.executeQuery("SELECT branch.id, branch.name, branch.address, branch.telNo, branch.receptionistId FROM branch, receptionist WHERE branch.receptionistId = receptionist.Id;");
             else if (query.equalsIgnoreCase("filter"))
                 rs = st.executeQuery("SELECT * FROM branch WHERE " + column + " = " + data + ";");
             else if (query.equalsIgnoreCase("sort"))
@@ -109,7 +109,7 @@ public class DataList implements IDataStore {
                 Branch branch = new Branch(id, name, address, receptionistId, telNo);
                 branchList.add(branch);
             }
-//			System.out.println("branchList " + branchList.size());
+            System.out.println("branchList " + branchList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -231,16 +231,6 @@ public class DataList implements IDataStore {
         }
     }
 
-    // provide the patient's basic information to add into database
-    public void addPatientPartial(String name, String ic, String password) {
-        try {
-            st.executeUpdate("INSERT IGNORE INTO patient (name, ic, password) " +
-                    "VALUES ('" + name + "','" + ic + "','" + password + "')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     // provide the patient's full information to add into database
     public void addPatientFull(String name, String ic, String phone, String address, String password) {
         try {
@@ -251,5 +241,52 @@ public class DataList implements IDataStore {
         }
     }
 
+    public void updatePatient (String phoneNo, String address, int patientId){
+        try {
+            st.executeUpdate("UPDATE Patient SET phone='" + phoneNo + "', address='" + address + "' WHERE id='" + patientId + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+<<<<<<< HEAD
    
+=======
+    // provide the appointmentId to update, with the new date and startSlot
+    public void updateAppointmentTime(int id, String date, int startSlot) {
+        String query = ( "UPDATE appointment SET date=?, startSlot=? WHERE id=?" );
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(3, id);
+            pstmt.setDate(1, new Date(new SimpleDateFormat("dd-MM-yyyy").parse(date).getTime()));
+            pstmt.setInt(2, startSlot);
+            pstmt.executeUpdate();
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // provide the appointmentId to update, with the updated attendance record
+    public void updateAppointmentAttendance(int id, String attendance) {
+        String query = ( "UPDATE appointment SET attendance=? WHERE id=?" );
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(2, id);
+            pstmt.setString(1, attendance);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // provide the appointmentId to update to cancel the appointment
+    public void cancelAppointment(int id) {
+        String query = ( "DELETE FROM appointment WHERE id=?" );
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 }

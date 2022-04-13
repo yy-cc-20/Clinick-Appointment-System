@@ -31,11 +31,19 @@ public interface IDataStore {
 
     //void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot);
 
+<<<<<<< HEAD
     //void updateAppointmentAttendance(int appointmentId, String updatedAttendance);
 
     //void cancelAppointment(int appointmentId);
 
 	Service createServiceObject(int id);
+=======
+    void addPatientFull(String name, String ic, String phone, String address, String password);
+
+    void updatePatient(String phone, String address, int patientId);
+
+    void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot);
+>>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 
 	Branch createBranchObject(int id);
 

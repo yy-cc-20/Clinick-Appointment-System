@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import database.DatabaseConnection;
 import entity.DataList;
 
-
 public class ManageAppointmentController {
 	private static Connection conn = DatabaseConnection.getConnection();
 	

@@ -46,7 +46,6 @@ public class MakeAppointmentUI {
 
     public static void displayAppointmentDetails(Appointment anAppointment) {
         System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDateString() + " \t| "
-                // todo: get the time
                 + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                 + anAppointment.getAllocation().getService().getServiceName() + " \t| "
                 + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
@@ -65,18 +64,18 @@ public class MakeAppointmentUI {
         // input validations for different fields
         switch (choice) {
             case 1 -> {
-                int id = ConsoleInput.askPositiveInt("appointment ID");
+                int id = ConsoleInput.askPositiveInt("Appointment ID");
                 searchKeyword = String.valueOf(id);
             }
             case 2 -> {
-                LocalDate date = ConsoleInput.askDate("appointment date");
-                searchKeyword = date.format(ConsoleInput.DATE_INPUT_FORMATTER);
+                LocalDate date = ConsoleInput.askDate("Appointment date");
+                searchKeyword = date.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
             }
             case 7 -> {
                 Attendance attendance = Attendance.askAttendance();
                 searchKeyword = attendance.toString();
             }
-            default -> searchKeyword = ConsoleInput.askString("search keyword");
+            default -> searchKeyword = ConsoleInput.askString("Search keyword");
         }
         searchKeyword = searchKeyword.toLowerCase();
         List<Appointment> selectedAppointments = controller.searchAppointment(choice, searchKeyword);
@@ -132,7 +131,7 @@ public class MakeAppointmentUI {
                 allocated = true;
             }
             if (allocated) {
-                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired ) + " selected.");
+                System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
                 String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
                 Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
                 // display appointment to book

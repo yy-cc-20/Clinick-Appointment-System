@@ -9,6 +9,9 @@ import entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
+// 1. create patient profile
+// 2.
+
 public class ManagePatientUI {
     private static final ManagePatientController controller = new ManagePatientController();
     private final User systemUser;
@@ -17,46 +20,7 @@ public class ManagePatientUI {
         this.systemUser = systemUser;
     }
 
-    public List<Patient> searchPatient() {
-        String patientIc = ConsoleInput.askString("patient IC").toLowerCase();
-        List<Patient> searchedPatients = controller.searchPatient(patientIc);
-
-        if (searchedPatients == null) {
-            System.out.println("No patient with IC " + patientIc + " found.");
-            if (ConsoleInput.askBoolean("Continue to create new patient profile"))
-                searchedPatients = new ArrayList<>();
-            //todo
-            searchedPatients.add(createPatientProfile());
-        } else {
-            System.out.println("Search Results:");
-            for (Patient selectedPatient : searchedPatients) {
-                displayPatient(selectedPatient);
-            }
-
-        }
-        return searchedPatients;
-    }
-
-    public Patient selectPatient(List<Patient> searchedPatients) {
-        int patientId = ConsoleInput.askPositiveInt("Select a patient ID");
-        Patient thePatient = null;
-        for (Patient searchedPatient : searchedPatients) {
-            if (searchedPatient.getUserId() == patientId) {
-                thePatient = searchedPatient;
-                System.out.println("Selected Patient:");
-                displayPatient(thePatient);
-            }
-        }
-        return thePatient;
-    }
-
-    public static void displayPatient(Patient selectedPatient) {
-        System.out.println("Patient ID \t| Patient \t| Phone No \t| Patient IC \t| Address");
-        System.out.println(
-                selectedPatient.getUserId() + " \t| " + selectedPatient.getUsername() + " \t| " + selectedPatient.getPhoneNo()
-                        + " \t| " + selectedPatient.getIc() + " \t| " + selectedPatient.getAddress());
-    }
-
+    // 1. create patient profile - add a new patient
     public Patient createPatientProfile() {
         String name = ConsoleInput.askString("New patient name");
         String phone = ConsoleInput.askString("New patient phone number");
@@ -69,10 +33,19 @@ public class ManagePatientUI {
         System.out.println("New patient profile created.");
 
         Patient selectedPatient = controller.searchPatient(ic).get(0);
-        displayPatient(selectedPatient);
+        displayPatientDetails(selectedPatient);
         return selectedPatient;
     }
 
+    // display the patient details
+    public static void displayPatientDetails(Patient selectedPatient) {
+        System.out.println("Patient ID \t| Patient \t| Phone No \t| Patient IC \t| Address");
+        System.out.println(
+                selectedPatient.getUserId() + " \t| " + selectedPatient.getUsername() + " \t| " + selectedPatient.getPhoneNo()
+                        + " \t| " + selectedPatient.getIc() + " \t| " + selectedPatient.getAddress());
+    }
+
+    // 2. manage patient profile - change phoneNo or address
     public void managePatientProfile() {
         int patientId = 0;
         String oriAddress = "";
@@ -111,6 +84,41 @@ public class ManagePatientUI {
             }
         }
         Patient modified = DataList.getInstance().getPatientList("filter", "id", Integer.toString(patientId)).get(0);
-        displayPatient(modified);
+        displayPatientDetails(modified);
+    }
+
+    // 3. search patient
+    public List<Patient> searchPatient() {
+        String patientIc = ConsoleInput.askString("patient IC").toLowerCase();
+        List<Patient> searchedPatients = controller.searchPatient(patientIc);
+
+        if (searchedPatients == null) {
+            System.out.println("No patient with IC " + patientIc + " found.");
+            if (ConsoleInput.askBoolean("Continue to create new patient profile")) {
+                searchedPatients = new ArrayList<>();
+                searchedPatients.add(createPatientProfile());
+            }
+        } else {
+            System.out.println("Search Results:");
+            for (Patient selectedPatient : searchedPatients) {
+                displayPatientDetails(selectedPatient);
+            }
+
+        }
+        return searchedPatients;
+    }
+
+    // select a patient
+    public Patient selectPatient(List<Patient> searchedPatients) {
+        int patientId = ConsoleInput.askPositiveInt("Select a patient ID");
+        Patient thePatient = null;
+        for (Patient searchedPatient : searchedPatients) {
+            if (searchedPatient.getUserId() == patientId) {
+                thePatient = searchedPatient;
+                System.out.println("Selected Patient:");
+                displayPatientDetails(thePatient);
+            }
+        }
+        return thePatient;
     }
 }
