@@ -41,6 +41,7 @@ public class MakeAppointmentController {
                     }
                 }
             }
+            // todo
             case 2 -> {
                 for (Appointment appointment : appointments) {
                     if (appointment.getAppointmentDateString().equals(searchKeyword)) {
@@ -71,7 +72,7 @@ public class MakeAppointmentController {
             }
             case 6 -> {
                 for (Appointment appointment : appointments) {
-                    if (appointment.getAllocation().getDoctor().getUsername().toLowerCase().equals(searchKeyword)) {
+                    if (appointment.getAllocation().getDoctor().getUsername().toLowerCase().contains(searchKeyword)) {
                         results.add(appointment);
                     }
                 }

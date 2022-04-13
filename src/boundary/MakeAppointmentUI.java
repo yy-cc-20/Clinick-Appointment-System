@@ -65,18 +65,18 @@ public class MakeAppointmentUI {
         // input validations for different fields
         switch (choice) {
             case 1 -> {
-                int id = ConsoleInput.askPositiveInt("appointment ID");
+                int id = ConsoleInput.askPositiveInt("Appointment ID");
                 searchKeyword = String.valueOf(id);
             }
             case 2 -> {
-                LocalDate date = ConsoleInput.askDate("appointment date");
-                searchKeyword = date.format(ConsoleInput.DATE_INPUT_FORMATTER);
+                LocalDate date = ConsoleInput.askDate("Appointment date");
+                searchKeyword = date.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
             }
             case 7 -> {
                 Attendance attendance = Attendance.askAttendance();
                 searchKeyword = attendance.toString();
             }
-            default -> searchKeyword = ConsoleInput.askString("search keyword");
+            default -> searchKeyword = ConsoleInput.askString("Search keyword");
         }
         searchKeyword = searchKeyword.toLowerCase();
         List<Appointment> selectedAppointments = controller.searchAppointment(choice, searchKeyword);

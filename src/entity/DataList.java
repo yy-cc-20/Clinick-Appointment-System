@@ -12,7 +12,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import boundary.ConsoleUI;
 import database.DatabaseConnection;
 
 /*
@@ -57,7 +56,7 @@ public class DataList implements IDataStore {
             // e.g., query = "filter" column = "id" data = "1"
             // e.g., query = "sort" column = "id" data = "asc"
             if (query == null)
-                rs = st.executeQuery("SELECT appointment.id, appointment.date, appointment.attendance, appointment.startSlot, appointment.patientId, appointment.allocationId FROM allocation, appointment, patient WHERE appointment.allocationId=allocation.id AND appointment.patientId=patient.id;");
+                rs = st.executeQuery("SELECT * FROM appointment;");
             else if (query.equalsIgnoreCase("filter"))
                 rs = st.executeQuery("SELECT * FROM appointment WHERE " + column + " = " + data + ";");
             else if (query.equalsIgnoreCase("sort"))
