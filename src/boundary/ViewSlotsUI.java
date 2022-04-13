@@ -155,7 +155,7 @@ public class ViewSlotsUI {
 		System.out.println();
 		System.out.println();
 		ConsoleUI.displayTableName("Available Time Slots For " + services.get(serviceId).getServiceName());
-		ConsoleUI.displayTableName("At " + findBranchNameFromId(branchId));
+		ConsoleUI.displayTableName("At " + findBranchNameFromId());
 		ConsoleUI.displayTableName("On " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
 		System.out.println();
 		System.out.println("No \t| Start Time \t| Slots |");
@@ -166,19 +166,28 @@ public class ViewSlotsUI {
             				+ availableDoctors.get(slot.ordinal()).size() + " \t| " );
         }
         
+        System.out.println();
+        
         System.out.println("The estimated time for this service is " 
-        		+ timeSlotsToHour(services.get(serviceId).getTimeSlotRequired()) + " hr(s).");
+        		+ timeSlotsToHour(findServiceRequiredSlotsFromId()) + " hr(s).");
 	}
 	
 	public static double timeSlotsToHour(int slots) {
 		return slots / 2.0;
 	}
 	
-	public String findBranchNameFromId(int branchId) {
+	public String findBranchNameFromId() {
 		for (Branch b : branchResults)
 			if (b.getBranchId() == branchId)
 				return b.getBranchName();
 		return "Unknown Branch";
+	}
+	
+	public int findServiceRequiredSlotsFromId() {
+		for (Service s : services)
+			if (s.getServiceId() == serviceId)
+				return s.getTimeSlotRequired();
+		return 0;
 	}
 	
 	/*
