@@ -1,6 +1,7 @@
 package boundary;
 
 import controller.ManagePatientController;
+import entity.DataList;
 import entity.Patient;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class ManagePatientUI {
         for (Patient searchedPatient : searchedPatients) {
             if(searchedPatient.getUserId() == patientId){
                 thePatient = searchedPatient;
+                System.out.println("Selected Patient:");
+                displayPatient(thePatient);
             }
         }
         return thePatient;
@@ -68,10 +71,15 @@ public class ManagePatientUI {
     public void managePatientProfile() {
         List<Patient> searchedPatients = searchPatient();
         Patient selectedPatient = selectPatient(searchedPatients);
+        if(selectedPatient == null){
+            System.out.println("No patient selected.");
+            return;
+        }
+
+        int patientId = selectedPatient.getUserId();
         String phoneNo = ConsoleInput.askStringV2("new patient phone number (PRESS ENTER TO SKIP)");
         String address = ConsoleInput.askStringV2("new patient address (PRESS ENTER TO SKIP)");
 
-        int patientId = selectedPatient.getUserId();
         if (ConsoleInput.askBoolean("Confirm changes")) {
             if (phoneNo == null && address == null) {
                 System.out.println("No changes has been made.");
@@ -86,5 +94,7 @@ public class ManagePatientUI {
                 System.out.println("Phone number and address has been updated.");
             }
         }
+        Patient modified = DataList.getInstance().getPatientList("filter", "id", Integer.toString(patientId)).get(0);
+        displayPatient(modified);
     }
 }
