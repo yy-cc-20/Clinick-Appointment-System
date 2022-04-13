@@ -18,8 +18,8 @@ public class ViewSlotsUI {
     // TODO To have column size determined by the longest info in the column so to display the table neatly
 
     private final static ViewSlotsUI instance = new ViewSlotsUI();
-    private List<Service> services = DataList.getInstance().getServiceList();
-    private ViewSlotsController controller = ViewSlotsController.getInstance();
+    private final List<Service> services = DataList.getInstance().getServiceList();
+    private final ViewSlotsController controller = ViewSlotsController.getInstance();
 
     // Filters
     private int serviceId;
@@ -57,7 +57,7 @@ public class ViewSlotsUI {
             if (servicesFound <= 0)
                 return false;
 
-            // validate selected service's Id
+            // validate selected service's ID
             while (true) {
                 if (!ConsoleInput.askBoolean("Select service"))
                     return false;
@@ -93,10 +93,9 @@ public class ViewSlotsUI {
 
             date = ConsoleInput.askDateNoEarlierThanToday("Date");
             viewTimeSlotFilteredByServiceBranchDate();
-            if (ConsoleInput.askBoolean("Continue searching"))
-                continue;
-            else
+            if (!ConsoleInput.askBoolean("Continue searching")) {
                 return true;
+            }
         }
     }
 
@@ -134,8 +133,8 @@ public class ViewSlotsUI {
         System.out.println();
         System.out.println("No \t| Service \t| Price (RM) \t| Description \t|");
 
-        for (int i = 0; i < services.size(); i++) {
-            service = services.get(i);
+        for (Service value : services) {
+            service = value;
             System.out.printf("%d\t|%s\t|%.2f\t|%s\t|%n", service.getServiceId(),
                     service.getServiceName(),
                     service.getPrice(),
@@ -157,11 +156,11 @@ public class ViewSlotsUI {
         System.out.println();
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
 
-        for (int i = 0; i < branchResults.size(); i++) {
-            System.out.println(branchResults.get(i).getBranchId() + " \t| "
-                    + branchResults.get(i).getBranchName() + " \t| "
-                    + branchResults.get(i).getTelNo() + " \t| "
-                    + branchResults.get(i).getBranchAddress() + " \t| ");
+        for (Branch branchResult : branchResults) {
+            System.out.println(branchResult.getBranchId() + " \t| "
+                    + branchResult.getBranchName() + " \t| "
+                    + branchResult.getTelNo() + " \t| "
+                    + branchResult.getBranchAddress() + " \t| ");
         }
         return branchResults.size();
     }
