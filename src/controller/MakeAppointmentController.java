@@ -9,6 +9,7 @@ import java.util.List;
 
 public class MakeAppointmentController {
 
+    // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
         List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
         String id = Integer.toString(theUser.getUserId());
@@ -86,8 +87,11 @@ public class MakeAppointmentController {
         return results;
     }
 
+    // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
         List<Allocation> allocations = DataList.getInstance().getAllocationList();
+
+        // find the service
         List<Service> services = DataList.getInstance().getServiceList();
         Service service = new Service();
         for (Service item : services) {
@@ -95,8 +99,10 @@ public class MakeAppointmentController {
                 service = item;
             }
         }
+
+        // check if the time slot selected is valid
         int slotRequired = service.getTimeSlotRequired();
-        if (slotRequired + slotRequired - 1 > 14) {
+        if (startSlot + slotRequired - 1 > 14 || startSlot + slotRequired - 1 > 8) {
             return null;
         }
 

@@ -8,13 +8,6 @@ public class Allocation {
     private Service service;
     private Doctor doctor;
 
-    public Allocation(int linkId, String branchId, String serviceId, String doctorId) {
-        this.linkId = linkId;
-        this.branch = findBranch(branchId);
-        this.service = findService(serviceId);
-        this.doctor = findDoctor(doctorId);
-    }
-
     public Allocation(int linkId, int branchId, int serviceId, int doctorId) {
         this.linkId = linkId;
         this.branch = findBranch(Integer.toString(branchId));
