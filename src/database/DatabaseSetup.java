@@ -404,4 +404,10 @@ public class DatabaseSetup {
 		conn.setAutoCommit(true);
 	}
 
+	// run me to test database setup!!!
+	// DatabaseSetupTest
+	public static void main(String[] args) {
+		DatabaseSetup.setupDatabase();
+	}
+
 }

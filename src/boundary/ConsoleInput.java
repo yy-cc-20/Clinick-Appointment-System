@@ -198,12 +198,11 @@ public class ConsoleInput {
     public static String askStringV2(String info) {
         String input;
 
-        while (true) {
-            System.out.printf("%n%s> ", info);
-            input = SingletonScanner.nextLine();
-            if (input.equals("\n"))
-                return null;
-        }
+        System.out.printf("%n%s> ", info);
+        input = SingletonScanner.nextLine();
+        if (input.equals(""))
+            return null;
+        return input;
     }
 
     // used to ask the name cannot be null

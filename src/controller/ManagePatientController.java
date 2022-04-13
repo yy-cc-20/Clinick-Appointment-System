@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
 import java.sql.SQLException;
@@ -11,11 +12,18 @@ import entity.*;
 public class ManagePatientController {
 	private final List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
 
-    public Patient searchPatient(String patientIc) {
+    public List<Patient> searchPatient(String patientIc) {
+		List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
+		List<Patient> searchList = new ArrayList<>();
+		boolean found = false;
 		for (Patient patient : patients) {
 			if (patient.getIc().toLowerCase().contains(patientIc)) {
-				return patient;
+				searchList.add(patient);
+				found = true;
 			}
+		}
+		if (found){
+			return searchList;
 		}
         return null;
     }
