@@ -21,8 +21,8 @@ public class DatabaseSetup {
 					"CREATE TABLE IF NOT EXISTS Service (id INT AUTO_INCREMENT, name VARCHAR(25) NOT NULL, price double NOT NULL, description VARCHAR(250), timeSlotRequired int NOT NULL, PRIMARY KEY (id))",
 					"CREATE TABLE IF NOT EXISTS Allocation (id INT AUTO_INCREMENT, branchId INT NOT NULL, serviceId INT NOT NULL, doctorId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (branchId) REFERENCES Branch(id), FOREIGN KEY (serviceId) REFERENCES Service(id), FOREIGN KEY (doctorId) REFERENCES Doctor(id))",
 					"CREATE TABLE IF NOT EXISTS Appointment (id INT AUTO_INCREMENT, date DATE NOT NULL, attendance VARCHAR(10), startSlot INT NOT NULL, patientId INT NOT NULL, allocationId INT NOT NULL, PRIMARY KEY (id), FOREIGN KEY (patientId) REFERENCES Patient(id), FOREIGN KEY (allocationId) REFERENCES Allocation(id))", };
-			for (int i = 0; i < createTables.length; i++) {
-				st.executeUpdate(createTables[i]);
+			for (String createTable : createTables) {
+				st.executeUpdate(createTable);
 			}
 
 			// insert data into all tables
@@ -70,8 +70,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Allocation (branchId, serviceId, doctorId) VALUES (5, 14, 23)",
 				"INSERT IGNORE INTO Allocation (branchId, serviceId, doctorId) VALUES (5, 15, 24)",
 				"INSERT IGNORE INTO Allocation (branchId, serviceId, doctorId) VALUES (5, 15, 25)", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -236,8 +236,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-25', 'NAN',       8,  42,  24)",
 				"INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-27', 'NAN',       8,  49,  25)",
 				"INSERT IGNORE INTO Appointment (date, attendance, startSlot, patientId, allocationId) VALUES ('2022-04-29', 'NAN',       2,  50,  26)", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -253,8 +253,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Seri Kembangan Health Screening Centre', 'No.1 & 3, Ground Floor, Jalan Besar Susur 1, 43300 Seri Kembangan, Selangor', '03-89599924', 3)",
 				"INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Kajang Health Screening Centre', 'No.40 & 41, Jalan Tukang, 43000 Kajang, Selangor', '03-87337433', 4)",
 				"INSERT IGNORE INTO Branch (name, address, telNo, receptionistId) VALUES ('Kudai Health Screening Centre', 'Tower 1, No.68, Jalan Pertama 1, Danga Utama Commercial Center, 81300 Skudai Johor Bahru', '07-5500323', 5)", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -290,8 +290,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Doctor (name, password) VALUES ('Anthony C. Griffin', 'Anthony23')",
 				"INSERT IGNORE INTO Doctor (name, password) VALUES ('Caroline McGuire', 'Caroline24')",
 				"INSERT IGNORE INTO Doctor (name, password) VALUES ('Kang Min', 'Kangmin25')", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -352,8 +352,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Patient (name, ic, phone, address, password) VALUES ('Khairudin Daryusman bin Azlan', 'B9103971', '6015-680 7432', '6-1, Jalan 5, USJ 47, 87016 Kiamsam, Labuan', 'Khairudin48')",
 				"INSERT IGNORE INTO Patient (name, ic, phone, address, password) VALUES ('Karnail a/l Yugendran', 'M79586826', '6019-644 3372', 'No. 73, Jalan Istana 7, Apartment Bestari, 18352 Wakaf Bharu, Kelantan', 'Karnail49')",
 				"INSERT IGNORE INTO Patient (name, ic, phone, address, password) VALUES ('Leung Lun Woon', 'A30930309', '606-488 0108', '621, Jalan 3/4, Bandar Baru Laksamana, 12619 George Town, Penang', 'Leung50')", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -369,8 +369,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Nurul Hasya binti Syarafuddin', 'Hasya333')",
 				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Rakesh Devaser a/l Shree', 'Rakesh444')",
 				"INSERT IGNORE INTO Receptionist (name, password) VALUES ('Nor Janni binti Syed Tumiran', 'Janni555')", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -396,8 +396,8 @@ public class DatabaseSetup {
 				"INSERT IGNORE INTO Service (name, price, description, timeSlotRequired) VALUES ('Women Health Screening', 1999, 'History & Clinical Examination, Vision Test, Blood Pressure Screening, Blood Investigation, Urine FEME, Thin Prep, Resting ECG, Pulmonary Function Test, Ankle Brachial Pressure Index, Chest X-Ray, 3D Mammogram, Ultrasound of Breast, Abdomen & Pelvis, Bone Mineral Density Scan, Diet Counselling', 5)",
 				"INSERT IGNORE INTO Service (name, price, description, timeSlotRequired) VALUES ('Pre-Marital Screening', 299, 'Blood Test including Full Blood Count, Peripheral Blood Film, Blood Grouping, Hepatitis B Screening, and HIV', 5)",
 				"INSERT IGNORE INTO Service (name, price, description, timeSlotRequired) VALUES ('Post-Covid Screening', 399, 'History & Clinical Examination, Anthropometry, Visual Acuity, Blood Test, Urine Test, Chest X-Ray, Lung Function Test', 5)", };
-		for (int i = 0; i < insertStatements.length; i++) {
-			st.addBatch(insertStatements[i]);
+		for (String insertStatement : insertStatements) {
+			st.addBatch(insertStatement);
 		}
 		st.executeBatch();
 		conn.commit();
@@ -407,7 +407,7 @@ public class DatabaseSetup {
 	// run me to test database setup!!!
 	// DatabaseSetupTest
 	public static void main(String[] args) {
-		DatabaseSetup.setupDatabase();
+		DatabaseSetup.setupDatabaseIfNotExist();
 	}
 
 }
