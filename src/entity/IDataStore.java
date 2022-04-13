@@ -22,9 +22,9 @@ public interface IDataStore {
 
     void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId);
 
-    void addPatientPartial(String name, String ic, String password);
-
     void addPatientFull(String name, String ic, String phone, String address, String password);
+
+    void updatePatient(String phone, String address, int patientId);
 
     void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot);
 

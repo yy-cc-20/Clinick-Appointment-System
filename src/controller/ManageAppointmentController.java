@@ -2,7 +2,6 @@ package controller;
 
 import entity.DataList;
 
-
 public class ManageAppointmentController {
 
     public void updateAppointmentTime(int appointmentId, String newDate, int newStartSlot) {

@@ -231,21 +231,19 @@ public class DataList implements IDataStore {
         }
     }
 
-    // provide the patient's basic information to add into database
-    public void addPatientPartial(String name, String ic, String password) {
-        try {
-            st.executeUpdate("INSERT IGNORE INTO patient (name, ic, password) " +
-                    "VALUES ('" + name + "','" + ic + "','" + password + "')");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     // provide the patient's full information to add into database
     public void addPatientFull(String name, String ic, String phone, String address, String password) {
         try {
             st.executeUpdate("INSERT IGNORE INTO patient (name, ic, phone, address, password) " +
                     "VALUES ('" + name + "','" + ic + "','" + phone + "','" + address + "','" + password + "')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePatient (String phoneNo, String address, int patientId){
+        try {
+            st.executeUpdate("UPDATE Patient SET phone='" + phoneNo + "', address='" + address + "' WHERE id='" + patientId + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
