@@ -8,26 +8,18 @@ import entity.Allocation;
 import entity.Appointment;
 import entity.Attendance;
 
+// 1. update appointment
+// 2. cancel appointment
+// 3. record attendance
+
 public class ManageAppointmentUI {
 
     private final ManageAppointmentController controller = new ManageAppointmentController();
     private final MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
     private static Appointment selectedAppointment;
 
-    private void searchAppointmentToModify() {
-        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
-        if(appointments.size() == 0){
-            return;
-        }
-        int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
-        for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentId() == appointmentId) {
-                selectedAppointment = appointment;
-            }
-        }
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
-    }
-
+    // 1. update appointment's time slot
+    // similar to make appointment
     public void updateAppointment() {
         searchAppointmentToModify();
 
@@ -71,6 +63,22 @@ public class ManageAppointmentUI {
         }
     }
 
+    // search and select an appointment to modify
+    private void searchAppointmentToModify() {
+        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+        if(appointments.size() == 0){
+            return;
+        }
+        int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
+        for (Appointment appointment : appointments) {
+            if (appointment.getAppointmentId() == appointmentId) {
+                selectedAppointment = appointment;
+            }
+        }
+        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+    }
+
+    // 2. cancel an appointment
     public void cancelAppointment() {
         searchAppointmentToModify();
         if(selectedAppointment == null){
@@ -82,6 +90,7 @@ public class ManageAppointmentUI {
         }
     }
 
+    // 3. record the attendance
     public void recordAttendance() {
         searchAppointmentToModify();
         if(selectedAppointment == null){
