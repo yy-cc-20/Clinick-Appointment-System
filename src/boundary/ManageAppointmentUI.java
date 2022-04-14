@@ -23,6 +23,10 @@ public class ManageAppointmentUI {
     public void updateAppointment() {
         searchAppointmentToModify();
 
+        if(selectedAppointment == null){
+            return;
+        }
+
         ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
         ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
