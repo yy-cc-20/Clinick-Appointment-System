@@ -64,26 +64,22 @@ public class ViewSlotsUI {
 
             // validate selected service's ID
             while (true) {
-                if (!ConsoleInput.askBoolean("Select service"))
                 if (!ConsoleInput.askBoolean("Select a service to continue"))
                     return false;
-                serviceId = ConsoleInput.askPositiveInt("Service");
                 serviceId = ConsoleInput.askPositiveInt("Service ID");
                 if (validateSelectedServiceId(serviceId))
                     break;
                 else
                 	System.out.println("Invalid input.");
             }
-
+// 
             // validate selected branch's Id
             while (true) {
-                if (!ConsoleInput.askBoolean("Select branch"))
                 if (!ConsoleInput.askBoolean("Select a branch to continue"))
                     if (ConsoleInput.askBoolean("Continue searching"))
                         continue;
                     else
                         return false;
-                branchId = ConsoleInput.askPositiveInt("Branch");
                 branchId = ConsoleInput.askPositiveInt("Branch ID");
 
                 if (validateSelectedBranchId(branchId))
