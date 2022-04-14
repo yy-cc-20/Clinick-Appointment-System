@@ -7,6 +7,7 @@ import entity.*;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class MakeAppointmentController {
 
     // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
-        List<Appointment> appointments = DataList.getAppointmentList();
+        DataList dataList = new DataList();
+        List<Appointment> appointments = dataList.getAppointmentList();
 
         if (theUser instanceof Patient) {
             List<Appointment> patientAppointments = new ArrayList<>();
@@ -46,7 +48,8 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
-        List<Appointment> appointments = DataList.getAppointmentList();
+        DataList dataList = new DataList();
+        List<Appointment> appointments = dataList.getAppointmentList();
         List<Appointment> results = new ArrayList<>();
 
         switch (choice) {
@@ -105,15 +108,17 @@ public class MakeAppointmentController {
     }
 
     public String getPatientName(int id) {
-        return DataList.getPatient(id).getUsername();
+        DataList dataList = new DataList();
+        return dataList.getPatient(id).getUsername();
     }
 
     // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
-        List<Allocation> allocations = DataList.getAllocationList();
+        DataList dataList = new DataList();
+        List<Allocation> allocations = dataList.getAllocationList();
 
         // find the service
-        List<Service> services = DataList.getServiceList();
+        List<Service> services = dataList.getServiceList();
         Service service = new Service();
         for (Service item : services) {
             if (item.getServiceId() == viewSlotsUI.getSelectedServiceId()) {
@@ -164,6 +169,11 @@ public class MakeAppointmentController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Appointment createAppointment(LocalDate selectedDate, int userId, int id, Attendance nan, int startSlot) {
+        DataList dataList = new DataList();
+        return new Appointment(selectedDate, userId, dataList.getAllocation(id), nan, startSlot);
     }
     /*
     public static void main(String[] args) {

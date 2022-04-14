@@ -129,11 +129,8 @@ public class MakeAppointmentUI {
             }
             if (allocated) {
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
-                Appointment appointmentToBook = new Appointment(viewSlotsUI.getSelectedDate(),
-                        selectedPatient.getUserId(),
-                        DataList.getAllocation(allocation.getId()),
-                        Attendance.NAN,
-                        startSlot);
+                Appointment appointmentToBook = controller.createAppointment(viewSlotsUI.getSelectedDate(),
+                        selectedPatient.getUserId(), allocation.getId(), Attendance.NAN, startSlot);
                 // display appointment to book
                 displayAppointmentDetails(appointmentToBook);
                 // ask confirmation to book

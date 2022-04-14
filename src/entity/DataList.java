@@ -32,11 +32,13 @@ public class DataList {
     private static List<Service> serviceList;
     private static List<Doctor> doctorList;
 
-    // SQL related
-    private static final Connection conn = DatabaseConnection.getConnection();
+    public DataList(){}
 
-    public static List<Doctor> getDoctorList() {
-        doctorList = new ArrayList<>();
+    // SQL related
+    private final Connection conn = DatabaseConnection.getConnection();
+
+    public List<Doctor> getDoctorList() {
+            doctorList = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM doctor ORDER BY id;");
@@ -53,7 +55,7 @@ public class DataList {
         return doctorList;
     }
 
-    public static List<Service> getServiceList() {
+    public List<Service> getServiceList() {
         serviceList = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -73,7 +75,7 @@ public class DataList {
         return serviceList;
     }
 
-    public static List<Receptionist> getReceptionistList() {
+    public List<Receptionist> getReceptionistList() {
         receptionistList = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -91,7 +93,7 @@ public class DataList {
         return receptionistList;
     }
 
-    public static List<Branch> getBranchList() {
+    public List<Branch> getBranchList() {
         branchList = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -112,7 +114,7 @@ public class DataList {
         return branchList;
     }
 
-    public static List<Allocation> getAllocationList() {
+    public List<Allocation> getAllocationList() {
         allocationList = new ArrayList<>();
         try {
             Statement st = DatabaseConnection.getConnection().createStatement();
@@ -130,7 +132,7 @@ public class DataList {
         return allocationList;
     }
 
-    public static List<Appointment> getAppointmentList() {
+    public List<Appointment> getAppointmentList() {
         appointmentList = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -152,7 +154,7 @@ public class DataList {
         return appointmentList;
     }
 
-    public static List<Patient> getPatientList() {
+    public List<Patient> getPatientList() {
         patientList = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -179,7 +181,7 @@ public class DataList {
      * @return an empty object if id not found
      */
     // If you want to the latest data from the database, call getXXList() before calling these method
-    public static Doctor getDoctor(int id) {
+    public Doctor getDoctor(int id) {
         if (doctorList == null)
             getDoctorList(); // Initialize doctorList
         for (Doctor d : doctorList)
@@ -188,7 +190,7 @@ public class DataList {
         return new Doctor();
     }
 
-    public static Service getService(int id) {
+    public Service getService(int id) {
         if (serviceList == null)
             getServiceList(); // Initialize serviceList
         for (Service s : serviceList)
@@ -197,7 +199,7 @@ public class DataList {
         return new Service();
     }
 
-    public static Receptionist getReceptionist(int id) {
+    public Receptionist getReceptionist(int id) {
         if (receptionistList == null)
             getReceptionistList(); // Initialize receptionistList
         for (Receptionist r : receptionistList)
@@ -206,7 +208,7 @@ public class DataList {
         return new Receptionist();
     }
 
-    public static Branch getBranch(int id) {
+    public Branch getBranch(int id) {
         if (branchList == null)
             getBranchList(); // Initialize branchList
         for (Branch b : branchList)
@@ -215,7 +217,7 @@ public class DataList {
         return new Branch();
     }
 
-    public static Allocation getAllocation(int id) {
+    public Allocation getAllocation(int id) {
         if (allocationList == null)
             getAllocationList(); // Initialize allocationList
         for (Allocation a : allocationList)
@@ -224,7 +226,7 @@ public class DataList {
         return new Allocation();
     }
 
-    public static Appointment getAppointment(int id) {
+    public Appointment getAppointment(int id) {
         if (appointmentList == null)
             getAppointmentList(); // Initialize appointmentList
         for (Appointment a : appointmentList)
@@ -233,7 +235,7 @@ public class DataList {
         return new Appointment();
     }
 
-    public static Patient getPatient(int id) {
+    public Patient getPatient(int id) {
         if (patientList == null)
             getPatientList(); // Initialize patientL
         for (Patient p : patientList)
@@ -242,7 +244,7 @@ public class DataList {
         return new Patient();
     }
 
-    public static Attendance attendanceStringToEnum(String attendance) {
+    public Attendance attendanceStringToEnum(String attendance) {
         if (attendance.equals("Attended")) {
             return Attendance.ATTENDED;
         } else if (attendance.equals("Absent")) {
@@ -252,7 +254,7 @@ public class DataList {
         }
     }
 
-    public static List<Appointment> getAppointmentListByPatientId(int id) {
+    public List<Appointment> getAppointmentListByPatientId(int id) {
         if (appointmentList == null)
             getAppointmentList(); // Initialize appointmentList
         List<Appointment> apptList = new ArrayList<>();

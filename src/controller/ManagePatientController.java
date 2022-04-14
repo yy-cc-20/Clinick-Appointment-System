@@ -20,7 +20,8 @@ public class ManagePatientController {
     }
 
     public List<Patient> searchPatient(String patientIc) {
-        List<Patient> patients = DataList.getPatientList();
+        DataList dataList = new DataList();
+        List<Patient> patients = dataList.getPatientList();
         List<Patient> searchList = new ArrayList<>();
         boolean found = false;
         for (Patient patient : patients) {

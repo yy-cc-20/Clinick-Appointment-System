@@ -21,7 +21,7 @@ public class ViewSlotsController {
     // Row: time slot number starting from 0
     // Column: the ids of the available doctors at that time
 
-    private ViewSlotsController() {
+    public ViewSlotsController() {
         try {
             st = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e) {
@@ -214,9 +214,10 @@ public class ViewSlotsController {
     // Return branch objects of the specified ids
     public List<Branch> getBranchesById(List<Integer> ids) {
         List<Branch> branchResults = new ArrayList<>();
+        DataList dataList = new DataList();
 
         for (int id : ids)
-            branchResults.add(DataList.getBranch(id));
+            branchResults.add(dataList.getBranch(id));
 
         return branchResults;
     }
