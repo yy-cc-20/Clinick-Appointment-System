@@ -7,7 +7,9 @@ import entity.*;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MakeAppointmentController {
@@ -151,7 +153,7 @@ public class MakeAppointmentController {
         String attendance = appointmentToBook.getAttendance().toString();
         int startSlot = appointmentToBook.getStartSlot();
         int patientId = appointmentToBook.getPatientId();
-        int allocationId = appointmentToBook.getAllocation().getLinkId();
+        int allocationId = appointmentToBook.getAllocation().getId();
 
         addAppointment(date, attendance, startSlot, patientId, allocationId);
     }
@@ -165,4 +167,17 @@ public class MakeAppointmentController {
             e.printStackTrace();
         }
     }
+    /*
+    public static void main(String[] args) {
+    	// Test addAppointment
+    	List<Integer> ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
+		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is 2, 3
+		System.out.println();
+	
+		new MakeAppointmentController().addAppointment(new Appointment(LocalDate.of(2022, 4, 25), 23, DataList.getAllocation(2), Attendance.NAN, 1));
+		
+		ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
+		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is 2, 2, 3
+		System.out.println();
+    }*/
 }

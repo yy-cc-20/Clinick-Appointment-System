@@ -217,7 +217,7 @@ public class DataList{
 		if (allocationList == null)
 			getAllocationList(); // Initialize allocationList
 		for (Allocation a : allocationList)
-			if (a.getLinkId() == id)
+			if (a.getId() == id)
 				return a;
 		return new Allocation();
 	}

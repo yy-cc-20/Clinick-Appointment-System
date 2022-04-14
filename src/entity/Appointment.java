@@ -45,55 +45,6 @@ public class Appointment {
 
     public Appointment() {
     }
-    /*
-    public Appointment(int appointmentId, String appointmentDate, int patientId, int allocationId,
-                       String attendance, int startSlot) {
-        this.appointmentId = appointmentId;
-        this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
-        this.patientId = patientId;
-        this.allocation = DataList2.createAllocationObject(allocationId);
-        this.attendance = DataList2.attendanceStringToEnum(attendance);
-        this.startSlot = startSlot;
-    }
-
-    public Appointment(String appointmentDate, int patientId, int allocationId, String attendance, int startSlot) {
-        this.appointmentDate = LocalDate.parse(appointmentDate, ConsoleUI.DATE_SQL_FORMATTER);
-        this.patientId = patientId;
-        this.allocation = DataList2.createAllocationObject(allocationId);
-        this.attendance = DataList2.attendanceStringToEnum(attendance);
-        this.startSlot = startSlot;
-    }
-
-
-    private Patient findPatient(int patientId) {
-        List<Patient> patients = DataList2.getPatientList();
-        for (Patient value : patients) {
-            if (value.getUserId() == patientId) {
-                return value;
-            }
-        }
-        return null;
-    }
-*/
-//    private Allocation findAllocation(int appointmentId) {
-//        List<Allocation> allocations = DataList.getInstance().getAllocationList();
-//        for (Allocation value : allocations) {
-//            if (value.getLinkId() == appointmentId) {
-//                return value;
-//            }
-//        }
-//        return null;
-//    }
-//
-//    private Attendance retrieveAttendance(String attendance) {
-//        if (attendance.equals("Attended")) {
-//            return Attendance.ATTENDED;
-//        } else if (attendance.equals("Absent")) {
-//            return Attendance.ABSENT;
-//        } else {
-//            return Attendance.NAN;
-//        }
-//    }
 
     public int getAppointmentId() {
         return appointmentId;

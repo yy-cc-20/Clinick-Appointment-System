@@ -24,6 +24,7 @@ public class ManageAppointmentUI {
         searchAppointmentToModify();
 
         ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
 
         if (!contViewSlot) {

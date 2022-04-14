@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 1. create patient profile
-// 2.
 
 public class ManagePatientUI {
     private static final ManagePatientController controller = new ManagePatientController();

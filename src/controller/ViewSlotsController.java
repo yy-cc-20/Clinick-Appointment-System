@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.sql.*;
 
@@ -58,22 +59,18 @@ public class ViewSlotsController {
      * @return the id of doctors who are available to provide a particular service at a particular branch for different times on a particular date
      */
     public List<List<Integer>> getAvailableDoctors(int serviceId, int branchId, LocalDate date, int requiredSlots) {
-
         // 1.
         List<Integer> doctorsInCharge = getDoctorsInCharge(serviceId, branchId);
 
         // 2. Initializes the availableDoctorsId with all the doctors in charge regardless of their availabilities
         int[] doctorsInChargeArr;
         doctorsInChargeArr = doctorsInCharge.stream().mapToInt(Integer::intValue).toArray().clone();
-        //System.out.println(Arrays.toString(doctorsInChargeArr));
 
         int[][] availableDoctors = new int[TimeSlot.values().length][];
         for (int i = 0; i < availableDoctors.length; ++i) {
             availableDoctors[i] = new int[doctorsInCharge.size()];
             availableDoctors[i] = doctorsInChargeArr.clone();
         }
-
-        //System.out.println("initial: " + Arrays.deepToString(availableDoctors));
 
         // 3. Remove the doctors in charge that have an appointment at a time slot from availableDoctorsId
         List<Integer> unavailableDoctorsId;
@@ -87,8 +84,7 @@ public class ViewSlotsController {
                             if (availableDoctors[startSlot.ordinal() + i][j] == id)
                                 availableDoctors[startSlot.ordinal() + i][j] = 0;
         }
-        //System.out.println("after remove " + Arrays.deepToString(availableDoctors));
-
+        
         // 4. Convert availableDoctor from array to arrayList
         availableDoctorsId = new ArrayList<>();
         List<Integer> temp;
@@ -98,7 +94,6 @@ public class ViewSlotsController {
                 if (doctorId > 0)
                     temp.add(doctorId);
             availableDoctorsId.add(temp);
-            //System.out.println(Arrays.deepToString(temp.toArray()));
         }
 
         return availableDoctorsId;
@@ -145,7 +140,6 @@ public class ViewSlotsController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //System.out.println("ViewSlotsController.getDoctorsInCharge testing");
         return returnIds;
     }
 
@@ -233,17 +227,23 @@ public class ViewSlotsController {
 	public static void main(String[] args) throws SQLException {
 
 		// getDoctorInCharge test
-		List<Integer> ids0 = ViewSlotsController.getInstance().getDoctorsInCharge(2, 1);
-		System.out.println(Arrays.deepToString(ids0.toArray())); // Correct output is 2, 3
-		System.out.println();
+		//List<Integer> ids0 = ViewSlotsController.getInstance().getDoctorsInCharge(2, 1);
+		//System.out.println(Arrays.deepToString(ids0.toArray())); // Correct output is 2, 3
+		//System.out.println();
 		
 		// getDoctorsHaveAppointment test
 		List<Integer> ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
 		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is 2, 3
 		System.out.println();
-				
+	
+		new ManageAppointmentController().cancelAppointment(36);
+		
+		ids = ViewSlotsController.getInstance().getDoctorsHaveAppointment(2, 1, LocalDate.of(2022, 4, 25), 1);
+		System.out.println(Arrays.deepToString(ids.toArray())); // Correct output is 3
+		System.out.println();
+		
 		// getAvailableDoctors test
-		List<List<Integer>> ids2 = ViewSlotsController.getInstance().getAvailableDoctors(2, 1, LocalDate.of(2022, 4, 25), 3);
-		System.out.println(Arrays.deepToString(ids2.toArray()));
+		//List<List<Integer>> ids2 = ViewSlotsController.getInstance().getAvailableDoctors(2, 1, LocalDate.of(2022, 4, 25), 3);
+		//System.out.println(Arrays.deepToString(ids2.toArray()));
 	}*/
 }

@@ -107,6 +107,7 @@ public class MakeAppointmentUI {
 
         // view slots
         ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
         if (!contViewSlot) {
             System.out.println("Back to the menu");
@@ -135,7 +136,7 @@ public class MakeAppointmentUI {
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
                 Appointment appointmentToBook = new Appointment(viewSlotsUI.getSelectedDate(), 
                 		selectedPatient.getUserId(), 
-                		DataList.getAllocation(allocation.getLinkId()), 
+                		DataList.getAllocation(allocation.getId()), 
                 		Attendance.NAN, 
                 		startSlot);
                 // display appointment to book

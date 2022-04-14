@@ -22,51 +22,12 @@ public class Allocation {
     }
     
     public Allocation(){}
-/*
-    public Allocation(int linkId, int branchId, int serviceId, int doctorId) {
-        this.linkId = linkId;
-        this.branch = findBranch(Integer.toString(branchId));
-        this.service = findService(Integer.toString(serviceId));
-        this.doctor = findDoctor(Integer.toString(doctorId));
-    }
 
-    
-
-    private Branch findBranch(String branchId) {
-        List<Branch> branches = DataList2.getBranchList();
-        for (Branch value : branches) {
-            if (value.getBranchId() == Integer.parseInt(branchId)) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    private Service findService(String serviceId) {
-        List<Service> services = DataList.getInstance().getServiceList();
-        for (Service value : services) {
-            if (value.getServiceId() == Integer.parseInt(serviceId)) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    private Doctor findDoctor(String doctorId) {
-        List<Doctor> doctors = DataList2.getDoctorList();
-        for (Doctor value : doctors) {
-            if (value.getUserId() == Integer.parseInt(doctorId)) {
-                return value;
-            }
-        }
-        return null;
-    }
-*/
-    public int getLinkId() {
+    public int getId() {
         return allocationId;
     }
 
-    public void setLinkId(int linkId) {
+    public void setId(int linkId) {
         this.allocationId = linkId;
     }
 

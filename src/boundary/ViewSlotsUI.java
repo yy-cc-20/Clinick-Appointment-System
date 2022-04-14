@@ -51,11 +51,12 @@ public class ViewSlotsUI {
      * @return false if the user did not continue to view the available time slots
      * or no result was found
      */
+    
     public boolean viewSlots() {
         int servicesFound;
         int branchesFound;
         while (true) {
-            ConsoleUI.clearScreen();
+            
             servicesFound = viewService();
             if (servicesFound <= 0)
                 return false;
@@ -126,7 +127,6 @@ public class ViewSlotsUI {
      * @return number of row of results
      */
     public int viewService() {
-        
         if (services.size() == 0) {
             System.out.println("No service found.");
             return services.size();
@@ -171,8 +171,6 @@ public class ViewSlotsUI {
 
     // Can be used by ChangeAppointmentUI
     public void viewTimeSlotFilteredByServiceBranchDate() {
-        //System.out.println("ViewSlotsUI.viewTimeSlotFilteredByServiceBranchDate testing");
-
         availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, requiredSlots);
         // index: the time slot number
         // value: the slots available for that time
