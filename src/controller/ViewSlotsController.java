@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.sql.*;
 
@@ -168,9 +167,9 @@ public class ViewSlotsController {
         return returnIds;
     }
 
-    /**
+    /*
      * @param startSlotOrdinal start from 0
-     */
+     *
     private void removeUnavailableDoctors(int startSlotOrdinal, int requiredSlots, int unavailableDoctorId) {
         for (int i = 0; i < requiredSlots; ++i) {
             if (startSlotOrdinal + i < availableDoctorsId.size())
@@ -196,8 +195,8 @@ public class ViewSlotsController {
 		someNo.get(0).remove(1);
 		System.out.println("Remove second element from the first list: " + Arrays.deepToString(someNo.get(0).toArray()));
 		System.out.println("After: " + Arrays.deepToString(someNo.toArray()));
-		*/
-    }
+		
+    }*/
 
     // Retrieve the integer from the ResultSet and return List<Integer>
     public List<Integer> resultSetToIntArr(ResultSet rs) {

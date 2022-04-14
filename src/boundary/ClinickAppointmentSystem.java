@@ -99,6 +99,7 @@ public class ClinickAppointmentSystem {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
+        	
             ConsoleUI.displaySystemName("Clinick Booking System");
             ConsoleUI.displayMenuForReceptionist();
             choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
