@@ -83,7 +83,7 @@ public class ViewSlotsUI {
                 else
                     return false;
             }
-            
+
             // validate selected branch's Id
             while (true) {
                 if (!ConsoleInput.askBoolean("Select a branch to continue"))
