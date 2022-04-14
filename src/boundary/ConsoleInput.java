@@ -25,7 +25,7 @@ public class ConsoleInput {
             default -> Attendance.NAN; // case 3
         };
     }
-    
+
     // Ask user the date, set the valid date
     public static LocalDate askDate(String info) {
         String stringDate;

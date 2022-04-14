@@ -46,6 +46,18 @@ package database;
  * 2. Statement st = conn.createStatement();
  * 3. PreparedStatement pstmt = conn.prepareStatement("SQL query here");
  * 4. st.executeUpdate("SQl query here");
+ * @description What this class does:
+ * - connects to the database
+ * - call SetUpDatabase to create tables if tables not exist
+ * <p>
+ * This class is using the singleton design pattern.
+ * There is only one object created for the Connection class in the system.
+ * <p>
+ * How to use this class:
+ * 1. Connection conn = DatabaseConnection.getConnection();
+ * 2. Statement st = conn.createStatement();
+ * 3. PreparedStatement pstmt = conn.prepareStatement("SQL query here");
+ * 4. st.executeUpdate("SQl query here");
  */
 
 /**
@@ -111,7 +123,7 @@ public class DatabaseConnection {
         Statement st = DatabaseConnection.getConnection().createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM Allocation ;");
         while (rs.next()) { // Move the cursor to the next row, return false if empty
-			System.out.println(rs.getInt("id") + ", " + rs.getInt("serviceId") + ", " + rs.getInt("doctorId") + ", " + rs.getInt("branchId"));
+            System.out.println(rs.getInt("id") + ", " + rs.getInt("serviceId") + ", " + rs.getInt("doctorId") + ", " + rs.getInt("branchId"));
         }
         System.out.println("DatabaseConnection test success!");
     }

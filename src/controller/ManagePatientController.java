@@ -9,16 +9,16 @@ import database.DatabaseConnection;
 import entity.*;
 
 public class ManagePatientController {
-	private Statement st;
-	
-	public ManagePatientController() {
-		try {
-			st = DatabaseConnection.getConnection().createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
+    private Statement st;
+
+    public ManagePatientController() {
+        try {
+            st = DatabaseConnection.getConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Patient> searchPatient(String patientIc) {
         List<Patient> patients = DataList.getPatientList();
         List<Patient> searchList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class ManagePatientController {
         }
     }
 
-    public void updatePatientProfile (String phoneNo, String address, int patientId){
+    public void updatePatientProfile(String phoneNo, String address, int patientId) {
         try {
             st.executeUpdate("UPDATE Patient SET phone='" + phoneNo + "', address='" + address + "' WHERE id='" + patientId + "'");
         } catch (SQLException e) {

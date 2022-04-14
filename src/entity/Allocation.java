@@ -5,23 +5,24 @@ public class Allocation {
     private Branch branch;
     private Service service;
     private Doctor doctor;
-    
+
     // Copy constructor: create a new object with exactly the same properties
-    public Allocation(int linkId, Service service, Branch branch, Doctor doctor){
+    public Allocation(int linkId, Service service, Branch branch, Doctor doctor) {
         this.allocationId = linkId;
         this.branch = branch;
         this.service = service;
         this.doctor = doctor;
     }
 
-    public Allocation(Allocation a){
+    public Allocation(Allocation a) {
         this.allocationId = a.allocationId;
         this.branch = a.branch;
         this.service = a.service;
         this.doctor = a.doctor;
     }
-    
-    public Allocation(){}
+
+    public Allocation() {
+    }
 
     public int getId() {
         return allocationId;

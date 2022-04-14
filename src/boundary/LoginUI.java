@@ -71,7 +71,7 @@ public class LoginUI {
     public boolean getHasLogin() {
         return hasLogin;
     }
-    
+
     public static void displayLoginMenu() {
         System.out.println();
         System.out.println(" 1. Receptionist");

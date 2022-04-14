@@ -66,7 +66,7 @@ public class MakeAppointmentUI {
                 searchKeyword = date.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
             }
             case 7 -> {
-            	ManageAppointmentUI.displayAttendanceChoice();
+                ManageAppointmentUI.displayAttendanceChoice();
                 Attendance attendance = ConsoleInput.askAttendance();
                 searchKeyword = attendance.toString();
             }
@@ -129,11 +129,11 @@ public class MakeAppointmentUI {
             }
             if (allocated) {
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
-                Appointment appointmentToBook = new Appointment(viewSlotsUI.getSelectedDate(), 
-                		selectedPatient.getUserId(), 
-                		DataList.getAllocation(allocation.getId()), 
-                		Attendance.NAN, 
-                		startSlot);
+                Appointment appointmentToBook = new Appointment(viewSlotsUI.getSelectedDate(),
+                        selectedPatient.getUserId(),
+                        DataList.getAllocation(allocation.getId()),
+                        Attendance.NAN,
+                        startSlot);
                 // display appointment to book
                 displayAppointmentDetails(appointmentToBook);
                 // ask confirmation to book

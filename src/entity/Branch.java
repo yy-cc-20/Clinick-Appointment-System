@@ -14,17 +14,18 @@ public class Branch {
         this.receptionist = new Receptionist(rec);
         this.telNo = telNo;
     }
-    
+
     // Copy constructor: create a new object with exactly the same properties
     public Branch(Branch b) {
-    	this.branchId = b.branchId;
+        this.branchId = b.branchId;
         this.branchName = b.branchName;
         this.branchAddress = b.branchAddress;
         this.receptionist = new Receptionist(b.receptionist);
         this.telNo = b.telNo;
     }
-    
-    public Branch() {}
+
+    public Branch() {
+    }
 
     public int getBranchId() {
         return branchId;
@@ -51,7 +52,7 @@ public class Branch {
     }
 
     public Receptionist getReceptionist() {
-    	return receptionist;
+        return receptionist;
     }
 
     public String getTelNo() {

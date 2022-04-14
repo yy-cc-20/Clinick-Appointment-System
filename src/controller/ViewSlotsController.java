@@ -83,7 +83,7 @@ public class ViewSlotsController {
                             if (availableDoctors[startSlot.ordinal() + i][j] == id)
                                 availableDoctors[startSlot.ordinal() + i][j] = 0;
         }
-        
+
         // 4. Convert availableDoctor from array to arrayList
         availableDoctorsId = new ArrayList<>();
         List<Integer> temp;
@@ -210,13 +210,13 @@ public class ViewSlotsController {
         }
         return ints;
     }
-    
+
     // Return branch objects of the specified ids
     public List<Branch> getBranchesById(List<Integer> ids) {
-    	List<Branch> branchResults = new ArrayList<>();
-        
-    	for (int id : ids)
-    		branchResults.add(DataList.getBranch(id));
+        List<Branch> branchResults = new ArrayList<>();
+
+        for (int id : ids)
+            branchResults.add(DataList.getBranch(id));
 
         return branchResults;
     }

@@ -7,9 +7,9 @@ public class Doctor extends User {
 
     public Doctor() {
     }
-    
+
     // Copy constructor: create a new object with exactly the same properties
     public Doctor(Doctor d) {
-    	super(d.userId, d.username, d.password);
+        super(d.userId, d.username, d.password);
     }
 }

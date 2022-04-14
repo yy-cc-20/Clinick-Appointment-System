@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 import database.DatabaseConnection;
 
 public class ManageAppointmentController {
-	private static Connection conn = DatabaseConnection.getConnection();
-	
+    private static final Connection conn = DatabaseConnection.getConnection();
+
     // after viewing the available slots, wants to update the date and startSlot => allocationId changes 
     // provide the appointmentId to update, with the new date and startSlot
     public void updateAppointmentTime(int id, String date, int startSlot) {

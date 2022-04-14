@@ -19,10 +19,10 @@ public class ViewSlotsUI {
 
     private final static ViewSlotsUI instance = new ViewSlotsUI();
     private final ViewSlotsController controller = ViewSlotsController.getInstance();
-    
+
     // List
-    private List<Service> services = DataList.getServiceList();
-    
+    private final List<Service> services = DataList.getServiceList();
+
     // Filters
     private int serviceId;
     private int branchId;
@@ -52,12 +52,12 @@ public class ViewSlotsUI {
      * or no result was found
      * @return true if the user wants to select a time slot
      */
-    
+
     public boolean viewSlots() {
         int servicesFound;
         int branchesFound;
         while (true) {
-            
+
             servicesFound = viewService();
             if (servicesFound <= 0)
                 return false;
@@ -118,9 +118,9 @@ public class ViewSlotsUI {
     }
 
     public int getRequiredSlots() {
-    	return requiredSlots;
+        return requiredSlots;
     }
-    
+
     public List<List<Integer>> getAvailableDoctors() {
         // index: the time slot
         // row: an array of the doctors available for that time
