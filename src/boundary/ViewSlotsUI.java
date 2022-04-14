@@ -166,7 +166,6 @@ public class ViewSlotsUI {
 
         ConsoleUI.displayTableName(serviceName);
         System.out.println();
-        System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
         System.out.printf("%s\t\t| %-50s| %-18s |%n", "ID", "Branch Name", "Telephone No");
 
 
