@@ -3,48 +3,36 @@ package entity;
 import java.util.List;
 
 public class Allocation {
-<<<<<<< HEAD
-	//private final static List<Service> services = DataList.getInstance().getServiceList();
-    //private final static List<Branch> branches = DataList.getInstance().getBranchList(null, "","");
-    //private final static List<Doctor> doctors = DataList.getInstance().getDoctorList();
-    private int allocationId;
-=======
     private int linkId;
     private Branch branch;
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     private Service service;
-    private Branch branch;
     private Doctor doctor;
 
-    // Copy constructor: create a new object with exactly the same properties
-    public Allocation(Allocation a) {
-    	allocationId = a.allocationId;
-    	service = new Service(a.service);
-    	branch = new Branch(a.branch);
-    	doctor = new Doctor(a.doctor);
+    public Allocation(int linkId, Service service, Branch branch, Doctor doctor){
+        this.linkId = linkId;
+        this.branch = branch;
+        this.service = service;
+        this.doctor = doctor;
     }
-<<<<<<< HEAD
-    
-    public Allocation(int id, Service s, Branch b, Doctor d) {
-    	allocationId = id;
-    	service = new Service(s);
-    	branch = new Branch(b);
-    	doctor = new Doctor(d);
+
+    public Allocation(Allocation a){
+        this.linkId = a.linkId;
+        this.branch = a.branch;
+        this.service = a.service;
+        this.doctor = a.doctor;
     }
 
     public Allocation(int linkId, int branchId, int serviceId, int doctorId) {
-        this.allocationId = linkId;
-        this.branch = DataList2.createBranchObject(branchId);
-        this.service = DataList2.createServiceObject(serviceId);
-        this.doctor = DataList2.createDoctorObject(doctorId);
+        this.linkId = linkId;
+        this.branch = findBranch(Integer.toString(branchId));
+        this.service = findService(Integer.toString(serviceId));
+        this.doctor = findDoctor(Integer.toString(doctorId));
     }
 
-    public Allocation() {
-    	
-=======
+    public Allocation(){}
 
     private Branch findBranch(String branchId) {
-        List<Branch> branches = DataList.getInstance().getBranchList(null, "", "");
+        List<Branch> branches = DataList2.getBranchList();
         for (Branch value : branches) {
             if (value.getBranchId() == Integer.parseInt(branchId)) {
                 return value;
@@ -64,22 +52,21 @@ public class Allocation {
     }
 
     private Doctor findDoctor(String doctorId) {
-        List<Doctor> doctors = DataList.getInstance().getDoctorList();
+        List<Doctor> doctors = DataList2.getDoctorList();
         for (Doctor value : doctors) {
             if (value.getUserId() == Integer.parseInt(doctorId)) {
                 return value;
             }
         }
         return null;
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     }
 
     public int getLinkId() {
-        return allocationId;
+        return linkId;
     }
 
     public void setLinkId(int linkId) {
-        this.allocationId = linkId;
+        this.linkId = linkId;
     }
 
     public Branch getBranch() {

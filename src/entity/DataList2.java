@@ -19,7 +19,7 @@ import database.DatabaseConnection;
 // If implements IDataStore interface
 // The static methods need to be written in IDataStore
 
-public class DataList2 {	
+public class DataList2{
 	// List
 	private static List<Patient> patientList;
 	private static List<Appointment> appointmentList;

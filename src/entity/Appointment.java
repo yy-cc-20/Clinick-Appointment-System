@@ -7,16 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Appointment {
-<<<<<<< HEAD
-    //private static final List<Patient> patients = DataList.getInstance().getPatientList();
-    //private static final List<Allocation> allocations = DataList.getInstance().getAllocationList();
-=======
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
-
     private int patientId;
     private int appointmentId;
     private LocalDate appointmentDate;
-    //private Patient patient; 
     // If there is Patient as the data member of Appointment and List<Appointment> as the data member of the Patient
     // It is not easily to create the objects
     private Allocation allocation;
@@ -63,10 +56,8 @@ public class Appointment {
     public Appointment() {
     }
 
-<<<<<<< HEAD
-=======
     private Patient findPatient(int patientId) {
-        List<Patient> patients = DataList.getInstance().getPatientList(null, "", "");
+        List<Patient> patients = DataList2.getPatientList();
         for (Patient value : patients) {
             if (value.getUserId() == patientId) {
                 return value;
@@ -75,27 +66,26 @@ public class Appointment {
         return null;
     }
 
-    private Allocation findAllocation(int appointmentId) {
-        List<Allocation> allocations = DataList.getInstance().getAllocationList();
-        for (Allocation value : allocations) {
-            if (value.getLinkId() == appointmentId) {
-                return value;
-            }
-        }
-        return null;
-    }
+//    private Allocation findAllocation(int appointmentId) {
+//        List<Allocation> allocations = DataList.getInstance().getAllocationList();
+//        for (Allocation value : allocations) {
+//            if (value.getLinkId() == appointmentId) {
+//                return value;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    private Attendance retrieveAttendance(String attendance) {
+//        if (attendance.equals("Attended")) {
+//            return Attendance.ATTENDED;
+//        } else if (attendance.equals("Absent")) {
+//            return Attendance.ABSENT;
+//        } else {
+//            return Attendance.NAN;
+//        }
+//    }
 
-    private Attendance retrieveAttendance(String attendance) {
-        if (attendance.equals("Attended")) {
-            return Attendance.ATTENDED;
-        } else if (attendance.equals("Absent")) {
-            return Attendance.ABSENT;
-        } else {
-            return Attendance.NAN;
-        }
-    }
-
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     public int getAppointmentId() {
         return appointmentId;
     }

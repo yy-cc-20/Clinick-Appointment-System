@@ -18,7 +18,7 @@ import database.DatabaseConnection;
  * IDataStore dataList = DataList.getInstance(); // Already retrieved the data
  */
 
-public class DataList implements IDataStore {
+public class DataList {
 
     private static IDataStore instance;
     private List<Doctor> doctorList;
@@ -45,7 +45,7 @@ public class DataList implements IDataStore {
 
     public static IDataStore getInstance() {
         if (instance == null) {
-            instance = new DataList();
+//            instance = new DataList();
         }
         return instance;
     }
@@ -249,9 +249,6 @@ public class DataList implements IDataStore {
         }
     }
 
-<<<<<<< HEAD
-   
-=======
     // provide the appointmentId to update, with the new date and startSlot
     public void updateAppointmentTime(int id, String date, int startSlot) {
         String query = ( "UPDATE appointment SET date=?, startSlot=? WHERE id=?" );
@@ -288,5 +285,4 @@ public class DataList implements IDataStore {
         }
     }
 
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
 }

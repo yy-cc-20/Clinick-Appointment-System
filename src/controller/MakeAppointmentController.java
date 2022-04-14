@@ -9,12 +9,18 @@ import java.util.List;
 
 public class MakeAppointmentController {
 
+    // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
-        List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
-        String id = Integer.toString(theUser.getUserId());
+        List<Appointment> appointments = DataList2.getAppointmentList();
 
         if (theUser instanceof Patient) {
-            return DataList.getInstance().getAppointmentList("filter", "patientId", id);
+            List<Appointment> patientAppointments = new ArrayList<>();
+            for (Appointment appointment : appointments) {
+                if (appointment.getPatientId() == theUser.getUserId()) {
+                    patientAppointments.add(appointment);
+                }
+            }
+            return patientAppointments;
         } else if (theUser instanceof Doctor) {
             List<Appointment> doctorAppointments = new ArrayList<>();
             for (Appointment appointment : appointments) {
@@ -28,7 +34,7 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
-        List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
+        List<Appointment> appointments = DataList2.getAppointmentList();
         List<Appointment> results = new ArrayList<>();
 
         switch (choice) {
@@ -86,8 +92,11 @@ public class MakeAppointmentController {
         return results;
     }
 
+    // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
         List<Allocation> allocations = DataList.getInstance().getAllocationList();
+
+        // find the service
         List<Service> services = DataList.getInstance().getServiceList();
         Service service = new Service();
         for (Service item : services) {
@@ -95,8 +104,10 @@ public class MakeAppointmentController {
                 service = item;
             }
         }
+
+        // check if the time slot selected is valid
         int slotRequired = service.getTimeSlotRequired();
-        if (slotRequired + slotRequired - 1 > 14) {
+        if (startSlot + slotRequired - 1 > 14 || startSlot + slotRequired - 1 > 8) {
             return null;
         }
 
