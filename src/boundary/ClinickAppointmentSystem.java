@@ -44,17 +44,17 @@ public class ClinickAppointmentSystem {
             // The user has log in
             User systemUser = loginUI.getUser(); // From systemUser can know the username, id, password, user type
 
-            makeAppointmentUI = new MakeAppointmentUI(systemUser);
+            makeAppointmentUI = new MakeAppointmentUI();
             manageAppointmentUI = new ManageAppointmentUI();
-            managePatientUI = new ManagePatientUI(systemUser);
-            manageAccountUI = new ManageAccountUI(systemUser);
+            managePatientUI = new ManagePatientUI();
+            manageAccountUI = new ManageAccountUI();
 
             if (systemUser instanceof Receptionist)
-                toExit = startReceptionistView();
+                toExit = startReceptionistView(systemUser);
             else if (systemUser instanceof Doctor)
-                toExit = startDoctorView();
+                toExit = startDoctorView(systemUser);
             else if (systemUser instanceof Patient)
-                toExit = startPatientView();
+                toExit = startPatientView(systemUser);
 
             if (toExit)
                 break;
@@ -96,7 +96,7 @@ public class ClinickAppointmentSystem {
     }
 
     /** @return false to log out, true to exit application */
-    static boolean startReceptionistView() {
+    static boolean startReceptionistView(User systemUser) {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
@@ -108,7 +108,7 @@ public class ClinickAppointmentSystem {
             switch (choiceNo) {
                 case 1 -> {
                     ConsoleUI.displayFunctionName("View Appointment");
-                    makeAppointmentUI.viewAppointment();
+                    makeAppointmentUI.viewAppointment(systemUser);
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Search Appointment");
@@ -136,7 +136,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 8 -> {
                     ConsoleUI.displayFunctionName("Manage Patient Profile");
-                    managePatientUI.managePatientProfile();
+                    managePatientUI.managePatientProfile(systemUser);
                 }
                 case 9 -> {
                     ConsoleUI.displayFunctionName("Search Patient");
@@ -144,7 +144,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 10 -> {
                     ConsoleUI.displayFunctionName("Manage Account");
-                    manageAccountUI.changePassword();
+                    manageAccountUI.changePassword(systemUser);
                 }
                 case 11 -> {
                     ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
@@ -164,7 +164,7 @@ public class ClinickAppointmentSystem {
     }
 
     /** @return false to log out, true to exit application */
-    static boolean startDoctorView() {
+    static boolean startDoctorView(User systemUser) {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
@@ -175,7 +175,7 @@ public class ClinickAppointmentSystem {
             switch (choiceNo) {
                 case 1 -> {
                     ConsoleUI.displayFunctionName("View Appointment");
-                    makeAppointmentUI.viewAppointment();
+                    makeAppointmentUI.viewAppointment(systemUser);
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Search Appointment");
@@ -187,7 +187,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 4 -> {
                     ConsoleUI.displayFunctionName("Manage Account");
-                    manageAccountUI.changePassword();
+                    manageAccountUI.changePassword(systemUser);
                 }
                 case 0 -> {
                     System.out.println("[1]Sign out");
@@ -203,7 +203,7 @@ public class ClinickAppointmentSystem {
     }
 
     /** @return false to log out, true to exit application */
-    static boolean startPatientView() {
+    static boolean startPatientView(User systemUser) {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
@@ -214,7 +214,7 @@ public class ClinickAppointmentSystem {
             switch (choiceNo) {
                 case 1 -> {
                     ConsoleUI.displayFunctionName("View Appointment");
-                    makeAppointmentUI.viewAppointment();
+                    makeAppointmentUI.viewAppointment(systemUser);
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Search Appointment");
@@ -222,11 +222,11 @@ public class ClinickAppointmentSystem {
                 }
                 case 3 -> {
                     ConsoleUI.displayFunctionName("Manage Account");
-                    manageAccountUI.changePassword();
+                    manageAccountUI.changePassword(systemUser);
                 }
                 case 4 -> {
                     ConsoleUI.displayFunctionName("Manage Profile");
-                    managePatientUI.managePatientProfile();
+                    managePatientUI.managePatientProfile(systemUser);
                 }
                 case 5 -> {
                     ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");

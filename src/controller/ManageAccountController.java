@@ -9,13 +9,11 @@ import entity.*;
 
 public class ManageAccountController {
     public static final String PASSWORD_CRITERIA = "Passwords must have at least 8 characters and contain at least one lowercase letter, one uppercase letter and one digit.%n%n";
-    private final User currentUser;
 
-    public ManageAccountController(User uc) {
-        currentUser = uc;
+    public ManageAccountController() {
     }
 
-    public void updatePassword(String password) {
+    public void updatePassword(User currentUser, String password) {
         currentUser.setPassword(password);
         String table;
         if (currentUser instanceof Receptionist) {

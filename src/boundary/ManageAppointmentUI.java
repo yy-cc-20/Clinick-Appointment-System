@@ -14,14 +14,18 @@ import entity.Attendance;
 
 public class ManageAppointmentUI {
 
-    private final ManageAppointmentController controller = new ManageAppointmentController();
-    private final MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
-    private static Appointment selectedAppointment;
+    private ManageAppointmentController controller;
+    private MakeAppointmentController makeAppointmentController;
+
+    public ManageAppointmentUI(){
+        controller = new ManageAppointmentController();
+        makeAppointmentController = new MakeAppointmentController();
+    }
 
     // 1. update appointment's time slot
     // similar to make appointment
     public void updateAppointment() {
-        searchAppointmentToModify();
+        Appointment selectedAppointment = searchAppointmentToModify();
 
         if (selectedAppointment == null) {
             return;
@@ -69,23 +73,29 @@ public class ManageAppointmentUI {
     }
 
     // search and select an appointment to modify
-    private void searchAppointmentToModify() {
+    private Appointment searchAppointmentToModify() {
         List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+        Appointment selectedAppointment = null;
         if (appointments.size() == 0) {
-            return;
+            return null;
         }
+        boolean select = false;
         int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId() == appointmentId) {
                 selectedAppointment = appointment;
+                select = true;
             }
         }
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+        if (select){
+            MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+        }
+        return selectedAppointment;
     }
 
     // 2. cancel an appointment
     public void cancelAppointment() {
-        searchAppointmentToModify();
+        Appointment selectedAppointment = searchAppointmentToModify();
         if (selectedAppointment == null) {
             return;
         }
@@ -97,7 +107,7 @@ public class ManageAppointmentUI {
 
     // 3. record the attendance
     public void recordAttendance() {
-        searchAppointmentToModify();
+        Appointment selectedAppointment = searchAppointmentToModify();
         if (selectedAppointment == null) {
             return;
         }

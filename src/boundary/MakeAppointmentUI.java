@@ -13,15 +13,14 @@ import controller.MakeAppointmentController;
 
 public class MakeAppointmentUI {
 
-    private final static MakeAppointmentController controller = new MakeAppointmentController();
-    private final User theUser;
+    private static MakeAppointmentController controller;
 
-    public MakeAppointmentUI(User theUser) {
-        this.theUser = theUser;
+    public MakeAppointmentUI() {
+        controller = new MakeAppointmentController();
     }
 
     // 1. view the appointments
-    public void viewAppointment() {
+    public void viewAppointment(User theUser) {
         List<Appointment> appointments = controller.getAllAppointments(theUser);
         displayAppointments(appointments);
     }
@@ -45,7 +44,8 @@ public class MakeAppointmentUI {
 
     public static void displayAppointmentDetails(Appointment a) {
         System.out.printf("%3d | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n%n", a.getAppointmentId(),
-                a.getAppointmentDateString(), a.getTime(), a.getDuration(), a.getAllocation().getService().getServiceName(), a.getPatientId(), controller.getPatientName(a.getPatientId()),
+                a.getAppointmentDateString(), a.getTime(), a.getDuration(), a.getAllocation().getService().getServiceName(),
+                a.getPatientId(), controller.getPatientName(a.getPatientId()),
                 a.getAllocation().getDoctor().getUserId(), a.getAllocation().getDoctor().getUsername(), a.getAttendance());
     }
 
@@ -91,7 +91,7 @@ public class MakeAppointmentUI {
     // add appointment
     public void makeAppointment() {
         // search patient
-        ManagePatientUI managePatientUI = new ManagePatientUI(theUser);
+        ManagePatientUI managePatientUI = new ManagePatientUI();
         System.out.println("Search Patient");
         List<Patient> searchedPatient = managePatientUI.searchPatient();
         Patient selectedPatient = managePatientUI.selectPatient(searchedPatient);
