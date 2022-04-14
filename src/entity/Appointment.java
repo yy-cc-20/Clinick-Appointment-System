@@ -75,7 +75,7 @@ public class Appointment {
     public String getDuration() {
         int required = allocation.getService().getTimeSlotRequired();
         double time = ViewSlotsUI.timeSlotsToHour(required);
-        return String.format("%f hr(s)", time);
+        return String.format("%.1f hr(s)", time);
     }
 
     public int getStartSlot() {

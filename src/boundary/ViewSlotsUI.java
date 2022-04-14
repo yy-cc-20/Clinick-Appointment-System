@@ -141,7 +141,7 @@ public class ViewSlotsUI {
         Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
-        System.out.printf("%s\t\t| %-40s| %-15s\t |%n", "No", "Service", "Price");
+        System.out.printf("%s\t\t| %-40s| %-15s\t |%n", "ID", "Service", "Price");
 
         for (Service value : services) {
             service = value;
@@ -164,7 +164,7 @@ public class ViewSlotsUI {
 
         ConsoleUI.displayTableName(serviceName);
         System.out.println();
-        System.out.printf("%s\t\t| %-50s| %-18s |%n", "No", "Branch Name", "Telephone No");
+        System.out.printf("%s\t\t| %-50s| %-18s |%n", "ID", "Branch Name", "Telephone No");
 
         for (Branch branchResult : branchResults) {
             System.out.printf("%d\t\t| %-50s| %-18s | \n\t\t  %s |%n%n", branchResult.getBranchId(),

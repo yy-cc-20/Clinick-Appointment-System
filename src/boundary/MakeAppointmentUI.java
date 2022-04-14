@@ -28,9 +28,8 @@ public class MakeAppointmentUI {
 
     private static void displayAppointmentHeading() {
         ConsoleUI.displayTableName("Appointments");
-        System.out.println(
-                "Appointment ID \t| Date \t| Time \t| Duration \t| Service \t| Branch \t| Patient ID \t" +
-                        "| Patient \t| Doctor ID \t| Doctor \t| Attendance");
+        System.out.printf("%3s | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n", "ID", "Date", "Time",
+                "Duration", "Service", "ID", "Patient", "ID", "Doctor", "Attendance");
     }
 
     private static void displayAppointments(List<Appointment> appointmentsToDisplay) {
@@ -44,15 +43,10 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void displayAppointmentDetails(Appointment anAppointment) {
-        System.out.println(anAppointment.getAppointmentId() + " \t| " + anAppointment.getAppointmentDateString() + " \t| "
-                + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
-                + anAppointment.getAllocation().getService().getServiceName() + " \t| "
-                + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
-                + anAppointment.getPatientId() + " \t| " + controller.getPatientName(anAppointment.getPatientId()) + " \t| "
-                + anAppointment.getAllocation().getDoctor().getUserId() + " \t| "
-                + anAppointment.getAllocation().getDoctor().getUsername() + " \t| "
-                + anAppointment.getAttendance());
+    public static void displayAppointmentDetails(Appointment a) {
+        System.out.printf("%3d | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n%n", a.getAppointmentId(),
+                a.getAppointmentDateString(), a.getTime(), a.getDuration(), a.getAllocation().getService().getServiceName(), a.getPatientId(), controller.getPatientName(a.getPatientId()),
+                a.getAllocation().getDoctor().getUserId(), a.getAllocation().getDoctor().getUsername(), a.getAttendance());
     }
 
     // 2. search appointments
