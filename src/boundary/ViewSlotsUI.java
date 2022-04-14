@@ -56,6 +56,8 @@ public class ViewSlotsUI {
 
     public boolean viewSlots() {
         int servicesFound;
+        int branchesFound;
+        
         while (true) {
 
             servicesFound = viewService();
@@ -64,10 +66,8 @@ public class ViewSlotsUI {
 
             // validate selected service's ID
             while (true) {
-                if (!ConsoleInput.askBoolean("Select service"))
                 if (!ConsoleInput.askBoolean("Select a service to continue"))
                     return false;
-                serviceId = ConsoleInput.askPositiveInt("Service");
                 serviceId = ConsoleInput.askPositiveInt("Service ID");
                 if (validateSelectedServiceId(serviceId))
                     break;
@@ -75,15 +75,22 @@ public class ViewSlotsUI {
                 	System.out.println("Invalid input.");
             }
 
+            findServiceNameRequiredSlotsFromId();
+            branchesFound = viewBranchFilteredByService();
+            if (branchesFound <= 0) {
+                if (ConsoleInput.askBoolean("Continue searching"))
+                    continue;
+                else
+                    return false;
+            }
+            
             // validate selected branch's Id
             while (true) {
-                if (!ConsoleInput.askBoolean("Select branch"))
                 if (!ConsoleInput.askBoolean("Select a branch to continue"))
                     if (ConsoleInput.askBoolean("Continue searching"))
                         continue;
                     else
                         return false;
-                branchId = ConsoleInput.askPositiveInt("Branch");
                 branchId = ConsoleInput.askPositiveInt("Branch ID");
 
                 if (validateSelectedBranchId(branchId))
@@ -95,9 +102,8 @@ public class ViewSlotsUI {
             System.out.println("\n\nEnter a date to view the available time slot.");
             date = ConsoleInput.askDateNoEarlierThanToday("Booking date");
             viewTimeSlotFilteredByServiceBranchDate();
-            if (!ConsoleInput.askBoolean("Continue viewing services and time slots for booking")) {
+            if (!ConsoleInput.askBoolean("Continue viewing services and time slots for booking"))
                 return true;
-            }
         }
     }
 
