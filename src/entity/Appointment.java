@@ -86,20 +86,8 @@ public class Appointment {
         return allocation;
     }
 
-    public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
-    }
-
-    public void setAppointmentDate(LocalDate appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
     }
 
-
-    public void setAllocation(Allocation allocation) {
-        this.allocation = allocation;
-    }
 }

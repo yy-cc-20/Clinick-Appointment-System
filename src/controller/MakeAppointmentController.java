@@ -49,7 +49,6 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
-        DataList dataList = new DataList();
         List<Appointment> appointments = dataList.getAppointmentList();
         List<Appointment> results = new ArrayList<>();
 
@@ -109,13 +108,11 @@ public class MakeAppointmentController {
     }
 
     public String getPatientName(int id) {
-        DataList dataList = new DataList();
         return dataList.getPatient(id).getUsername();
     }
 
     // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
-        DataList dataList = new DataList();
         List<Allocation> allocations = dataList.getAllocationList();
 
         // find the service
@@ -173,7 +170,6 @@ public class MakeAppointmentController {
     }
 
     public Appointment createAppointment(LocalDate selectedDate, int userId, int id, Attendance nan, int startSlot) {
-        DataList dataList = new DataList();
         return new Appointment(selectedDate, userId, dataList.getAllocation(id), nan, startSlot);
     }
     /*

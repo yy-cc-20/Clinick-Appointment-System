@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import entity.*;
 
 public class ViewSlotsController {
-
+    private DataList dataList;
     private Statement st;
     private ResultSet rs;
     private String sql;
@@ -22,6 +22,7 @@ public class ViewSlotsController {
     // Column: the ids of the available doctors at that time
 
     public ViewSlotsController() {
+        dataList = new DataList();
         try {
             st = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e) {
@@ -240,7 +241,6 @@ public class ViewSlotsController {
     // Return branch objects of the specified ids
     public List<Branch> getBranchesById(List<Integer> ids) {
         List<Branch> branchResults = new ArrayList<>();
-        DataList dataList = new DataList();
 
         for (int id : ids)
             branchResults.add(dataList.getBranch(id));
