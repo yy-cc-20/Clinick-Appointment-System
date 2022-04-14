@@ -96,7 +96,7 @@ public class ViewSlotsUI {
                     System.out.println("Invalid input.");
             }
 
-            date = ConsoleInput.askDateNoEarlierThanToday("Date");
+            date = ConsoleInput.askDateNoEarlierThanToday("Appointment date");
             viewTimeSlotFilteredByServiceBranchDate();
             if (!ConsoleInput.askBoolean("Continue searching")) {
                 return true;
@@ -165,11 +165,11 @@ public class ViewSlotsUI {
         System.out.println();
         System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
 
-        for (Branch branchResult : branchResults) {
-            System.out.println(branchResult.getBranchId() + " \t| "
-                    + branchResult.getBranchName() + " \t| "
-                    + branchResult.getTelNo() + " \t| "
-                    + branchResult.getBranchAddress() + " \t| ");
+        for (Branch b : branchResults) {
+            System.out.println(b.getBranchId() + " \t| "
+                    + b.getBranchName() + " \t| "
+                    + b.getTelNo() + " \t| "
+                    + b.getBranchAddress() + " \t| ");
         }
         return branchResults.size();
     }
@@ -181,7 +181,7 @@ public class ViewSlotsUI {
         // value: the slots available for that time
         System.out.println();
         System.out.println();
-        ConsoleUI.displayTableName("Available Time Slots For " + serviceName);
+        ConsoleUI.displayTableName("Available Time Slots for " + serviceName);
         ConsoleUI.displayTableName("At " + findBranchNameFromId());
         ConsoleUI.displayTableName("On " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
         System.out.println();
@@ -234,14 +234,10 @@ public class ViewSlotsUI {
         return false;
     }
 
-//    // ViewSlotsUI test
-//    public static void main(String[] args) {
-//        System.out.println(timeSlotsToHour(1));
-//        System.out.println(timeSlotsToHour(2));
-//        System.out.println(timeSlotsToHour(3));
-//        System.out.println(timeSlotsToHour(4));
-//        System.out.println(timeSlotsToHour(5));
-//
-//        ViewSlotsUI.getInstance().viewSlots();
-//    }
+    // ViewSlotsUI test
+    public static void main(String[] args) {
+        ViewSlotsUI
+        .getInstance()
+        .viewSlots();
+    }
 }
