@@ -4,175 +4,283 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.PreparedStatement;
-import java.sql.Date;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import database.DatabaseConnection;
 
 /*
- * IDataStore dataList = DataList.getInstance(); // Already retrieved the data
+ * This class read data from the database and create objects from it.
+ * This class does not save the data to the database.
+ * To get the latest data, use the getXXList() method to get the data in the database.
  */
 
-public class DataList {
+// If implements IDataStore interface
+// The static methods need to be written in IDataStore
 
-    private static IDataStore instance;
-    private List<Doctor> doctorList;
-    private List<Patient> patientList;
-    private List<Receptionist> receptionistList;
-    private List<Appointment> appointmentList;
-    private List<Allocation> allocationList;
-    private List<Branch> branchList;
-    private List<Service> serviceList;
+public class DataList{
+	// Do not know why need to use local variable instead of the data members for Statement and ResultSet object.
+	// This is the only way can work.
+	
+	// List
+	private static List<Patient> patientList;
+	private static List<Appointment> appointmentList;
+	private static List<Allocation> allocationList;
+	private static List<Branch> branchList;
+	private static List<Receptionist> receptionistList;
+	private static List<Service> serviceList;
+	private static List<Doctor> doctorList;
+	
+	// SQL related
+	private static Connection conn = DatabaseConnection.getConnection();
 
-    private Connection con;
-    private Statement st;
-    private ResultSet rs;
-
-    // Private constructor for singleton
-    private DataList() {
+	public static List<Doctor> getDoctorList() {
+    	doctorList = new ArrayList<>();
         try {
-            con = DatabaseConnection.getConnection();
-            st = con.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static IDataStore getInstance() {
-        if (instance == null) {
-//            instance = new DataList();
-        }
-        return instance;
-    }
-
-    public List<Appointment> getAppointmentList(String query, String column, String data) {
-        try {
-            appointmentList = new ArrayList<>();
-            // e.g., query = "filter" column = "id" data = "1"
-            // e.g., query = "sort" column = "id" data = "asc"
-            if (query == null)
-                rs = st.executeQuery("SELECT * FROM appointment;");
-            else if (query.equalsIgnoreCase("filter"))
-                rs = st.executeQuery("SELECT * FROM appointment WHERE " + column + " = " + data + ";");
-            else if (query.equalsIgnoreCase("sort"))
-                rs = st.executeQuery("SELECT * FROM appointment ORDER BY " + column + " " + data + ";");
-
+        	Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM doctor ORDER BY id;");
             while (rs.next()) {
                 int id = rs.getInt("id");
-                Date date = rs.getDate("date");
-                String attendance = rs.getString("attendance");
-                int startSlot = rs.getInt("startSlot");
-                int patientId = rs.getInt("patientId");
-                int allocationId = rs.getInt("allocationId");
-                Appointment appointment = new Appointment(id, date.toString(), patientId,
-                        allocationId, attendance, startSlot);
-                appointmentList.add(appointment);
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                Doctor doctor = new Doctor(id, name, password);
+                doctorList.add(doctor);
             }
-            System.out.println("appointmentList " + appointmentList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return appointmentList;
+        return doctorList;
+    }
+	
+	public static List<Service> getServiceList() {
+		serviceList = new ArrayList<>();
+        try {
+        	Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM service ORDER BY id;");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                String description = rs.getString("description");
+                int timeslotRequired = rs.getInt("timeSlotRequired");
+                Service service = new Service(id, name, price, description, timeslotRequired);
+                serviceList.add(service);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return serviceList;
     }
 
-
-    public List<Branch> getBranchList(String query, String column, String data) {
+    public static List<Receptionist> getReceptionistList() {
+    	receptionistList = new ArrayList<>();
         try {
-            branchList = new ArrayList<>();
-            if (query == null)
-                rs = st.executeQuery("SELECT branch.id, branch.name, branch.address, branch.telNo, branch.receptionistId FROM branch, receptionist WHERE branch.receptionistId = receptionist.Id;");
-            else if (query.equalsIgnoreCase("filter"))
-                rs = st.executeQuery("SELECT * FROM branch WHERE " + column + " = " + data + ";");
-            else if (query.equalsIgnoreCase("sort"))
-                rs = st.executeQuery("SELECT * FROM branch ORDER BY " + column + " " + data + ";");
-
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM receptionist ORDER BY id;");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                Receptionist receptionist = new Receptionist(id, name, password);
+                receptionistList.add(receptionist);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return receptionistList;
+    }
+    
+	public static List<Branch> getBranchList() {
+		branchList = new ArrayList<>();
+		try {
+			Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM branch ORDER BY id;");
+           
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String address = rs.getString("address");
                 String telNo = rs.getString("telNo");
-                int receptionistId = rs.getInt("receptionistId");
-                Branch branch = new Branch(id, name, address, receptionistId, telNo);
+                Receptionist rep = getReceptionist(rs.getInt("receptionistId"));
+                Branch branch = new Branch(id, name, address, rep, telNo);
                 branchList.add(branch);
             }
-            System.out.println("branchList " + branchList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return branchList;
-    }
+	}
 
-
-
-
-    public void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId) {
+	public static List<Allocation> getAllocationList() {
+		allocationList = new ArrayList<>();
+		try {
+			Statement st = DatabaseConnection.getConnection().createStatement();
+			ResultSet rs = st.executeQuery("SELECT doctorId, branchId, serviceId, id FROM allocation ORDER BY id;");
+			while (rs.next()) {
+				Service service = getService(rs.getInt("serviceId"));
+				Doctor doctor = getDoctor(rs.getInt("doctorId"));
+				Branch branch = getBranch(rs.getInt("branchId"));
+				Allocation allocation = new Allocation(rs.getInt("id"), service, branch, doctor);
+				allocationList.add(allocation);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return allocationList;
+	}
+	
+	public static List<Appointment> getAppointmentList() {
+		appointmentList = new ArrayList<>();
+		try {
+			Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM appointment ORDER BY id;");
+           
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                LocalDate date = rs.getDate("date").toLocalDate();
+                Attendance attendance = attendanceStringToEnum(rs.getString("attendance"));
+                int startSlot = rs.getInt("startSlot");
+                int patientId = rs.getInt("patientId");
+                Allocation allocation = getAllocation(rs.getInt("allocationId"));
+                Appointment appointment = new Appointment(id, date, patientId, allocation, attendance, startSlot);
+                appointmentList.add(appointment);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appointmentList;
+	}
+	
+    public static List<Patient> getPatientList() {
+    	patientList = new ArrayList<>();
         try {
-            st.executeUpdate("INSERT IGNORE INTO appointment (date, attendance, startSlot, patientId, allocationId) " +
-                    "VALUES ('" + date + "','" + attendance + "','" + startSlot + "','" + patientId + "','"
-                    + allocationId + "')");
+        	Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM patient ORDER BY id;");
+            
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String ic = rs.getString("ic");
+                String phone = rs.getString("phone");
+                String address = rs.getString("address");
+                String password = rs.getString("password");
+                List<Appointment> appointmentList = getAppointmentListByPatientId(id);
+                Patient patient = new Patient(id, name, password, ic, phone, address, appointmentList);
+                patientList.add(patient);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return patientList;
     }
+    
+	/** @return an empty object if id not found */
+    // If you want to the latest data from the database, call getXXList() before calling these method
+	public static Doctor getDoctor(int id) {
+		if (doctorList == null)
+			getDoctorList(); // Initialize doctorList
+		for (Doctor d : doctorList)
+			if (d.getUserId() == id)
+				return d;
+		return new Doctor();
+	}
+	
+	public static Service getService(int id) {
+		if (serviceList == null)
+			getServiceList(); // Initialize serviceList
+		for (Service s : serviceList)
+			if (s.getServiceId() == id)
+				return s;
+		return new Service();
+	}
 
-    // provide the patient's full information to add into database
-    public void addPatientFull(String name, String ic, String phone, String address, String password) {
-        try {
-            st.executeUpdate("INSERT IGNORE INTO patient (name, ic, phone, address, password) " +
-                    "VALUES ('" + name + "','" + ic + "','" + phone + "','" + address + "','" + password + "')");
-        } catch (SQLException e) {
-            e.printStackTrace();
+	public static Receptionist getReceptionist(int id) {
+		if (receptionistList == null)
+			getReceptionistList(); // Initialize receptionistList
+		for (Receptionist r : receptionistList)
+			if (r.getUserId() == id)
+				return r;
+		return new Receptionist();
+	}
+	
+	public static Branch getBranch(int id) {
+		if (branchList == null)
+			getBranchList(); // Initialize branchList
+		for (Branch b : branchList)
+			if (b.getBranchId() == id)
+				return b;
+		return new Branch();
+	}
+
+	public static Allocation getAllocation(int id) {
+		if (allocationList == null)
+			getAllocationList(); // Initialize allocationList
+		for (Allocation a : allocationList)
+			if (a.getLinkId() == id)
+				return a;
+		return new Allocation();
+	}
+	
+	public static Appointment getAppointment(int id) {
+		if (appointmentList == null)
+			getAppointmentList(); // Initialize appointmentList
+		for (Appointment a : appointmentList)
+			if (a.getAppointmentId() == id)
+				return a;
+		return new Appointment();
+	}
+	
+	public static Patient getPatient(int id) {
+		if (patientList == null)
+			getPatientList(); // Initialize patientL
+		for (Patient p : patientList)
+			if (p.getUserId() == id)
+				return p;
+		return new Patient();
+	}
+	
+	public static Attendance attendanceStringToEnum(String attendance) {
+        if (attendance.equals("Attended")) {
+            return Attendance.ATTENDED;
+        } else if (attendance.equals("Absent")) {
+            return Attendance.ABSENT;
+        } else {
+            return Attendance.NAN;
         }
     }
-
-    public void updatePatient (String phoneNo, String address, int patientId){
-        try {
-            st.executeUpdate("UPDATE Patient SET phone='" + phoneNo + "', address='" + address + "' WHERE id='" + patientId + "'");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // provide the appointmentId to update, with the new date and startSlot
-    public void updateAppointmentTime(int id, String date, int startSlot) {
-        String query = ( "UPDATE appointment SET date=?, startSlot=? WHERE id=?" );
-        try (PreparedStatement pstmt = con.prepareStatement(query)) {
-            pstmt.setInt(3, id);
-            pstmt.setDate(1, new Date(new SimpleDateFormat("dd-MM-yyyy").parse(date).getTime()));
-            pstmt.setInt(2, startSlot);
-            pstmt.executeUpdate();
-        } catch (SQLException | ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // provide the appointmentId to update, with the updated attendance record
-    public void updateAppointmentAttendance(int id, String attendance) {
-        String query = ( "UPDATE appointment SET attendance=? WHERE id=?" );
-        try (PreparedStatement pstmt = con.prepareStatement(query)) {
-            pstmt.setInt(2, id);
-            pstmt.setString(1, attendance);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // provide the appointmentId to update to cancel the appointment
-    public void cancelAppointment(int id) {
-        String query = ( "DELETE FROM appointment WHERE id=?" );
-        try (PreparedStatement pstmt = con.prepareStatement(query)) {
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
+	
+	public static List<Appointment> getAppointmentListByPatientId(int id) {
+		if (appointmentList == null)
+			getAppointmentList(); // Initialize appointmentList
+		List<Appointment> apptList = new ArrayList<>();
+		for (Appointment a : appointmentList)
+			if (a.getPatientId() == id)
+				apptList.add(a);
+		return apptList;
+	}
+	/*
+	// DataList test
+	// Before you start to do this class
+	// Make sure the classes you use is working fine
+	// It is not easy to debug a big class ...
+	public static void main(String[] args) {
+		List<Patient> patientList = DataList2.getPatientList();
+		Patient patient = patientList.get(5);
+		List<Appointment> appointmentList = patient.getAppointments();
+		Appointment appointment = appointmentList.get(1);
+		Allocation allocation = appointment.getAllocation();
+		Service service = allocation.getService();
+		Branch branch = allocation.getBranch();
+		Doctor doctor = allocation.getDoctor();
+		Receptionist receptionist = branch.getReceptionist();
+		
+		System.out.println(patient.getUserId()); // 6
+		System.out.println(appointment.getAppointmentId()); // 21
+		System.out.println(allocation.getLinkId()); // 2
+		System.out.println(service.getServiceId()); // 2
+		System.out.println(branch.getBranchId()); // 1
+		System.out.println(doctor.getUserId()); // 2
+		System.out.println(receptionist.getUserId()); // 1
+	}*/
 }

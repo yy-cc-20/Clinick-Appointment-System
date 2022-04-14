@@ -223,7 +223,7 @@ public class ViewSlotsController {
     	List<Branch> branchResults = new ArrayList<>();
         
     	for (int id : ids)
-    		branchResults.add(DataList2.createBranchObject(id));
+    		branchResults.add(DataList.getBranch(id));
 
         return branchResults;
     }

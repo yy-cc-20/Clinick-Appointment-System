@@ -2,16 +2,28 @@ package controller;
 
 import boundary.ConsoleUI;
 import boundary.ViewSlotsUI;
+import database.DatabaseConnection;
 import entity.*;
 
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
+	private Statement st;
+	
+	public MakeAppointmentController() {
+		try {
+			st = DatabaseConnection.getConnection().createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
     // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
-        List<Appointment> appointments = DataList2.getAppointmentList();
+        List<Appointment> appointments = DataList.getAppointmentList();
 
         if (theUser instanceof Patient) {
             List<Appointment> patientAppointments = new ArrayList<>();
@@ -34,7 +46,7 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
-        List<Appointment> appointments = DataList2.getAppointmentList();
+        List<Appointment> appointments = DataList.getAppointmentList();
         List<Appointment> results = new ArrayList<>();
 
         switch (choice) {
@@ -69,7 +81,7 @@ public class MakeAppointmentController {
             }
             case 5 -> {
                 for (Appointment appointment : appointments) {
-                    if (appointment.getPatient().getUsername().toLowerCase().contains(searchKeyword)) {
+                    if (getPatientName(appointment.getPatientId()).toLowerCase().contains(searchKeyword)) {
                         results.add(appointment);
                     }
                 }
@@ -91,13 +103,17 @@ public class MakeAppointmentController {
         }
         return results;
     }
-
+    
+    public String getPatientName(int id) {
+    	return DataList.getPatient(id).getUsername();
+    }
+    
     // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
-        List<Allocation> allocations = DataList.getInstance().getAllocationList();
+        List<Allocation> allocations = DataList.getAllocationList();
 
         // find the service
-        List<Service> services = DataList.getInstance().getServiceList();
+        List<Service> services = DataList.getServiceList();
         Service service = new Service();
         for (Service item : services) {
             if (item.getServiceId() == viewSlotsUI.getSelectedServiceId()) {
@@ -134,9 +150,19 @@ public class MakeAppointmentController {
         String date = appointmentToBook.getAppointmentDate().format(ConsoleUI.DATE_SQL_FORMATTER);
         String attendance = appointmentToBook.getAttendance().toString();
         int startSlot = appointmentToBook.getStartSlot();
-        int patientId = appointmentToBook.getPatient().getUserId();
+        int patientId = appointmentToBook.getPatientId();
         int allocationId = appointmentToBook.getAllocation().getLinkId();
 
-        DataList.getInstance().addAppointment(date, attendance, startSlot, patientId, allocationId);
+        addAppointment(date, attendance, startSlot, patientId, allocationId);
+    }
+
+    public void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId) {
+        try {
+            st.executeUpdate("INSERT IGNORE INTO appointment (date, attendance, startSlot, patientId, allocationId) " +
+                    "VALUES ('" + date + "','" + attendance + "','" + startSlot + "','" + patientId + "','"
+                    + allocationId + "')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

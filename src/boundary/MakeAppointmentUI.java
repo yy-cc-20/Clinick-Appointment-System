@@ -49,7 +49,7 @@ public class MakeAppointmentUI {
                 + anAppointment.getTime() + " \t| " + anAppointment.getDuration() + " \t| "
                 + anAppointment.getAllocation().getService().getServiceName() + " \t| "
                 + anAppointment.getAllocation().getBranch().getBranchName() + " \t| "
-                + anAppointment.getPatient().getUserId() + " \t| " + anAppointment.getPatient().getUsername() + " \t| "
+                + anAppointment.getPatientId() + " \t| " + controller.getPatientName(anAppointment.getPatientId()) + " \t| "
                 + anAppointment.getAllocation().getDoctor().getUserId() + " \t| "
                 + anAppointment.getAllocation().getDoctor().getUsername() + " \t| "
                 + anAppointment.getAttendance());
@@ -72,7 +72,8 @@ public class MakeAppointmentUI {
                 searchKeyword = date.format(ConsoleUI.DATE_OUTPUT_FORMATTER);
             }
             case 7 -> {
-                Attendance attendance = Attendance.askAttendance();
+            	ManageAppointmentUI.displayAttendanceChoice();
+                Attendance attendance = ConsoleInput.askAttendance();
                 searchKeyword = attendance.toString();
             }
             default -> searchKeyword = ConsoleInput.askString("Search keyword");
@@ -132,8 +133,11 @@ public class MakeAppointmentUI {
             }
             if (allocated) {
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
-                String date = viewSlotsUI.getSelectedDate().format(ConsoleUI.DATE_SQL_FORMATTER);
-                Appointment appointmentToBook = new Appointment(date, selectedPatient.getUserId(), allocation.getLinkId(), Attendance.NAN.toString(), startSlot);
+                Appointment appointmentToBook = new Appointment(viewSlotsUI.getSelectedDate(), 
+                		selectedPatient.getUserId(), 
+                		DataList.getAllocation(allocation.getLinkId()), 
+                		Attendance.NAN, 
+                		startSlot);
                 // display appointment to book
                 displayAppointmentDetails(appointmentToBook);
                 // ask confirmation to book
@@ -151,7 +155,7 @@ public class MakeAppointmentUI {
             }
         }
     }
-    
+
     public static void displayMenuForSearchingAppointment() {
         System.out.println("Search by:           ");
         System.out.println(" 1. Appointment ID   ");

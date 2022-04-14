@@ -8,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import database.DatabaseConnection;
-import entity.DataList;
 
 public class ManageAppointmentController {
 	private static Connection conn = DatabaseConnection.getConnection();
@@ -42,7 +41,6 @@ public class ManageAppointmentController {
 
     // provide the appointmentId to update to cancel the appointment
     public void cancelAppointment(int id) {
-        // TODO : cancel the appointment
         String query = ( "DELETE FROM appointment WHERE id=?" );
         try (PreparedStatement pstmt = conn.prepareStatement(query)) {
             pstmt.setInt(1, id);

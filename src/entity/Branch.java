@@ -6,7 +6,7 @@ public class Branch {
     private String branchAddress;
     private Receptionist receptionist;
     private String telNo;
-
+/*
     public Branch(int branchId, String branchName, String branchAddress, int receptionistId, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
@@ -14,7 +14,7 @@ public class Branch {
         this.receptionist = DataList2.createReceptionistObject(receptionistId);
         this.telNo = telNo;
     }
-
+*/
     public Branch(int branchId, String branchName, String branchAddress, Receptionist rec, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
@@ -79,5 +79,4 @@ public class Branch {
     public void setTelNo(String telNo) {
         this.telNo = telNo;
     }
-
 }

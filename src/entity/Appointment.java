@@ -4,14 +4,14 @@ import boundary.ConsoleUI;
 import boundary.ViewSlotsUI;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Appointment {
+	// If there is Patient as the data member of Appointment and List<Appointment> as the data member of the Patient
+    // It is not easily to create the objects
     private int patientId;
+    
     private int appointmentId;
     private LocalDate appointmentDate;
-    // If there is Patient as the data member of Appointment and List<Appointment> as the data member of the Patient
-    // It is not easily to create the objects
     private Allocation allocation;
     private Attendance attendance;
     private int startSlot;
@@ -35,6 +35,17 @@ public class Appointment {
 		this.startSlot = startSlot;
 	}
     
+    public Appointment(LocalDate ad, int p, Allocation a, Attendance at, int startSlot) {
+		this.appointmentDate = ad;
+		this.patientId = p;
+		this.allocation = new Allocation(a);
+		this.attendance = at;
+		this.startSlot = startSlot;
+	}
+
+    public Appointment() {
+    }
+    /*
     public Appointment(int appointmentId, String appointmentDate, int patientId, int allocationId,
                        String attendance, int startSlot) {
         this.appointmentId = appointmentId;
@@ -53,8 +64,6 @@ public class Appointment {
         this.startSlot = startSlot;
     }
 
-    public Appointment() {
-    }
 
     private Patient findPatient(int patientId) {
         List<Patient> patients = DataList2.getPatientList();
@@ -65,7 +74,7 @@ public class Appointment {
         }
         return null;
     }
-
+*/
 //    private Allocation findAllocation(int appointmentId) {
 //        List<Allocation> allocations = DataList.getInstance().getAllocationList();
 //        for (Allocation value : allocations) {

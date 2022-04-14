@@ -19,7 +19,10 @@ public class ViewSlotsUI {
 
     private final static ViewSlotsUI instance = new ViewSlotsUI();
     private final ViewSlotsController controller = ViewSlotsController.getInstance();
-
+    
+    // List
+    private List<Service> services = DataList.getServiceList();
+    
     // Filters
     private int serviceId;
     private int branchId;
@@ -123,7 +126,7 @@ public class ViewSlotsUI {
      * @return number of row of results
      */
     public int viewService() {
-        List<Service> services = DataList.getInstance().getServiceList();
+        
         if (services.size() == 0) {
             System.out.println("No service found.");
             return services.size();
@@ -205,7 +208,6 @@ public class ViewSlotsUI {
     }
 
     public void findServiceNameRequiredSlotsFromId() {
-        List<Service> services = DataList.getInstance().getServiceList();
         for (Service s : services)
             if (s.getServiceId() == serviceId) {
                 serviceName = s.getServiceName();
@@ -223,7 +225,6 @@ public class ViewSlotsUI {
 
     // Check if the id is exists
     public boolean validateSelectedServiceId(int id) {
-        List<Service> services = DataList.getInstance().getServiceList();
         for (Service s : services)
             if (s.getServiceId() == id)
                 return true;

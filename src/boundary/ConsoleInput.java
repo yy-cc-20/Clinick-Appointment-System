@@ -8,12 +8,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import entity.Attendance;
+
 public class ConsoleInput {
     private static final String ERROR_MESSAGE = "Sorry, cannot greater than 5 digits.";
 
     public static final DateTimeFormatter DATE_INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy"); // Input date format, "1-1-2022" and "01-01-2022" are both acceptable
     // There is another format for output in ConsoleUI
 
+    public static Attendance askAttendance() {
+        int choice = ConsoleInput.askChoice(1, 3, "Select attendance");
+
+        return switch (choice) {
+            case 1 -> Attendance.ATTENDED;
+            case 2 -> Attendance.ABSENT;
+            default -> Attendance.NAN; // case 3
+        };
+    }
+    
     // Ask user the date, set the valid date
     public static LocalDate askDate(String info) {
         String stringDate;

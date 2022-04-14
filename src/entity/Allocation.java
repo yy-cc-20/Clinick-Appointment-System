@@ -1,27 +1,28 @@
 package entity;
 
-import java.util.List;
-
 public class Allocation {
-    private int linkId;
+    private int allocationId;
     private Branch branch;
     private Service service;
     private Doctor doctor;
-
+    
+    // Copy constructor: create a new object with exactly the same properties
     public Allocation(int linkId, Service service, Branch branch, Doctor doctor){
-        this.linkId = linkId;
+        this.allocationId = linkId;
         this.branch = branch;
         this.service = service;
         this.doctor = doctor;
     }
 
     public Allocation(Allocation a){
-        this.linkId = a.linkId;
+        this.allocationId = a.allocationId;
         this.branch = a.branch;
         this.service = a.service;
         this.doctor = a.doctor;
     }
-
+    
+    public Allocation(){}
+/*
     public Allocation(int linkId, int branchId, int serviceId, int doctorId) {
         this.linkId = linkId;
         this.branch = findBranch(Integer.toString(branchId));
@@ -29,7 +30,7 @@ public class Allocation {
         this.doctor = findDoctor(Integer.toString(doctorId));
     }
 
-    public Allocation(){}
+    
 
     private Branch findBranch(String branchId) {
         List<Branch> branches = DataList2.getBranchList();
@@ -60,13 +61,13 @@ public class Allocation {
         }
         return null;
     }
-
+*/
     public int getLinkId() {
-        return linkId;
+        return allocationId;
     }
 
     public void setLinkId(int linkId) {
-        this.linkId = linkId;
+        this.allocationId = linkId;
     }
 
     public Branch getBranch() {
