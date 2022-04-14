@@ -80,15 +80,6 @@ public class DataList {
         return appointmentList;
     }
 
-    // Return branch objects of the specified ids
-    public List<Branch> getBranchesById(List<Integer> ids) {
-        List<Branch> branchResults = new ArrayList<>();
-
-        for (Integer id : ids)
-            branchResults.add(getBranchList("filter", "id", id.toString()).get(0));
-
-        return branchResults;
-    }
 
     public List<Branch> getBranchList(String query, String column, String data) {
         try {
@@ -117,109 +108,8 @@ public class DataList {
         return branchList;
     }
 
-    public List<Service> getServiceList() {
-        try {
-            serviceList = new ArrayList<>();
-            rs = st.executeQuery("SELECT * FROM service ORDER BY id;");
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                double price = rs.getDouble("price");
-                String description = rs.getString("description");
-                int timeslotRequired = rs.getInt("timeSlotRequired");
-                Service service = new Service(id, name, price, description, timeslotRequired);
-                serviceList.add(service);
-            }
-//			System.out.println("serviceList " + serviceList.size());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return serviceList;
-    }
 
-    public List<Doctor> getDoctorList() {
-        try {
-            doctorList = new ArrayList<>();
-            rs = st.executeQuery("SELECT * FROM doctor ORDER BY id;");
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String password = rs.getString("password");
-                Doctor doctor = new Doctor(id, name, password);
-                doctorList.add(doctor);
-            }
-//			System.out.println("doctorList " + doctorList.size());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return doctorList;
-    }
 
-    public List<Allocation> getAllocationList() {
-        try {
-            allocationList = new ArrayList<>();
-            rs = st.executeQuery("SELECT * FROM allocation ORDER BY id;");
-            // rs.next returns false on second iteration
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                int branchId = rs.getInt("branchId");
-                int serviceId = rs.getInt("serviceId");
-                int doctorId = rs.getInt("doctorId");
-                Allocation allocation = new Allocation(id, branchId, serviceId, doctorId);
-                allocationList.add(allocation);
-            }
-            System.out.println("allocationList " + allocationList.size());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return allocationList;
-    }
-
-    public List<Patient> getPatientList(String query, String column, String data) {
-        try {
-            patientList = new ArrayList<>();
-            rs = st.executeQuery("SELECT * FROM patient ORDER BY id;");
-            if (query == null)
-                rs = st.executeQuery("SELECT * FROM patient ORDER BY id;");
-            else if (query.equalsIgnoreCase("filter"))
-                rs = st.executeQuery("SELECT * FROM patient WHERE " + column + " = " + data + ";");
-            else if (query.equalsIgnoreCase("sort"))
-                rs = st.executeQuery("SELECT * FROM patient ORDER BY " + column + " " + data + ";");
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String ic = rs.getString("ic");
-                String phone = rs.getString("phone");
-                String address = rs.getString("address");
-                String password = rs.getString("password");
-                Patient patient = new Patient(id, name, password, ic, phone, address);
-                patientList.add(patient);
-            }
-//			System.out.println("patientList " + patientList.size());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return patientList;
-    }
-
-    public List<Receptionist> getReceptionistList() {
-        try {
-            receptionistList = new ArrayList<>();
-            rs = st.executeQuery("SELECT * FROM receptionist ORDER BY id;");
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String password = rs.getString("password");
-                Receptionist receptionist = new Receptionist(id, name, password);
-                receptionistList.add(receptionist);
-            }
-//			System.out.println("receptionistList " + receptionistList.size());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return receptionistList;
-    }
 
     public void addAppointment(String date, String attendance, int startSlot, int patientId, int allocationId) {
         try {
