@@ -13,12 +13,16 @@ import entity.*;
  */
 
 public class LoginUI {
-    private final LoginController loginController = new LoginController();
+    private final LoginController loginController;
     private boolean hasLogin;
     private int role;
     private int userid;
     private String password;
     private String username;
+
+    public LoginUI(){
+        loginController = new LoginController();
+    }
 
     // Use this method for login
     // Lock account and exit program if fail too many times

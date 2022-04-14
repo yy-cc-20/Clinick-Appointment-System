@@ -13,8 +13,10 @@ import java.util.List;
 
 public class MakeAppointmentController {
     private Statement st;
+    DataList dataList;
 
     public MakeAppointmentController() {
+        dataList = new DataList();
         try {
             st = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e) {
@@ -24,7 +26,6 @@ public class MakeAppointmentController {
 
     // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
-        DataList dataList = new DataList();
         List<Appointment> appointments = dataList.getAppointmentList();
 
         if (theUser instanceof Patient) {
