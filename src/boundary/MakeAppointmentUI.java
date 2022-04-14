@@ -98,6 +98,7 @@ public class MakeAppointmentUI {
     public void makeAppointment() {
         // search patient
         ManagePatientUI managePatientUI = new ManagePatientUI(theUser);
+        System.out.println("Search Patient");
         List<Patient> searchedPatient = managePatientUI.searchPatient();
         Patient selectedPatient = managePatientUI.selectPatient(searchedPatient);
         if (selectedPatient == null) {

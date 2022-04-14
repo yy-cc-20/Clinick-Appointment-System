@@ -50,6 +50,7 @@ public class ViewSlotsUI {
     /**
      * @return false if the user did not continue to view the available time slots
      * or no result was found
+     * @return true if the user wants to select a time slot
      */
     
     public boolean viewSlots() {
@@ -115,6 +116,10 @@ public class ViewSlotsUI {
         return date;
     }
 
+    public int getRequiredSlots() {
+    	return requiredSlots;
+    }
+    
     public List<List<Integer>> getAvailableDoctors() {
         // index: the time slot
         // row: an array of the doctors available for that time
