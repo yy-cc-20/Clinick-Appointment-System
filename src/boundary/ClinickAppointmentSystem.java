@@ -69,7 +69,7 @@ public class ClinickAppointmentSystem {
         int choiceNo; // the action that user wants to perform
 
         while (true) {
-            ConsoleUI.displaySystemName("Clinick Booking System");
+            ConsoleUI.displaySystemName("Clinick Appointment Booking System");
             ConsoleUI.displayMenuForGuest();
             choiceNo = ConsoleInput.askChoice(0, 2, "Your choice");
 
@@ -100,7 +100,7 @@ public class ClinickAppointmentSystem {
         boolean toExit;
         while (true) {
         	
-            ConsoleUI.displaySystemName("Clinick Booking System");
+            ConsoleUI.displaySystemName("Clinick Appointment Booking System");
             ConsoleUI.displayMenuForReceptionist();
             choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");
 
@@ -167,7 +167,7 @@ public class ClinickAppointmentSystem {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
-            ConsoleUI.displaySystemName("Clinick Booking System");
+            ConsoleUI.displaySystemName("Clinick Appointment Booking System");
             ConsoleUI.displayMenuForDoctor();
             choiceNo = ConsoleInput.askChoice(0, 4, "Your choice");
 
@@ -206,7 +206,7 @@ public class ClinickAppointmentSystem {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
-            ConsoleUI.displaySystemName("Clinick Booking System");
+            ConsoleUI.displaySystemName("Clinick Appointment Booking System");
             ConsoleUI.displayMenuForPatient();
             choiceNo = ConsoleInput.askChoice(0, 5, "Your choice");
 
