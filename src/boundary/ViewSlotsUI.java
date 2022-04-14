@@ -19,7 +19,6 @@ public class ViewSlotsUI {
 
     private final static ViewSlotsUI instance = new ViewSlotsUI();
     private final ViewSlotsController controller = ViewSlotsController.getInstance();
-    
 
     // List
     private static final List<Service> services = DataList.getServiceList();
