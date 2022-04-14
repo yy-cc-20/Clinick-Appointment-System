@@ -265,7 +265,6 @@ public class DataList {
 	// DataList test
 	// Before you start to do this class
 	// Make sure the classes you use is working fine
-	// It is not easy to debug a big class ...
 	public static void main(String[] args) {
 		List<Patient> patientList = DataList2.getPatientList();
 		Patient patient = patientList.get(5);
