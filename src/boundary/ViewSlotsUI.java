@@ -64,9 +64,9 @@ public class ViewSlotsUI {
 
             // validate selected service's ID
             while (true) {
-                if (!ConsoleInput.askBoolean("Select service"))
+                if (!ConsoleInput.askBoolean("Select a service to continue"))
                     return false;
-                serviceId = ConsoleInput.askPositiveInt("Service");
+                serviceId = ConsoleInput.askPositiveInt("Service ID");
                 if (validateSelectedServiceId(serviceId))
                     break;
                 else
@@ -84,21 +84,22 @@ public class ViewSlotsUI {
 
             // validate selected branch's Id
             while (true) {
-                if (!ConsoleInput.askBoolean("Select branch"))
+                if (!ConsoleInput.askBoolean("Select a branch to continue"))
                     if (ConsoleInput.askBoolean("Continue searching"))
                         continue;
                     else
                         return false;
-                branchId = ConsoleInput.askPositiveInt("Branch");
+                branchId = ConsoleInput.askPositiveInt("Branch ID");
+
                 if (validateSelectedBranchId(branchId))
                     break;
                 else
                     System.out.println("Invalid input.");
             }
-
-            date = ConsoleInput.askDateNoEarlierThanToday("Date");
+            System.out.println("\n\nEnter a date to view the available time slot.");
+            date = ConsoleInput.askDateNoEarlierThanToday("Booking date");
             viewTimeSlotFilteredByServiceBranchDate();
-            if (!ConsoleInput.askBoolean("Continue searching")) {
+            if (!ConsoleInput.askBoolean("Continue viewing services and time slots for booking")) {
                 return true;
             }
         }
@@ -140,11 +141,11 @@ public class ViewSlotsUI {
         Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
-        System.out.println("No \t| Service \t| Price (RM) \t| Description \t|");
+        System.out.printf("%s\t\t| %-40s| %-15s\t |%n", "No", "Service", "Price");
 
         for (Service value : services) {
             service = value;
-            System.out.printf("%d\t|%s\t|%.2f\t|%s\t|%n", service.getServiceId(),
+            System.out.printf("%d\t\t| %-40s| RM%-15.2f| \n\t%s |%n%n", service.getServiceId(),
                     service.getServiceName(),
                     service.getPrice(),
                     service.getDescription());
@@ -163,13 +164,13 @@ public class ViewSlotsUI {
 
         ConsoleUI.displayTableName(serviceName);
         System.out.println();
-        System.out.println("No \t| Branch Name \t|Telephone No \t| Branch Address \t|  ");
+        System.out.printf("%s\t\t| %-50s| %-18s |%n", "No", "Branch Name", "Telephone No");
 
         for (Branch branchResult : branchResults) {
-            System.out.println(branchResult.getBranchId() + " \t| "
-                    + branchResult.getBranchName() + " \t| "
-                    + branchResult.getTelNo() + " \t| "
-                    + branchResult.getBranchAddress() + " \t| ");
+            System.out.printf("%d\t\t| %-50s| %-18s | \n\t\t  %s |%n%n", branchResult.getBranchId(),
+                    branchResult.getBranchName(),
+                    branchResult.getTelNo(),
+                    branchResult.getBranchAddress());
         }
         return branchResults.size();
     }
@@ -189,7 +190,7 @@ public class ViewSlotsUI {
         for (TimeSlot slot : TimeSlot.values()) {
             int i = slot.ordinal() + 1;
             System.out.println(i + " \t| "
-                    + slot + " \t| "
+                    + slot + " \t\t| "
                     + availableDoctors.get(slot.ordinal()).size() + " \t| ");
         }
 

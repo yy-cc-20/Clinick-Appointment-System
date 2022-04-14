@@ -30,7 +30,7 @@ public class ConsoleInput {
     public static LocalDate askDate(String info) {
         String stringDate;
         while (true) {
-            System.out.print(info + " (e.g. 1-1-2022) > ");
+            System.out.print(info + " (e.g. 31-5-2022) > ");
             try {
                 stringDate = SingletonScanner.nextLine();
                 return LocalDate.parse(stringDate, DATE_INPUT_FORMATTER);
