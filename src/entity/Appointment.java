@@ -6,10 +6,10 @@ import boundary.ViewSlotsUI;
 import java.time.LocalDate;
 
 public class Appointment {
-	// If there is Patient as the data member of Appointment and List<Appointment> as the data member of the Patient
+    // If there is Patient as the data member of Appointment and List<Appointment> as the data member of the Patient
     // It is not easily to create the objects
     private int patientId;
-    
+
     private int appointmentId;
     private LocalDate appointmentDate;
     private Allocation allocation;
@@ -18,30 +18,30 @@ public class Appointment {
 
     // Copy constructor: create a new object with exactly the same properties
     public Appointment(Appointment a) {
-		this.appointmentId = a.appointmentId;
-		this.appointmentDate = a.appointmentDate; // LocalDate is immutable, so can refer to the same object
-		this.patientId = a.patientId;
-		this.allocation = a.allocation;
-		this.attendance = a.attendance;
-		this.startSlot = a.startSlot;
-	}
-    
+        this.appointmentId = a.appointmentId;
+        this.appointmentDate = a.appointmentDate; // LocalDate is immutable, so can refer to the same object
+        this.patientId = a.patientId;
+        this.allocation = a.allocation;
+        this.attendance = a.attendance;
+        this.startSlot = a.startSlot;
+    }
+
     public Appointment(int appointmentId, LocalDate ad, int p, Allocation a, Attendance at, int startSlot) {
-		this.appointmentId = appointmentId;
-		this.appointmentDate = ad;
-		this.patientId = p;
-		this.allocation = new Allocation(a);
-		this.attendance = at;
-		this.startSlot = startSlot;
-	}
-    
+        this.appointmentId = appointmentId;
+        this.appointmentDate = ad;
+        this.patientId = p;
+        this.allocation = new Allocation(a);
+        this.attendance = at;
+        this.startSlot = startSlot;
+    }
+
     public Appointment(LocalDate ad, int p, Allocation a, Attendance at, int startSlot) {
-		this.appointmentDate = ad;
-		this.patientId = p;
-		this.allocation = new Allocation(a);
-		this.attendance = at;
-		this.startSlot = startSlot;
-	}
+        this.appointmentDate = ad;
+        this.patientId = p;
+        this.allocation = new Allocation(a);
+        this.attendance = at;
+        this.startSlot = startSlot;
+    }
 
     public Appointment() {
     }
@@ -75,7 +75,7 @@ public class Appointment {
     public String getDuration() {
         int required = allocation.getService().getTimeSlotRequired();
         double time = ViewSlotsUI.timeSlotsToHour(required);
-        return String.format("%f hr(s)", time);
+        return String.format("%.1f hr(s)", time);
     }
 
     public int getStartSlot() {

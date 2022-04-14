@@ -23,6 +23,10 @@ public class ManageAppointmentUI {
     public void updateAppointment() {
         searchAppointmentToModify();
 
+        if (selectedAppointment == null) {
+            return;
+        }
+
         ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
         ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
@@ -67,7 +71,7 @@ public class ManageAppointmentUI {
     // search and select an appointment to modify
     private void searchAppointmentToModify() {
         List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
-        if(appointments.size() == 0){
+        if (appointments.size() == 0) {
             return;
         }
         int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
@@ -82,7 +86,7 @@ public class ManageAppointmentUI {
     // 2. cancel an appointment
     public void cancelAppointment() {
         searchAppointmentToModify();
-        if(selectedAppointment == null){
+        if (selectedAppointment == null) {
             return;
         }
         if (ConsoleInput.askBoolean("Cancel appointment")) {
@@ -94,7 +98,7 @@ public class ManageAppointmentUI {
     // 3. record the attendance
     public void recordAttendance() {
         searchAppointmentToModify();
-        if(selectedAppointment == null){
+        if (selectedAppointment == null) {
             return;
         }
         displayAttendanceChoice();

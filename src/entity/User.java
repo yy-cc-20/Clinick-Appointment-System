@@ -24,9 +24,9 @@ public class User {
     }
 
     public void setUserId(int id) {
-    	userId = id;
+        userId = id;
     }
-    
+
     public int getUserId() {
         return userId;
     }

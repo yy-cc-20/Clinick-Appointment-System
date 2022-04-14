@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MakeAppointmentController {
-	private Statement st;
-	
-	public MakeAppointmentController() {
-		try {
-			st = DatabaseConnection.getConnection().createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    private Statement st;
+
+    public MakeAppointmentController() {
+        try {
+            st = DatabaseConnection.getConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
@@ -103,11 +103,11 @@ public class MakeAppointmentController {
         }
         return results;
     }
-    
+
     public String getPatientName(int id) {
-    	return DataList.getPatient(id).getUsername();
+        return DataList.getPatient(id).getUsername();
     }
-    
+
     // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
         List<Allocation> allocations = DataList.getAllocationList();

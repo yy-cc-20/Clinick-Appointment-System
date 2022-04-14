@@ -15,17 +15,17 @@ public class Patient extends User {
         this.ic = p.ic;
         this.phoneNo = p.phoneNo;
         this.address = p.address;
-        this.appointmentList = new ArrayList<Appointment>(p.appointmentList);
+        this.appointmentList = new ArrayList<>(p.appointmentList);
     }
-    
+
     public Patient(int userid, String username, String password, String ic, String phoneNo, String address, List<Appointment> a) {
         super(userid, username, password);
         this.ic = ic;
         this.phoneNo = phoneNo;
         this.address = address;
-        appointmentList = new ArrayList<Appointment>(a);
+        appointmentList = new ArrayList<>(a);
     }
-    
+
     public Patient(int userid, String username, String password) {
         super(userid, username, password);
     }
@@ -62,6 +62,6 @@ public class Patient extends User {
     }
 
     public void setAppointments(List<Appointment> appointments) {
-        this.appointmentList = new ArrayList<Appointment>(appointments);
+        this.appointmentList = new ArrayList<>(appointments);
     }
 }

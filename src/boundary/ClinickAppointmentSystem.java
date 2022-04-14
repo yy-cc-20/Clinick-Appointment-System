@@ -9,10 +9,11 @@
  * @author Tan Jia Qi          1904022 P2
  * @author Yang Chu Yan        2005912 P2
  * @database MySQL, using JDBC API (driver class version 8.0.28)
- * @see            database.DatabaseConnection class on how to connect this system to the MySQL database on your computer
  * @description A console program that aims to digitize the process of making an appointment.
  * Applying object-oriented programming concept, using entity-boundary-controller design pattern.
  * @login User id and password can be found at database.DatabaseSetUp
+ * @login User id and password can be found at database.DatabaseSetUp
+ * @see database.DatabaseConnection class on how to connect this system to the MySQL database on your computer
  */
 
 /**
@@ -99,7 +100,7 @@ public class ClinickAppointmentSystem {
         int choiceNo; // the action that user wants to perform
         boolean toExit;
         while (true) {
-        	
+
             ConsoleUI.displaySystemName("Clinick Appointment Booking System");
             ConsoleUI.displayMenuForReceptionist();
             choiceNo = ConsoleInput.askChoice(0, 11, "Your choice");

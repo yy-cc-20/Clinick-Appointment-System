@@ -35,10 +35,9 @@ public class ManagePatientUI {
 
     // display the patient details
     public static void displayPatientDetails(Patient selectedPatient) {
-        System.out.println("Patient ID \t| Patient \t| Phone No \t| Patient IC \t| Address");
-        System.out.println(
-                selectedPatient.getUserId() + " \t| " + selectedPatient.getUsername() + " \t| " + selectedPatient.getPhoneNo()
-                        + " \t| " + selectedPatient.getIc() + " \t| " + selectedPatient.getAddress());
+        System.out.printf("%3s | %-45s | %-15s | %-20s | %s%n", "ID", "Patient", "Phone No", "Patient IC", "Address");
+        System.out.printf("%3d | %-45s | %-15s | %-20s | %s%n%n", selectedPatient.getUserId(), selectedPatient.getUsername(),
+                selectedPatient.getPhoneNo(), selectedPatient.getIc(), selectedPatient.getAddress());
     }
 
     // 2. manage patient profile - change phoneNo or address
@@ -93,7 +92,7 @@ public class ManagePatientUI {
                 searchedPatients.add(createPatientProfile());
             }
         } else {
-            System.out.println("Search Results:");
+            System.out.println("\nSearch Results:\n");
             for (Patient selectedPatient : searchedPatients) {
                 displayPatientDetails(selectedPatient);
             }
