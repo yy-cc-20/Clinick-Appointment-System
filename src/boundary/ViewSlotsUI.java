@@ -15,12 +15,13 @@ import entity.*;
  */
 
 public class ViewSlotsUI {
+    // TODO To have column size determined by the longest info in the column so to display the table neatly
 
-    private final ViewSlotsUI instance = new ViewSlotsUI();
-    private ViewSlotsController controller = new ViewSlotsController();
+    private final static ViewSlotsUI instance = new ViewSlotsUI();
+    private final ViewSlotsController controller = ViewSlotsController.getInstance();
 
     // List
-    private final List<Service> services = DataList.getServiceList();
+    private static final List<Service> services = DataList.getServiceList();
 
     // Filters
     private int serviceId;
@@ -39,7 +40,7 @@ public class ViewSlotsUI {
 
     }
 
-    public ViewSlotsUI getInstance() {
+    public static ViewSlotsUI getInstance() {
         return instance;
     }
 
@@ -202,7 +203,7 @@ public class ViewSlotsUI {
                 + timeSlotsToHour(requiredSlots) + " hr(s).");
     }
 
-    public double timeSlotsToHour(int slots) {
+    public static double timeSlotsToHour(int slots) {
         return slots / 2.0;
     }
 
@@ -235,5 +236,12 @@ public class ViewSlotsUI {
             if (s.getServiceId() == id)
                 return true;
         return false;
+    }
+
+    // ViewSlotsUI test
+    public static void main(String[] args) {
+        ViewSlotsUI
+        .getInstance()
+        .viewSlots();
     }
 }
