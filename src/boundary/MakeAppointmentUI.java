@@ -25,13 +25,13 @@ public class MakeAppointmentUI {
         displayAppointments(appointments);
     }
 
-    private static void displayAppointmentHeading() {
+    private void displayAppointmentHeading() {
         ConsoleUI.displayTableName("Appointments");
         System.out.printf("%3s | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n", "ID", "Date", "Time",
                 "Duration", "Service", "ID", "Patient", "ID", "Doctor", "Attendance");
     }
 
-    private static void displayAppointments(List<Appointment> appointmentsToDisplay) {
+    private void displayAppointments(List<Appointment> appointmentsToDisplay) {
         if (appointmentsToDisplay.size() == 0) {
             System.out.println("No appointment to display.");
         } else {
@@ -42,7 +42,7 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void displayAppointmentDetails(Appointment a) {
+    public void displayAppointmentDetails(Appointment a) {
         System.out.printf("%3d | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n%n", a.getAppointmentId(),
                 a.getAppointmentDateString(), a.getTime(), a.getDuration(), a.getAllocation().getService().getServiceName(),
                 a.getPatientId(), controller.getPatientName(a.getPatientId()),
@@ -50,7 +50,7 @@ public class MakeAppointmentUI {
     }
 
     // 2. search appointments
-    public static List<Appointment> searchAppointment() {
+    public List<Appointment> searchAppointment() {
         displayMenuForSearchingAppointment();
 
         int choice = ConsoleInput.askChoice(1, 7, "Your selection");

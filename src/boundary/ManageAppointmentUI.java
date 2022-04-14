@@ -14,10 +14,12 @@ import entity.Attendance;
 
 public class ManageAppointmentUI {
 
+    private MakeAppointmentUI makeAppointmentUI;
     private ManageAppointmentController controller;
     private MakeAppointmentController makeAppointmentController;
 
     public ManageAppointmentUI(){
+        makeAppointmentUI = new MakeAppointmentUI();
         controller = new ManageAppointmentController();
         makeAppointmentController = new MakeAppointmentController();
     }
@@ -74,7 +76,7 @@ public class ManageAppointmentUI {
 
     // search and select an appointment to modify
     private Appointment searchAppointmentToModify() {
-        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+        List<Appointment> appointments = makeAppointmentUI.searchAppointment();
         Appointment selectedAppointment = null;
         if (appointments.size() == 0) {
             return null;
@@ -88,7 +90,7 @@ public class ManageAppointmentUI {
             }
         }
         if (select){
-            MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+            makeAppointmentUI.displayAppointmentDetails(selectedAppointment);
         }
         return selectedAppointment;
     }
@@ -115,7 +117,7 @@ public class ManageAppointmentUI {
         Attendance attendance = ConsoleInput.askAttendance();
         controller.updateAppointmentAttendance(selectedAppointment.getAppointmentId(), attendance.toString());
         selectedAppointment.setAttendance(attendance);
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+        makeAppointmentUI.displayAppointmentDetails(selectedAppointment);
     }
 
     public static void displayAttendanceChoice() {

@@ -37,6 +37,12 @@ public class ClinickAppointmentSystem {
         boolean toExit;
 
         while (true) {
+            makeAppointmentUI = new MakeAppointmentUI();
+            manageAppointmentUI = new ManageAppointmentUI();
+            managePatientUI = new ManagePatientUI();
+            manageAccountUI = new ManageAccountUI();
+            viewSlotsUI = new ViewSlotsUI();
+
             // Guest Mode
             toExit = startGuestView();
             if (toExit)
@@ -44,12 +50,6 @@ public class ClinickAppointmentSystem {
 
             // The user has log in
             User systemUser = loginUI.getUser(); // From systemUser can know the username, id, password, user type
-
-            makeAppointmentUI = new MakeAppointmentUI();
-            manageAppointmentUI = new ManageAppointmentUI();
-            managePatientUI = new ManagePatientUI();
-            manageAccountUI = new ManageAccountUI();
-            viewSlotsUI = new ViewSlotsUI();
 
             if (systemUser instanceof Receptionist)
                 toExit = startReceptionistView(systemUser);
@@ -114,7 +114,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Search Appointment");
-                    MakeAppointmentUI.searchAppointment();
+                    makeAppointmentUI.searchAppointment();
                 }
                 case 3 -> {
                     ConsoleUI.displayFunctionName("Make Appointment");
@@ -181,7 +181,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Search Appointment");
-                    MakeAppointmentUI.searchAppointment();
+                    makeAppointmentUI.searchAppointment();
                 }
                 case 3 -> {
                     ConsoleUI.displayFunctionName("Search Patient");
@@ -220,7 +220,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Search Appointment");
-                    MakeAppointmentUI.searchAppointment();
+                    makeAppointmentUI.searchAppointment();
                 }
                 case 3 -> {
                     ConsoleUI.displayFunctionName("Manage Account");
