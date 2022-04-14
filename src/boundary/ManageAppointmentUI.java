@@ -31,7 +31,7 @@ public class ManageAppointmentUI {
             return;
         }
 
-        ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        ViewSlotsUI viewSlotsUI = new ViewSlotsUI();
         ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
 

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import entity.*;
 
 public class ViewSlotsController {
-    private static ViewSlotsController instance;
+
     private Statement st;
     private ResultSet rs;
     private String sql;
@@ -27,12 +27,6 @@ public class ViewSlotsController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static ViewSlotsController getInstance() {
-        if (instance == null)
-            instance = new ViewSlotsController();
-        return instance;
     }
 
     /**
@@ -126,6 +120,38 @@ public class ViewSlotsController {
 				AND startSlot = (slot.ordinal() + 1)
 				
 		*/
+    }
+
+    public String findBranchNameFromId(List<Branch> branchResults, int branchId) {
+        for (Branch b : branchResults)
+            if (b.getBranchId() == branchId)
+                return b.getBranchName();
+        return "Unknown Branch";
+    }
+
+    public Service findServiceFromId(List<Service> services, int serviceId) {
+        Service service = new Service();
+        for (Service s : services)
+            if (s.getServiceId() == serviceId) {
+                service = s;
+            }
+        return service;
+    }
+
+    // Check if the id is exists
+    public boolean validateSelectedBranchId(List<Branch> branchResults, int id) {
+        for (Branch b : branchResults)
+            if (b.getBranchId() == id)
+                return true;
+        return false;
+    }
+
+    // Check if the id is exists
+    public boolean validateSelectedServiceId(List<Service> services, int id) {
+        for (Service s : services)
+            if (s.getServiceId() == id)
+                return true;
+        return false;
     }
 
     public List<Integer> getDoctorsInCharge(int serviceId, int branchId) {

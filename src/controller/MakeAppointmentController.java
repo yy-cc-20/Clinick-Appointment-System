@@ -128,7 +128,7 @@ public class MakeAppointmentController {
 
         // check if the time slot selected is valid
         int slotRequired = service.getTimeSlotRequired();
-        if (startSlot + slotRequired - 1 > 14 || startSlot + slotRequired - 1 > 8) {
+        if (startSlot + slotRequired - 1 > 14 || (startSlot + slotRequired - 1 > 8 && startSlot != 8)) {
             return null;
         }
 

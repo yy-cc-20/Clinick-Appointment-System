@@ -101,7 +101,7 @@ public class MakeAppointmentUI {
         }
 
         // view slots
-        ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        ViewSlotsUI viewSlotsUI = new ViewSlotsUI();
         ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
         if (!contViewSlot) {

@@ -31,6 +31,7 @@ public class ClinickAppointmentSystem {
     private static ManageAppointmentUI manageAppointmentUI;
     private static ManagePatientUI managePatientUI;
     private static ManageAccountUI manageAccountUI;
+    private static ViewSlotsUI viewSlotsUI;
 
     public static void main(String... args) {
         boolean toExit;
@@ -48,6 +49,7 @@ public class ClinickAppointmentSystem {
             manageAppointmentUI = new ManageAppointmentUI();
             managePatientUI = new ManagePatientUI();
             manageAccountUI = new ManageAccountUI();
+            viewSlotsUI = new ViewSlotsUI();
 
             if (systemUser instanceof Receptionist)
                 toExit = startReceptionistView(systemUser);
@@ -77,7 +79,7 @@ public class ClinickAppointmentSystem {
             switch (choiceNo) {
                 case 1 -> {
                     ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
-                    ViewSlotsUI.getInstance().viewSlots();
+                    viewSlotsUI.viewSlots();
                 }
                 case 2 -> {
                     ConsoleUI.displayFunctionName("Sign In");
@@ -148,7 +150,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 11 -> {
                     ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
-                    ViewSlotsUI.getInstance().viewSlots();
+                    viewSlotsUI.viewSlots();
                 }
                 case 0 -> {
                     System.out.println("[1]Sign out");
@@ -230,7 +232,7 @@ public class ClinickAppointmentSystem {
                 }
                 case 5 -> {
                     ConsoleUI.displayFunctionName("View Services and Time Slots for Booking");
-                    ViewSlotsUI.getInstance().viewSlots();
+                    viewSlotsUI.viewSlots();
                 }
                 case 0 -> {
                     System.out.println("[1]Sign out");
