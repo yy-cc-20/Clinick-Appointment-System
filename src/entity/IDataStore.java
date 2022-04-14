@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-public interface IDataList {
+public interface IDataStore {
     List<Doctor> getDoctorList();
 
     List<Service> getServiceList();

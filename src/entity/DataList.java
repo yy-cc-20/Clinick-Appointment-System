@@ -19,7 +19,7 @@ import database.DatabaseConnection;
 // If implements IDataStore interface
 // The static methods need to be written in IDataStore
 
-public class DataList implements IDataList{
+public class DataList implements IDataStore {
     // Do not know why need to use local variable instead of the data members for Statement and ResultSet object.
     // This is the only way can work.
 
