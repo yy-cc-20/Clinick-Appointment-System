@@ -9,8 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class ConsoleInput {
-    private static final String STRING_ERROR = "Sorry, cannot contain \";\".";
-    private static final String ERROR_MESSAGE1 = "Sorry, cannot greater than 5 digits.";
+    private static final String ERROR_MESSAGE = "Sorry, cannot greater than 5 digits.";
 
     public static final DateTimeFormatter DATE_INPUT_FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy"); // Input date format, "1-1-2022" and "01-01-2022" are both acceptable
     // There is another format for output in ConsoleUI
@@ -131,7 +130,7 @@ public class ConsoleInput {
                 if (input <= 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
-                    System.out.printf("%s%n%n", ERROR_MESSAGE1);
+                    System.out.printf("%s%n%n", ERROR_MESSAGE);
                 } else {
                     return input;
                 }
@@ -171,7 +170,7 @@ public class ConsoleInput {
                 if (input < 0) {
                     System.out.println(errorMessage);
                 } else if (input > 99999) {
-                    System.out.printf("%s%n%n", ERROR_MESSAGE1);
+                    System.out.printf("%s%n%n", ERROR_MESSAGE);
                 } else {
                     return input;
                 }
