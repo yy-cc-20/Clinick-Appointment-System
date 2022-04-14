@@ -11,11 +11,16 @@ public class MakeAppointmentController {
 
     // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
-        List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
-        String id = Integer.toString(theUser.getUserId());
+        List<Appointment> appointments = DataList2.getAppointmentList();
 
         if (theUser instanceof Patient) {
-            return DataList.getInstance().getAppointmentList("filter", "patientId", id);
+            List<Appointment> patientAppointments = new ArrayList<>();
+            for (Appointment appointment : appointments) {
+                if (appointment.getPatientId() == theUser.getUserId()) {
+                    patientAppointments.add(appointment);
+                }
+            }
+            return patientAppointments;
         } else if (theUser instanceof Doctor) {
             List<Appointment> doctorAppointments = new ArrayList<>();
             for (Appointment appointment : appointments) {
@@ -29,7 +34,7 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
-        List<Appointment> appointments = DataList.getInstance().getAppointmentList(null, "", "");
+        List<Appointment> appointments = DataList2.getAppointmentList();
         List<Appointment> results = new ArrayList<>();
 
         switch (choice) {

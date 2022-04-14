@@ -8,6 +8,20 @@ public class Allocation {
     private Service service;
     private Doctor doctor;
 
+    public Allocation(int linkId, Service service, Branch branch, Doctor doctor){
+        this.linkId = linkId;
+        this.branch = branch;
+        this.service = service;
+        this.doctor = doctor;
+    }
+
+    public Allocation(Allocation a){
+        this.linkId = a.linkId;
+        this.branch = a.branch;
+        this.service = a.service;
+        this.doctor = a.doctor;
+    }
+
     public Allocation(int linkId, int branchId, int serviceId, int doctorId) {
         this.linkId = linkId;
         this.branch = findBranch(Integer.toString(branchId));
@@ -15,8 +29,10 @@ public class Allocation {
         this.doctor = findDoctor(Integer.toString(doctorId));
     }
 
+    public Allocation(){}
+
     private Branch findBranch(String branchId) {
-        List<Branch> branches = DataList.getInstance().getBranchList(null, "", "");
+        List<Branch> branches = DataList2.getBranchList();
         for (Branch value : branches) {
             if (value.getBranchId() == Integer.parseInt(branchId)) {
                 return value;
@@ -36,7 +52,7 @@ public class Allocation {
     }
 
     private Doctor findDoctor(String doctorId) {
-        List<Doctor> doctors = DataList.getInstance().getDoctorList();
+        List<Doctor> doctors = DataList2.getDoctorList();
         for (Doctor value : doctors) {
             if (value.getUserId() == Integer.parseInt(doctorId)) {
                 return value;

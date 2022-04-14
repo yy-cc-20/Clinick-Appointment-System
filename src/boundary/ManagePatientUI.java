@@ -1,10 +1,7 @@
 package boundary;
 
 import controller.ManagePatientController;
-import entity.DataList;
-import entity.Patient;
-import entity.Receptionist;
-import entity.User;
+import entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +80,6 @@ public class ManagePatientUI {
                 System.out.println("Phone number and address has been updated.");
             }
         }
-        Patient modified = DataList.getInstance().getPatientList("filter", "id", Integer.toString(patientId)).get(0);
-        displayPatientDetails(modified);
     }
 
     // 3. search patient

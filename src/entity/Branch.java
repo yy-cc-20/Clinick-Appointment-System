@@ -1,14 +1,10 @@
 package entity;
 
 public class Branch {
-<<<<<<< HEAD
-    //private static final List<Receptionist> receptionists = DataList.getInstance().getReceptionistList();
-=======
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     private int branchId;
     private String branchName;
     private String branchAddress;
-    private final Receptionist receptionist;
+    private Receptionist receptionist;
     private String telNo;
 
     public Branch(int branchId, String branchName, String branchAddress, int receptionistId, String telNo) {
@@ -19,7 +15,6 @@ public class Branch {
         this.telNo = telNo;
     }
 
-<<<<<<< HEAD
     public Branch(int branchId, String branchName, String branchAddress, Receptionist rec, String telNo) {
         this.branchId = branchId;
         this.branchName = branchName;
@@ -37,18 +32,17 @@ public class Branch {
         this.telNo = b.telNo;
     }
     
-    public Branch() {
-=======
-    private Receptionist findReceptionist(int receptionistId) {
-        List<Receptionist> receptionists = DataList.getInstance().getReceptionistList();
-        for (Receptionist value : receptionists) {
-            if (value.getUserId() == receptionistId) {
-                return value;
-            }
-        }
-        return null;
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
-    }
+    public Branch() {}
+
+//    private Receptionist findReceptionist(int receptionistId) {
+//        List<Receptionist> receptionists = DataList2.getReceptionistList();
+//        for (Receptionist value : receptionists) {
+//            if (value.getUserId() == receptionistId) {
+//                return value;
+//            }
+//        }
+//        return null;
+//    }
 
     public int getBranchId() {
         return branchId;
@@ -75,11 +69,7 @@ public class Branch {
     }
 
     public Receptionist getReceptionist() {
-<<<<<<< HEAD
     	return receptionist;
-=======
-        return receptionist;
->>>>>>> 7e97ca07d6a18380e990e62afe8ee0d0233d2ad0
     }
 
     public String getTelNo() {
