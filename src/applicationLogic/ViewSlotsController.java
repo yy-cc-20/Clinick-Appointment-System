@@ -12,7 +12,7 @@ import domain.*;
 import java.time.LocalDate;
 
 public class ViewSlotsController {
-    private static ViewSlotsController instance;
+    private DataList dataList;
     private Statement st;
     private ResultSet rs;
     private String sql;
@@ -22,18 +22,13 @@ public class ViewSlotsController {
     // Row: time slot number starting from 0
     // Column: the ids of the available doctors at that time
 
-    private ViewSlotsController() {
+    public ViewSlotsController() {
+        dataList = new DataList();
         try {
             st = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static ViewSlotsController getInstance() {
-        if (instance == null)
-            instance = new ViewSlotsController();
-        return instance;
     }
 
     /**
@@ -129,6 +124,38 @@ public class ViewSlotsController {
 		*/
     }
 
+    public String findBranchNameFromId(List<Branch> branchResults, int branchId) {
+        for (Branch b : branchResults)
+            if (b.getBranchId() == branchId)
+                return b.getBranchName();
+        return "Unknown Branch";
+    }
+
+    public Service findServiceFromId(List<Service> services, int serviceId) {
+        Service service = new Service();
+        for (Service s : services)
+            if (s.getServiceId() == serviceId) {
+                service = s;
+            }
+        return service;
+    }
+
+    // Check if the id is exists
+    public boolean validateSelectedBranchId(List<Branch> branchResults, int id) {
+        for (Branch b : branchResults)
+            if (b.getBranchId() == id)
+                return true;
+        return false;
+    }
+
+    // Check if the id is exists
+    public boolean validateSelectedServiceId(List<Service> services, int id) {
+        for (Service s : services)
+            if (s.getServiceId() == id)
+                return true;
+        return false;
+    }
+
     public List<Integer> getDoctorsInCharge(int serviceId, int branchId) {
         List<Integer> returnIds = new ArrayList<>();
         sql = "SELECT doctorId FROM Allocation WHERE serviceId = " + serviceId + " AND branchId = " + branchId;
@@ -217,7 +244,7 @@ public class ViewSlotsController {
         List<Branch> branchResults = new ArrayList<>();
 
         for (int id : ids)
-            branchResults.add(DataList.getBranch(id));
+            branchResults.add(dataList.getBranch(id));
 
         return branchResults;
     }

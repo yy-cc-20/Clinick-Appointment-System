@@ -10,14 +10,14 @@ import domain.User;
  */
 
 public class ManageAccountUI {
-    private final ManageAccountController controller;
+    private ManageAccountController controller;
 
-    public ManageAccountUI(User uc) {
-        controller = new ManageAccountController(uc);
+    public ManageAccountUI() {
+        controller = new ManageAccountController();
     }
 
     // Exit this method if the user do not want to change the password
-    public void changePassword() {
+    public void changePassword(User theUser) {
         if (!ConsoleInput.askBoolean("Change password"))
             return; // Don't want to change password
 
@@ -42,7 +42,7 @@ public class ManageAccountUI {
         confirmedPassword = SingletonScanner.nextLine();
 
         if (inputPassword.equals(confirmedPassword)) {
-            controller.updatePassword(confirmedPassword);
+            controller.updatePassword(theUser, confirmedPassword);
             System.out.println("Password changed.");
         } else
             System.out.println("Password did not match.");

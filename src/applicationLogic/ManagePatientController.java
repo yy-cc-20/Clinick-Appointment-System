@@ -10,8 +10,10 @@ import domain.*;
 
 public class ManagePatientController {
     private Statement st;
+    private DataList dataList;
 
     public ManagePatientController() {
+        dataList = new DataList();
         try {
             st = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e) {
@@ -20,7 +22,7 @@ public class ManagePatientController {
     }
 
     public List<Patient> searchPatient(String patientIc) {
-        List<Patient> patients = DataList.getPatientList();
+        List<Patient> patients = dataList.getPatientList();
         List<Patient> searchList = new ArrayList<>();
         boolean found = false;
         for (Patient patient : patients) {

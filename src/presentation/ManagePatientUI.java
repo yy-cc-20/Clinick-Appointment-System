@@ -10,11 +10,10 @@ import applicationLogic.ManagePatientController;
 // 1. create patient profile
 
 public class ManagePatientUI {
-    private static final ManagePatientController controller = new ManagePatientController();
-    private final User systemUser;
+    private ManagePatientController controller;
 
-    public ManagePatientUI(User systemUser) {
-        this.systemUser = systemUser;
+    public ManagePatientUI() {
+        controller = new ManagePatientController();
     }
 
     // 1. create patient profile - add a new patient
@@ -42,7 +41,7 @@ public class ManagePatientUI {
     }
 
     // 2. manage patient profile - change phoneNo or address
-    public void managePatientProfile() {
+    public void managePatientProfile(User systemUser) {
         int patientId = 0;
         String oriAddress = "";
         String oriPhoneNo = "";

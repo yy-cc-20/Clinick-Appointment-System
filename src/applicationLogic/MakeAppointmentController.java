@@ -6,6 +6,7 @@ import presentation.ViewSlotsUI;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,10 @@ import dataAccess.DatabaseConnection;
 
 public class MakeAppointmentController {
     private Statement st;
+    DataList dataList;
 
     public MakeAppointmentController() {
+        dataList = new DataList();
         try {
             st = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e) {
@@ -24,7 +27,7 @@ public class MakeAppointmentController {
 
     // get all the appointment based on the role
     public List<Appointment> getAllAppointments(User theUser) {
-        List<Appointment> appointments = DataList.getAppointmentList();
+        List<Appointment> appointments = dataList.getAppointmentList();
 
         if (theUser instanceof Patient) {
             List<Appointment> patientAppointments = new ArrayList<>();
@@ -47,7 +50,7 @@ public class MakeAppointmentController {
     }
 
     public List<Appointment> searchAppointment(int choice, String searchKeyword) {
-        List<Appointment> appointments = DataList.getAppointmentList();
+        List<Appointment> appointments = dataList.getAppointmentList();
         List<Appointment> results = new ArrayList<>();
 
         switch (choice) {
@@ -106,15 +109,15 @@ public class MakeAppointmentController {
     }
 
     public String getPatientName(int id) {
-        return DataList.getPatient(id).getUsername();
+        return dataList.getPatient(id).getUsername();
     }
 
     // check the timeslot availability and assign the allocation
     public Allocation assignAllocation(ViewSlotsUI viewSlotsUI, int startSlot) {
-        List<Allocation> allocations = DataList.getAllocationList();
+        List<Allocation> allocations = dataList.getAllocationList();
 
         // find the service
-        List<Service> services = DataList.getServiceList();
+        List<Service> services = dataList.getServiceList();
         Service service = new Service();
         for (Service item : services) {
             if (item.getServiceId() == viewSlotsUI.getSelectedServiceId()) {
@@ -124,7 +127,7 @@ public class MakeAppointmentController {
 
         // check if the time slot selected is valid
         int slotRequired = service.getTimeSlotRequired();
-        if (startSlot + slotRequired - 1 > 14 || startSlot + slotRequired - 1 > 8) {
+        if (startSlot + slotRequired - 1 > 14 || (startSlot + slotRequired - 1 > 8 && startSlot != 8)) {
             return null;
         }
 
@@ -165,6 +168,10 @@ public class MakeAppointmentController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Appointment createAppointment(LocalDate selectedDate, int userId, int id, Attendance nan, int startSlot) {
+        return new Appointment(selectedDate, userId, dataList.getAllocation(id), nan, startSlot);
     }
     /*
     public static void main(String[] args) {

@@ -17,11 +17,8 @@ import domain.*;
 public class ViewSlotsUI {
     // TODO To have column size determined by the longest info in the column so to display the table neatly
 
-    private final static ViewSlotsUI instance = new ViewSlotsUI();
-    private final ViewSlotsController controller = ViewSlotsController.getInstance();
-
-    // List
-    private static final List<Service> services = DataList.getServiceList();
+//    private static ViewSlotsUI instance = new ViewSlotsUI();
+    private ViewSlotsController controller;
 
     // Filters
     private int serviceId;
@@ -29,20 +26,18 @@ public class ViewSlotsUI {
     private LocalDate date;
 
     // Results
-    private List<Branch> branchResults;
+//    private List<Branch> branchResults;
     private String serviceName;
     private int requiredSlots;
-    private List<List<Integer>> availableDoctors;
+//    private List<List<Integer>> availableDoctors;
+
     // index: the time slot
     // row: an array of the doctors available for that time
 
-    private ViewSlotsUI() {
-
+    public ViewSlotsUI() {
+        controller = new ViewSlotsController();
     }
 
-    public static ViewSlotsUI getInstance() {
-        return instance;
-    }
 
     // Can be used by MakeAppointmentUI
     // Exit if the user do not want to continue view the available time slots
@@ -57,7 +52,10 @@ public class ViewSlotsUI {
     public boolean viewSlots() {
         int servicesFound;
         int branchesFound;
-        
+        DataList dataList = new DataList();
+        List<Service> services = dataList.getServiceList();
+        List<Branch> branches = dataList.getBranchList();
+
         while (true) {
 
             servicesFound = viewService();
@@ -69,14 +67,17 @@ public class ViewSlotsUI {
                 if (!ConsoleInput.askBoolean("Select a service to continue"))
                     return false;
                 serviceId = ConsoleInput.askPositiveInt("Service ID");
-                if (validateSelectedServiceId(serviceId))
+                if (controller.validateSelectedServiceId(services, serviceId)){
+                    Service service = controller.findServiceFromId(services, serviceId);
+                    serviceName =service.getServiceName();
+                    requiredSlots = service.getTimeSlotRequired();
+                    branchesFound = viewBranchFilteredByService().size();
                     break;
+                }
                 else
                 	System.out.println("Invalid input.");
             }
 
-            findServiceNameRequiredSlotsFromId();
-            branchesFound = viewBranchFilteredByService();
             if (branchesFound <= 0) {
                 if (ConsoleInput.askBoolean("Continue searching"))
                     continue;
@@ -93,7 +94,7 @@ public class ViewSlotsUI {
                         return false;
                 branchId = ConsoleInput.askPositiveInt("Branch ID");
 
-                if (validateSelectedBranchId(branchId))
+                if (controller.validateSelectedBranchId(branches, branchId))
                     break;
                 else
                     System.out.println("Invalid input.");
@@ -102,7 +103,7 @@ public class ViewSlotsUI {
             System.out.println("\n\nEnter a date to view the available time slot.");
             date = ConsoleInput.askDateNoEarlierThanToday("Booking date");
             viewTimeSlotFilteredByServiceBranchDate();
-            if (!ConsoleInput.askBoolean("Continue viewing services and time slots for booking"))
+            if (!ConsoleInput.askBoolean("Continue viewing services and time slots"))
                 return true;
         }
     }
@@ -124,9 +125,7 @@ public class ViewSlotsUI {
     }
     
     public List<List<Integer>> getAvailableDoctors() {
-        // index: the time slot
-        // row: an array of the doctors available for that time
-        return availableDoctors;
+        return controller.getAvailableDoctors(serviceId, branchId, date, requiredSlots);
     }
 
     // Can be used by ChangeAppointmentUI
@@ -135,6 +134,9 @@ public class ViewSlotsUI {
      * @return number of row of results
      */
     public int viewService() {
+        DataList dataList = new DataList();
+        List<Service> services = dataList.getServiceList();
+
         if (services.size() == 0) {
             System.out.println("No service found.");
             return services.size();
@@ -156,12 +158,12 @@ public class ViewSlotsUI {
     }
 
     // Can be used by ChangeAppointmentUI
-    public int viewBranchFilteredByService() {
-        branchResults = controller.getBranchFilteredByService(serviceId);
+    public List<Branch> viewBranchFilteredByService() {
+        List<Branch> branchResults = controller.getBranchFilteredByService(serviceId);
 
         if (branchResults.size() == 0) {
             System.out.println("No branch found.");
-            return branchResults.size();
+            return branchResults;
         }
 
         ConsoleUI.displayTableName(serviceName);
@@ -175,18 +177,19 @@ public class ViewSlotsUI {
                     branchResult.getTelNo(),
                     branchResult.getBranchAddress());
         }
-        return branchResults.size();
+        return branchResults;
     }
 
     // Can be used by ChangeAppointmentUI
     public void viewTimeSlotFilteredByServiceBranchDate() {
-        availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, requiredSlots);
+        List<List<Integer>> availableDoctors = controller.getAvailableDoctors(serviceId, branchId, date, requiredSlots);
+        List<Branch> branchResults = controller.getBranchFilteredByService(serviceId);
         // index: the time slot number
         // value: the slots available for that time
         System.out.println();
         System.out.println();
         ConsoleUI.displayTableName("Available Time Slots for " + serviceName);
-        ConsoleUI.displayTableName("At " + findBranchNameFromId());
+        ConsoleUI.displayTableName("At " + controller.findBranchNameFromId(branchResults, branchId));
         ConsoleUI.displayTableName("On " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
         System.out.println();
         System.out.println("No \t| Start Time \t| Slots |");
@@ -207,41 +210,10 @@ public class ViewSlotsUI {
         return slots / 2.0;
     }
 
-    public String findBranchNameFromId() {
-        for (Branch b : branchResults)
-            if (b.getBranchId() == branchId)
-                return b.getBranchName();
-        return "Unknown Branch";
-    }
-
-    public void findServiceNameRequiredSlotsFromId() {
-        for (Service s : services)
-            if (s.getServiceId() == serviceId) {
-                serviceName = s.getServiceName();
-                requiredSlots = s.getTimeSlotRequired();
-            }
-    }
-
-    // Check if the id is exists
-    public boolean validateSelectedBranchId(int id) {
-        for (Branch b : branchResults)
-            if (b.getBranchId() == id)
-                return true;
-        return false;
-    }
-
-    // Check if the id is exists
-    public boolean validateSelectedServiceId(int id) {
-        for (Service s : services)
-            if (s.getServiceId() == id)
-                return true;
-        return false;
-    }
-
-    // ViewSlotsUI test
-    public static void main(String[] args) {
-        ViewSlotsUI
-        .getInstance()
-        .viewSlots();
-    }
+//    // ViewSlotsUI test
+//    public static void main(String[] args) {
+//        ViewSlotsUI
+//        .getInstance()
+//        .viewSlots();
+//    }
 }

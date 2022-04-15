@@ -14,20 +14,26 @@ import domain.Attendance;
 
 public class ManageAppointmentUI {
 
-    private final ManageAppointmentController controller = new ManageAppointmentController();
-    private final MakeAppointmentController makeAppointmentController = new MakeAppointmentController();
-    private static Appointment selectedAppointment;
+    private MakeAppointmentUI makeAppointmentUI;
+    private ManageAppointmentController controller;
+    private MakeAppointmentController makeAppointmentController;
+
+    public ManageAppointmentUI(){
+        makeAppointmentUI = new MakeAppointmentUI();
+        controller = new ManageAppointmentController();
+        makeAppointmentController = new MakeAppointmentController();
+    }
 
     // 1. update appointment's time slot
     // similar to make appointment
     public void updateAppointment() {
-        searchAppointmentToModify();
+        Appointment selectedAppointment = searchAppointmentToModify();
 
         if (selectedAppointment == null) {
             return;
         }
 
-        ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        ViewSlotsUI viewSlotsUI = new ViewSlotsUI();
         ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
 
@@ -69,23 +75,29 @@ public class ManageAppointmentUI {
     }
 
     // search and select an appointment to modify
-    private void searchAppointmentToModify() {
-        List<Appointment> appointments = MakeAppointmentUI.searchAppointment();
+    private Appointment searchAppointmentToModify() {
+        List<Appointment> appointments = makeAppointmentUI.searchAppointment();
+        Appointment selectedAppointment = null;
         if (appointments.size() == 0) {
-            return;
+            return null;
         }
+        boolean select = false;
         int appointmentId = ConsoleInput.askPositiveInt("Select Appointment ID");
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId() == appointmentId) {
                 selectedAppointment = appointment;
+                select = true;
             }
         }
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+        if (select){
+            makeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+        }
+        return selectedAppointment;
     }
 
     // 2. cancel an appointment
     public void cancelAppointment() {
-        searchAppointmentToModify();
+        Appointment selectedAppointment = searchAppointmentToModify();
         if (selectedAppointment == null) {
             return;
         }
@@ -97,7 +109,7 @@ public class ManageAppointmentUI {
 
     // 3. record the attendance
     public void recordAttendance() {
-        searchAppointmentToModify();
+        Appointment selectedAppointment = searchAppointmentToModify();
         if (selectedAppointment == null) {
             return;
         }
@@ -105,7 +117,7 @@ public class ManageAppointmentUI {
         Attendance attendance = ConsoleInput.askAttendance();
         controller.updateAppointmentAttendance(selectedAppointment.getAppointmentId(), attendance.toString());
         selectedAppointment.setAttendance(attendance);
-        MakeAppointmentUI.displayAppointmentDetails(selectedAppointment);
+        makeAppointmentUI.displayAppointmentDetails(selectedAppointment);
     }
 
     public static void displayAttendanceChoice() {

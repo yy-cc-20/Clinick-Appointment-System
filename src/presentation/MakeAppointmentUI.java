@@ -13,26 +13,25 @@ import domain.*;
 
 public class MakeAppointmentUI {
 
-    private final static MakeAppointmentController controller = new MakeAppointmentController();
-    private final User theUser;
+    private static MakeAppointmentController controller;
 
-    public MakeAppointmentUI(User theUser) {
-        this.theUser = theUser;
+    public MakeAppointmentUI() {
+        controller = new MakeAppointmentController();
     }
 
     // 1. view the appointments
-    public void viewAppointment() {
+    public void viewAppointment(User theUser) {
         List<Appointment> appointments = controller.getAllAppointments(theUser);
         displayAppointments(appointments);
     }
 
-    private static void displayAppointmentHeading() {
+    private void displayAppointmentHeading() {
         ConsoleUI.displayTableName("Appointments");
         System.out.printf("%3s | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n", "ID", "Date", "Time",
                 "Duration", "Service", "ID", "Patient", "ID", "Doctor", "Attendance");
     }
 
-    private static void displayAppointments(List<Appointment> appointmentsToDisplay) {
+    private void displayAppointments(List<Appointment> appointmentsToDisplay) {
         if (appointmentsToDisplay.size() == 0) {
             System.out.println("No appointment to display.");
         } else {
@@ -43,14 +42,15 @@ public class MakeAppointmentUI {
         }
     }
 
-    public static void displayAppointmentDetails(Appointment a) {
+    public void displayAppointmentDetails(Appointment a) {
         System.out.printf("%3d | %-11s | %-14s | %-10s | %-25s | %-4s%-45s | %-4s%-40s | %s%n%n", a.getAppointmentId(),
-                a.getAppointmentDateString(), a.getTime(), a.getDuration(), a.getAllocation().getService().getServiceName(), a.getPatientId(), controller.getPatientName(a.getPatientId()),
+                a.getAppointmentDateString(), a.getTime(), a.getDuration(), a.getAllocation().getService().getServiceName(),
+                a.getPatientId(), controller.getPatientName(a.getPatientId()),
                 a.getAllocation().getDoctor().getUserId(), a.getAllocation().getDoctor().getUsername(), a.getAttendance());
     }
 
     // 2. search appointments
-    public static List<Appointment> searchAppointment() {
+    public List<Appointment> searchAppointment() {
         displayMenuForSearchingAppointment();
 
         int choice = ConsoleInput.askChoice(1, 7, "Your selection");
@@ -91,7 +91,7 @@ public class MakeAppointmentUI {
     // add appointment
     public void makeAppointment() {
         // search patient
-        ManagePatientUI managePatientUI = new ManagePatientUI(theUser);
+        ManagePatientUI managePatientUI = new ManagePatientUI();
         System.out.println("Search Patient");
         List<Patient> searchedPatient = managePatientUI.searchPatient();
         Patient selectedPatient = managePatientUI.selectPatient(searchedPatient);
@@ -101,7 +101,7 @@ public class MakeAppointmentUI {
         }
 
         // view slots
-        ViewSlotsUI viewSlotsUI = ViewSlotsUI.getInstance();
+        ViewSlotsUI viewSlotsUI = new ViewSlotsUI();
         ConsoleUI.clearScreen();
         boolean contViewSlot = viewSlotsUI.viewSlots();
         if (!contViewSlot) {
@@ -129,11 +129,8 @@ public class MakeAppointmentUI {
             }
             if (allocated) {
                 System.out.println("Slot " + startSlot + "-" + ( startSlot + slotRequired - 1 ) + " selected.");
-                Appointment appointmentToBook = new Appointment(viewSlotsUI.getSelectedDate(),
-                        selectedPatient.getUserId(),
-                        DataList.getAllocation(allocation.getId()),
-                        Attendance.NAN,
-                        startSlot);
+                Appointment appointmentToBook = controller.createAppointment(viewSlotsUI.getSelectedDate(),
+                        selectedPatient.getUserId(), allocation.getId(), Attendance.NAN, startSlot);
                 // display appointment to book
                 displayAppointmentDetails(appointmentToBook);
                 // ask confirmation to book
