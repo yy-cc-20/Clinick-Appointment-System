@@ -2,32 +2,34 @@
 This project is an assignment developed by 5 students, including me.
 
 ## Features
-- Login
-- Main Menu
-- View appointment
-- Search appointment
-- Make appointment
-- View Slots
-  - Select Service <br/>  
-    <img width="700px" src="https://user-images.githubusercontent.com/65067887/215247825-5ee3b167-000f-485c-b803-ec657d08e056.png" /> <br/>    
-    <img width="300px" src="https://user-images.githubusercontent.com/65067887/215247840-e14bde42-24fd-4f58-b187-d05cc246ebf0.png" />
-    
-  - Select Branch <br/>  
-    <img width="700px" src="https://user-images.githubusercontent.com/65067887/215246996-c06e84e7-1783-4b1e-8267-f32702e646c9.png" />
-    
-  - Select Date <br/>
-    <img width="350px" src="https://user-images.githubusercontent.com/65067887/215248181-ca96c16f-bf0a-424a-9d18-3548531b4f1e.png" />
-    
-  - Show Doctor's Available Time Slot <br/>
-    <img width="500px" src="https://user-images.githubusercontent.com/65067887/215248203-c2f501e9-8ce3-47f2-a284-66dae6a76e59.png" />
+1. Login <br/>
+    <img width="350px" src="https://user-images.githubusercontent.com/65067887/215248623-66b354ef-9f97-4395-aa12-c46d9c8b7693.png" /> <br/>
 
-- Update Appointment
-- Cancel Appointment
-- Record Attendance
-- Search patient
-- Create Patient Profile
-- Manage Patient Profile
-- Manage account
+3. Main Menu
+4. View appointment
+5. Search appointment
+6. Make appointment
+7. View Doctors' Available Time Slots
+    1. Select Service <br/>  
+    <img width="700px" src="https://user-images.githubusercontent.com/65067887/215247825-5ee3b167-000f-485c-b803-ec657d08e056.png" /> <br/>    
+    <img width="300px" src="https://user-images.githubusercontent.com/65067887/215247840-e14bde42-24fd-4f58-b187-d05cc246ebf0.png" /> <br/>
+    
+    2. Select Branch <br/>  
+    <img width="700px" src="https://user-images.githubusercontent.com/65067887/215246996-c06e84e7-1783-4b1e-8267-f32702e646c9.png" /> <br/>
+    
+    3. Select Date <br/>
+    <img width="350px" src="https://user-images.githubusercontent.com/65067887/215248181-ca96c16f-bf0a-424a-9d18-3548531b4f1e.png" /> <br/>
+    
+    4. Show Doctor's Available Time Slot <br/>
+    <img width="500px" src="https://user-images.githubusercontent.com/65067887/215248203-c2f501e9-8ce3-47f2-a284-66dae6a76e59.png" /> <br/>
+
+7. Update Appointment
+8. Cancel Appointment
+9. Record Attendance
+10. Search patient
+11. Create Patient Profile
+12. Manage Patient Profile
+13. Manage account
 
 
 
