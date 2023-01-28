@@ -3,6 +3,10 @@ This project is an assignment developed by 5 students, including me.
 
 ## Features
 1. Login <br/>
+    1. Restrict login attempts <br/>
+    <img width="350px" src="https://user-images.githubusercontent.com/65067887/215249293-df5b06ea-5a81-42ba-8d65-f75e5e1671d5.png" /> <br/>
+    
+    2. Successful login <br/>
     <img width="350px" src="https://user-images.githubusercontent.com/65067887/215248623-66b354ef-9f97-4395-aa12-c46d9c8b7693.png" /> <br/>
 
 3. Main Menu
