@@ -145,7 +145,7 @@ public class ViewSlotsUI {
         Service service;
         ConsoleUI.displayTableName("All Services");
         System.out.println();
-        System.out.printf("%s\t\t| %-40s| %-15s\t |%n", "ID", "Service", "Price");
+        System.out.printf("%s\t\t| %-40s| %-15s |%n", "ID", "Service", "Price");
 
         for (Service value : services) {
             service = value;
@@ -192,7 +192,7 @@ public class ViewSlotsUI {
         ConsoleUI.displayTableName("At " + controller.findBranchNameFromId(branchResults, branchId));
         ConsoleUI.displayTableName("On " + date.format(ConsoleUI.DATE_OUTPUT_FORMATTER));
         System.out.println();
-        System.out.println("No \t| Start Time \t| Slots |");
+        System.out.println("No \t| Start Time \t\t| Slots |");
         for (TimeSlot slot : TimeSlot.values()) {
             int i = slot.ordinal() + 1;
             System.out.println(i + " \t| "
