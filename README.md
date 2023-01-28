@@ -24,7 +24,7 @@ This project is an assignment developed by 5 students, including me.
     3. Select Date <br/>
     <img width="350px" src="https://user-images.githubusercontent.com/65067887/215248181-ca96c16f-bf0a-424a-9d18-3548531b4f1e.png" /> <br/>
     
-    4. Show Doctor's Available Time Slot <br/>
+    4. Show Doctors' Available Time Slot <br/>
     <img width="500px" src="https://user-images.githubusercontent.com/65067887/215248203-c2f501e9-8ce3-47f2-a284-66dae6a76e59.png" /> <br/>
 
 7. Update Appointment
