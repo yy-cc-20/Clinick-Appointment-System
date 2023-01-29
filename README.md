@@ -1,7 +1,7 @@
-# Clinic-Booking-App 🏥
+# 🏥 Clinic-Booking-App
 This project is an assignment developed by 5 students.
 
-## Features 🌟
+## 🌟 Features
 <details>
 <summary>1. Login</summary>
     1. Restrict login attempts <br/>
@@ -42,5 +42,5 @@ This project is an assignment developed by 5 students.
 
 
 
-## Package Diagram
+## 🛠️ Package Diagram
 <img width="550px" src="https://user-images.githubusercontent.com/65067887/215243170-00a8150d-370d-4a5d-8259-9b162d98a1a5.png" />
