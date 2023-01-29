@@ -2,18 +2,22 @@
 This project is an assignment developed by 5 students, including me.
 
 ## Features
-1. Login <br/>
+<details>
+<summary>1. Login</summary>
     1. Restrict login attempts <br/>
     <img width="350px" src="https://user-images.githubusercontent.com/65067887/215249293-df5b06ea-5a81-42ba-8d65-f75e5e1671d5.png" /> <br/>
     
     2. Successful login <br/>
     <img width="350px" src="https://user-images.githubusercontent.com/65067887/215248623-66b354ef-9f97-4395-aa12-c46d9c8b7693.png" /> <br/>
+</details>
 
-3. Main Menu
-4. View appointment
-5. Search appointment
-6. Make appointment
-7. View Doctors' Available Time Slots
+2. Main Menu
+3. View appointment
+4. Search appointment
+5. Make appointment
+
+<details>
+<summary>6. View Doctors' Available Time Slots</summary>
     1. Select Service <br/>  
     <img width="700px" src="https://user-images.githubusercontent.com/65067887/215247825-5ee3b167-000f-485c-b803-ec657d08e056.png" /> <br/>    
     <img width="300px" src="https://user-images.githubusercontent.com/65067887/215247840-e14bde42-24fd-4f58-b187-d05cc246ebf0.png" /> <br/>
@@ -26,6 +30,7 @@ This project is an assignment developed by 5 students, including me.
     
     4. Show Doctors' Available Time Slot <br/>
     <img width="500px" src="https://user-images.githubusercontent.com/65067887/215248203-c2f501e9-8ce3-47f2-a284-66dae6a76e59.png" /> <br/>
+</details>
 
 7. Update Appointment
 8. Cancel Appointment
