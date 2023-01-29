@@ -1,7 +1,7 @@
-# Clinic-Booking-App
+# Clinic-Booking-App 🏥
 This project is an assignment developed by 5 students.
 
-## Features
+## Features 🌟
 <details>
 <summary>1. Login</summary>
     1. Restrict login attempts <br/>
