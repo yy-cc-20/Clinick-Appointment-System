@@ -3,7 +3,7 @@ This project is an assignment developed by 5 students.
 
 ![image](https://user-images.githubusercontent.com/65067887/215316395-086c56ec-f1a2-4a26-aaeb-2ded408b0ba0.png)
 
-## 🌟 Features
+## ✨ Features
 <details>
 <summary>1. Login</summary>
     1. Restrict login attempts <br/>
